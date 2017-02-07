@@ -1,6 +1,7 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -88,6 +89,10 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+            	game.getNavigationScreen().playerController.keyUp(Input.Keys.W);
+            	game.getNavigationScreen().playerController.keyUp(Input.Keys.A);
+            	game.getNavigationScreen().playerController.keyUp(Input.Keys.S);
+            	game.getNavigationScreen().playerController.keyUp(Input.Keys.D);
                 game.setScreen(pauseScreen);
             }
         });
