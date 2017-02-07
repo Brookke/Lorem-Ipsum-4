@@ -14,11 +14,6 @@ import static me.lihq.game.people.AbstractPerson.PersonState;
 public class PlayerController extends InputAdapter
 {
     /**
-     * This timer is used to measure how long input has been read for
-     */
-    public int timer = 0;
-
-    /**
      * Booleans storing what keys have been pressed and not released
      */
     private boolean north, south, west, east;
@@ -130,9 +125,8 @@ public class PlayerController extends InputAdapter
      */
     public void update()
     {
-        if (!south && !north && !east && !west) {
-            timer = 0;
-        }
+    	if (!player.canMove)
+    		return;
 
         Direction goTo = null;
 
@@ -148,15 +142,6 @@ public class PlayerController extends InputAdapter
 
         if (goTo == null) return;
 
-        timer++;
-
-        if (timer > Settings.TPS / 12) {
-            player.move(goTo);
-            return;
-        }
-
-        if (player.getState() != PersonState.WALKING) {
-            player.setDirection(goTo);
-        }
+        player.move(goTo);
     }
 }
