@@ -181,6 +181,7 @@ public abstract class AbstractPerson extends Sprite
         this.animTimer = 0f;
 
         this.state = PersonState.WALKING;
+        updateTextureRegion();
     }
 
 
