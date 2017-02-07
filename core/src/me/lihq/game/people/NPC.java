@@ -39,6 +39,9 @@ public class NPC extends AbstractPerson
     // Used to track whether the NPC has been ignored
     public boolean ignored = false;
 
+    // Used to track whether the NPC has been accused, so they can ignore the player after a false accusation
+    public boolean accused = false;
+
     /**
      * This stores the players personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
