@@ -255,6 +255,8 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void render(float delta)
     {
+    	update();
+    	
         game.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {
             n.pushCoordinatesToSprite();

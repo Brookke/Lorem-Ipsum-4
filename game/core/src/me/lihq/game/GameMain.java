@@ -51,12 +51,6 @@ public class GameMain extends Game
     public Player player;
 
     /**
-     * This controls the game ticks and calculating how many ticks per second there are
-     */
-    public int ticks = 0;
-    public int lastSecond = -1;
-
-    /**
      * A screen to be used to display standard gameplay within the game , including the status bar.
      */
     public NavigationScreen navigationScreen;
@@ -98,8 +92,6 @@ public class GameMain extends Game
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
-
-        gameLoop();
     }
 
     /**
@@ -136,34 +128,6 @@ public class GameMain extends Game
     public AbstractScreen getScreen()
     {
         return (AbstractScreen) super.getScreen();
-    }
-
-    /**
-     * This is the main gameLoop that only needs to be called once, it then creates a logic thread to be executed once a game tick
-     */
-    public void gameLoop()
-    {
-        Timer gameTimer = new Timer();
-        TimerTask task = new TimerTask()
-        {
-            @Override
-            public void run()
-            {
-                ticks++;
-
-                Calendar cal = Calendar.getInstance();
-
-                if (cal.get(Calendar.SECOND) != lastSecond) {
-                    lastSecond = cal.get(Calendar.SECOND);
-                    System.out.println("TPSLogger: tps:      " + ticks);
-                    ticks = 0;
-                }
-
-                me.getScreen().update();
-            }
-        };
-
-        gameTimer.schedule(task, 0, 1000 / Settings.TPS);
     }
 
     /**
