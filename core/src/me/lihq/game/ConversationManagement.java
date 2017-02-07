@@ -69,12 +69,15 @@ public class ConversationManagement
         player.canMove = false;
         player.inConversation = true;
 
-        if (!tempNPC.ignored) {
-            //Introduction
+        if (tempNPC.accused) {
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 2));
+            finishConversation();
+
+        } else if (!tempNPC.ignored) {
             speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 1));
             speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 1));
-
             queryQuestionType();
+
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 2));
             finishConversation();
@@ -158,7 +161,8 @@ public class ConversationManagement
             speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
             finishConversation();
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox("They are clearly not the killer, just look at them.", 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 2));
+            this.tempNPC.accused = true;
             finishConversation();
         }
     }
