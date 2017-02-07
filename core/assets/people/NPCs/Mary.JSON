@@ -4,6 +4,8 @@
   "personality":"AGGRESSIVE",
   "responses": {
     "introduction": "Hello",
+    "Ignored Initial": "##INITIAL IGNORE##",
+    "ignored Return": "##IGNORED & RETURNED##",
     "Big Footprint": "Those would fit yes, maybe you should give me them.",
     "Small Footprint": "Not mine, way too small for me.",
     "Glasses": "Not sure why it matters but yes.",

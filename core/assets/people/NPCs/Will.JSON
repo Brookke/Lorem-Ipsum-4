@@ -5,13 +5,15 @@
 
   "responses": {
     "introduction": "Hello",
+    "Ignored Initial": "##INITIAL IGNORE##",
+    "ignored Return": "##IGNORED & RETURNED##",
     "Big Footprint": "Oh yes I could fit into those.",
     "Small Footprint": "Too small for me.",
     "Glasses": "No I do not have glasses.",
     "Bag": "I don't have a bag with me.",
     "Lipstick": "I actually do have some Lipstick.",
     "Right Handed": "I am right handed.",
-    "Dark Hair": "I do have dark hair yes.",
+    "Dark Hair": "I do have dark hair yes."
   },
   "noneResponses": [
     "Sorry I have some graphics to render.",

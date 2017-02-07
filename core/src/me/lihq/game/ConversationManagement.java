@@ -69,11 +69,16 @@ public class ConversationManagement
         player.canMove = false;
         player.inConversation = true;
 
-        //Introduction
-        speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
-        speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
+        if (!tempNPC.ignored) {
+            //Introduction
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
 
-        queryQuestionType();
+            queryQuestionType();
+        } else {
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 2));
+            finishConverstation();
+        }
     }
 
     /**
@@ -87,6 +92,7 @@ public class ConversationManagement
 
         if (!player.collectedClues.isEmpty()) {
             buttons.add(new SpeechBoxButton("Question?", 0, eventHandler));
+            buttons.add(new SpeechBoxButton("Ignore", 2, eventHandler));
         }
         if (player.collectedClues.size() > 3) {
             buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
@@ -157,6 +163,13 @@ public class ConversationManagement
         }
     }
 
+    private void ignoreNPC()
+    {
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 2));
+        this.tempNPC.ignored = true;
+        finishConverstation();
+    }
+
     /**
      * This method is called when a conversation is over to change some variables back for normal gameplay to resume
      */
@@ -183,6 +196,8 @@ public class ConversationManagement
                     queryQuestionStyle();
                 } else if (option == 1) {
                     accuseNPC();
+                } else if (option == 2) {
+                    ignoreNPC();
                 }
                 break;
 

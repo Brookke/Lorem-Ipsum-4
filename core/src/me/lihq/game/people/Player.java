@@ -153,6 +153,11 @@ public class Player extends AbstractPerson
         if (clueFound != null) {
             GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
+
+            // set all NPCs ignored to false
+            for (NPC character : GameMain.me.NPCs) {
+                character.ignored = false;
+            }
         } else {
             GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
