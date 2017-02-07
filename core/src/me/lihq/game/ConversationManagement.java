@@ -77,7 +77,7 @@ public class ConversationManagement
             queryQuestionType();
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 2));
-            finishConverstation();
+            finishConversation();
         }
     }
 
@@ -167,7 +167,7 @@ public class ConversationManagement
     {
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 2));
         this.tempNPC.ignored = true;
-        finishConverstation();
+        finishConversation();
     }
 
     /**
