@@ -95,7 +95,7 @@ public class ConversationManagement
             speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox("You need to find some clues before you question a suspect", 5));
-            finishConverstation();
+            finishConversation();
         }
     }
 
@@ -140,7 +140,7 @@ public class ConversationManagement
     {
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 3));
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 3));
-        finishConverstation();
+        finishConversation();
     }
 
     /**
@@ -150,17 +150,17 @@ public class ConversationManagement
     {
         if (this.tempNPC.isKiller()) {
             speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
-            finishConverstation();
+            finishConversation();
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox("They are clearly not the killer, just look at them.", 5));
-            finishConverstation();
+            finishConversation();
         }
     }
 
     /**
      * This method is called when a conversation is over to change some variables back for normal gameplay to resume
      */
-    private void finishConverstation()
+    private void finishConversation()
     {
         this.tempNPC.canMove = true;
         this.player.canMove = true;
