@@ -36,6 +36,9 @@ public class NPC extends AbstractPerson
     private boolean isKiller = false;
     private boolean isVictim = false;
 
+    // Used to track whether the NPC has been ignored
+    public boolean ignored = false;
+
     /**
      * This stores the players personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
