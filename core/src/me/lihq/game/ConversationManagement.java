@@ -76,7 +76,7 @@ public class ConversationManagement
 
             queryQuestionType();
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), "Bugger off, you've ignored me!", 3));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 2));
             finishConverstation();
         }
     }
@@ -165,7 +165,7 @@ public class ConversationManagement
 
     private void ignoreNPC()
     {
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), "OK, be that way.", 2));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 2));
         this.tempNPC.ignored = true;
         finishConverstation();
     }

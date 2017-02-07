@@ -12,6 +12,8 @@
   "personality": "NICE",
   "responses": {
     "introduction": "Hi, have you seen my robot? It seems to have gone astray...",
+    "Ignored Initial": "##INITIAL IGNORE##",
+    "ignored Return": "##IGNORED & RETURNED##",
     "Big Footprint": "Those would fit me I think.",
     "Small Footprint": "Sorry, bit too small for me.",
     "Glasses": "Yes I do need glasses these days.",
