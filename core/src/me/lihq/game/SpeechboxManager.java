@@ -99,5 +99,11 @@ public class SpeechboxManager
         }
     }
 
+    public void skipMessage()
+    {
+        if (this.stack.get(0).isSkippable) {
+            this.removeCurrentSpeechBox();
+        }
+    }
 
 }
