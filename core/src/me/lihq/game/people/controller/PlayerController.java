@@ -44,6 +44,9 @@ public class PlayerController extends InputAdapter
     {
         if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
             player.interact();
+            if (player.inConversation) {
+                // Todo: Skip message if no buttons on screen
+            }
             return true;
         }
 

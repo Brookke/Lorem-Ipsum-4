@@ -268,4 +268,9 @@ public class ConversationManagement
         CLUE
     }
 
+    public void SkipMessage()
+    {
+        System.out.println("Skip Message.");
+    }
+
 }
