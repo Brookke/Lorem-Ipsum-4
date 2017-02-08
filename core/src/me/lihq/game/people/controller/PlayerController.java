@@ -47,9 +47,7 @@ public class PlayerController extends InputAdapter
     public boolean keyDown(int keycode)
     {
         if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-            if (player.inConversation) {
-                GameMain.me.navigationScreen.speechboxMngr.skipMessage();
-            }
+            GameMain.me.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             return true;
         }
