@@ -2,6 +2,7 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import me.lihq.game.ConversationManagement;
 import me.lihq.game.Settings;
 import me.lihq.game.people.Player;
 
@@ -43,10 +44,10 @@ public class PlayerController extends InputAdapter
     public boolean keyDown(int keycode)
     {
         if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-            player.interact();
             if (player.inConversation) {
-                // Todo: Skip message if no buttons on screen
+                ConversationManagement.SkipMessage();
             }
+            player.interact();
             return true;
         }
 
