@@ -268,10 +268,10 @@ public class ConversationManagement
         CLUE
     }
 
-    public static void SkipMessage()
+    public void SkipMessage()
     {
         // todo: skip if current message doesn't have buttons
-        System.out.println("Skip Message.");
+        System.out.println("Skip message");
     }
 
 }

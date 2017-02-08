@@ -67,6 +67,10 @@ public class SpeechBox
      */
     private String textContent;
 
+
+    // Specifies whether a speechbox can be skipped (for those without buttons)
+    public boolean isSkippable = false;
+
     /**
      * List of buttons to be displayed on the SpeechBox
      */
@@ -106,6 +110,7 @@ public class SpeechBox
     {
         textContent = content;
         buttons = new ArrayList<>();
+        isSkippable = true;
         this.timeoutDuration = timeout * Settings.TPS;
         setupStage();
     }
@@ -118,6 +123,7 @@ public class SpeechBox
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
+        isSkippable = true;
         this.timeoutDuration = timeout * Settings.TPS;
         setupStage();
     }
