@@ -99,5 +99,12 @@ public class SpeechboxManager
         }
     }
 
+    public void skipMessage()
+    {
+        // ensure the message has a positive timeout, otherwise it contains buttons and shouldn't be skippable
+        if (!this.stack.isEmpty() && (this.stack.get(0).timeoutDuration > 0)) {
+            this.removeCurrentSpeechBox();
+        }
+    }
 
 }
