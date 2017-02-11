@@ -106,5 +106,14 @@ public class SpeechboxManager
             this.removeCurrentSpeechBox();
         }
     }
+    
+    /**
+     * 
+     * @return true if the stack of speechboxes is empty, false otherwise
+     */
+    public boolean isEmpty()
+    {
+    	return this.stack.isEmpty();
+    }
 
 }
