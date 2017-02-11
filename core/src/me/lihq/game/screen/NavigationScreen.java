@@ -177,6 +177,8 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void update()
     {
+    	convMngt.finishConversation();
+    	
         if (!pause) { //this statement contains updates that shouldn't happen during a pause
             playerController.update();
             game.player.update();

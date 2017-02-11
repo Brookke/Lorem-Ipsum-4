@@ -38,19 +38,24 @@ public class ConversationManagement
      * This stores the style of questioning for how the player wants to ask the question
      */
     private Personality tempQuestionStyle;
+    
+    /**
+     * Indicates whether the last conversation is finished or ongoing
+     */
+    private boolean finished;
 
     /**
-     * This constructs a converstation manager
+     * This constructs a conversation manager
      *
      * @param player           the player that will initiate the conversation
-     * @param speechboxManager the speechbox manager that is in charge of displaying the converstation
+     * @param speechboxManager the speechbox manager that is in charge of displaying the conversation
      */
     public ConversationManagement(Player player, SpeechboxManager speechboxManager)
     {
-
         this.player = player;
         this.speechboxMngr = speechboxManager;
 
+        finished = false;
     }
 
     /**
@@ -70,17 +75,17 @@ public class ConversationManagement
         player.inConversation = true;
 
         if (tempNPC.accused) {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 2));
-            finishConversation();
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
+            finished = true;
 
         } else if (!tempNPC.ignored) {
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 1));
-            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 1));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
             queryQuestionType();
 
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 2));
-            finishConversation();
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 5));
+            finished = true;
         }
     }
 
@@ -104,7 +109,7 @@ public class ConversationManagement
             speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox("You need to find some clues before you question a suspect", 5));
-            finishConversation();
+            finished = true;
         }
     }
 
@@ -147,9 +152,9 @@ public class ConversationManagement
      */
     private void questionNPC()
     {
-        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 3));
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 3));
-        finishConversation();
+        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
+        finished = true;
     }
 
     /**
@@ -159,29 +164,32 @@ public class ConversationManagement
     {
         if (this.tempNPC.isKiller()) {
             speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
-            finishConversation();
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 2));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
             this.tempNPC.accused = true;
-            finishConversation();
         }
+        finished = true;
     }
 
     private void ignoreNPC()
     {
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 2));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 5));
         this.tempNPC.ignored = true;
-        finishConversation();
+        finished = true;
     }
 
     /**
      * This method is called when a conversation is over to change some variables back for normal gameplay to resume
      */
-    private void finishConversation()
+    public void finishConversation()
     {
+    	if (!this.speechboxMngr.isEmpty() || !this.player.inConversation || !this.finished)
+    		return;
+    	
         this.tempNPC.canMove = true;
         this.player.canMove = true;
         this.player.inConversation = false;
+        this.finished = false;
     }
 
     /**
