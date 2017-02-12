@@ -9,22 +9,28 @@
 
 package me.lihq.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
+import me.lihq.game.people.controller.OtherInput;
 import me.lihq.game.screen.AbstractScreen;
 import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
-
-import java.util.*;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -64,6 +70,16 @@ public class GameMain extends Game
      * The main menu screen that shows up when the game is first started
      */
     private MainMenuScreen menuScreen;
+    
+    /**
+     * Universal input handler
+     */
+    public OtherInput input;
+    
+    /**
+     * Input multiplexer to control multiple inputs across project
+     */
+    public InputMultiplexer inputMultiplexer;
 
     /**
      * This is called at start up. It initialises the game.
@@ -80,6 +96,13 @@ public class GameMain extends Game
         initialiseAllPeople();
 
         initialiseClues();
+        
+        // Load universal input class
+        input = new OtherInput();
+        
+        // Load input multiplexer and add universal input to it
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(input);
 
         //set up the screen and display the first room
 
