@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -29,13 +30,19 @@ public class InventoryScreen extends AbstractScreen {
     private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*CLUES_PER_ROW)/2f;
 	
 	private Stage stage;
+	private Stage zoomedStage;
 	
 	private Skin buttonSkins;
+	
+	private boolean zoomed;
 
 	public InventoryScreen(GameMain game) {
 		super(game);
 		
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        
+        zoomed = false;
 		
         initSkin();
 		initMenu();
@@ -76,6 +83,7 @@ public class InventoryScreen extends AbstractScreen {
 
         stage.addActor(text);
         stage.addActor(resumeButton);
+        zoomedStage.addActor(text);
         
         resumeButton.addListener(new ClickListener()
         {
@@ -99,21 +107,58 @@ public class InventoryScreen extends AbstractScreen {
 						Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 				stage.addActor(imgBtn);
 				
+		        LabelStyle textStyle = new LabelStyle(buttonSkins.getFont("default"), Color.RED);
+		        Label text = new Label(c.getName(), textStyle);
+		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
+		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
+		        stage.addActor(text);
+				
 
 				imgBtn.addListener(new ClickListener()
 		        {
 		            @Override
 		            public void clicked(InputEvent event, float x, float y)
 		            {
-		                game.setScreen(game.navigationScreen);
+		                Gdx.input.setInputProcessor(zoomedStage);
+		            	
+		            	Image img = new Image(buttonSkins.getDrawable(c.getName()));
+		            	img.setPosition(Gdx.graphics.getWidth()/2-img.getWidth()/2,
+		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
+		            	zoomedStage.addActor(img);
+		            	
+		            	Label name = new Label(c.getName(), textStyle);
+		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
+		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
+		            	zoomedStage.addActor(name);
+
+		            	Label description = new Label(c.getDescription(), textStyle);
+		            	description.setPosition(Gdx.graphics.getWidth()/2-description.getWidth()/2,
+		            			Gdx.graphics.getHeight()/2-img.getHeight()/2-description.getHeight()*2);
+		            	zoomedStage.addActor(description);
+		            	
+		                TextButton backButton = new TextButton("Back", buttonSkins);
+		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
+		                zoomedStage.addActor(backButton);
+
+		                backButton.addListener(new ClickListener()
+		                {
+		                    @Override
+		                    public void clicked(InputEvent event, float x, float y)
+		                    {
+		                        Gdx.input.setInputProcessor(stage);
+		                        
+		                    	img.remove();
+		                    	name.remove();
+		                    	description.remove();
+		                    	backButton.remove();
+		                    	
+		                        zoomed = false;
+		                    }
+		                });
+
+		            	zoomed = true;
 		            }
 		        });
-				
-		        LabelStyle textStyle = new LabelStyle(buttonSkins.getFont("default"), Color.RED);
-		        Label text = new Label(c.getName(), textStyle);
-		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
-		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
-		        stage.addActor(text);
 			}
 		}
 		
@@ -138,8 +183,14 @@ public class InventoryScreen extends AbstractScreen {
         Gdx.gl.glClearColor(135, 206, 235, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
-		stage.act();
-		stage.draw();
+        if (zoomed) {
+        	zoomedStage.act();
+        	zoomedStage.draw();
+        }
+        else {
+        	stage.act();
+    		stage.draw();
+        }
 	}
 
 	@Override
