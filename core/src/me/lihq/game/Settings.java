@@ -23,6 +23,9 @@ public class Settings
      */
     public static final int TPS = 60;
     
+    /**
+     * The size of the clue textures
+     */
     public static final int CLUE_SIZE = 64;
 
     /**
