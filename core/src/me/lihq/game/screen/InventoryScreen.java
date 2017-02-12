@@ -18,11 +18,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 
 public class InventoryScreen extends AbstractScreen {
 	
     private static final Color BACKGROUND_COLOR = Color.GRAY;
+    
+    private static final int CLUES_PER_ROW = 7;
+    private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*CLUES_PER_ROW)/2f;
 	
 	private Stage stage;
 	
@@ -91,7 +95,8 @@ public class InventoryScreen extends AbstractScreen {
 				buttonSkins.add(c.getName(), new TextureRegion(c.getTexture(), c.getRegionX(), c.getRegionY(), c.getRegionWidth(), c.getRegionHeight()));
 				ImageButton imgBtn = new ImageButton(buttonSkins.getDrawable(c.getName()));
 				
-				imgBtn.setPosition(64*count, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4);
+				imgBtn.setPosition(OFFSET+Settings.CLUE_SIZE/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
+						Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 				stage.addActor(imgBtn);
 				
 
@@ -103,6 +108,12 @@ public class InventoryScreen extends AbstractScreen {
 		                game.setScreen(game.navigationScreen);
 		            }
 		        });
+				
+		        LabelStyle textStyle = new LabelStyle(buttonSkins.getFont("default"), Color.RED);
+		        Label text = new Label(c.getName(), textStyle);
+		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
+		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
+		        stage.addActor(text);
 			}
 		}
 		
