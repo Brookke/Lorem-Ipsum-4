@@ -34,11 +34,17 @@ public class Clue extends Sprite
      * @param description describes what the clue is
      * @param texture     the texture region of the clue
      */
-    public Clue(String name, String description, TextureRegion texture)
+    
+    private Boolean isMurderWeapon;
+    /**
+     * True if clue is a murder weapon, otherwise false.
+     */
+    public Clue(String name, String description, Boolean weapon, TextureRegion texture)
     {
         super(texture);
         this.name = name;
         this.description = description;
+        this.isMurderWeapon = weapon;
     }
 
     /**
@@ -77,7 +83,14 @@ public class Clue extends Sprite
     {
         return this.description;
     }
+    /**
+     * this method returns whether or not a clue is a murder weapon.
+     */
 
+    public Boolean getisMurderWeapon(){
+    	return this.isMurderWeapon;
+    }
+    
     /**
      * This method calls the method of the same name but allows a Vector2Int as a parameter rather than
      * the specific coordinates.
@@ -87,6 +100,7 @@ public class Clue extends Sprite
      * @param v - The Vector2Int that the clue's tile coordinates are to be set to
      * @return (Clue) returns this object once the location has been updated
      */
+    
     public Clue setTileCoordinates(Vector2Int v)
     {
         return setTileCoordinates(v.x, v.y);
