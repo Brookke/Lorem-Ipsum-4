@@ -137,6 +137,8 @@ public class GameMain extends Game
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
+        
+        input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
 

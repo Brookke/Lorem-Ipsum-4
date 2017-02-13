@@ -196,7 +196,6 @@ public class Menu
      */
     public void render()
     {
-    	game.input.update();
         //Determining the background colour of the menu
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
