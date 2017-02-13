@@ -238,15 +238,15 @@ public class NPC extends AbstractPerson
     	if (style == personality && player == style)
     	{
     		// TODO: Retrieve improved response rather than normal response
-    		return getSpeech(clue);
+    		return getSpeech("responses", clue);
     	}
     	else if (style == personality || style == player)
     	{
-    		return getSpeech(clue);
+    		return getSpeech("responses", clue);
         } 
     	else
     	{
-            return getSpeech("");
+            return getSpeech("noneResponses", "");
         }
     }
 
