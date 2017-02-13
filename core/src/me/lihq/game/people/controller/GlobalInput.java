@@ -1,11 +1,10 @@
 package me.lihq.game.people.controller;
 
-import java.awt.Menu;
-
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 
 import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
 import me.lihq.game.screen.PauseScreen;
 
 /**
@@ -23,7 +22,7 @@ public class GlobalInput extends InputAdapter {
 	/**
 	 * Variables storing state of inputs
 	 */
-	private boolean paused;
+	private boolean paused, interact, showWalkable, showHideable, debug;
 	
 	public GlobalInput(GameMain game) {
 		this.game = game;
@@ -34,7 +33,18 @@ public class GlobalInput extends InputAdapter {
 		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
 		{
 			paused = true;
-			return true;
+		}
+		if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
+			interact = true;
+		}
+		if (keycode == Input.Keys.J) {
+			showWalkable = true;
+		}
+		if (keycode == Input.Keys.H) {
+			showHideable = true;
+		}
+		if (keycode == Input.Keys.F3) {
+			debug = true;
 		}
 		return false;
 	}
@@ -44,7 +54,18 @@ public class GlobalInput extends InputAdapter {
 		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
 		{
 			paused = false;
-			return true;
+		}
+		if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
+			interact = false;
+		}
+		if (keycode == Input.Keys.J) {
+			showWalkable = false;
+		}
+		if (keycode == Input.Keys.H) {
+			showHideable = false;
+		}
+		if (keycode == Input.Keys.F3) {
+			debug = false;
 		}
 		return false;
 	}
@@ -64,6 +85,23 @@ public class GlobalInput extends InputAdapter {
 				game.setScreen(game.getNavigationScreen());
 				paused = false;
 			}
+		}
+		if (interact && game.getScreen().getClass() == game.navigationScreen.getClass()) {
+			GameMain.me.navigationScreen.speechboxMngr.skipMessage();
+            game.player.interact();
+            interact = false;
+		}
+		if (showWalkable) {
+			Settings.DEBUG_OPTIONS.put("showWalkable", !Settings.DEBUG_OPTIONS.get("showWalkable"));
+			showWalkable = false;
+		}
+		if (showHideable) {
+			Settings.DEBUG_OPTIONS.put("showHideable", !Settings.DEBUG_OPTIONS.get("showHideable"));
+			showHideable = false;
+		}
+		if (debug) {
+			Settings.DEBUG = !Settings.DEBUG;
+			debug = false;
 		}
 	}
 

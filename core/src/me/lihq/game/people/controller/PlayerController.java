@@ -42,12 +42,6 @@ public class PlayerController extends InputAdapter
     @Override
     public boolean keyDown(int keycode)
     {
-        if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-            GameMain.me.navigationScreen.speechboxMngr.skipMessage();
-            player.interact();
-            return true;
-        }
-
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = true;
             return true;
@@ -68,23 +62,6 @@ public class PlayerController extends InputAdapter
             this.south = true;
             return true;
         }
-
-        //TODO: The following 3 key reads could do with being placed in another controller
-        if (keycode == Input.Keys.J) {
-            Settings.DEBUG_OPTIONS.put("showWalkable", !Settings.DEBUG_OPTIONS.get("showWalkable"));
-            return true;
-        }
-
-        if (keycode == Input.Keys.H) {
-            Settings.DEBUG_OPTIONS.put("showHideable", !Settings.DEBUG_OPTIONS.get("showHideable"));
-            return true;
-        }
-
-        if (keycode == Input.Keys.F3) {
-            Settings.DEBUG = !Settings.DEBUG;
-            return true;
-        }
-
         return false;
     }
 
@@ -97,7 +74,6 @@ public class PlayerController extends InputAdapter
     @Override
     public boolean keyUp(int keycode)
     {
-
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = false;
             return true;
@@ -117,7 +93,6 @@ public class PlayerController extends InputAdapter
             this.south = false;
             return true;
         }
-
         return false;
     }
 
