@@ -29,8 +29,10 @@ import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.AbstractScreen;
+import me.lihq.game.screen.InventoryScreen;
 import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
+import me.lihq.game.screen.PauseScreen;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -70,6 +72,10 @@ public class GameMain extends Game
      * The main menu screen that shows up when the game is first started
      */
     public MainMenuScreen menuScreen;
+
+    public PauseScreen pauseScreen;
+    
+    public InventoryScreen inventoryScreen;
     
     /**
      * Universal input handler
@@ -113,6 +119,9 @@ public class GameMain extends Game
 
         navigationScreen = new NavigationScreen(this);
         navigationScreen.updateTiledMapRenderer();
+        
+        pauseScreen = new PauseScreen(this);
+        inventoryScreen = new InventoryScreen(this);
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
