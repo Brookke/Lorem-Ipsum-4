@@ -77,13 +77,18 @@ public class InventoryScreen extends AbstractScreen {
         Label text = new Label("Inventory", textStyle);
         text.setFontScale(2, 2);
         text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
+        
+        Label text2 = new Label("Inventory", textStyle);
+        text2.setFontScale(2, 2);
+        text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
+
 
         TextButton resumeButton = new TextButton("Resume", buttonSkins);
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
         stage.addActor(resumeButton);
-        zoomedStage.addActor(text);
+        zoomedStage.addActor(text2);
         
         resumeButton.addListener(new ClickListener()
         {
