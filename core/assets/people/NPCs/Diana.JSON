@@ -7,9 +7,11 @@
     "Bag",
     "Lipstick",
     "Right Handed",
-    "Dark Hair"
+    "Dark Hair",
+    "Erotic Novel",
+    "Broken Mobile Phone",
+    "Car Keys"
   ],
-
   "personality": "AGGRESSIVE",
   "responses": {
     "introduction": "Hello, what do you want?!",
@@ -22,7 +24,10 @@
     "Bag": "What do you think I would need a bag for?",
     "Lipstick": "Yes I have lipstick, my lips aren't naturally this colour.",
     "Right Handed": "What kind of question is that? But, if you think it'll help, I am right handed.",
-    "Dark Hair": "Oh behind this blue wig, my hair is dark"
+    "Dark Hair": "Oh behind this blue wig, my hair is dark",
+    "Erotic Novel": "Of course not! Why would you even think of me?",
+    "Broken Mobile Phone": "You think I'm clumsy? How dare you! That is not my phone!",
+    "Car Keys": "You think I'd tell you anything? Just because the car keys you have are the same make as my car?"
   },
   "noneResponses": [
     "Too busy, go away.",

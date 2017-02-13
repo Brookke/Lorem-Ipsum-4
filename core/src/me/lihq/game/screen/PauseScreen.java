@@ -1,9 +1,9 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
 
@@ -48,9 +48,6 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void show()
     {
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(pauseMenu.stage);
-        Gdx.input.setInputProcessor(multiplexer);
     }
 
     /**
@@ -59,7 +56,7 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void update()
     {
-
+    	
     }
 
     /**

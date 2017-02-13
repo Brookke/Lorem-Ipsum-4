@@ -208,19 +208,20 @@ public abstract class AbstractPerson extends Sprite
     public abstract void importDialogue(String fileName);
 
     /**
-     * Gets a random item from the correct dictionary key.
+     * Retrieves a line of dialogue with a specified key.
      *
-     * @param key
-     * @return
+     * @param type - The type of response to retrieve
+     * @param key - The key of the line of dialogue
+     * @return The corresponding line of dialogue
      */
-    public String getSpeech(String key)
+    public String getSpeech(String type, String key)
     {
         //TODO: Randomise the noneResponse
         try {
-            if (!jsonData.get("Responses").has(key)) {
-                return jsonData.get("noneResponses").getString(0);
-            } else {
-                return jsonData.get("Responses").getString(key);
+        	if (type == "noneResponses") {
+        		return jsonData.get(type).getString(0);
+        	} else {
+                return jsonData.get(type).getString(key);
             }
         } catch (Exception e) {
             return "error speech not working";
@@ -230,23 +231,14 @@ public abstract class AbstractPerson extends Sprite
     /**
      * This method returns the response based on the clue given
      *
+     * @param type - The type of response to retrieve
      * @param clue - The clue to get the response for
-     * @return (String) the string response
+     * @return The corresponding line of dialogue
      */
-    public String getSpeech(Clue clue)
+    public String getSpeech(String type, Clue clue)
     {
-        return this.getSpeech(clue.getName());
+        return this.getSpeech(type, clue.getName());
     }
-
-
-    /**
-     * This handles speech for a clue that has a question style
-     *
-     * @param clue  the clue to be questioned about
-     * @param style the style of questioning
-     * @return the speech
-     */
-    public abstract String getSpeech(Clue clue, Personality style);
 
     /**
      * Updates the texture region based upon how far though the animation time it is.

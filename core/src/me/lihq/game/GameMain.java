@@ -9,22 +9,30 @@
 
 package me.lihq.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
+import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.AbstractScreen;
+import me.lihq.game.screen.InventoryScreen;
 import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
-
-import java.util.*;
+import me.lihq.game.screen.PauseScreen;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -63,7 +71,21 @@ public class GameMain extends Game
     /**
      * The main menu screen that shows up when the game is first started
      */
-    private MainMenuScreen menuScreen;
+    public MainMenuScreen menuScreen;
+
+    public PauseScreen pauseScreen;
+    
+    public InventoryScreen inventoryScreen;
+    
+    /**
+     * Universal input handler
+     */
+    public GlobalInput input;
+    
+    /**
+     * Input multiplexer to control multiple inputs across project
+     */
+    public InputMultiplexer inputMultiplexer;
 
     /**
      * This is called at start up. It initialises the game.
@@ -80,6 +102,14 @@ public class GameMain extends Game
         initialiseAllPeople();
 
         initialiseClues();
+        
+        // Load universal input class
+        input = new GlobalInput(this);
+        
+        // Load input multiplexer and add universal input to it
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(input);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         //set up the screen and display the first room
 
@@ -89,6 +119,9 @@ public class GameMain extends Game
 
         navigationScreen = new NavigationScreen(this);
         navigationScreen.updateTiledMapRenderer();
+        
+        pauseScreen = new PauseScreen(this);
+        inventoryScreen = new InventoryScreen(this);
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
@@ -104,6 +137,8 @@ public class GameMain extends Game
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
+        
+        input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
 
@@ -128,16 +163,6 @@ public class GameMain extends Game
     public AbstractScreen getScreen()
     {
         return (AbstractScreen) super.getScreen();
-    }
-
-    /**
-     * This method returns the Navigation Screen that the game runs on.
-     *
-     * @return navigationScreen - The gameplay screen.
-     */
-    public NavigationScreen getNavigationScreen()
-    {
-        return navigationScreen;
     }
 
     /**
@@ -244,16 +269,17 @@ public class GameMain extends Game
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
 
-        tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Lipstick", "Lipstick, a killer's best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Right Handed", "This indicates the killer is right handed", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        tempClues.add(new Clue("Bloody Knife", "A bloody knife... it's actually dripping", true, new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        //tempClues.add(new Clue("Clue 9", "test Desc", new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
-        //tempClues.add(new Clue("Clue 10", "test Desc", new TextureRegion(Assets.CLUE_SHEET, 0, 0, 32, 32)));
+
+        tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Right-Handed fountain pen", "A bloodstained fountain pen. The killer must be right-handed", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Erotic Novel", "An erotic novel the killer left behind. At least now we know that they have terrible taste.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Broken Mobile Phone", "A broken mobile phone. Perhaps somebody will recognise it.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Car Keys", "A set of car keys left at the crimescene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
 
         Collections.shuffle(tempClues);
 

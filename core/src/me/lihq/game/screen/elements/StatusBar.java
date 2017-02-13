@@ -1,7 +1,6 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
 import me.lihq.game.GameMain;
-import me.lihq.game.screen.PauseScreen;
 
 /**
  * The status bar shown throughout the game
@@ -54,7 +53,6 @@ public class StatusBar
      */
     private Skin buttonSkin;
     private Skin labelSkin;
-    private PauseScreen pauseScreen;
 
     /**
      * The initializer for the StatusBar
@@ -63,7 +61,6 @@ public class StatusBar
     public StatusBar(final GameMain game)
     {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        pauseScreen = new PauseScreen(game);
         initSkins();
 
         Table statusBar = new Table();
@@ -81,6 +78,15 @@ public class StatusBar
 
         TextButton inventoryButton = new TextButton("Inventory", buttonSkin);
         statusBar.add(inventoryButton).uniform();
+        inventoryButton.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+            	game.navigationScreen.playerController.clear();
+            	game.setScreen(game.inventoryScreen);
+            }
+        });
 
         TextButton pauseButton = new TextButton("Pause", buttonSkin);
         statusBar.add(pauseButton).uniform();
@@ -89,11 +95,8 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.getNavigationScreen().playerController.keyUp(Input.Keys.W);
-            	game.getNavigationScreen().playerController.keyUp(Input.Keys.A);
-            	game.getNavigationScreen().playerController.keyUp(Input.Keys.S);
-            	game.getNavigationScreen().playerController.keyUp(Input.Keys.D);
-                game.setScreen(pauseScreen);
+            	game.navigationScreen.playerController.clear();
+                game.setScreen(game.pauseScreen);
             }
         });
 

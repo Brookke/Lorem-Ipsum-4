@@ -23,7 +23,6 @@ import java.util.ArrayList;
  * SpeechBox sb = new SpeechBox(..)
  * sb.render();
  * <p>
- * Note: add to InputMultiplexer if using with other UI elements.
  */
 public class SpeechBox
 {

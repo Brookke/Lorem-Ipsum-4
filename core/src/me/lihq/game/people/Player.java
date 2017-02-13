@@ -60,16 +60,28 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * This method will change the players personality by the given amount.
-     * It will cap the personality between 0 and 100.
-     * <p>
-     * If the change takes it out of these bounds, it will change it to the min or max.
-     *
-     * @param change - The amount to change by, can be positive or negative
+     * Changes the player's personality towards the given type, and
+     * caps the personality between 0 and 100.
+     * 
+     * @param change - The personality type to move in the direction of
      */
-    public void addToPersonality(int change)
+    public void changePersonality(Personality change)
     {
-        personalityLevel = personalityLevel + change;
+    	switch (change)
+    	{
+    	case AGGRESSIVE:
+    		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
+    		break;
+		case NEUTRAL:
+			if (personalityLevel < 50)
+				personalityLevel += Math.ceil(10*((50-personalityLevel)/100f));
+			else
+				personalityLevel -= Math.ceil(10*((personalityLevel-50)/100f));
+			break;
+		case NICE:
+    		personalityLevel += Math.ceil(10*((100-personalityLevel)/100f));
+			break;
+    	}
 
         if (personalityLevel < 0) {
             personalityLevel = 0;
@@ -96,7 +108,7 @@ public class Player extends AbstractPerson
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            GameMain.me.getNavigationScreen().initialiseRoomChange();
+            GameMain.me.navigationScreen.initialiseRoomChange();
             return;
         }
 
@@ -117,7 +129,7 @@ public class Player extends AbstractPerson
 
         NPC npc = getFacingNPC();
         if (npc != null) {
-            GameMain.me.getNavigationScreen().convMngt.startConversation(npc);
+            GameMain.me.navigationScreen.convMngt.startConversation(npc);
         } else {
             checkForClue();
         }
@@ -156,7 +168,7 @@ public class Player extends AbstractPerson
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
             	this.murderWeapon = true;
@@ -167,7 +179,7 @@ public class Player extends AbstractPerson
                 character.ignored = false;
             }
         } else {
-            GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
     }
 
@@ -246,13 +258,12 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * This method gets the speech based on what clue it is and the selected personality
+     * Handles speech for a question about a clue.
      *
-     * @param clue  the clue to be questioned about
-     * @param style the style of questioning
-     * @return (String) - The speech to add to the SpeechBox
+     * @param clue - The clue to be questioned about
+     * @param style - The style of questioning
+     * @return The appropriate line of dialogue.
      */
-    @Override
     public String getSpeech(Clue clue, Personality style)
     {
         String key = clue.getName();

@@ -7,7 +7,10 @@
     "Bag",
     "Lipstick",
     "Right Handed",
-    "Dark Hair"
+    "Dark Hair",
+    "Erotic Novel",
+    "Broken Mobile Phone",
+    "Car Keys"
   ],
   "personality": "NICE",
   "responses": {
@@ -21,7 +24,10 @@
     "Bag": "I do have a bag with me yes",
     "Lipstick": "Erm no I do not wear lipstick...",
     "Right Handed": "Yes, I am right handed.",
-    "Dark Hair": "I would say my hair is dark yes."
+    "Dark Hair": "I would say my hair is dark yes.",
+    "Erotic Novel": "Ah, a fellow lover of 50 Spades of Hay! We should go for drinks sometime!"
+    "Broken Mobile Phone": "I'm afraid I can't help you there, friend.",
+    "Car Keys": "My car is the same make as those keys! I'm glad you have such an appreciation for them."
   },
   "noneResponses": [
     "Sorry I have some marking to get on with.",

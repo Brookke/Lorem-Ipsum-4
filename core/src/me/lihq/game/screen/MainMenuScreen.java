@@ -52,9 +52,7 @@ public class MainMenuScreen extends AbstractScreen
     @Override
     public void show()
     {
-        //I don't actually remember what this did, could someone update this?
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(menu.stage);
+        game.inputMultiplexer.addProcessor(menu.stage);
     }
 
     /**

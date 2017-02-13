@@ -226,19 +226,27 @@ public class NPC extends AbstractPerson
 
 
     /**
-     * This handles speech for a clue that has a question style
+     * Handles speech for a question about a clue.
      *
-     * @param clue  the clue to be questioned about
-     * @param style the style of questioning
-     * @return (String) the speech
+     * @param clue - The clue to be questioned about
+     * @param style - The style of questioning
+     * @param player - The personality type of the player
+     * @return The appropriate line of dialogue.
      */
-    @Override
-    public String getSpeech(Clue clue, Personality style)
+    public String getSpeech(Clue clue, Personality style, Personality player)
     {
-        if (style == this.personality) {
-            return getSpeech(clue);
-        } else {
-            return getSpeech("");
+    	if (style == personality && player == style)
+    	{
+    		// TODO: Retrieve improved response rather than normal response
+    		return getSpeech("responses", clue);
+    	}
+    	else if (style == personality || style == player)
+    	{
+    		return getSpeech("responses", clue);
+        } 
+    	else
+    	{
+            return getSpeech("noneResponses", "");
         }
     }
 

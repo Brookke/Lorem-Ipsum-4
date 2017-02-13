@@ -75,16 +75,16 @@ public class ConversationManagement
         player.inConversation = true;
 
         if (tempNPC.accused) {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
             finished = true;
 
         } else if (!tempNPC.ignored) {
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("responses", "Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("responses", "Introduction"), 5));
             queryQuestionType();
 
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Ignored Return"), 5));
             finished = true;
         }
     }
@@ -154,7 +154,7 @@ public class ConversationManagement
     private void questionNPC()
     {
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
         finished = true;
     }
 
@@ -166,7 +166,7 @@ public class ConversationManagement
         if (this.tempNPC.isKiller()) {
             speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
             this.tempNPC.accused = true;
         }
         finished = true;
@@ -174,7 +174,7 @@ public class ConversationManagement
 
     private void ignoreNPC()
     {
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Ignored Initial"), 5));
         this.tempNPC.ignored = true;
         finished = true;
     }
