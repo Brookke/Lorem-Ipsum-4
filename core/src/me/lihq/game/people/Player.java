@@ -56,16 +56,28 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * This method will change the players personality by the given amount.
-     * It will cap the personality between 0 and 100.
-     * <p>
-     * If the change takes it out of these bounds, it will change it to the min or max.
-     *
-     * @param change - The amount to change by, can be positive or negative
+     * Changes the player's personality towards the given type, and
+     * caps the personality between 0 and 100.
+     * 
+     * @param change - The personality type to move in the direction of
      */
-    public void addToPersonality(int change)
+    public void changePersonality(Personality change)
     {
-        personalityLevel = personalityLevel + change;
+    	switch (change)
+    	{
+    	case AGGRESSIVE:
+    		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
+    		break;
+		case NEUTRAL:
+			if (personalityLevel < 50)
+				personalityLevel += Math.ceil(10*((50-personalityLevel)/100f));
+			else
+				personalityLevel -= Math.ceil(10*((personalityLevel-50)/100f));
+			break;
+		case NICE:
+    		personalityLevel += Math.ceil(10*((100-personalityLevel)/100f));
+			break;
+    	}
 
         if (personalityLevel < 0) {
             personalityLevel = 0;
