@@ -48,7 +48,6 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void show()
     {
-        game.inputMultiplexer.addProcessor(pauseMenu.stage);
     }
 
     /**
