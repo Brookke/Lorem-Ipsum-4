@@ -27,7 +27,7 @@ public class InventoryScreen extends AbstractScreen {
     private static final Color BACKGROUND_COLOR = Color.GRAY;
     
     private static final int CLUES_PER_ROW = 7;
-    private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*CLUES_PER_ROW)/2f;
+    private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*2*CLUES_PER_ROW)/2f;
 	
 	private Stage stage;
 	private Stage zoomedStage;
