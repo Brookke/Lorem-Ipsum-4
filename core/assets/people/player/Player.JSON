@@ -37,10 +37,25 @@
       "NEUTRAL": "Do you have dark hair?",
       "NICE": "I can't tell if that hair is part of your costume, can you tell me what colour your actual hair is? "
     },
+    "Erotic Novel": {
+      "AGGRESSIVE": "DO YOU ENJOY TERRIBLE BOOKS LIKE THIS ONE?!... WELL?!",
+      "NEUTRAL": "Is this your book?",
+      "NICE": "I just found a copy of my favourite book! Do you know who it belongs to?"
+    },
+    "Broken Mobile Phone": {
+      "AGGRESSIVE": "I DEMAND TO KNOW IF THIS IS YOUR PHONE IMMEDIATELY!!!",
+      "NEUTRAL": "Is this your phone?",
+      "NICE": "I just found someone's broken phone. Do you recognise it? I'd love to return it."
+    },
+    "Car Keys": {
+      "AGGRESSIVE": "ARE THESE YOUR CAR KEYS?! TELL ME NOW OR I'LL MURDER YOUR FIRST-BORN!!",
+      "NEUTRAL": "Are these your car keys?",
+      "NICE": "Hey you look like you have good taste in cars. What make is yours? "
+    },
   },
   "noneResponses": [
     "Sorry I am a little busy for questions right now.",
-    "And why do you think I would help you.",
+    "And why do you think I would help you?",
     "I am not telling you."
   ]
 }

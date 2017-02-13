@@ -1,5 +1,17 @@
 {
   "name": "Colin",
+  "clues": [
+    "Big Footprint",
+    "Small Footprint",
+    "Glasses",
+    "Bag",
+    "Lipstick",
+    "Right Handed",
+    "Dark Hair",
+    "Erotic Novel",
+    "Broken Mobile Phone",
+    "Car Keys"
+  ],
   "personality": "NICE",
   "responses": {
     "introduction": "Hello young detective!",
@@ -12,7 +24,10 @@
     "Bag": "I do own a bag, I think I left it in my room.",
     "Lipstick": "No I don't wear lipstick.",
     "Right Handed": "I am right handed.",
-    "Dark Hair": "Don't think it could be my hair, I have light hair."
+    "Dark Hair": "Don't think it could be my hair, I have light hair.",
+    "Erotic Novel": "Terrible? That's 50 Spades of Hay! That's my favourite book!",
+    "Broken Mobile Phone": "It might be mine. I can't tell.",
+    "Car Keys": "HAH! Joke's on you! I'm not a balanced enough individual to have children... or a car..."
   },
   "noneResponses": [
     "Sorry I am a little busy for questions right now.",
