@@ -102,11 +102,9 @@ public class ConversationManagement
             buttons.add(new SpeechBoxButton("Question?", 0, eventHandler));
             buttons.add(new SpeechBoxButton("Ignore", 2, eventHandler));
         }
-        for (int i=0;i<player.collectedClues.size();i++){
-        	if (player.collectedClues.get(i).getisMurderWeapon() == true) {
-                buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
+        if (player.murderWeapon == true) {
+        	buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
             }
-        }
         
         if (buttons.size() > 0) {
             speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));

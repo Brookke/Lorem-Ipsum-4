@@ -22,6 +22,11 @@ public class Player extends AbstractPerson
     /**
      * This stores whether the player is in the middle of a conversation or not
      */
+    
+    public boolean murderWeapon = false;
+    /**
+     * true if player has the murder weapon.
+     */
     public boolean inConversation = false;
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
@@ -154,6 +159,9 @@ public class Player extends AbstractPerson
         if (clueFound != null) {
             GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
+            if (clueFound.getisMurderWeapon() == true) {
+            	this.murderWeapon = true;
+            }
 
             // set all NPCs ignored to false
             for (NPC character : GameMain.me.NPCs) {

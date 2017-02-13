@@ -26,6 +26,12 @@ public class Clue extends Sprite
      * whereas this is in terms of map tiles relative to the bottom left of the map.
      */
     private Vector2Int tileCoordinates = new Vector2Int(0, 0);
+    
+
+    /**
+     * True if clue is a murder weapon, otherwise false.
+     */
+    private Boolean isMurderWeapon;
 
     /**
      * Creates a clue
@@ -35,10 +41,6 @@ public class Clue extends Sprite
      * @param texture     the texture region of the clue
      */
     
-    private Boolean isMurderWeapon;
-    /**
-     * True if clue is a murder weapon, otherwise false.
-     */
     public Clue(String name, String description, Boolean weapon, TextureRegion texture)
     {
         super(texture);
