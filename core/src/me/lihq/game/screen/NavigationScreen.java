@@ -69,10 +69,6 @@ public class NavigationScreen extends AbstractScreen
     private Viewport viewport;
     private SpriteBatch spriteBatch;
     /**
-     * The input multiplexer for the game
-     */
-    private InputMultiplexer multiplexer;
-    /**
      * This stores whether the game is paused or not
      */
     private boolean pause = false;
@@ -145,7 +141,7 @@ public class NavigationScreen extends AbstractScreen
 
         statusBar = new StatusBar(game);
 
-        speechboxMngr = new SpeechboxManager();
+        speechboxMngr = new SpeechboxManager(game);
 
         convMngt = new ConversationManagement(game.player, speechboxMngr);
 
@@ -162,13 +158,8 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void show()
     {
-        InputMultiplexer multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(speechboxMngr.multiplexer);
-        multiplexer.addProcessor(playerController);
-        multiplexer.addProcessor(statusBar.stage);
-
-        Gdx.input.setInputProcessor(multiplexer);
-
+        game.inputMultiplexer.addProcessor(playerController);
+        game.inputMultiplexer.addProcessor(statusBar.stage);
     }
 
     /**

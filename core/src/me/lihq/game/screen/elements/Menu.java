@@ -131,6 +131,7 @@ public class Menu
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+            	Gdx.input.setInputProcessor(game.inputMultiplexer);
                 game.setScreen(game.navigationScreen);
             }
         });
