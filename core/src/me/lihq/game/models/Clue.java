@@ -31,7 +31,7 @@ public class Clue extends Sprite
     /**
      * True if clue is a murder weapon, otherwise false.
      */
-    private Boolean isMurderWeapon;
+    private boolean isMurderWeapon;
 
     /**
      * Creates a clue
@@ -40,7 +40,6 @@ public class Clue extends Sprite
      * @param description describes what the clue is
      * @param texture     the texture region of the clue
      */
-    
     public Clue(String name, String description, Boolean weapon, TextureRegion texture)
     {
         super(texture);
