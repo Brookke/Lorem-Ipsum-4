@@ -152,6 +152,9 @@ public class NavigationScreen extends AbstractScreen
         tiledMapRenderer.addPerson(game.player);
 
         arrow = new RoomArrow(game.player);
+
+        game.inputMultiplexer.addProcessor(playerController);
+        game.inputMultiplexer.addProcessor(statusBar.stage);
     }
 
     /**
@@ -160,8 +163,6 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void show()
     {
-        game.inputMultiplexer.addProcessor(playerController);
-        game.inputMultiplexer.addProcessor(statusBar.stage);
     }
 
     /**
