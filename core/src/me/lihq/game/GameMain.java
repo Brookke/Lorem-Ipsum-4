@@ -103,6 +103,7 @@ public class GameMain extends Game
         // Load input multiplexer and add universal input to it
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         //set up the screen and display the first room
 

@@ -75,7 +75,6 @@ public class Menu
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.pauseMenu = pauseMenu;
         
-        Gdx.input.setInputProcessor(game.inputMultiplexer);
         game.inputMultiplexer.addProcessor(stage);
 
         //Initialising the skin made for the buttons
