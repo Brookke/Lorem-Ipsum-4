@@ -1,8 +1,18 @@
 {
   "name":"Will",
-  "clues": ["Big Footprint","Small Footprint", "Glasses","Bag","Lipstick","Right Handed","Dark Hair"],
+  "clues": [
+    "Big Footprint",
+    "Small Footprint",
+    "Glasses",
+    "Bag",
+    "Lipstick",
+    "Right Handed",
+    "Dark Hair",
+    "Erotic Novel",
+    "Broken Mobile Phone",
+    "Car Keys"
+  ],
   "personality":"NEUTRAL",
-
   "responses": {
     "introduction": "Hello",
     "Ignored Initial": "##INITIAL IGNORE##",
@@ -14,10 +24,13 @@
     "Bag": "I don't have a bag with me.",
     "Lipstick": "I actually do have some Lipstick.",
     "Right Handed": "I am right handed.",
-    "Dark Hair": "I do have dark hair yes."
+    "Dark Hair": "I do have dark hair yes.",
+    "Erotic Novel": "Nope.",
+    "Broken Mobile Phone": "Nope.",
+    "Car Keys": "Nope.",
   },
   "noneResponses": [
-    "Sorry I have some graphics to render.",
+    "Sorry I have some sound to render.",
     "And why would i help you.",
     "I am not telling you."
   ]
