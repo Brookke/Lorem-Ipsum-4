@@ -189,7 +189,7 @@ public class Menu
     public void render()
     {
         //Determining the background colour of the menu
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //Rendering the buttons
         stage.act();
