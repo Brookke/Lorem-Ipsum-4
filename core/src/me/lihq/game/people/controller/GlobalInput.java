@@ -10,13 +10,25 @@ import com.badlogic.gdx.InputAdapter;
  */
 public class GlobalInput extends InputAdapter {
 	
+	private boolean paused;
+	
 	@Override
 	public boolean keyDown(int keycode) {
+		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
+		{
+			paused = true;
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
+		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
+		{
+			paused = false;
+			return true;
+		}
 		return false;
 	}
 	
