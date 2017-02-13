@@ -83,7 +83,7 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.getNavigationScreen().playerController.clear();
+            	game.navigationScreen.playerController.clear();
             	game.setScreen(game.inventoryScreen);
             }
         });
@@ -95,7 +95,7 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.getNavigationScreen().playerController.clear();
+            	game.navigationScreen.playerController.clear();
                 game.setScreen(game.pauseScreen);
             }
         });

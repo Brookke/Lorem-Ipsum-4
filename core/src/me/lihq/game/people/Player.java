@@ -104,7 +104,7 @@ public class Player extends AbstractPerson
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            GameMain.me.getNavigationScreen().initialiseRoomChange();
+            GameMain.me.navigationScreen.initialiseRoomChange();
             return;
         }
 
@@ -125,7 +125,7 @@ public class Player extends AbstractPerson
 
         NPC npc = getFacingNPC();
         if (npc != null) {
-            GameMain.me.getNavigationScreen().convMngt.startConversation(npc);
+            GameMain.me.navigationScreen.convMngt.startConversation(npc);
         } else {
             checkForClue();
         }
@@ -164,7 +164,7 @@ public class Player extends AbstractPerson
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
 
             // set all NPCs ignored to false
@@ -172,7 +172,7 @@ public class Player extends AbstractPerson
                 character.ignored = false;
             }
         } else {
-            GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
     }
 

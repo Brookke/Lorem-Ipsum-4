@@ -166,16 +166,6 @@ public class GameMain extends Game
     }
 
     /**
-     * This method returns the Navigation Screen that the game runs on.
-     *
-     * @return navigationScreen - The gameplay screen.
-     */
-    public NavigationScreen getNavigationScreen()
-    {
-        return navigationScreen;
-    }
-
-    /**
      * Generates all the NPC's, Players
      */
     public void initialiseAllPeople()
