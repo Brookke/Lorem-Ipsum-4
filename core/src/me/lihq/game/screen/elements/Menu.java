@@ -20,6 +20,11 @@ import me.lihq.game.GameMain;
 
 public class Menu
 {
+	/**
+	 * Game for menu
+	 */
+	private GameMain game;
+	
     /**
      * The background color of the menu
      */
@@ -64,10 +69,13 @@ public class Menu
      */
     public Menu(final GameMain game, boolean pauseMenu)
     {
+    	this.game = game;
+    	
         //Initialising new stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        Gdx.input.setInputProcessor(stage);
         this.pauseMenu = pauseMenu;
+        
+        game.inputMultiplexer.addProcessor(stage);
 
         //Initialising the skin made for the buttons
         initButtonSkin();
@@ -131,7 +139,6 @@ public class Menu
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	Gdx.input.setInputProcessor(game.inputMultiplexer);
                 game.setScreen(game.navigationScreen);
             }
         });
@@ -189,6 +196,7 @@ public class Menu
      */
     public void render()
     {
+    	game.input.update();
         //Determining the background colour of the menu
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -1,8 +1,9 @@
 package me.lihq.game.screen;
 
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -13,7 +14,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import me.lihq.game.*;
+
+import me.lihq.game.ConversationManagement;
+import me.lihq.game.GameMain;
+import me.lihq.game.OrthogonalTiledMapRendererWithPeople;
+import me.lihq.game.Settings;
+import me.lihq.game.SpeechboxManager;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.controller.PlayerController;
@@ -21,8 +27,6 @@ import me.lihq.game.screen.elements.DebugOverlay;
 import me.lihq.game.screen.elements.RoomArrow;
 import me.lihq.game.screen.elements.RoomTag;
 import me.lihq.game.screen.elements.StatusBar;
-
-import java.util.List;
 
 /**
  * This is the screen that is responsible for the navigation of the player around the game.
@@ -149,7 +153,8 @@ public class NavigationScreen extends AbstractScreen
 
         arrow = new RoomArrow(game.player);
 
-
+        game.inputMultiplexer.addProcessor(playerController);
+        game.inputMultiplexer.addProcessor(statusBar.stage);
     }
 
     /**
@@ -158,8 +163,6 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void show()
     {
-        game.inputMultiplexer.addProcessor(playerController);
-        game.inputMultiplexer.addProcessor(statusBar.stage);
     }
 
     /**
@@ -168,6 +171,7 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void update()
     {
+    	game.input.update();
     	convMngt.finishConversation();
     	
         if (!pause) { //this statement contains updates that shouldn't happen during a pause

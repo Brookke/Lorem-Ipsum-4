@@ -69,7 +69,7 @@ public class GameMain extends Game
     /**
      * The main menu screen that shows up when the game is first started
      */
-    private MainMenuScreen menuScreen;
+    public MainMenuScreen menuScreen;
     
     /**
      * Universal input handler
@@ -98,11 +98,12 @@ public class GameMain extends Game
         initialiseClues();
         
         // Load universal input class
-        input = new GlobalInput();
+        input = new GlobalInput(this);
         
         // Load input multiplexer and add universal input to it
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         //set up the screen and display the first room
 

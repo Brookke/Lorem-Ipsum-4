@@ -2,15 +2,11 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import me.lihq.game.ConversationManagement;
-import me.lihq.game.Settings;
-import me.lihq.game.SpeechboxManager;
-import me.lihq.game.people.Player;
-import me.lihq.game.screen.NavigationScreen;
-import me.lihq.game.GameMain;
 
-import static me.lihq.game.people.AbstractPerson.Direction;
-import static me.lihq.game.people.AbstractPerson.PersonState;
+import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
+import me.lihq.game.people.AbstractPerson.Direction;
+import me.lihq.game.people.Player;
 
 /**
  * This class allows the player to be moved and controlled.
@@ -20,7 +16,7 @@ public class PlayerController extends InputAdapter
     /**
      * Booleans storing what keys have been pressed and not released
      */
-    private boolean north, south, west, east;
+    private boolean north, south, west, east, interact;
 
     /**
      * This stores the player that the controller controls
@@ -46,12 +42,10 @@ public class PlayerController extends InputAdapter
     @Override
     public boolean keyDown(int keycode)
     {
-        if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-            GameMain.me.navigationScreen.speechboxMngr.skipMessage();
-            player.interact();
-            return true;
-        }
-
+    	if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
+    		this.interact = true;
+    		return true;
+    	}
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = true;
             return true;
@@ -72,23 +66,6 @@ public class PlayerController extends InputAdapter
             this.south = true;
             return true;
         }
-
-        //TODO: The following 3 key reads could do with being placed in another controller
-        if (keycode == Input.Keys.J) {
-            Settings.DEBUG_OPTIONS.put("showWalkable", !Settings.DEBUG_OPTIONS.get("showWalkable"));
-            return true;
-        }
-
-        if (keycode == Input.Keys.H) {
-            Settings.DEBUG_OPTIONS.put("showHideable", !Settings.DEBUG_OPTIONS.get("showHideable"));
-            return true;
-        }
-
-        if (keycode == Input.Keys.F3) {
-            Settings.DEBUG = !Settings.DEBUG;
-            return true;
-        }
-
         return false;
     }
 
@@ -101,7 +78,6 @@ public class PlayerController extends InputAdapter
     @Override
     public boolean keyUp(int keycode)
     {
-
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = false;
             return true;
@@ -121,7 +97,6 @@ public class PlayerController extends InputAdapter
             this.south = false;
             return true;
         }
-
         return false;
     }
 
@@ -130,6 +105,12 @@ public class PlayerController extends InputAdapter
      */
     public void update()
     {
+    	if (interact) {
+    		GameMain.me.navigationScreen.speechboxMngr.skipMessage();
+            player.interact();
+            interact = false;
+    	}
+    	
     	if (!player.canMove)
     		return;
 
