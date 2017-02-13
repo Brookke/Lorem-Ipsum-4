@@ -16,18 +16,17 @@ import java.util.List;
 public class Player extends AbstractPerson
 {
     /**
-     * This object stores the clues that the player has picked up
+     * This object stores the clues that the player has picked up.
      */
     public List<Clue> collectedClues = new ArrayList<>();
     /**
-     * This stores whether the player is in the middle of a conversation or not
-     */
-    
-    public boolean murderWeapon = false;
-    /**
-     * true if player has the murder weapon.
+     * This stores whether the player is in the middle of a conversation or not.
      */
     public boolean inConversation = false;
+    /**
+     * Stores whether the player has picked up the murder weapon or not.
+     */
+    private boolean murderWeapon = false;
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
@@ -50,7 +49,7 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * Reads in the JSON file of tha character and stores dialogue in the dialogue HashMap
+     * Reads in the JSON file of the character and stores dialogue in the dialogue HashMap
      *
      * @param fileName - The file to read from
      */
@@ -159,7 +158,7 @@ public class Player extends AbstractPerson
         if (clueFound != null) {
             GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
-            if (clueFound.getisMurderWeapon() == true) {
+            if (clueFound.getisMurderWeapon()) {
             	this.murderWeapon = true;
             }
 
@@ -210,6 +209,15 @@ public class Player extends AbstractPerson
     public int getPersonalityLevel()
     {
         return this.personalityLevel;
+    }
+    
+    /**
+     * 
+     * @return true if the murder weapon has been found, false otherwise
+     */
+    public boolean foundMurderWeapon()
+    {
+    	return murderWeapon;
     }
 
 
