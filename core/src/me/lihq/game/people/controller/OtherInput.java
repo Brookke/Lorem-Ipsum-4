@@ -1,14 +1,14 @@
 package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.InputAdapter;
 
 /**
  * Universal input handler for non-Player related inputs
  * @author Andrew
  *
  */
-public class OtherInput implements InputProcessor {
+public class OtherInput extends InputAdapter {
 	
 	/**
 	 * Private array storing the boolean state of keys. The index of the array is the key value from libgdx. True means key is pressed, False means key is not pressed
@@ -37,36 +37,6 @@ public class OtherInput implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		keys[keycode] = false;
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(int amount) {
 		return false;
 	}
 
