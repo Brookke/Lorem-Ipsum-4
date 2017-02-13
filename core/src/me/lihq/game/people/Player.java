@@ -158,7 +158,7 @@ public class Player extends AbstractPerson
         if (clueFound != null) {
             GameMain.me.getNavigationScreen().speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
-            if (clueFound.getisMurderWeapon()) {
+            if (clueFound.isMurderWeapon()) {
             	this.murderWeapon = true;
             }
 

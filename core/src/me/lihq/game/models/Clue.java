@@ -31,7 +31,7 @@ public class Clue extends Sprite
     /**
      * True if clue is a murder weapon, otherwise false.
      */
-    private boolean isMurderWeapon;
+    private boolean murderWeapon;
 
     /**
      * Creates a clue
@@ -45,7 +45,7 @@ public class Clue extends Sprite
         super(texture);
         this.name = name;
         this.description = description;
-        this.isMurderWeapon = weapon;
+        this.murderWeapon = weapon;
     }
 
     /**
@@ -84,12 +84,13 @@ public class Clue extends Sprite
     {
         return this.description;
     }
+    
     /**
-     * this method returns whether or not a clue is a murder weapon.
+     * 
+     * @return true if this is the murder weapon, false otherwise
      */
-
-    public Boolean getisMurderWeapon(){
-    	return this.isMurderWeapon;
+    public boolean isMurderWeapon(){
+    	return this.murderWeapon;
     }
     
     /**
