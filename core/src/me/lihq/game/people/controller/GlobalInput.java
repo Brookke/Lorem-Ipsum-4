@@ -22,7 +22,7 @@ public class GlobalInput extends InputAdapter {
 	/**
 	 * Variables storing state of inputs
 	 */
-	private boolean paused, showWalkable, showHideable, debug;
+	private boolean paused, inventory, showWalkable, showHideable, debug;
 	
 	public GlobalInput(GameMain game) {
 		this.game = game;
@@ -30,36 +30,50 @@ public class GlobalInput extends InputAdapter {
 	
 	@Override
 	public boolean keyDown(int keycode) {
-		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
-		{
+		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P) {
 			paused = true;
+			return true;
+		}
+		if (keycode == Input.Keys.I) {
+			inventory = true;
+			return true;
 		}
 		if (keycode == Input.Keys.J) {
 			showWalkable = true;
+			return true;
 		}
 		if (keycode == Input.Keys.H) {
 			showHideable = true;
+			return true;
 		}
 		if (keycode == Input.Keys.F3) {
 			debug = true;
+			return true;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
-		{
+		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P) {
 			paused = false;
+			return true;
+		}
+		if (keycode == Input.Keys.I) {
+			inventory = false;
+			return true;
 		}
 		if (keycode == Input.Keys.J) {
 			showWalkable = false;
+			return true;
 		}
 		if (keycode == Input.Keys.H) {
 			showHideable = false;
+			return true;
 		}
 		if (keycode == Input.Keys.F3) {
 			debug = false;
+			return true;
 		}
 		return false;
 	}
@@ -68,18 +82,6 @@ public class GlobalInput extends InputAdapter {
 	 * Called once a frame to transfer read input to the live game data in the logic Thread.
 	 */
 	public void update() {
-		if (paused) {
-			if (game.getScreen().getClass() == game.menuScreen.getClass()) return;
-			PauseScreen pauseScreen = new PauseScreen(game);
-			if (game.getScreen().getClass() != pauseScreen.getClass()) {
-				game.getNavigationScreen().playerController.clear();
-				game.setScreen(pauseScreen);
-				paused = false;
-			} else {
-				game.setScreen(game.getNavigationScreen());
-				paused = false;
-			}
-		}
 		if (showWalkable) {
 			Settings.DEBUG_OPTIONS.put("showWalkable", !Settings.DEBUG_OPTIONS.get("showWalkable"));
 			showWalkable = false;
@@ -91,6 +93,29 @@ public class GlobalInput extends InputAdapter {
 		if (debug) {
 			Settings.DEBUG = !Settings.DEBUG;
 			debug = false;
+		}
+		
+		if (game.getScreen().getClass() == game.menuScreen.getClass()) return;
+		
+		if (paused && game.getScreen().getClass() != game.inventoryScreen.getClass()) {
+			if (game.getScreen().getClass() != game.pauseScreen.getClass()) {
+				game.getNavigationScreen().playerController.clear();
+				game.setScreen(game.pauseScreen);
+				paused = false;
+			} else {
+				game.setScreen(game.getNavigationScreen());
+				paused = false;
+			}
+		}
+		if (inventory && game.getScreen().getClass() != game.pauseScreen.getClass()) {
+			if (game.getScreen().getClass() != game.inventoryScreen.getClass()) {
+				game.getNavigationScreen().playerController.clear();
+				game.setScreen(game.inventoryScreen);
+				inventory = false;
+			} else {
+				game.setScreen(game.getNavigationScreen());
+				inventory = false;
+			}
 		}
 	}
 
