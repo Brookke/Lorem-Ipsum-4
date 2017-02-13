@@ -2,15 +2,11 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import me.lihq.game.ConversationManagement;
-import me.lihq.game.Settings;
-import me.lihq.game.SpeechboxManager;
-import me.lihq.game.people.Player;
-import me.lihq.game.screen.NavigationScreen;
-import me.lihq.game.GameMain;
 
-import static me.lihq.game.people.AbstractPerson.Direction;
-import static me.lihq.game.people.AbstractPerson.PersonState;
+import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
+import me.lihq.game.people.AbstractPerson.Direction;
+import me.lihq.game.people.Player;
 
 /**
  * This class allows the player to be moved and controlled.

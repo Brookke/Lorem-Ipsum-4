@@ -179,8 +179,7 @@ public class InventoryScreen extends AbstractScreen {
 
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
