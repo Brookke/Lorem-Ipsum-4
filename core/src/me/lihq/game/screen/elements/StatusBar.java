@@ -16,8 +16,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.lihq.game.GameMain;
-import me.lihq.game.screen.InventoryScreen;
-import me.lihq.game.screen.PauseScreen;
 
 /**
  * The status bar shown throughout the game
@@ -55,8 +53,6 @@ public class StatusBar
      */
     private Skin buttonSkin;
     private Skin labelSkin;
-    private PauseScreen pauseScreen;
-    private InventoryScreen inventoryScreen;
 
     /**
      * The initializer for the StatusBar
@@ -65,8 +61,6 @@ public class StatusBar
     public StatusBar(final GameMain game)
     {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        pauseScreen = new PauseScreen(game);
-        inventoryScreen = new InventoryScreen(game);
         initSkins();
 
         Table statusBar = new Table();
@@ -89,8 +83,8 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.getNavigationScreen().playerController.clear();
-            	game.setScreen(inventoryScreen);
+            	game.navigationScreen.playerController.clear();
+            	game.setScreen(game.inventoryScreen);
             }
         });
 
@@ -101,8 +95,8 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.getNavigationScreen().playerController.clear();
-                game.setScreen(pauseScreen);
+            	game.navigationScreen.playerController.clear();
+                game.setScreen(game.pauseScreen);
             }
         });
 
