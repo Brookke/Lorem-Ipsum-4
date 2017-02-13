@@ -83,7 +83,7 @@ public class InventoryScreen extends AbstractScreen {
         text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
 
 
-        TextButton resumeButton = new TextButton("Resume", buttonSkins);
+        TextButton resumeButton = new TextButton("Close", buttonSkins);
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
