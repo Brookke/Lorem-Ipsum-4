@@ -27,7 +27,7 @@ import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
-import me.lihq.game.people.controller.OtherInput;
+import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.AbstractScreen;
 import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
@@ -74,7 +74,7 @@ public class GameMain extends Game
     /**
      * Universal input handler
      */
-    public OtherInput input;
+    public GlobalInput input;
     
     /**
      * Input multiplexer to control multiple inputs across project
@@ -98,7 +98,7 @@ public class GameMain extends Game
         initialiseClues();
         
         // Load universal input class
-        input = new OtherInput();
+        input = new GlobalInput();
         
         // Load input multiplexer and add universal input to it
         inputMultiplexer = new InputMultiplexer();

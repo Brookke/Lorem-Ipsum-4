@@ -8,7 +8,7 @@ import com.badlogic.gdx.InputAdapter;
  * @author Andrew
  *
  */
-public class OtherInput extends InputAdapter {
+public class GlobalInput extends InputAdapter {
 	
 	/**
 	 * Private array storing the boolean state of keys. The index of the array is the key value from libgdx. True means key is pressed, False means key is not pressed
