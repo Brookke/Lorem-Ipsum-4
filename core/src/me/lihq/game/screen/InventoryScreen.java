@@ -125,7 +125,8 @@ public class InventoryScreen extends AbstractScreen {
 		            @Override
 		            public void clicked(InputEvent event, float x, float y)
 		            {
-		                Gdx.input.setInputProcessor(zoomedStage);
+		                game.inputMultiplexer.removeProcessor(stage);
+		            	game.inputMultiplexer.addProcessor(zoomedStage);
 		            	
 		            	Image img = new Image(buttonSkins.getDrawable(c.getName()));
 		            	img.setPosition(Gdx.graphics.getWidth()/2-img.getWidth()/2,
@@ -151,8 +152,9 @@ public class InventoryScreen extends AbstractScreen {
 		                    @Override
 		                    public void clicked(InputEvent event, float x, float y)
 		                    {
-		                        Gdx.input.setInputProcessor(stage);
-		                        
+				                game.inputMultiplexer.removeProcessor(zoomedStage);
+				            	game.inputMultiplexer.addProcessor(stage);
+				            	
 		                    	img.remove();
 		                    	name.remove();
 		                    	description.remove();
