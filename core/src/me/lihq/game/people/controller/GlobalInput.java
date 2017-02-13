@@ -22,7 +22,7 @@ public class GlobalInput extends InputAdapter {
 	/**
 	 * Variables storing state of inputs
 	 */
-	private boolean paused, interact, showWalkable, showHideable, debug;
+	private boolean paused, showWalkable, showHideable, debug;
 	
 	public GlobalInput(GameMain game) {
 		this.game = game;
@@ -33,9 +33,6 @@ public class GlobalInput extends InputAdapter {
 		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
 		{
 			paused = true;
-		}
-		if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-			interact = true;
 		}
 		if (keycode == Input.Keys.J) {
 			showWalkable = true;
@@ -54,9 +51,6 @@ public class GlobalInput extends InputAdapter {
 		if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P)
 		{
 			paused = false;
-		}
-		if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-			interact = false;
 		}
 		if (keycode == Input.Keys.J) {
 			showWalkable = false;
@@ -85,11 +79,6 @@ public class GlobalInput extends InputAdapter {
 				game.setScreen(game.getNavigationScreen());
 				paused = false;
 			}
-		}
-		if (interact && game.getScreen().getClass() == game.navigationScreen.getClass()) {
-			GameMain.me.navigationScreen.speechboxMngr.skipMessage();
-            game.player.interact();
-            interact = false;
 		}
 		if (showWalkable) {
 			Settings.DEBUG_OPTIONS.put("showWalkable", !Settings.DEBUG_OPTIONS.get("showWalkable"));

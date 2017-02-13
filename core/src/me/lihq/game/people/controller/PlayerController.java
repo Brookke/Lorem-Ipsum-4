@@ -16,7 +16,7 @@ public class PlayerController extends InputAdapter
     /**
      * Booleans storing what keys have been pressed and not released
      */
-    private boolean north, south, west, east;
+    private boolean north, south, west, east, interact;
 
     /**
      * This stores the player that the controller controls
@@ -42,6 +42,10 @@ public class PlayerController extends InputAdapter
     @Override
     public boolean keyDown(int keycode)
     {
+    	if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
+    		this.interact = true;
+    		return true;
+    	}
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = true;
             return true;
@@ -101,6 +105,12 @@ public class PlayerController extends InputAdapter
      */
     public void update()
     {
+    	if (interact) {
+    		GameMain.me.navigationScreen.speechboxMngr.skipMessage();
+            player.interact();
+            interact = false;
+    	}
+    	
     	if (!player.canMove)
     		return;
 
