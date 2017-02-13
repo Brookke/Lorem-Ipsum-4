@@ -238,16 +238,6 @@ public abstract class AbstractPerson extends Sprite
         return this.getSpeech(clue.getName());
     }
 
-
-    /**
-     * This handles speech for a clue that has a question style
-     *
-     * @param clue  the clue to be questioned about
-     * @param style the style of questioning
-     * @return the speech
-     */
-    public abstract String getSpeech(Clue clue, Personality style);
-
     /**
      * Updates the texture region based upon how far though the animation time it is.
      */

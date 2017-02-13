@@ -242,13 +242,12 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * This method gets the speech based on what clue it is and the selected personality
+     * Handles speech for a question about a clue.
      *
-     * @param clue  the clue to be questioned about
-     * @param style the style of questioning
-     * @return (String) - The speech to add to the SpeechBox
+     * @param clue - The clue to be questioned about
+     * @param style - The style of questioning
+     * @return The appropriate line of dialogue.
      */
-    @Override
     public String getSpeech(Clue clue, Personality style)
     {
         String key = clue.getName();
