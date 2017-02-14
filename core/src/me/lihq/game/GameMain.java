@@ -19,7 +19,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
@@ -86,6 +89,12 @@ public class GameMain extends Game
      * Input multiplexer to control multiple inputs across project
      */
     public InputMultiplexer inputMultiplexer;
+    
+    /**
+     * Global fonts to be used for rendering text - the number represents
+     * the size of the font
+     */
+    public BitmapFont font30, font20;
 
     /**
      * This is called at start up. It initialises the game.
@@ -102,6 +111,14 @@ public class GameMain extends Game
         initialiseAllPeople();
 
         initialiseClues();
+        
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/arial.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 30;
+        font30 = generator.generateFont(parameter);
+        parameter.size = 20;
+        font20 = generator.generateFont(parameter);
+        generator.dispose();
         
         // Load universal input class
         input = new GlobalInput(this);

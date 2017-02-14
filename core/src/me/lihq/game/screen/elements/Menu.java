@@ -98,9 +98,7 @@ public class Menu
         //An if statement that lets the same class be used for both the pause and main menu
         //screens. It also prints an error message to the console if called using an incorrect argument
 
-        BitmapFont font = new BitmapFont();
-
-        LabelStyle textStyle = new LabelStyle(font, Color.RED);
+        LabelStyle textStyle = new LabelStyle(game.font30, Color.RED);
 
         //Creating the label containing text and determining  its size and location on screen
         Label text;
@@ -117,9 +115,7 @@ public class Menu
             newGameButton.setText("New Game");
         }
 
-        text.setFontScale(2, 2);
-
-        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
+        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
         TextButton settings = new TextButton("Settings", buttonSkin);
@@ -170,7 +166,7 @@ public class Menu
     private void initButtonSkin()
     {
         //Create a font
-        BitmapFont font = new BitmapFont();
+    	BitmapFont font = new BitmapFont();
         buttonSkin = new Skin();
         buttonSkin.add("default", font);
 
