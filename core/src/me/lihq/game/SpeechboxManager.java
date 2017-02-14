@@ -5,12 +5,16 @@ import me.lihq.game.screen.elements.SpeechBox;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.InputMultiplexer;
+
 /**
  * This is to control the order that SpeechBoxes are shown in and controls flow of displaying the SpeechBoxes
  */
 public class SpeechboxManager
 {
 	public GameMain game;
+	
+    public InputMultiplexer multiplexer;
 
     /**
      * This is the stack of SpeechBox's that are to be displayed
@@ -23,6 +27,7 @@ public class SpeechboxManager
     public SpeechboxManager(GameMain game)
     {
     	this.game = game;
+    	multiplexer = new InputMultiplexer();
     }
 
     /**
@@ -42,7 +47,7 @@ public class SpeechboxManager
     {
         if (!this.stack.isEmpty()) {
             if (this.stack.get(0).timeoutDuration == 0) {
-                game.inputMultiplexer.removeProcessor(this.stack.get(0).stage);
+            	multiplexer.removeProcessor(this.stack.get(0).stage);
                 this.stack.remove(0);
             } else {
                 this.stack.get(0).update();
@@ -70,8 +75,8 @@ public class SpeechboxManager
      */
     private void updateInputProcessor()
     {
-        if (game.inputMultiplexer.getProcessors().size == 0 && !this.stack.isEmpty()) {
-            game.inputMultiplexer.addProcessor(this.stack.get(0).stage);
+        if (multiplexer.getProcessors().size == 0 && !this.stack.isEmpty()) {
+        	multiplexer.addProcessor(this.stack.get(0).stage);
         }
     }
 
