@@ -155,6 +155,7 @@ public class NavigationScreen extends AbstractScreen
 
         game.inputMultiplexer.addProcessor(playerController);
         game.inputMultiplexer.addProcessor(statusBar.stage);
+        game.inputMultiplexer.addProcessor(speechboxMngr.multiplexer);
     }
 
     /**
