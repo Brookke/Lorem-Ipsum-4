@@ -165,9 +165,11 @@ public class ConversationManagement
     {
         if (this.tempNPC.isKiller()) {
             speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
+            player.addToScore(1000);
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
             this.tempNPC.accused = true;
+            player.addToScore(-2000);
         }
         finished = true;
     }
@@ -222,6 +224,10 @@ public class ConversationManagement
             case CLUE:
                 this.tempCluePos = option;
                 questionNPC();
+                if (!tempNPC.alreadyAskedClues.contains(player.collectedClues.get(tempCluePos))) {
+                	player.addToScore(100);
+                	tempNPC.alreadyAskedClues.add(player.collectedClues.get(tempCluePos));
+                }
                 break;
         }
 

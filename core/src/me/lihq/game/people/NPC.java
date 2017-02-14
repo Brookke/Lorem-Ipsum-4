@@ -22,6 +22,11 @@ public class NPC extends AbstractPerson
      */
     public List<Clue> associatedClues = new ArrayList<>();
     private Random random;
+    
+    /**
+     * List of clues NPC has already been asked about
+     */
+    public List<Clue> alreadyAskedClues = new ArrayList<>();
 
     /**
      * The motive string details why the NPC committed the murder.
