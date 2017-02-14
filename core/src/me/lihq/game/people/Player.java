@@ -42,7 +42,6 @@ public class Player extends AbstractPerson
      * Variables for keeping track of score
      */
     private Date startDate, currentDate;
-    private int timeDiffMins, timeDiffSecs;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -55,7 +54,6 @@ public class Player extends AbstractPerson
         super(name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
         initDates();
-        int temp = getPenalty();
     }
 
     /**
@@ -300,8 +298,6 @@ public class Player extends AbstractPerson
     private void initDates() {
     	startDate = new Date();
     	currentDate = new Date();
-    	timeDiffMins = 0;
-    	timeDiffSecs = 0;
     }
     
     public int getPenalty() {
