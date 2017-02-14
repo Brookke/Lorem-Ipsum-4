@@ -224,7 +224,10 @@ public class ConversationManagement
             case CLUE:
                 this.tempCluePos = option;
                 questionNPC();
-                player.addToScore(100);
+                if (!tempNPC.alreadyAskedClues.contains(player.collectedClues.get(tempCluePos))) {
+                	player.addToScore(100);
+                	tempNPC.alreadyAskedClues.add(player.collectedClues.get(tempCluePos));
+                }
                 break;
         }
 
