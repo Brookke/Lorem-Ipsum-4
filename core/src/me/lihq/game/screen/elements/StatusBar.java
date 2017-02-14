@@ -23,6 +23,11 @@ import me.lihq.game.GameMain;
  */
 public class StatusBar
 {
+	/**
+	 * Variable for the game
+	 */
+	private GameMain game;
+	
     /**
      * The height of the StatusBar
      */
@@ -53,6 +58,11 @@ public class StatusBar
      */
     private Skin buttonSkin;
     private Skin labelSkin;
+    
+    /**
+     * Variable for score label
+     */
+    private Label scoreLabel;
 
     /**
      * The initializer for the StatusBar
@@ -60,6 +70,8 @@ public class StatusBar
      */
     public StatusBar(final GameMain game)
     {
+    	this.game = game;
+    	
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         initSkins();
 
@@ -69,7 +81,7 @@ public class StatusBar
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        Label scoreLabel = new Label("Score: 0", labelSkin);
+        scoreLabel = new Label("Score: 10000", labelSkin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
@@ -109,6 +121,7 @@ public class StatusBar
      */
     public void render()
     {
+    	scoreLabel.setText("Score: " + game.player.getScore());
         stage.act();
         stage.draw();
     }

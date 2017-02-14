@@ -1,14 +1,16 @@
 package me.lihq.game.people;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
+
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
 import me.lihq.game.screen.elements.SpeechBox;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class defines the player that the person playing the game will be represented by.
@@ -35,6 +37,12 @@ public class Player extends AbstractPerson
      * The score the player has earned so far.
      */
     private int score = 0;
+    
+    /**
+     * Variables for keeping track of score
+     */
+    private Date startDate, currentDate;
+    private int timeDiffMins, timeDiffSecs;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -46,6 +54,8 @@ public class Player extends AbstractPerson
     {
         super(name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
+        initDates();
+        int temp = getPenalty();
     }
 
     /**
@@ -172,12 +182,14 @@ public class Player extends AbstractPerson
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
             	this.murderWeapon = true;
+            	score += 500;
             }
 
             // set all NPCs ignored to false
             for (NPC character : GameMain.me.NPCs) {
                 character.ignored = false;
             }
+            score += 250;
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
@@ -273,6 +285,37 @@ public class Player extends AbstractPerson
             return jsonData.get("Responses").get(key).getString(style.toString());
         }
     }
-
+    
+    public void addToScore(int scoreToAdd) {
+    	score += scoreToAdd;
+    }
+    
+    public int getScore() {
+    	int overallScore = 10000 + score - getPenalty();
+    	if (overallScore < 0) overallScore = 0;
+    	
+    	return overallScore;
+    }
+    
+    private void initDates() {
+    	startDate = new Date();
+    	currentDate = new Date();
+    	timeDiffMins = 0;
+    	timeDiffSecs = 0;
+    }
+    
+    public int getPenalty() {
+    	int penalty = 0;
+    	currentDate = new Date();
+    	
+    	long diff = currentDate.getTime() - startDate.getTime();
+    	
+    	int diffMin = (int) (diff / (60 * 1000));
+    	int diffSec = ((int) (diff / 1000)) % 60;
+    	
+    	penalty = (diffMin * 1000) + (diffSec * (1000 / 60));
+    	
+    	return penalty;
+    }
 
 }
