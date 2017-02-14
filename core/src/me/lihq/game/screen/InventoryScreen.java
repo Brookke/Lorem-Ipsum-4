@@ -131,7 +131,8 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		            	zoomedStage.addActor(img);
 		            	
-		            	Label name = new Label(c.getName(), textStyle);
+		            	LabelStyle bigTextStyle = new LabelStyle(game.font20, Color.RED);
+		            	Label name = new Label(c.getName(), bigTextStyle);
 		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
 		            	zoomedStage.addActor(name);

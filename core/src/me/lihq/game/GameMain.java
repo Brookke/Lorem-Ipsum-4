@@ -90,7 +90,11 @@ public class GameMain extends Game
      */
     public InputMultiplexer inputMultiplexer;
     
-    public BitmapFont font30;
+    /**
+     * Global fonts to be used for rendering text - the number represents
+     * the size of the font
+     */
+    public BitmapFont font30, font20;
 
     /**
      * This is called at start up. It initialises the game.
@@ -112,6 +116,9 @@ public class GameMain extends Game
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = 30;
         font30 = generator.generateFont(parameter);
+        parameter.size = 20;
+        font20 = generator.generateFont(parameter);
+        generator.dispose();
         
         // Load universal input class
         input = new GlobalInput(this);
