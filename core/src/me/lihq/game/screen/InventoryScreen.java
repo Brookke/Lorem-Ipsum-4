@@ -72,16 +72,14 @@ public class InventoryScreen extends AbstractScreen {
 	}
 	
 	private void initMenu() {
-        LabelStyle textStyle = new LabelStyle(buttonSkins.getFont("default"), Color.RED);
+        LabelStyle textStyle = new LabelStyle(game.font30, Color.RED);
 
         //Creating the label containing text and determining  its size and location on screen
         Label text = new Label("Inventory", textStyle);
-        text.setFontScale(2, 2);
-        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
+        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
         
         Label text2 = new Label("Inventory", textStyle);
-        text2.setFontScale(2, 2);
-        text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth(), Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
+        text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
 
 
         TextButton resumeButton = new TextButton("Close", buttonSkins);
