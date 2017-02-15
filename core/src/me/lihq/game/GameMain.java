@@ -228,11 +228,17 @@ public class GameMain extends Game
         NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("Grey", "grey.png", 0, 0, gameMap.getRoom(0), true, "Grey.JSON");
+        NPC npc7 = new NPC("NPC1", "NPC1.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC("Girl", "girl.png", 0, 0, gameMap.getRoom(0), true, "Girl.JSON");
+        NPC npc8 = new NPC("NPC2", "NPC2.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
         NPCs.add(npc8);
+
+        NPC npc9 = new NPC("NPC3", "NPC3.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc9);
+
+        NPC npc10 = new NPC("NPC4", "NPC4.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc10);
 
         int amountOfRooms = gameMap.getAmountOfRooms();
 
@@ -255,7 +261,7 @@ public class GameMain extends Game
             /*
             Pick a random room and put that NPC in it
              */
-            int toTake = new Random().nextInt(roomsLeft.size() - 1);
+            int toTake = new Random().nextInt(roomsLeft.size());
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
