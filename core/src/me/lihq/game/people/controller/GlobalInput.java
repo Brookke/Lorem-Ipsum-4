@@ -94,24 +94,26 @@ public class GlobalInput extends InputAdapter {
 			debug = false;
 		}
 		
-		if (game.getScreen().getClass() == game.menuScreen.getClass()) return;
+		if (game.getScreen() == game.menuScreen) return;
 		
-		if (paused && game.getScreen().getClass() != game.inventoryScreen.getClass()) {
-			if (game.getScreen().getClass() != game.pauseScreen.getClass()) {
+		if (paused) {
+			if (game.getScreen() == game.navigationScreen) {
 				game.navigationScreen.playerController.clear();
 				game.setScreen(game.pauseScreen);
 				paused = false;
-			} else {
+			} 
+			else if (game.getScreen() == game.pauseScreen) {
 				game.setScreen(game.navigationScreen);
 				paused = false;
 			}
 		}
-		if (inventory && game.getScreen().getClass() != game.pauseScreen.getClass()) {
-			if (game.getScreen().getClass() != game.inventoryScreen.getClass()) {
+		if (inventory) {
+			if (game.getScreen() == game.navigationScreen) {
 				game.navigationScreen.playerController.clear();
 				game.setScreen(game.inventoryScreen);
 				inventory = false;
-			} else {
+			} 
+			else if (game.getScreen() == game.inventoryScreen) {
 				game.setScreen(game.navigationScreen);
 				inventory = false;
 			}
