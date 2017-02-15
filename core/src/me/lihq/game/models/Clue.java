@@ -1,13 +1,15 @@
 package me.lihq.game.models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 
 import me.lihq.game.Assets;
 import me.lihq.game.Settings;
-import me.lihq.game.people.JsonReader;
-import me.lihq.game.people.JsonValue;
-import me.lihq.game.people.AbstractPerson.Personality;
 
 
 /**
@@ -129,10 +131,13 @@ public class Clue extends Sprite
     }
     
     /**
-     * Sets current clue as the murder weapon for this game.
+     * Sets this clue as the murder weapon.
      */
-    public Clue setMurderWeapon(){
+    public Clue setMurderWeapon()
+    {
     	this.murderWeapon = true;
+    	
+    	return this;
     }
     
     /**
@@ -144,7 +149,6 @@ public class Clue extends Sprite
      * @param v - The Vector2Int that the clue's tile coordinates are to be set to
      * @return (Clue) returns this object once the location has been updated
      */
-    
     public Clue setTileCoordinates(Vector2Int v)
     {
         return setTileCoordinates(v.x, v.y);

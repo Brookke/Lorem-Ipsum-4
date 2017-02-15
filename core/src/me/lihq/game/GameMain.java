@@ -334,10 +334,10 @@ public class GameMain extends Game
         tempClues.add(new Clue("Car Keys.json", 1, 2));
         tempClues.add(new Clue("Knife.json", 3, 3)); //Needs sprite
         tempClues.add(new Clue("Cricket Bat.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Energy Drink", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Red Scarf", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Inhaler", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Hockey Stick,", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Energy Drink.json", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Red Scarf.json", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Inhaler.json", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Hockey Stick.json", 3, 3)); //Needs sprite
         
         Collections.shuffle(tempClues);
 
