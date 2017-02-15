@@ -111,7 +111,7 @@ public class GameMain extends Game
     @Override
     public void create()
     {
-        this.me = this;
+        GameMain.me = this;
 
         Assets.load();// Load in the assets the game needs
 

@@ -2,7 +2,6 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
@@ -21,7 +20,6 @@ public class PauseScreen extends AbstractScreen
      * The camera for the pause menu to use
      */
     private OrthographicCamera camera = new OrthographicCamera();
-    private Viewport viewport;
 
     /**
      * This constructor sets the relevant properties of the class.
