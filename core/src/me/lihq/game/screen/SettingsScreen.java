@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
 
 public class SettingsScreen extends AbstractScreen {
 
@@ -33,7 +34,6 @@ public class SettingsScreen extends AbstractScreen {
 		super(game);
 		
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        game.inputMultiplexer.addProcessor(stage);
         
         initSkin();
         initMenu();
@@ -67,6 +67,7 @@ public class SettingsScreen extends AbstractScreen {
         checkBoxStyle.checkboxOff = buttonSkins.getDrawable("uncheck");
         checkBoxStyle.checkboxOn = buttonSkins.getDrawable("check");
         checkBoxStyle.font = buttonSkins.getFont("default");
+        checkBoxStyle.fontColor = Color.RED;
         buttonSkins.add("default", checkBoxStyle);
 	}
 	
@@ -84,7 +85,8 @@ public class SettingsScreen extends AbstractScreen {
         stage.addActor(backButton);
         
         
-        CheckBox muteCheckBox = new CheckBox("Mute", buttonSkins);
+        CheckBox muteCheckBox = new CheckBox("  Mute", buttonSkins);
+        muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + muteCheckBox.getHeight());
         stage.addActor(muteCheckBox);
 
         backButton.addListener(new ClickListener()
@@ -98,12 +100,25 @@ public class SettingsScreen extends AbstractScreen {
             		game.setScreen(game.pauseScreen);
             }
         });
+        
+        muteCheckBox.addListener(new ClickListener()
+        {
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+            	if (Settings.MUTED)
+            		game.music.play();
+            	else
+            		game.music.pause();
+            	
+            	Settings.MUTED = !Settings.MUTED;
+            }
+        });
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-
+        game.inputMultiplexer.addProcessor(stage);
 	}
 
 	@Override
@@ -141,8 +156,7 @@ public class SettingsScreen extends AbstractScreen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
+        game.inputMultiplexer.removeProcessor(stage);
 	}
 
 	@Override

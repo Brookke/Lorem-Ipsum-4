@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 
 import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
 import me.lihq.game.screen.elements.SpeechBox;
@@ -189,7 +190,8 @@ public class Player extends AbstractPerson
             }
             score += 250;
             
-            GameMain.me.sound.play();
+            if (!Settings.MUTED)
+            	GameMain.me.sound.play();
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
