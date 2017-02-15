@@ -91,18 +91,18 @@ public class GameMain extends Game
      * Input multiplexer to control multiple inputs across project
      */
     public InputMultiplexer inputMultiplexer;
-    
+
     /**
      * Global fonts to be used for rendering text - the number represents
      * the size of the font
      */
     public BitmapFont font30, font20;
-    
+
     /**
      * Used for streaming the soundtrack
      */
     public Music music;
-    
+
     public Sound sound;
 
     /**
@@ -128,7 +128,7 @@ public class GameMain extends Game
         parameter.size = 20;
         font20 = generator.generateFont(parameter);
         generator.dispose();
-        
+
         // Load universal input class
         input = new GlobalInput(this);
         
@@ -148,12 +148,12 @@ public class GameMain extends Game
         
         pauseScreen = new PauseScreen(this);
         inventoryScreen = new InventoryScreen(this);
-        
+
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
         music.setVolume(0.5f);
         music.setLooping(true);
         music.play();
-        
+
         sound = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
 
         //Instantiate the FPSLogger to show FPS
@@ -228,6 +228,18 @@ public class GameMain extends Game
         NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
         NPCs.add(npc6);
 
+        NPC npc7 = new NPC("NPC1", "NPC1.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc7);
+
+        NPC npc8 = new NPC("NPC2", "NPC2.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc8);
+
+        NPC npc9 = new NPC("NPC3", "NPC3.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc9);
+
+        NPC npc10 = new NPC("NPC4", "NPC4.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc10);
+
         int amountOfRooms = gameMap.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
@@ -249,7 +261,7 @@ public class GameMain extends Game
             /*
             Pick a random room and put that NPC in it
              */
-            int toTake = new Random().nextInt(roomsLeft.size() - 1);
+            int toTake = new Random().nextInt(roomsLeft.size());
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
