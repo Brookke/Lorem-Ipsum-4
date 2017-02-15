@@ -48,6 +48,7 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void show()
     {
+        game.inputMultiplexer.addProcessor(pauseMenu.stage);
     }
 
     /**
@@ -89,7 +90,6 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void pause()
     {
-
     }
 
     /**
@@ -107,7 +107,7 @@ public class PauseScreen extends AbstractScreen
     @Override
     public void hide()
     {
-
+        game.inputMultiplexer.removeProcessor(pauseMenu.stage);
     }
 
     /**
