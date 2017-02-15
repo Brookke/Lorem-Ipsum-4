@@ -41,7 +41,6 @@ public class InventoryScreen extends AbstractScreen {
 		
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        game.inputMultiplexer.addProcessor(stage);
         
         zoomed = false;
 		
@@ -175,6 +174,7 @@ public class InventoryScreen extends AbstractScreen {
 	@Override
 	public void show() {
         addButtons();
+        game.inputMultiplexer.addProcessor(stage);
 	}
 
 	@Override
@@ -217,8 +217,7 @@ public class InventoryScreen extends AbstractScreen {
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-
+        game.inputMultiplexer.removeProcessor(stage);
 	}
 
 	@Override
