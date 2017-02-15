@@ -305,7 +305,7 @@ public class GameMain extends Game
 
 
         tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (0 * Settings.CLUE_SIZE), (0 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (01 * Settings.CLUE_SIZE), (0 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (0 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
         tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), (0 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
         tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), (0 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
         tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, (0 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
