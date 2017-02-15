@@ -27,6 +27,8 @@ public class Settings
      * The size of the clue textures
      */
     public static final int CLUE_SIZE = 64;
+    
+    public static boolean MUTED = false;
 
     /**
      * This is whether to draw some debug features to the screen

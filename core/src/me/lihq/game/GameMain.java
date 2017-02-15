@@ -38,6 +38,7 @@ import me.lihq.game.screen.InventoryScreen;
 import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
 import me.lihq.game.screen.PauseScreen;
+import me.lihq.game.screen.SettingsScreen;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -81,6 +82,10 @@ public class GameMain extends Game
     public PauseScreen pauseScreen;
     
     public InventoryScreen inventoryScreen;
+    
+    public SettingsScreen settingsScreen;
+    
+    public boolean mainMenu = true;
     
     /**
      * Universal input handler
@@ -148,7 +153,9 @@ public class GameMain extends Game
         
         pauseScreen = new PauseScreen(this);
         inventoryScreen = new InventoryScreen(this);
-
+        
+        settingsScreen = new SettingsScreen(this);
+        
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
         music.setVolume(0.5f);
         music.setLooping(true);

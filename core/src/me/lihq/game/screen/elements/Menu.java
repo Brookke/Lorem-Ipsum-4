@@ -132,6 +132,7 @@ public class Menu
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
+            	game.mainMenu = false;
                 game.setScreen(game.navigationScreen);
             }
         });
@@ -151,7 +152,7 @@ public class Menu
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                //Change to settings screen once its been made
+            	game.setScreen(game.settingsScreen);
             }
         });
     }

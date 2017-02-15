@@ -18,6 +18,11 @@ public class Assets
      * This is the asset sheet for clues
      */
     public static Texture CLUE_SHEET;
+    
+    /**
+     * The textures for the checkbox UI item
+     */
+    public static TextureRegion UNCHECKED_BOX, CHECKED_BOX;
 
     /**
      * This is the texture of splashscreen frames
@@ -87,6 +92,10 @@ public class Assets
         TAG_BORDER = loadTexture("border.png");
 
         CLUE_SHEET = loadTexture("clueSheet.png");
+        
+        Texture checkbox = loadTexture("checkbox.png");
+        UNCHECKED_BOX = new TextureRegion(checkbox, 0, 0, 32, 32);
+        CHECKED_BOX = new TextureRegion(checkbox, 32, 0, 32, 32);
 
         Texture glintFile = loadTexture("glintSheet.png");
         TextureRegion[][] splitFrames = TextureRegion.split(glintFile, 32, 32);
