@@ -289,10 +289,10 @@ public class Player extends AbstractPerson
     
     public void addToScore(int scoreToAdd) {
     	score += scoreToAdd;
+    	if (score < 0) score = 0;
     }
     
     public int getScore() {
-    	if (score < 0) score = 0;
     	return score;
     }
     
