@@ -6,8 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -15,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 public class SettingsScreen extends AbstractScreen {
@@ -55,6 +59,15 @@ public class SettingsScreen extends AbstractScreen {
         textButtonStyle.over = buttonSkins.newDrawable("background", Color.LIGHT_GRAY);
         textButtonStyle.font = buttonSkins.getFont("default");
         buttonSkins.add("default", textButtonStyle);
+
+        buttonSkins.add("uncheck", Assets.UNCHECKED_BOX);
+        buttonSkins.add("check", Assets.CHECKED_BOX);
+
+        CheckBoxStyle checkBoxStyle = new CheckBoxStyle();
+        checkBoxStyle.checkboxOff = buttonSkins.getDrawable("uncheck");
+        checkBoxStyle.checkboxOn = buttonSkins.getDrawable("check");
+        checkBoxStyle.font = buttonSkins.getFont("default");
+        buttonSkins.add("default", checkBoxStyle);
 	}
 	
 	private void initMenu() {
@@ -69,6 +82,10 @@ public class SettingsScreen extends AbstractScreen {
         
         stage.addActor(text);
         stage.addActor(backButton);
+        
+        
+        CheckBox muteCheckBox = new CheckBox("Mute", buttonSkins);
+        stage.addActor(muteCheckBox);
 
         backButton.addListener(new ClickListener()
         {
@@ -77,6 +94,8 @@ public class SettingsScreen extends AbstractScreen {
             {
             	if (game.mainMenu)
             		game.setScreen(game.menuScreen);
+            	else
+            		game.setScreen(game.pauseScreen);
             }
         });
 	}
