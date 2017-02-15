@@ -18,6 +18,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -101,6 +102,8 @@ public class GameMain extends Game
      * Used for streaming the soundtrack
      */
     public Music music;
+    
+    public Sound sound;
 
     /**
      * This is called at start up. It initialises the game.
@@ -150,6 +153,8 @@ public class GameMain extends Game
         music.setVolume(0.5f);
         music.setLooping(true);
         music.play();
+        
+        sound = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
@@ -179,6 +184,7 @@ public class GameMain extends Game
     public void dispose()
     {
     	music.dispose();
+    	sound.dispose();
     }
 
     /**
