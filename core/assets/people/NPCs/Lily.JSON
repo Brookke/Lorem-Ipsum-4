@@ -33,5 +33,12 @@
     "Really sorry but I just don't have the time right now.",
     "I'm sure it would be fine if I helped but just don't want to be involved right now.",
     "I am not telling you, sorry."
-  ]
+  ],
+  "motives": {
+  	"Colin": "Motive for killing Colin",
+  	"Diana": "Motive for killing Diana",
+  	"Mary": "Motive for killing Mary",
+  	"Mike": "Motive for killing Mike",
+  	"Will": "Motive for killing Will"
+  }
 }

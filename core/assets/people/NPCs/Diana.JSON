@@ -33,5 +33,12 @@
     "Too busy, go away.",
     "Don't have time for you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "Motive for killing Colin",
+  	"Lily": "Motive for killing Lily",
+  	"Mary": "Motive for killing Mary",
+  	"Mike": "Motive for killing Mike",
+  	"Will": "Motive for killing Will"
+  }
 }

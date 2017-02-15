@@ -33,5 +33,12 @@
     "Sorry I have some sound to render.",
     "And why would i help you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "Motive for killing Colin",
+  	"Diana": "Motive for killing Diana",
+  	"Lily": "Motive for killing Lily",
+  	"Mary": "Motive for killing Mary",
+  	"Mike": "Motive for killing Mike"
+  }
 }

@@ -33,5 +33,12 @@
     "Sorry I am a little busy for questions right now.",
     "And why do you think I would help you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Diana": "Motive for killing Diana",
+  	"Lily": "Motive for killing Lily",
+  	"Mary": "Motive for killing Mary",
+  	"Mike": "Motive for killing Mike",
+  	"Will": "Motive for killing Will"
+  }
 }

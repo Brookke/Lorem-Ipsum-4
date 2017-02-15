@@ -33,5 +33,12 @@
     "Sorry I have some marking to get on with.",
     "I'm not sure why I should help you exactly.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "Motive for killing Colin",
+  	"Diana": "Motive for killing Diana",
+  	"Lily": "Motive for killing Lily",
+  	"Mary": "Motive for killing Mary",
+  	"Will": "Motive for killing Will"
+  }
 }

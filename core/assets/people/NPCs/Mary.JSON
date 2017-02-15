@@ -33,5 +33,12 @@
     "Sorry I am far too busy for you",
     "I really don't feel the need to help you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "Motive for killing Colin",
+  	"Diana": "Motive for killing Diana",
+  	"Lily": "Motive for killing Lily",
+  	"Mike": "Motive for killing Mike",
+  	"Will": "Motive for killing Will"
+  }
 }
