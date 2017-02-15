@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputAdapter;
 
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
-import me.lihq.game.screen.PauseScreen;
 
 /**
  * Universal input handler for non-Player related inputs

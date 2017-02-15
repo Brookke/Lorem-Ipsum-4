@@ -2,7 +2,6 @@ package me.lihq.game.models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import me.lihq.game.Settings;
 
 
 /**

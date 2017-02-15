@@ -1,9 +1,8 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.viewport.Viewport;
+
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
 
@@ -21,11 +20,6 @@ public class MainMenuScreen extends AbstractScreen
      * This is the camera for the screen
      */
     private OrthographicCamera camera = new OrthographicCamera();
-
-    /**
-     * This is the viewpoint for the camera to take
-     */
-    private Viewport viewport;
 
     /**
      * The constructor for the MainMenuScreen

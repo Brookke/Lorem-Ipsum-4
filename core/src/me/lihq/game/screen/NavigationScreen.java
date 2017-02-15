@@ -249,7 +249,8 @@ public class NavigationScreen extends AbstractScreen
      *
      * @param delta The time in seconds since the last render.
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void render(float delta)
     {
     	update();
