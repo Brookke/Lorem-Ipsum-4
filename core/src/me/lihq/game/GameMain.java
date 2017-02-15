@@ -342,7 +342,6 @@ public class GameMain extends Game
         Collections.shuffle(tempClues);
 
         for (Room room : gameMap.getRooms()) {
-            if (tempClues.isEmpty()) return;
 
             Vector2Int randHidingSpot = room.getRandHidingSpot();
 
