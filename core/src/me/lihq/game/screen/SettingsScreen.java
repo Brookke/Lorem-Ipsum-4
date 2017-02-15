@@ -102,16 +102,25 @@ public class SettingsScreen extends AbstractScreen {
         stage.addActor(backButton);
         
         CheckBox muteCheckBox = new CheckBox("  Mute", buttonSkins);
-        muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + muteCheckBox.getHeight());
+        muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + muteCheckBox.getHeight()*2);
         stage.addActor(muteCheckBox);
         
+        LabelStyle labelStyle = new LabelStyle(game.font20, Color.RED);
+        Label musicLabel = new Label("Music volume:", labelStyle);
+        musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth()/2, Gdx.graphics.getHeight() / 2);
+        stage.addActor(musicLabel);
+        
         Slider musicSlider = new Slider(0, 1, 0.1f, false, buttonSkins);
-        musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - musicSlider.getHeight());
+        musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - musicSlider.getHeight()*1.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
         stage.addActor(musicSlider);
         
+        Label sfxLabel = new Label("Sound effects volume:", labelStyle);
+        sfxLabel.setPosition(Gdx.graphics.getWidth() / 2 - sfxLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 - musicSlider.getHeight()*3.5f);
+        stage.addActor(sfxLabel);
+        
         Slider sfxSlider = new Slider(0, 1, 0.1f, false, buttonSkins);
-        sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - sfxSlider.getHeight()*4);
+        sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - sfxSlider.getHeight()*5);
         sfxSlider.setValue(Settings.SFX_VOLUME);
         stage.addActor(sfxSlider);
 
