@@ -188,6 +188,8 @@ public class Player extends AbstractPerson
                 character.ignored = false;
             }
             score += 250;
+            
+            GameMain.me.sound.play();
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
