@@ -121,7 +121,7 @@ public class StatusBar
      */
     public void render()
     {
-    	scoreLabel.setText("Score: " + game.player.getScore());
+    	if (game.getScreen() == game.navigationScreen) scoreLabel.setText("Score: " + game.player.getScore());
         stage.act();
         stage.draw();
     }
