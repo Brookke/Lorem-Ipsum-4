@@ -303,7 +303,6 @@ public class Player extends AbstractPerson
     }
     
     public int getPenalty() {
-    	int penalty = 0;
     	currentDate = new Date();
     	
     	long diff = currentDate.getTime() - startDate.getTime();
@@ -311,7 +310,7 @@ public class Player extends AbstractPerson
     	int diffMin = (int) (diff / (60 * 1000));
     	int diffSec = ((int) (diff / 1000)) % 60;
     	
-    	penalty = (diffMin * 1000) + (diffSec * (1000 / 60));
+    	int penalty = (diffMin * 1000) + (diffSec * (1000 / 60));
     	
     	return penalty;
     }
