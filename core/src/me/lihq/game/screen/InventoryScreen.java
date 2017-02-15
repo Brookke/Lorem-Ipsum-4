@@ -186,6 +186,8 @@ public class InventoryScreen extends AbstractScreen {
 	public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        game.player.getScore();
         
         if (zoomed) {
         	zoomedStage.act();
