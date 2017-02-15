@@ -191,7 +191,7 @@ public class Player extends AbstractPerson
             score += 250;
             
             if (!Settings.MUTED)
-            	GameMain.me.sound.play();
+            	GameMain.me.sound.play(Settings.SFX_VOLUME);
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }

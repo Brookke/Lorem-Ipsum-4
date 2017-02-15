@@ -6,15 +6,18 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider.SliderStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -69,6 +72,20 @@ public class SettingsScreen extends AbstractScreen {
         checkBoxStyle.font = buttonSkins.getFont("default");
         checkBoxStyle.fontColor = Color.RED;
         buttonSkins.add("default", checkBoxStyle);
+        
+        Pixmap slider = new Pixmap(20, 20, Pixmap.Format.RGB888);
+        slider.setColor(Color.BLACK);
+        slider.fill();
+        Pixmap knob = new Pixmap(10, 10, Pixmap.Format.RGB888);
+        knob.setColor(Color.GRAY);
+        knob.fill();
+        buttonSkins.add("slider", new Texture(slider));
+        buttonSkins.add("knob", new Texture(knob));
+        
+        SliderStyle sliderStyle = new SliderStyle();
+        sliderStyle.background = buttonSkins.getDrawable("slider");
+        sliderStyle.knob = buttonSkins.getDrawable("knob");
+        buttonSkins.add("default-horizontal", sliderStyle);
 	}
 	
 	private void initMenu() {
@@ -84,10 +101,19 @@ public class SettingsScreen extends AbstractScreen {
         stage.addActor(text);
         stage.addActor(backButton);
         
-        
         CheckBox muteCheckBox = new CheckBox("  Mute", buttonSkins);
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + muteCheckBox.getHeight());
         stage.addActor(muteCheckBox);
+        
+        Slider musicSlider = new Slider(0, 1, 0.1f, false, buttonSkins);
+        musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - musicSlider.getHeight());
+        musicSlider.setValue(Settings.MUSIC_VOLUME);
+        stage.addActor(musicSlider);
+        
+        Slider sfxSlider = new Slider(0, 1, 0.1f, false, buttonSkins);
+        sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - sfxSlider.getHeight()*4);
+        sfxSlider.setValue(Settings.SFX_VOLUME);
+        stage.addActor(sfxSlider);
 
         backButton.addListener(new ClickListener()
         {
@@ -113,6 +139,25 @@ public class SettingsScreen extends AbstractScreen {
             	
             	Settings.MUTED = !Settings.MUTED;
             }
+        });
+        
+        musicSlider.addListener(new ChangeListener()
+        {
+			@Override
+			public void changed(ChangeEvent event, Actor actor)
+			{
+				game.music.setVolume(musicSlider.getValue());
+				Settings.MUSIC_VOLUME = musicSlider.getValue();
+			}
+        });
+        
+        sfxSlider.addListener(new ChangeListener()
+        {
+			@Override
+			public void changed(ChangeEvent event, Actor actor)
+			{
+				Settings.SFX_VOLUME = sfxSlider.getValue();
+			}
         });
 	}
 
