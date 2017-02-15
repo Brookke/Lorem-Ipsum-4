@@ -112,7 +112,7 @@ public class MainMenuScreen extends AbstractScreen
     @Override
     public void hide()
     {
-
+        game.inputMultiplexer.removeProcessor(menu.stage);
     }
 
     /**
