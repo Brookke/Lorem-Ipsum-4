@@ -3,8 +3,6 @@ package me.lihq.game.people;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 
@@ -37,12 +35,14 @@ public class Player extends AbstractPerson
     /**
      * The score the player has earned so far.
      */
-    private int score = 10000;
+    private int score = 0;
 
     /**
      * Variables for keeping track of score
      */
     private Date startDate, currentDate;
+
+    private long gameDuration = 0;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -292,8 +292,6 @@ public class Player extends AbstractPerson
     }
     
     public int getScore() {
-
-    	score -= getPenalty();
     	if (score < 0) score = 0;
     	return score;
     }
@@ -303,20 +301,19 @@ public class Player extends AbstractPerson
     	currentDate = new Date();
     }
     
-    public int getPenalty() {
+    public void durationCounter() {
+        currentDate = new Date();
+        int unpausedTime = (int) (currentDate.getTime() - startDate.getTime()) / 1000;
         if (GameMain.me.isPaused) {
             startDate = new Date();
-            return 0;
+            gameDuration += unpausedTime;
         }
-        currentDate = new Date();
+    }
 
-        long diff = currentDate.getTime() - startDate.getTime();
-
-        if (diff > 500) {
-            initDates();
-            return 5;
-        }
-        return 0;
+    // Returns the duration of the game (excluding time paused) as a whole
+    // number of seconds
+    public int getPlayTime() {
+        return (int) gameDuration;
     }
 
 }
