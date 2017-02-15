@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 
+import com.badlogic.gdx.utils.Timer;
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
@@ -36,8 +38,8 @@ public class Player extends AbstractPerson
     /**
      * The score the player has earned so far.
      */
-    private int score = 0;
-    
+    private int score = 10000;
+
     /**
      * Variables for keeping track of score
      */
@@ -291,10 +293,10 @@ public class Player extends AbstractPerson
     }
     
     public int getScore() {
-    	int overallScore = 10000 + score - getPenalty();
-    	if (overallScore < 0) overallScore = 0;
-    	
-    	return overallScore;
+
+    	score -= getPenalty();
+    	if (score < 0) score = 0;
+    	return score;
     }
     
     private void initDates() {
@@ -303,16 +305,19 @@ public class Player extends AbstractPerson
     }
     
     public int getPenalty() {
-    	currentDate = new Date();
-    	
-    	long diff = currentDate.getTime() - startDate.getTime();
-    	
-    	int diffMin = (int) (diff / (60 * 1000));
-    	int diffSec = ((int) (diff / 1000)) % 60;
-    	
-    	int penalty = (diffMin * 1000) + (diffSec * (1000 / 60));
-    	
-    	return penalty;
+        if (GameMain.me.isPaused) {
+            startDate = new Date();
+            return 0;
+        }
+        currentDate = new Date();
+
+        long diff = currentDate.getTime() - startDate.getTime();
+
+        if (diff > 500) {
+            initDates();
+            return 5;
+        }
+        return 0;
     }
 
 }

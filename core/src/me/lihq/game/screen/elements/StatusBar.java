@@ -107,7 +107,8 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.navigationScreen.playerController.clear();
+                game.isPaused = true;
+                game.navigationScreen.playerController.clear();
                 game.setScreen(game.pauseScreen);
             }
         });

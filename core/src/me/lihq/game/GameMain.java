@@ -105,6 +105,9 @@ public class GameMain extends Game
     
     public Sound sound;
 
+    // used to track whether the game is paused
+    public boolean isPaused = true;
+
     /**
      * This is called at start up. It initialises the game.
      */
