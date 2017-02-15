@@ -81,7 +81,7 @@ public class StatusBar
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: 10000", labelSkin);
+        scoreLabel = new Label("Score: " + game.player.getScore(), labelSkin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
