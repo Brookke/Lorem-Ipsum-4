@@ -81,7 +81,7 @@ public class StatusBar
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: 10000", labelSkin);
+        scoreLabel = new Label("Score: " + game.player.getScore(), labelSkin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
@@ -107,7 +107,8 @@ public class StatusBar
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.navigationScreen.playerController.clear();
+                game.isPaused = true;
+                game.navigationScreen.playerController.clear();
                 game.setScreen(game.pauseScreen);
             }
         });

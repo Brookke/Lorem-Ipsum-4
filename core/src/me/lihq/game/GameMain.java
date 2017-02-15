@@ -110,6 +110,9 @@ public class GameMain extends Game
 
     public Sound sound;
 
+    // used to track whether the game is paused
+    public boolean isPaused = true;
+
     /**
      * This is called at start up. It initialises the game.
      */
@@ -157,7 +160,7 @@ public class GameMain extends Game
         settingsScreen = new SettingsScreen(this);
         
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
-        music.setVolume(0.5f);
+        music.setVolume(Settings.MUSIC_VOLUME);
         music.setLooping(true);
         music.play();
 
@@ -177,7 +180,7 @@ public class GameMain extends Game
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
-        
+        player.durationCounter();
         input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
