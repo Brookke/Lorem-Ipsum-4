@@ -31,17 +31,17 @@ public class PlayerUnitTests extends GameTester
     public void testPlayerPersonality()
     {
         //Personality Level is default 50
-        p.addToPersonality(100);
+        p.changePersonality(Personality.NICE);
         //Should have surpassed the maximum of 100. Then changed to the maximum, 100
         assertEquals("Fail - Personality not Upper Capped", 100, p.getPersonalityLevel());
         assertEquals(Personality.NICE, p.getPersonality());
 
-        p.addToPersonality(-50);
+        p.changePersonality(Personality.NEUTRAL);
         //Reduce back to 50
         assertEquals("Fail - Personality not reduced to 50", 50, p.getPersonalityLevel());
         assertEquals(Personality.NEUTRAL, p.getPersonality());
 
-        p.addToPersonality(-100);
+        p.changePersonality(Personality.AGGRESSIVE);
         //Gone below 0, should move it back up to 0
         assertEquals("Fail - Personality not Lower Capped", 0, p.getPersonalityLevel());
         assertEquals(Personality.AGGRESSIVE, p.getPersonality());
