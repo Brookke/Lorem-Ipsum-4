@@ -10,7 +10,13 @@
     "Dark Hair",
     "Erotic Novel",
     "Broken Mobile Phone",
-    "Car Keys"
+    "Car Keys",
+    "Knife",
+    "Cricket Bat",
+    "Energy Drink",
+    "Red Scarf",
+    "Inhaler",
+    "Hockey Stick"
   ],
   "personality":"NEUTRAL",
   "responses": {
@@ -28,6 +34,12 @@
     "Erotic Novel": "Nope.",
     "Broken Mobile Phone": "Nope.",
     "Car Keys": "Nope.",
+    "Knife": "PLACEHOLDER",
+    "Cricket Bat": "PLACEHOLDER",
+    "Energy Drink": "PLACEHOLDER",
+    "Red Scarf": "PLACEHOLDER",
+    "Inhaler": "PLACEHOLDER",
+    "Hockey Stick": "PLACEHOLDER"
   },
   "noneResponses": [
     "Sorry I have some sound to render.",

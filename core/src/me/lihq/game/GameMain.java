@@ -323,17 +323,22 @@ public class GameMain extends Game
         List<Clue> tempClues = new ArrayList<>();
 
 
-        tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Right-Handed fountain pen", "A bloodstained fountain pen. The killer must be right-handed", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Erotic Novel", "An erotic novel the killer left behind. At least now we know that they have terrible taste.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Broken Mobile Phone", "A broken mobile phone. Perhaps somebody will recognise it.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Car Keys", "A set of car keys left at the crimescene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-
+        tempClues.add(new Clue("Bag.json", 3, 0));
+        tempClues.add(new Clue("Glasses.json", 2, 0));
+        tempClues.add(new Clue("Big Footprint.json", 0, 0));
+        tempClues.add(new Clue("Lipstick.json", 0, 1));
+        tempClues.add(new Clue("Right Handed Fountain Pen.json", 1, 1));
+        tempClues.add(new Clue("Dark Hair.json", 2, 1));
+        tempClues.add(new Clue("Erotic Novel.json", 3, 1));
+        tempClues.add(new Clue("Broken Mobile Phone.json", 0, 2));
+        tempClues.add(new Clue("Car Keys.json", 1, 2));
+        tempClues.add(new Clue("Knife.json", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Cricket Bat.json", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Energy Drink", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Red Scarf", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Inhaler", 3, 3)); //Needs sprite
+        tempClues.add(new Clue("Hockey Stick,", 3, 3)); //Needs sprite
+        
         Collections.shuffle(tempClues);
 
         for (Room room : gameMap.getRooms()) {

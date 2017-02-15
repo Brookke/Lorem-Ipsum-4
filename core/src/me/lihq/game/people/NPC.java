@@ -82,7 +82,7 @@ public class NPC extends AbstractPerson
     }
 
     /**
-     * Reads in the JSON file of tha character and stores dialogue in the dialogue HashMap
+     * Reads in the JSON file of the character and stores dialogue in the dialogue HashMap
      *
      * @param fileName - The filename to read from
      */

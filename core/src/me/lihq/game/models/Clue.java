@@ -3,6 +3,12 @@ package me.lihq.game.models;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import me.lihq.game.Assets;
+import me.lihq.game.Settings;
+import me.lihq.game.people.JsonReader;
+import me.lihq.game.people.JsonValue;
+import me.lihq.game.people.AbstractPerson.Personality;
+
 
 /**
  * This class defines the clues that the player needs to find in order to solve the murder.
@@ -30,7 +36,17 @@ public class Clue extends Sprite
     /**
      * True if clue is a murder weapon, otherwise false.
      */
-    private boolean murderWeapon;
+    private boolean murderWeapon = false;
+    
+    /**
+     * True if the clue could possibly be a murder weapon, otherwise false.
+     */
+    private boolean possibleWeapon;
+    
+    /**
+     * This is the JSON data for the Player/NPC
+     */
+    private JsonValue jsonData;
 
     /**
      * Creates a clue
@@ -39,14 +55,26 @@ public class Clue extends Sprite
      * @param description describes what the clue is
      * @param texture     the texture region of the clue
      */
-    public Clue(String name, String description, Boolean weapon, TextureRegion texture)
+    public Clue(String jsonFile, Integer clueX, Integer clueY)
     {
-        super(texture);
-        this.name = name;
-        this.description = description;
-        this.murderWeapon = weapon;
+        super(new TextureRegion(Assets.CLUE_SHEET, (clueX * Settings.CLUE_SIZE), (clueY * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
+        
+        importClue(jsonFile);
     }
 
+    /**
+     * Reads and stores content of json file.
+     *
+     * @param fileName - The filename to read from
+     */
+    public void importClue(String fileName)
+    {
+        jsonData = new JsonReader().parse(Gdx.files.internal("clues/" + fileName));
+        this.name = jsonData.getString("name");
+        this.description = jsonData.getString("description");
+        this.possibleWeapon = jsonData.getBoolean("weapon");
+    }
+    
     /**
      * This method checks equality of this Clue object and another object.
      *
@@ -86,10 +114,25 @@ public class Clue extends Sprite
     
     /**
      * 
+     * @return true if this is a possible murder weapon, false otherwise
+     */
+    public boolean isPossibleWeapon(){
+    	return this.possibleWeapon;
+    }
+    
+    /**
+     * 
      * @return true if this is the murder weapon, false otherwise
      */
     public boolean isMurderWeapon(){
     	return this.murderWeapon;
+    }
+    
+    /**
+     * Sets current clue as the murder weapon for this game.
+     */
+    public Clue setMurderWeapon(){
+    	this.murderWeapon = true;
     }
     
     /**
