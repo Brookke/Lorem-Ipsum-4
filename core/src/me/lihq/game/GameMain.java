@@ -157,7 +157,7 @@ public class GameMain extends Game
         settingsScreen = new SettingsScreen(this);
         
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
-        music.setVolume(0.5f);
+        music.setVolume(Settings.MUSIC_VOLUME);
         music.setLooping(true);
         music.play();
 
