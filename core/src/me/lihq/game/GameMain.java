@@ -96,18 +96,18 @@ public class GameMain extends Game
      * Input multiplexer to control multiple inputs across project
      */
     public InputMultiplexer inputMultiplexer;
-    
+
     /**
      * Global fonts to be used for rendering text - the number represents
      * the size of the font
      */
     public BitmapFont font30, font20;
-    
+
     /**
      * Used for streaming the soundtrack
      */
     public Music music;
-    
+
     public Sound sound;
 
     /**
@@ -116,7 +116,7 @@ public class GameMain extends Game
     @Override
     public void create()
     {
-        this.me = this;
+        GameMain.me = this;
 
         Assets.load();// Load in the assets the game needs
 
@@ -133,7 +133,7 @@ public class GameMain extends Game
         parameter.size = 20;
         font20 = generator.generateFont(parameter);
         generator.dispose();
-        
+
         // Load universal input class
         input = new GlobalInput(this);
         
@@ -160,7 +160,7 @@ public class GameMain extends Game
         music.setVolume(0.5f);
         music.setLooping(true);
         music.play();
-        
+
         sound = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
 
         //Instantiate the FPSLogger to show FPS
@@ -235,6 +235,18 @@ public class GameMain extends Game
         NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
         NPCs.add(npc6);
 
+        NPC npc7 = new NPC("NPC1", "NPC1.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc7);
+
+        NPC npc8 = new NPC("NPC2", "NPC2.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc8);
+
+        NPC npc9 = new NPC("NPC3", "NPC3.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc9);
+
+        NPC npc10 = new NPC("NPC4", "NPC4.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPCs.add(npc10);
+
         int amountOfRooms = gameMap.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
@@ -256,7 +268,7 @@ public class GameMain extends Game
             /*
             Pick a random room and put that NPC in it
              */
-            int toTake = new Random().nextInt(roomsLeft.size() - 1);
+            int toTake = new Random().nextInt(roomsLeft.size());
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
@@ -312,15 +324,15 @@ public class GameMain extends Game
 
 
         tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Right-Handed fountain pen", "A bloodstained fountain pen. The killer must be right-handed", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Erotic Novel", "An erotic novel the killer left behind. At least now we know that they have terrible taste.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Broken Mobile Phone", "A broken mobile phone. Perhaps somebody will recognise it.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Car Keys", "A set of car keys left at the crimescene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Right-Handed fountain pen", "A bloodstained fountain pen. The killer must be right-handed", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Erotic Novel", "An erotic novel the killer left behind. At least now we know that they have terrible taste.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Broken Mobile Phone", "A broken mobile phone. Perhaps somebody will recognise it.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        tempClues.add(new Clue("Car Keys", "A set of car keys left at the crimescene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
 
         Collections.shuffle(tempClues);
 

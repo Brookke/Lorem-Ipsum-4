@@ -133,7 +133,7 @@ public class SpeechBox
         initSkins();
 
         //Init container
-        Container container = new Container();
+        Container<Table> container = new Container<Table>();
         container.setBounds(0, Y_OFFSET, WIDTH, HEIGHT);
         container.setBackground(UIHelpers.getBackgroundDrawable(BORDER_COLOUR, WIDTH, HEIGHT));
 

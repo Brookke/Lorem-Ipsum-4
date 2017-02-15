@@ -16,9 +16,9 @@ public class ClueUnitTest extends GameTester
     {
         Assets.load();
         //TODO: use correct assets
-        shoe = new Clue("Shoe", "I am a shoe", Assets.getArrowDirection("NORTH"));
-        book = new Clue("book", "I am a book", Assets.getArrowDirection("NORTH"));
-        glasses = new Clue("glasses", "I am a pair of glasses", Assets.getArrowDirection("NORTH"));
+        shoe = new Clue("Shoe", "I am a shoe", false, Assets.getArrowDirection("NORTH"));
+        book = new Clue("book", "I am a book", false, Assets.getArrowDirection("NORTH"));
+        glasses = new Clue("glasses", "I am a pair of glasses", false, Assets.getArrowDirection("NORTH"));
     }
 
     @Test

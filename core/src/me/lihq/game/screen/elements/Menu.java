@@ -1,7 +1,10 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -12,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
 import me.lihq.game.GameMain;
 
 /**
@@ -52,11 +56,6 @@ public class Menu
     private boolean pauseMenu;
 
     /**
-     * This is the camera for the menu
-     */
-    private OrthographicCamera camera;
-
-    /**
      * This is the sprite batch of the menu that elements are rendered on.
      */
     private SpriteBatch batch;
@@ -82,7 +81,7 @@ public class Menu
 
 
         //Loading the menu or pause screen
-        initMenu(game);
+        initMenu(this.game);
     }
 
     /**
