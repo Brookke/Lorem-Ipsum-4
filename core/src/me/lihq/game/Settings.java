@@ -28,6 +28,8 @@ public class Settings
      */
     public static final int CLUE_SIZE = 64;
     
+    public static final int NUMBER_OF_CLUES = 10;
+    
     public static boolean MUTED = false;
     
     public static float MUSIC_VOLUME = 0.5f;

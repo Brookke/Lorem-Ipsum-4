@@ -10,7 +10,13 @@
     "Dark Hair",
     "Erotic Novel",
     "Broken Mobile Phone",
-    "Car Keys"
+    "Car Keys",
+    "Knife",
+    "Cricket Bat",
+    "Energy Drink",
+    "Red Scarf",
+    "Inhaler",
+    "Hockey Stick"
   ],
   "personality": "AGGRESSIVE",
   "responses": {
@@ -27,7 +33,13 @@
     "Dark Hair": "Oh behind this blue wig, my hair is dark",
     "Erotic Novel": "Of course not! Why would you even think of me?",
     "Broken Mobile Phone": "You think I'm clumsy? How dare you! That is not my phone!",
-    "Car Keys": "You think I'd tell you anything? Just because the car keys you have are the same make as my car?"
+    "Car Keys": "You think I'd tell you anything? Just because the car keys you have are the same make as my car?",
+    "Knife": "PLACEHOLDER",
+    "Cricket Bat": "PLACEHOLDER",
+    "Energy Drink": "PLACEHOLDER",
+    "Red Scarf": "PLACEHOLDER",
+    "Inhaler": "PLACEHOLDER",
+    "Hockey Stick": "PLACEHOLDER"
   },
   "noneResponses": [
     "Too busy, go away.",

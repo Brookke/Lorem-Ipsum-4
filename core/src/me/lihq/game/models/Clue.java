@@ -3,9 +3,12 @@ package me.lihq.game.models;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import me.lihq.game.Assets;
+import me.lihq.game.Settings;
+
 
 /**
- * This class defines the clues that the player needs to find in order to solve the murder.
+ * Defines the clues that the player needs to find in order to solve the murder.
  */
 public class Clue extends Sprite
 {
@@ -26,32 +29,37 @@ public class Clue extends Sprite
      */
     private Vector2Int tileCoordinates = new Vector2Int(0, 0);
     
-
     /**
      * True if clue is a murder weapon, otherwise false.
+     * 
+     * @author JAAPAN
      */
-    private boolean murderWeapon;
+    private boolean murderWeapon = false;
 
     /**
      * Creates a clue
      *
-     * @param name        the name of the clue i.e. what it is
-     * @param description describes what the clue is
-     * @param texture     the texture region of the clue
+     * @param name 			- The name of the clue i.e. what it is
+     * @param description 	- Describes what the clue is
+     * @param weapon		- Whether this clue is the murder weapon or not
+     * @param clueX			- The column of the texture on the spritesheet
+     * @param clueY			- The row of the texture on the spritesheet
+     * 
+     * @author JAAPAN
      */
-    public Clue(String name, String description, Boolean weapon, TextureRegion texture)
+    public Clue(String name, String description, boolean weapon, int clueX, int clueY)
     {
-        super(texture);
+        super(new TextureRegion(Assets.CLUE_SHEET, (clueX * Settings.CLUE_SIZE), (clueY * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
         this.name = name;
         this.description = description;
         this.murderWeapon = weapon;
     }
-
+    
     /**
-     * This method checks equality of this Clue object and another object.
+     * Checks equality of this Clue object and another object.
      *
-     * @param obj - The clue object.
-     * @return - Returns True if it is of the type Clue and the names are exactly the same
+     * @param obj - The clue object to test against
+     * @return True if {@code obj} is of type Clue and has the same name
      */
     @Override
     public boolean equals(Object obj)
@@ -65,9 +73,8 @@ public class Clue extends Sprite
     }
 
     /**
-     * Getter for Clue name.
      *
-     * @return - (String) Returns name of clue.
+     * @return (String) The name of clue.
      */
     public String getName()
     {
@@ -75,9 +82,8 @@ public class Clue extends Sprite
     }
 
     /**
-     * Getter for clue description
      *
-     * @return - (String) Returns the description of the clue.
+     * @return (String) The description of the clue.
      */
     public String getDescription()
     {
@@ -86,34 +92,50 @@ public class Clue extends Sprite
     
     /**
      * 
-     * @return true if this is the murder weapon, false otherwise
+     * @return True if this is the murder weapon, false otherwise
+     * 
+     * @author JAAPAN
      */
     public boolean isMurderWeapon(){
     	return this.murderWeapon;
     }
     
     /**
-     * This method calls the method of the same name but allows a Vector2Int as a parameter rather than
-     * the specific coordinates.
-     * <p>
-     * It sets the tile coordinates of the clue in the map.
+     * Sets this clue as the murder weapon.
+     * 
+     * @return (Clue) This object once it has been set as the murder weapon
+     * 
+     * @author JAAPAN
+     */
+    public Clue setMurderWeapon()
+    {
+    	this.murderWeapon = true;
+    	
+    	return this;
+    }
+    
+    /**
+     * Sets the tile coordinates of the clue in the map.
      *
      * @param v - The Vector2Int that the clue's tile coordinates are to be set to
-     * @return (Clue) returns this object once the location has been updated
+     *          <p>
+     *          All coordinates relative to the bottom left of the map
+     *          </p>
+     * @return (Clue) This object once the location has been updated
      */
-    
     public Clue setTileCoordinates(Vector2Int v)
     {
         return setTileCoordinates(v.x, v.y);
     }
 
     /**
-     * Setter for clue tile coordinates.
+     * Sets the tile coordinates of the clue in the map.
      *
      * @param x - The x coordinate for where the clue is, in terms of tiles.
      * @param y - The y coordinate for where the clue is, in terms of tiles.
      *          <p>
-     *          all coordinates relative to bottom left of the map
+     *          All coordinates relative to the bottom left of the map
+     *          </p>
      * @return (Clue) this object
      */
     public Clue setTileCoordinates(int x, int y)
@@ -121,15 +143,15 @@ public class Clue extends Sprite
         this.tileCoordinates.x = x;
         this.tileCoordinates.y = y;
 
-        //setPosition(x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-
         return this;
     }
 
     /**
-     * This method gets the Clue's current tile location on the map as a Vector2Int
      *
      * @return (Vector2Int) The tile coordinates of the clue
+     *          <p>
+     *          All coordinates relative to the bottom left of the map
+     *          </p>
      */
     public Vector2Int getPosition()
     {
@@ -137,9 +159,11 @@ public class Clue extends Sprite
     }
 
     /**
-     * This method returns the x component of the clues tile coordinates from {@link #getPosition()}
      *
-     * @return (int) The x tile coordinate of the clue
+     * @return (int) The x component of the clue's tile coordinates
+     *          <p>
+     *          All coordinates relative to the bottom left of the map
+     *          </p>
      */
     public int getTileX()
     {
@@ -147,9 +171,11 @@ public class Clue extends Sprite
     }
 
     /**
-     * This method returns the y component of the clues tile coordinates from {@link #getPosition()}
      *
-     * @return (int) The y tile coordinate of the clue
+     * @return (int) The y component of the clue's tile coordinates
+     *          <p>
+     *          All coordinates relative to the bottom left of the map
+     *          </p>
      */
     public int getTileY()
     {

@@ -10,7 +10,13 @@
     "Dark Hair",
     "Erotic Novel",
     "Broken Mobile Phone",
-    "Car Keys"
+    "Car Keys",
+    "Knife",
+    "Cricket Bat",
+    "Energy Drink",
+    "Red Scarf",
+    "Inhaler",
+    "Hockey Stick"
   ],
   "personality":"AGGRESSIVE",
   "responses": {
@@ -27,7 +33,13 @@
     "Dark Hair": "No my hair is not particularly dark.",
     "Erotic Novel": "Where did you get that?! Give that back!",
     "Broken Mobile Phone": "Hey that might be mine! But it's badly damaged. I can't really tell.",
-    "Car Keys": "Why would I have a car of that make? Ew!"
+    "Car Keys": "Why would I have a car of that make? Ew!",
+    "Knife": "PLACEHOLDER",
+    "Cricket Bat": "PLACEHOLDER",
+    "Energy Drink": "PLACEHOLDER",
+    "Red Scarf": "PLACEHOLDER",
+    "Inhaler": "PLACEHOLDER",
+    "Hockey Stick": "PLACEHOLDER"    
   },
   "noneResponses": [
     "Sorry I am far too busy for you",

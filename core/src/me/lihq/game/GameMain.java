@@ -10,19 +10,21 @@
 package me.lihq.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+
+
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -115,7 +117,7 @@ public class GameMain extends Game
 
     /**
      * This is called at start up. It initialises the game.
-     */
+     */ 
     @Override
     public void create()
     {
@@ -320,35 +322,65 @@ public class GameMain extends Game
     }
 
     /**
-     * This method initialises all the clues that are to be added to the games.
+     * Initialises all the clues that are to be added to the game.
+     * 
+     * @author JAAPAN
      */
     private void initialiseClues()
     {
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
+        
+        Random random = new Random();
+        JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
+        List<Integer> clueIndices = new ArrayList<>();
+        // Get the total number of generic clues in the JSON file
+        int totalClues = jsonData.get("clues").size;
+        
+        // Randomly select a number of clues, by generating random indices. 
+        // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
+        while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
+        	int r = random.nextInt(totalClues);
+        	if (!clueIndices.contains(r))
+        		clueIndices.add(r);
+        }
+        
+        for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
+        	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
+        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+        }
+        
+        // Choose a random murder weapon
+        int murderWeapon = random.nextInt(jsonData.get("weapons").size);
+        // Create the murder weapon from the JSON file.
+        JsonValue entry = jsonData.get("weapons").get(murderWeapon);
+        tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
+        
+        // Assign each clue to a randomly selected room.
+        int amountOfRooms = gameMap.getAmountOfRooms();
 
+        List<Integer> roomsLeft = new ArrayList<>();
 
-        tempClues.add(new Clue("Big Footprint", "A big footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, 0, 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Small Footprint", "A small footprint left at the crime scene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Glasses", "A pair of glasses these were found by another detective at the crime scene.", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Bag", "A bag. Someone must have left in a hurry.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), 0, Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Lipstick", "Lipstick, a killers best friend.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Right-Handed fountain pen", "A bloodstained fountain pen. The killer must be right-handed", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Dark Hair", "A dark hair from the crime scene", false, new TextureRegion(Assets.CLUE_SHEET, (2 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Erotic Novel", "An erotic novel the killer left behind. At least now we know that they have terrible taste.", false, new TextureRegion(Assets.CLUE_SHEET, (3 * Settings.CLUE_SIZE), (1 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Broken Mobile Phone", "A broken mobile phone. Perhaps somebody will recognise it.", false, new TextureRegion(Assets.CLUE_SHEET, 0, (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
-        tempClues.add(new Clue("Car Keys", "A set of car keys left at the crimescene by the killer.", false, new TextureRegion(Assets.CLUE_SHEET, (1 * Settings.CLUE_SIZE), (2 * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE)));
+        for (int i = 0; i < amountOfRooms; i++) {
+            roomsLeft.add(i);
+        }
 
-        Collections.shuffle(tempClues);
-
-        for (Room room : gameMap.getRooms()) {
-            if (tempClues.isEmpty()) return;
+        for (Clue clue : tempClues) {
+        	// Refill the rooms left list if there are more clues than rooms. This will put AT LEAST one clue per room if so.
+            if (roomsLeft.isEmpty()) {
+                for (int i = 0; i < amountOfRooms; i++) {
+                    roomsLeft.add(i);
+                }
+            }
+            int toTake = random.nextInt(roomsLeft.size());
+            int selectedRoom = roomsLeft.get(toTake);
+            roomsLeft.remove(toTake);
+            Room room = gameMap.getRoom(selectedRoom);
 
             Vector2Int randHidingSpot = room.getRandHidingSpot();
 
             if (randHidingSpot != null) {
-                room.addClue(tempClues.get(0).setTileCoordinates(randHidingSpot));
-                tempClues.remove(0);
+                room.addClue(clue.setTileCoordinates(randHidingSpot));
             }
 
         }
