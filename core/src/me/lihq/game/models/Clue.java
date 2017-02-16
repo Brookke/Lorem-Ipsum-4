@@ -44,11 +44,6 @@ public class Clue extends Sprite
      * True if the clue could possibly be a murder weapon, otherwise false.
      */
     private boolean possibleWeapon;
-    
-    /**
-     * This is the JSON data for the Player/NPC
-     */
-    private JsonValue jsonData;
 
     /**
      * Creates a clue
@@ -57,24 +52,13 @@ public class Clue extends Sprite
      * @param description describes what the clue is
      * @param texture     the texture region of the clue
      */
-    public Clue(String jsonFile, Integer clueX, Integer clueY)
+    public Clue(String name, String description, Boolean weapon, Integer clueX, Integer clueY)
     {
         super(new TextureRegion(Assets.CLUE_SHEET, (clueX * Settings.CLUE_SIZE), (clueY * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
-        
-        importClue(jsonFile);
-    }
+        this.name = name;
+        this.description = description;
+        this.possibleWeapon = weapon;
 
-    /**
-     * Reads and stores content of json file.
-     *
-     * @param fileName - The filename to read from
-     */
-    public void importClue(String fileName)
-    {
-        jsonData = new JsonReader().parse(Gdx.files.internal("clues/" + fileName));
-        this.name = jsonData.getString("name");
-        this.description = jsonData.getString("description");
-        this.possibleWeapon = jsonData.getBoolean("weapon");
     }
     
     /**

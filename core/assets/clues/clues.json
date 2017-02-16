@@ -1,0 +1,108 @@
+{
+  "Bag": {
+    "name": "Right-Handed Fountain Pen",
+    "description": "A bloodstained fountain pen. The killer must be right-handed.",
+    "weapon": true,
+    "clueX": 3,
+    "clueY": 0
+  },
+  "Red Scarf": {
+    "name": "Red Scarf",
+    "description": "A scarf found at the crime scene. Its colour is suspiciously similar to the colour of blood.",
+    "weapon": true,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Lipstick": {
+    "name": "Lipstick",
+    "description": "Lipstick, a killer's best friend.",
+    "weapon": false,
+    "clueX": 0,
+    "clueY": 1
+  },
+  "Knife": {
+    "name": "Knife",
+    "description": "A knife that was left near the crime scene.",
+    "weapon": true,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Inhaler": {
+    "name": "Inhaler",
+    "description": "An inhaler left at the crime scene.",
+    "weapon": false,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Hockey Stick": {
+    "name": "Hockey Stick",
+    "description": "A hockey stick belonging to the university hockey club.",
+    "weapon": true,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Glasses": {
+    "name": "Glasses",
+    "description": "A pair of glasses that were found by another detective at the crime scene.",
+    "weapon": false,
+    "clueX": 2,
+    "clueY": 0
+  },
+  "Erotic Novel": {
+    "name": "Erotic Novel"
+    "description": "An erotic novel the killer left behind. At least now we know that they have terrible taste"
+    "weapon": true
+    "clueX": 3
+    "clueY": 1
+  },
+  "Energy Drink": {
+    "name": "Energy Drink",
+    "description": "An empty can of energy drink. Not many people drink this brand.",
+    "weapon": false,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Dark Hair": {
+    "name": "Dark Hair"
+    "description": "A dark hair from from the crime scene."
+    "weapon": false
+    "clueX": 2
+    "clueY": 1
+  },
+  "Cricket Bat": {
+    "name": "Cricket Bat",
+    "description": "A cricket bat, but no cricket ball in sight... hmm...",
+    "weapon": true,
+    "clueX": 3,
+    "clueY": 3
+  },
+  "Car Keys": {
+    "name": "Car Keys"
+    "description": "A set of car keys left at the crime scene by the killer."
+    "weapon": false
+    "clueX": 1
+    "clueY": 2
+  },
+  "Broken Mobile Phone": {
+    "name": "Broken Mobile Phone",
+    "description": "A broken mobile phone. Perhaps somebody will recognise it.",
+    "weapon": true,
+    "clueX": 0,
+    "clueY": 2
+  },
+  "Big Footprint": {
+    "name": "Big Footprint",
+    "description": "A big footprint left at the crime scene by the killer.",
+    "weapon": false,
+    "clueX": 0,
+    "clueY": 0
+  },
+  "Right-Handed Fountain Pen": {
+    "name": "Right-Handed Fountain Pen",
+    "description": "A bloodstained fountain pen. The killer must be right-handed."
+    "weapon": true,
+    "clueX": 1,
+    "clueY": 1
+  }
+}
+  

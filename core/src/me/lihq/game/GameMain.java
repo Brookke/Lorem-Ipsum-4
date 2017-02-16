@@ -16,6 +16,10 @@ import java.util.Random;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+
+
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -112,7 +116,7 @@ public class GameMain extends Game
 
     /**
      * This is called at start up. It initialises the game.
-     */
+     */ 
     @Override
     public void create()
     {
@@ -321,23 +325,18 @@ public class GameMain extends Game
     {
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
-
-
-        tempClues.add(new Clue("Bag.json", 3, 0));
-        tempClues.add(new Clue("Glasses.json", 2, 0));
-        tempClues.add(new Clue("Big Footprint.json", 0, 0));
-        tempClues.add(new Clue("Lipstick.json", 0, 1));
-        tempClues.add(new Clue("Right Handed Fountain Pen.json", 1, 1));
-        tempClues.add(new Clue("Dark Hair.json", 2, 1));
-        tempClues.add(new Clue("Erotic Novel.json", 3, 1));
-        tempClues.add(new Clue("Broken Mobile Phone.json", 0, 2));
-        tempClues.add(new Clue("Car Keys.json", 1, 2));
-        tempClues.add(new Clue("Knife.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Cricket Bat.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Energy Drink.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Red Scarf.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Inhaler.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Hockey Stick.json", 3, 3)); //Needs sprite
+        
+        Random random = new Random();
+        int cluesUsed = random.nextInt(5) + 10;
+        
+        JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
+        for (JsonValue entry = jsonData.child; entry != null; entry = entry.next) {
+        	tempClues.add(new Clue(entry.getString("name"), entry.getString("description"), entry.getBoolean("weapon"), entry.getInt("clueX"), entry.getInt("clueY")));
+        	cluesUsed--;
+        	if (cluesUsed == 0) {
+        		return;
+        	}
+        }
         
         Collections.shuffle(tempClues);
 
