@@ -10,19 +10,21 @@
 package me.lihq.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
+
+
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -112,7 +114,7 @@ public class GameMain extends Game
 
     /**
      * This is called at start up. It initialises the game.
-     */
+     */ 
     @Override
     public void create()
     {
@@ -315,39 +317,65 @@ public class GameMain extends Game
     }
 
     /**
-     * This method initialises all the clues that are to be added to the games.
+     * Initialises all the clues that are to be added to the game.
+     * 
+     * @author JAAPAN
      */
     private void initialiseClues()
     {
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
-
-
-        tempClues.add(new Clue("Bag.json", 3, 0));
-        tempClues.add(new Clue("Glasses.json", 2, 0));
-        tempClues.add(new Clue("Big Footprint.json", 0, 0));
-        tempClues.add(new Clue("Lipstick.json", 0, 1));
-        tempClues.add(new Clue("Right Handed Fountain Pen.json", 1, 1));
-        tempClues.add(new Clue("Dark Hair.json", 2, 1));
-        tempClues.add(new Clue("Erotic Novel.json", 3, 1));
-        tempClues.add(new Clue("Broken Mobile Phone.json", 0, 2));
-        tempClues.add(new Clue("Car Keys.json", 1, 2));
-        tempClues.add(new Clue("Knife.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Cricket Bat.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Energy Drink.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Red Scarf.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Inhaler.json", 3, 3)); //Needs sprite
-        tempClues.add(new Clue("Hockey Stick.json", 3, 3)); //Needs sprite
         
-        Collections.shuffle(tempClues);
+        Random random = new Random();
+        JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
+        List<Integer> clueIndices = new ArrayList<>();
+        // Get the total number of generic clues in the JSON file
+        int totalClues = jsonData.get("clues").size;
+        
+        // Randomly select a number of clues, by generating random indices. 
+        // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
+        while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
+        	int r = random.nextInt(totalClues);
+        	if (!clueIndices.contains(r))
+        		clueIndices.add(r);
+        }
+        
+        for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
+        	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
+        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+        }
+        
+        // Choose a random murder weapon
+        int murderWeapon = random.nextInt(jsonData.get("weapons").size);
+        // Create the murder weapon from the JSON file.
+        JsonValue entry = jsonData.get("weapons").get(murderWeapon);
+        tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
+        
+        // Assign each clue to a randomly selected room.
+        int amountOfRooms = gameMap.getAmountOfRooms();
 
-        for (Room room : gameMap.getRooms()) {
+        List<Integer> roomsLeft = new ArrayList<>();
+
+        for (int i = 0; i < amountOfRooms; i++) {
+            roomsLeft.add(i);
+        }
+
+        for (Clue clue : tempClues) {
+        	// Refill the rooms left list if there are more clues than rooms. This will put AT LEAST one clue per room if so.
+            if (roomsLeft.isEmpty()) {
+                for (int i = 0; i < amountOfRooms; i++) {
+                    roomsLeft.add(i);
+                }
+            }
+            int toTake = random.nextInt(roomsLeft.size());
+            int selectedRoom = roomsLeft.get(toTake);
+            roomsLeft.remove(toTake);
+            Room room = gameMap.getRoom(selectedRoom);
 
             Vector2Int randHidingSpot = room.getRandHidingSpot();
 
             if (randHidingSpot != null) {
-                room.addClue(tempClues.get(0).setTileCoordinates(randHidingSpot));
-                tempClues.remove(0);
+                room.addClue(clue.setTileCoordinates(randHidingSpot));
             }
 
         }
