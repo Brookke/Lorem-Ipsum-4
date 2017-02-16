@@ -9,7 +9,6 @@ import me.lihq.game.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * The class which is responsible for the non-playable characters within the game that the player will meet.
@@ -23,7 +22,6 @@ public class NPC extends AbstractPerson
      * Associated clues
      */
     public List<Clue> associatedClues = new ArrayList<>();
-    private Random random;
     
     /**
      * List of clues NPC has already been asked about
@@ -67,7 +65,6 @@ public class NPC extends AbstractPerson
     {
         super(name, "people/NPCs/" + spriteSheet, tileX, tileY);
         this.setRoom(room);
-        this.random = new Random();
         this.canBeKiller = canBeKiller;
 
         importDialogue(jsonFile);
