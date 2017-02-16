@@ -21,18 +21,25 @@ public class Player extends AbstractPerson
      * This object stores the clues that the player has picked up.
      */
     public List<Clue> collectedClues = new ArrayList<>();
+    
     /**
      * This stores whether the player is in the middle of a conversation or not.
      */
     public boolean inConversation = false;
+    
     /**
      * Stores whether the player has picked up the murder weapon or not.
      */
-    private boolean murderWeapon = false;
+    private boolean foundMurderWeapon = false;
+    
+    private int usefulClues = 0;
+    private int questionsAsked = 0;
+    
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
     private int personalityLevel = 50;
+    
     /**
      * The score the player has earned so far.
      */
@@ -99,8 +106,7 @@ public class Player extends AbstractPerson
             personalityLevel = 100;
         }
     }
-
-
+    
     /**
      * This Moves the player to a new tile.
      *
@@ -181,9 +187,12 @@ public class Player extends AbstractPerson
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
-            	this.murderWeapon = true;
+            	this.foundMurderWeapon = true;
             	score += 500;
             }
+            
+            if (!clueFound.isRedHerring())
+            	usefulClues++;
 
             // set all NPCs ignored to false
             for (NPC character : GameMain.me.NPCs) {
@@ -239,17 +248,34 @@ public class Player extends AbstractPerson
     }
     
     /**
+     * Determines whether the player has enough information to accuse an NPC yet. 
      * 
-     * @return true if the murder weapon has been found, false otherwise
+     * @return True if the murder weapon has been found, at least 3 other useful (i.e. not
+     * a red herring) clues have been found, and at least 5 questions have been asked, otherwise
+     * false
+     * 
+     * @author JAAPAN
      */
-    public boolean foundMurderWeapon()
+    public boolean canAccuse()
     {
-    	return murderWeapon;
+    	return (foundMurderWeapon && usefulClues >= 3 && questionsAsked >= 5);
+    }
+    
+    /**
+     * Increments the counter for questions asked. Should be called when a question receives
+     * an actual response (i.e. not a non-response)
+     * 
+     * @author JAAPAN
+     */
+    public void addQuestion()
+    {
+    	questionsAsked++;
     }
 
 
     /**
-     * This takes the player at its current position, and automatically gets the transition data for the next room and applies it to the player and game
+     * This takes the player at its current position, and automatically gets the transition data
+     * for the next room and applies it to the player and game
      */
     public void moveRoom()
     {

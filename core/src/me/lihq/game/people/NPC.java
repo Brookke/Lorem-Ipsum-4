@@ -2,6 +2,8 @@ package me.lihq.game.people;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
+
+import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
 
@@ -238,16 +240,22 @@ public class NPC extends AbstractPerson
      * @param style - The style of questioning
      * @param player - The personality type of the player
      * @return The appropriate line of dialogue.
+     * 
+     * @author JAAPAN
      */
     public String getSpeech(Clue clue, Personality style, Personality player)
     {
     	if (style == personality && player == style)
     	{
     		// TODO: Retrieve improved response rather than normal response
+    		// Increment the player's question counter
+    		GameMain.me.player.addQuestion();
     		return getSpeech("responses", clue);
     	}
     	else if (style == personality || style == player)
     	{
+    		// Increment the player's question counter
+    		GameMain.me.player.addQuestion();
     		return getSpeech("responses", clue);
         } 
     	else

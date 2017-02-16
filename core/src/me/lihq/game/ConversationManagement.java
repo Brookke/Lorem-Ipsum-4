@@ -102,7 +102,7 @@ public class ConversationManagement
             buttons.add(new SpeechBoxButton("Question?", 0, eventHandler));
             buttons.add(new SpeechBoxButton("Ignore", 2, eventHandler));
         }
-        if (player.foundMurderWeapon()) {
+        if (player.canAccuse()) {
         	buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
     	}
         
