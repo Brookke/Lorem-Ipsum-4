@@ -244,16 +244,60 @@ public class NPC extends AbstractPerson
     {
     	if (style == personality && player == style)
     	{
-    		// TODO: Retrieve improved response rather than normal response
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
-    		return getSpeech("responses", clue);
+    		
+    		String response = getSpeech("responses", clue);
+    		
+    		// If this NPC is the killer, point the player in the direction of a 
+    		// random NPC. Otherwise, point them towards the killer. As this is an improved
+    		// response, whether the clue is a red herring or not is unimportant.
+    		if (isKiller)
+    		{
+    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			while (name == getName())
+    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", name);
+    		}
+    		else
+    		{
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", GameMain.me.killer.getName());
+    			// Add the room of the killer to the response
+    			String room = GameMain.me.killer.getRoom().getName();
+    			if (room != "Outside Ron Cooke Hub")
+    				response += " Last I saw them, they were in the " + room + ".";
+    			else
+    				response += " Last I saw them, they were outside.";
+    		}
+    		
+    		return response;
     	}
     	else if (style == personality || style == player)
     	{
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
-    		return getSpeech("responses", clue);
+    		
+    		String response = getSpeech("responses", clue);
+    		
+    		// If this NPC is the killer, or the clue is a red herring, point the player
+    		// in the direction of a random NPC. Otherwise, point them towards the killer
+    		if (isKiller || clue.isRedHerring())
+    		{
+    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			while (name == getName())
+    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", name);
+    		}
+    		else
+    		{
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", GameMain.me.killer.getName());
+    		}
+    		
+    		return response;
         } 
     	else
     	{

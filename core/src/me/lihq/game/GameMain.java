@@ -306,7 +306,7 @@ public class GameMain extends Game
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);
 
-            System.out.println(loopNpc.getName() + " has been placed in room " + selectedRoom + " at " + position);
+            System.out.println(loopNpc.getName() + " has been placed in room \"" + gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
         }
         System.out.println();
     }

@@ -153,6 +153,7 @@ public class ConversationManagement
      */
     private void questionNPC()
     {
+    	player.changePersonality(tempQuestionStyle);
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
         finished = true;
