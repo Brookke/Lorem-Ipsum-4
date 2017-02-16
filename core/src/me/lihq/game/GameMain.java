@@ -247,7 +247,7 @@ public class GameMain extends Game
         NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), true, "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC("NPC4", "NPC4.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
         NPCs.add(npc10);
 
         int amountOfRooms = gameMap.getAmountOfRooms();
