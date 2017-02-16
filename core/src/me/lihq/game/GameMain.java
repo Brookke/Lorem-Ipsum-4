@@ -350,15 +350,31 @@ public class GameMain extends Game
         JsonValue entry = jsonData.get("weapons").get(murderWeapon);
         tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
         
-        Collections.shuffle(tempClues);
+        // Assign each clue to a randomly selected room.
+        int amountOfRooms = gameMap.getAmountOfRooms();
 
-        for (Room room : gameMap.getRooms()) {
+        List<Integer> roomsLeft = new ArrayList<>();
+
+        for (int i = 0; i < amountOfRooms; i++) {
+            roomsLeft.add(i);
+        }
+
+        for (Clue clue : tempClues) {
+        	// Refill the rooms left list if there are more clues than rooms. This will put AT LEAST one clue per room if so.
+            if (roomsLeft.isEmpty()) {
+                for (int i = 0; i < amountOfRooms; i++) {
+                    roomsLeft.add(i);
+                }
+            }
+            int toTake = random.nextInt(roomsLeft.size());
+            int selectedRoom = roomsLeft.get(toTake);
+            roomsLeft.remove(toTake);
+            Room room = gameMap.getRoom(selectedRoom);
 
             Vector2Int randHidingSpot = room.getRandHidingSpot();
 
             if (randHidingSpot != null) {
-                room.addClue(tempClues.get(0).setTileCoordinates(randHidingSpot));
-                tempClues.remove(0);
+                room.addClue(clue.setTileCoordinates(randHidingSpot));
             }
 
         }
