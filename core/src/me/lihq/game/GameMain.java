@@ -330,10 +330,15 @@ public class GameMain extends Game
         int cluesUsed = random.nextInt(5) + 10;
         
         JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
-        for (JsonValue entry = jsonData.child; entry != null && cluesUsed > 0; entry = entry.next) {
-        	tempClues.add(new Clue(entry.name, entry.getString("description"), entry.getBoolean("weapon"), entry.getInt("x"), entry.getInt("y")));
+        for (JsonValue entry = jsonData.get("clues").child; entry != null && cluesUsed > 0; entry = entry.next) {
+        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
         	cluesUsed--;
         }
+        // Choose a random murder weapon
+        int murderWeapon = random.nextInt(jsonData.getInt("weaponCount"));
+        // Create the murder weapon from the JSON file.
+        JsonValue entry = jsonData.get("weapons").get(murderWeapon);
+        tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
         
         Collections.shuffle(tempClues);
 
