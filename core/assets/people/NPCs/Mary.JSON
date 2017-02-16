@@ -22,12 +22,12 @@
     "Small Footprint": "Not mine, way too small for me.",
     "Glasses": "Not sure why it matters but yes.",
     "Bag": "Not mine, I already have a bag.",
-    "Lipstick": "Yes ,I have just got some new Lipstick actually... Now where did I put it",
+    "Lipstick": "Yes ,I have just got some new lipstick actually... Now where did I put it",
     "Right Handed": "I am right handed.",
     "Dark Hair": "No my hair is not particularly dark.",
     "Erotic Novel": "Where did you get that?! Give that back!"
     "Broken Mobile Phone": "Hey that might be mine! But it's badly damaged. I can't really tell.",
-    "Car Keys": "Why would I have a car of that make? ewwww"
+    "Car Keys": "Why would I have a car of that make? Ew!"
   },
   "noneResponses": [
     "Sorry I am far too busy for you",
@@ -35,10 +35,10 @@
     "I am not telling you."
   ],
   "motives": {
-  	"Colin": "Motive for killing Colin",
-  	"Diana": "Motive for killing Diana",
-  	"Lily": "Motive for killing Lily",
-  	"Mike": "Motive for killing Mike",
-  	"Will": "Motive for killing Will"
+  	"Colin": "I caught him trying to curse my earlobe.",
+  	"Diana": "That hair was an eyesore. I couldn't bear to look at it for another second.",
+  	"Lily": "She was wearing the same dress I was... and looked better in it!",
+  	"Mike": "It's not my fault! He beat me in a spelling test in primary school.",
+  	"Will": "What kind of whackjob would make small talk about sound waves."
   }
 }
