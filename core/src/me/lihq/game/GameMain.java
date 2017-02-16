@@ -10,7 +10,6 @@
 package me.lihq.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -318,7 +317,9 @@ public class GameMain extends Game
     }
 
     /**
-     * This method initialises all the clues that are to be added to the games.
+     * Initialises all the clues that are to be added to the game.
+     * 
+     * @author JAAPAN
      */
     private void initialiseClues()
     {
