@@ -286,7 +286,7 @@ public class NPC extends AbstractPerson
     		if (isKiller || clue.isRedHerring())
     		{
     			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName())
+    			while (name == getName() || name == GameMain.me.killer.getName())
     				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", name);
