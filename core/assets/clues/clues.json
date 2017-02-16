@@ -1,7 +1,7 @@
 {
-  "Right-Handed Fountain Pen": {
-    "description": "A bloodstained fountain pen. The killer must be right-handed.",
-    "weapon": true,
+  "Bag": {
+    "description": "A bag. Somebody must have left in a hurry...",
+    "weapon": false,
     "x": 3,
     "y": 0
   },
