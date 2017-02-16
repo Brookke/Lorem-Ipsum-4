@@ -35,10 +35,14 @@
     "I am not telling you."
   ],
   "motives": {
+  	"Adam": "",
   	"Colin": "I wanted to make a transitive relation between me, my weapon and him.",
   	"Diana": "She spat in my ear. I think it was an accident. But still.",
+  	"Horatio": "",
+  	"Kyle": "",
   	"Lily": "She once cut me in line to see Star Wars - I didn't get in!",
   	"Mary": "She beat me in a poetry writing contest.",
   	"Mike": "He once dripped molten solder on me. I still have the scar."
+  	"Roger": "",
   }
 }

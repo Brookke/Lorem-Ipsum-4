@@ -35,10 +35,14 @@
     "I am not telling you, sorry."
   ],
   "motives": {
+  	"Adam": "",
   	"Colin": "He strangled my dog first.",
   	"Diana": "She got a hair in my soup. I know it was her because it was blue.",
+  	"Horatio": "",
+  	"Kyle": "",
   	"Mary": "She accused me of eating her chocolate cake. Liar.",
   	"Mike": "He ran me over once.",
+  	"Roger": "",
   	"Will": "His pet mouse offends me."
   }
 }
