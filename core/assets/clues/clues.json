@@ -73,10 +73,36 @@
 		    "y": 3
   		},
   		"Right-Handed Fountain Pen": {
-		    "description": "A bloodstained fountain pen. The killer must be right-handed."
+		    "description": "A bloodstained fountain pen. The killer must be right-handed.",
 		    "x": 1,
 		    "y": 1
+  		},
+  		"Hardware Magazine": {
+  			"description": "A copy of a niche hardware magazine."
+  			"x": 3,
+  			"y": 3
+  		},
+  		"Diamond Ring": {
+  			"description": "An expensive diamond ring found near the crime scene.",
+  			"x": 3,
+  			"y": 3
+  		},
+  		"Receipt": {
+  			"description": "A receipt from the Ron Cooke Cafe for a Vegan sandwich.",
+  			"x": 3, 
+  			"y": 3
+  		},
+  		"USB Stick": {
+  			"description": "A USB stick containing nothing but an unnamed, incomplete history essay.",
+  			"x": 3,
+  			"y": 3
+  		},
+  		"Sweet Wrapper": {
+  			"description": "A wrapper for a sweet that's... coffee flavour? eww, who even eats those?",
+  			"x": 3,
+  			"y": 3
   		}
+  		
   	}
 }
   
