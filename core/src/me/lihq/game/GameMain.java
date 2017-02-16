@@ -348,6 +348,12 @@ public class GameMain extends Game
         for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
         	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
         	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+        	
+        	// Set the first clues in the list to red herrings (the number of red herrings
+        	// specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
+        	// this does not need to be further randomised.
+        	if (i < Settings.NUMBER_OF_RED_HERRINGS)
+        		tempClues.get(i).setRedHerring();
         }
         
         // Choose a random murder weapon
@@ -355,6 +361,8 @@ public class GameMain extends Game
         // Create the murder weapon from the JSON file.
         JsonValue entry = jsonData.get("weapons").get(murderWeapon);
         tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
+    	
+    	System.out.println(entry.name + " is the murder weapon");
         
         // Assign each clue to a randomly selected room.
         int amountOfRooms = gameMap.getAmountOfRooms();
