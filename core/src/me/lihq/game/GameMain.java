@@ -112,6 +112,9 @@ public class GameMain extends Game
 
     public Sound sound;
 
+    // used to track whether the game is paused
+    public boolean isPaused = true;
+
     /**
      * This is called at start up. It initialises the game.
      */ 
@@ -159,7 +162,7 @@ public class GameMain extends Game
         settingsScreen = new SettingsScreen(this);
         
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
-        music.setVolume(0.5f);
+        music.setVolume(Settings.MUSIC_VOLUME);
         music.setLooping(true);
         music.play();
 
@@ -179,7 +182,7 @@ public class GameMain extends Game
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
-        
+        player.durationCounter();
         input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
@@ -237,16 +240,16 @@ public class GameMain extends Game
         NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("NPC1", "NPC1.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), true, "Roger.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC("NPC2", "NPC2.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), true, "Horatio.JSON");
         NPCs.add(npc8);
 
-        NPC npc9 = new NPC("NPC3", "NPC3.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), true, "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC("NPC4", "NPC4.png", 0, 0, gameMap.getRoom(0), true, "NoName.JSON");
+        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
         NPCs.add(npc10);
 
         int amountOfRooms = gameMap.getAmountOfRooms();
@@ -284,18 +287,20 @@ public class GameMain extends Game
         /*
         Generate who the Killer and Victim are
          */
-        NPC killer = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
 
         while (!killer.setKiller()) {
-            killer = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+            killer = NPCs.get(new Random().nextInt(NPCs.size()));
         }
 
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
 
 
         while (!victim.setVictim()) {
-            victim = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+            victim = NPCs.get(new Random().nextInt(NPCs.size()));
         }
+        
+        killer.setMotive(victim);
     }
 
     /**

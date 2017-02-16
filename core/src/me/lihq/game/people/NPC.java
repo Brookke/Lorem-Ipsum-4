@@ -185,15 +185,16 @@ public class NPC extends AbstractPerson
     }
 
     /**
-     * Setter for the NPC's motive string.
+     * Reads and sets the NPC's motive for killing the victim from the JSON file.
      *
-     * @param motive - The motive this particular NPC has for committing the murder.
+     * @param victim - The victim of the heinous crime.
      * @return (NPC) Returns the NPC object as this is how the NPC's are built
      * by returning and adding each part.
      */
-    public NPC setMotive(String motive)
+    public NPC setMotive(NPC victim)
     {
-        this.motive = motive;
+        motive = jsonData.get("motives").getString(victim.getName());
+        System.out.println(motive);
         return this;
     }
 

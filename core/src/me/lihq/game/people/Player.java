@@ -3,7 +3,6 @@ package me.lihq.game.people;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 
@@ -38,11 +37,13 @@ public class Player extends AbstractPerson
      * The score the player has earned so far.
      */
     private int score = 0;
-    
+
     /**
      * Variables for keeping track of score
      */
     private Date startDate, currentDate;
+
+    private long gameDuration = 0;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -191,7 +192,7 @@ public class Player extends AbstractPerson
             score += 250;
             
             if (!Settings.MUTED)
-            	GameMain.me.sound.play();
+            	GameMain.me.sound.play(Settings.SFX_VOLUME);
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
@@ -290,13 +291,11 @@ public class Player extends AbstractPerson
     
     public void addToScore(int scoreToAdd) {
     	score += scoreToAdd;
+    	if (score < 0) score = 0;
     }
     
     public int getScore() {
-    	int overallScore = 10000 + score - getPenalty();
-    	if (overallScore < 0) overallScore = 0;
-    	
-    	return overallScore;
+    	return score;
     }
     
     private void initDates() {
@@ -304,18 +303,19 @@ public class Player extends AbstractPerson
     	currentDate = new Date();
     }
     
-    public int getPenalty() {
-    	int penalty = 0;
-    	currentDate = new Date();
-    	
-    	long diff = currentDate.getTime() - startDate.getTime();
-    	
-    	int diffMin = (int) (diff / (60 * 1000));
-    	int diffSec = ((int) (diff / 1000)) % 60;
-    	
-    	penalty = (diffMin * 1000) + (diffSec * (1000 / 60));
-    	
-    	return penalty;
+    public void durationCounter() {
+        currentDate = new Date();
+        int unpausedTime = (int) (currentDate.getTime() - startDate.getTime()) / 1000;
+        if (GameMain.me.isPaused) {
+            startDate = new Date();
+            gameDuration += unpausedTime;
+        }
+    }
+
+    // Returns the duration of the game (excluding time paused) as a whole
+    // number of seconds
+    public int getPlayTime() {
+        return (int) gameDuration;
     }
 
 }

@@ -31,6 +31,10 @@ public class Settings
     public static final int NUMBER_OF_CLUES = 10;
     
     public static boolean MUTED = false;
+    
+    public static float MUSIC_VOLUME = 0.5f;
+    
+    public static float SFX_VOLUME = 1f;
 
     /**
      * This is whether to draw some debug features to the screen

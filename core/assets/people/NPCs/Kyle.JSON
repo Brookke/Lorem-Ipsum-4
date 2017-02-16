@@ -1,5 +1,5 @@
 {
-  "name": "NoName",
+  "name": "Kyle",
   "clues": [
     "Big Footprint",
     "Small Footprint",
@@ -10,13 +10,7 @@
     "Dark Hair",
     "Erotic Novel",
     "Broken Mobile Phone",
-    "Car Keys",
-    "Knife",
-    "Cricket Bat",
-    "Energy Drink",
-    "Red Scarf",
-    "Inhaler",
-    "Hockey Stick"
+    "Car Keys"
   ],
   "personality": "NICE",
   "responses": {
@@ -33,17 +27,22 @@
     "Dark Hair": "My hair is a dark colour , it is a bit messy today though haha.",
     "Erotic Novel": "Sorry, that sort of book isn't really my thing.",
     "Broken Mobile Phone": "Oh I'm sorry, I don't recognise it.",
-    "Car Keys": "I wish hahaha! I can't afford a car.",
-    "Knife": "PLACEHOLDER",
-    "Cricket Bat": "PLACEHOLDER",
-    "Energy Drink": "PLACEHOLDER",
-    "Red Scarf": "PLACEHOLDER",
-    "Inhaler": "PLACEHOLDER",
-    "Hockey Stick": "PLACEHOLDER"
+    "Car Keys": "I wish hahaha! I can't afford a car."
   },
   "noneResponses": [
     "Really sorry but I just don't have the time right now.",
     "I'm sure it would be fine if I helped but just don't want to be involved right now.",
     "I am not telling you, sorry."
-  ]
+  ],
+  "motives": {
+  	"Adam": "",
+  	"Colin": "",
+  	"Diana": "",
+  	"Horatio": "",
+  	"Lily": "",
+  	"Mary": "",
+  	"Mike": "",
+  	"Roger": "",
+  	"Will": ""
+  }
 }
