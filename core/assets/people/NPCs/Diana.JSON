@@ -33,5 +33,12 @@
     "Too busy, go away.",
     "Don't have time for you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "He was a danger to everyone! You're welcome.",
+  	"Lily": "She was so bouncy. I just had to bounce her right off the building.",
+  	"Mary": "She scraped my car in the car park.",
+  	"Mike": "He had the crazy eyes.",
+  	"Will": "After some reflection, I could project no bright lights in his future. It was worth it to satisfy my evil blood-lust."
+  }
 }

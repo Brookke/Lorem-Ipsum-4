@@ -33,5 +33,12 @@
     "Sorry I have some marking to get on with.",
     "I'm not sure why I should help you exactly.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Colin": "He once borrowed a soldering iron off me and never gave it back.",
+  	"Diana": "She thought I was a waiter and insulted my facial hair. The impudence!",
+  	"Lily": "Her mutt bred with my pedigree! Those puppies will be so ugly.",
+  	"Mary": "She chained her bike to mine once. I was stranded for three hours.",
+  	"Will": "He used to deliver my paper and everyday would throw it right into the fish pond. I lost thousands!"
+  }
 }

@@ -33,5 +33,12 @@
     "Really sorry but I just don't have the time right now.",
     "I'm sure it would be fine if I helped but just don't want to be involved right now.",
     "I am not telling you, sorry."
-  ]
+  ],
+  "motives": {
+  	"Colin": "He strangled my dog first.",
+  	"Diana": "She got a hair in my soup. I know it was her because it was blue.",
+  	"Mary": "She accused me of eating her chocolate cake. Liar.",
+  	"Mike": "He ran me over once.",
+  	"Will": "His pet mouse offends me."
+  }
 }

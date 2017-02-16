@@ -285,18 +285,20 @@ public class GameMain extends Game
         /*
         Generate who the Killer and Victim are
          */
-        NPC killer = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
 
         while (!killer.setKiller()) {
-            killer = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+            killer = NPCs.get(new Random().nextInt(NPCs.size()));
         }
 
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
 
 
         while (!victim.setVictim()) {
-            victim = NPCs.get(new Random().nextInt(NPCs.size() - 1));
+            victim = NPCs.get(new Random().nextInt(NPCs.size()));
         }
+        
+        killer.setMotive(victim);
     }
 
     /**

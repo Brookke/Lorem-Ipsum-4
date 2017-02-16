@@ -33,5 +33,12 @@
     "Sorry I am a little busy for questions right now.",
     "And why do you think I would help you.",
     "I am not telling you."
-  ]
+  ],
+  "motives": {
+  	"Diana": "That witch! I had to kill her before she put a curse on everyone here.",
+  	"Lily": "I had no choice, she let her dog befoul my begonias.",
+  	"Mary": "She stole my green window!",
+  	"Mike": "Such a nice man - what a shame he's carrying Giant African Land Lice. I had to kill him before the infection spread.",
+  	"Will": "I saw him in the bakery last week. Everyone knows only dangerous people eat croissants. He had to go."
+  }
 }
