@@ -26,7 +26,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -327,15 +326,26 @@ public class GameMain extends Game
         List<Clue> tempClues = new ArrayList<>();
         
         Random random = new Random();
-        int cluesUsed = random.nextInt(5) + 10;
-        
         JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
-        for (JsonValue entry = jsonData.get("clues").child; entry != null && cluesUsed > 0; entry = entry.next) {
-        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
-        	cluesUsed--;
+        List<Integer> clueIndices = new ArrayList<>();
+        // Get the total number of generic clues in the JSON file
+        int totalClues = jsonData.get("clues").size;
+        
+        // Randomly select a number of clues, by generating random indices. 
+        // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
+        while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
+        	int r = random.nextInt(totalClues);
+        	if (!clueIndices.contains(r))
+        		clueIndices.add(r);
         }
+        
+        for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
+        	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
+        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+        }
+        
         // Choose a random murder weapon
-        int murderWeapon = random.nextInt(jsonData.getInt("weaponCount"));
+        int murderWeapon = random.nextInt(jsonData.get("weapons").size);
         // Create the murder weapon from the JSON file.
         JsonValue entry = jsonData.get("weapons").get(murderWeapon);
         tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
