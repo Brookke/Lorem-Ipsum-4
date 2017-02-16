@@ -61,10 +61,17 @@ public class GameMain extends Game
      * The game map
      */
     public Map gameMap;
+    
     /**
      * A player object for the player of the game
      */
     public Player player;
+    
+    /**
+     * An NPC object for the killer. This allows us to easily access the name and room of the
+     * killer, without having to iterate through each NPC
+     */
+    public NPC killer;
 
     /**
      * A screen to be used to display standard gameplay within the game , including the status bar.
@@ -252,6 +259,24 @@ public class GameMain extends Game
         NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
         NPCs.add(npc10);
 
+        /*
+        Generate who the Killer and Victim are
+         */
+        killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!killer.setKiller()) {
+            killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+
+        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!victim.setVictim()) {
+            victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+        
+        killer.setMotive(victim);
+        // Remove the victim from the list of NPCs, so they aren't added to the game
+        NPCs.remove(victim);
+        
+
         int amountOfRooms = gameMap.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
@@ -283,24 +308,7 @@ public class GameMain extends Game
 
             System.out.println(loopNpc.getName() + " has been placed in room " + selectedRoom + " at " + position);
         }
-
-        /*
-        Generate who the Killer and Victim are
-         */
-        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
-
-        while (!killer.setKiller()) {
-            killer = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
-
-
-        while (!victim.setVictim()) {
-            victim = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-        
-        killer.setMotive(victim);
+        System.out.println();
     }
 
     /**
