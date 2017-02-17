@@ -1,25 +1,20 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 /**
- * Reusable Main initMenu UI, can be used for the pause screen aswell.
+ * Reusable Menu UI, can be used for the pause screen as well.
  */
 
 public class Menu
@@ -28,27 +23,16 @@ public class Menu
 	 * Game for menu
 	 */
 	private GameMain game;
-	
-    /**
-     * The background color of the menu
-     */
-    private static final Color BACKGROUND_COLOR = Color.GRAY;
 
     /**
      * The width of the menu
      */
     private static final int WIDTH = Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8;
 
-    //Initialising necessary objects and variables
     /**
      * the stage to render the menu to
      */
     public Stage stage;
-
-    /**
-     * The default button skins
-     */
-    private Skin buttonSkin;
 
     /**
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
@@ -74,12 +58,6 @@ public class Menu
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.pauseMenu = pauseMenu;
 
-        //Initialising the skin made for the buttons
-        initButtonSkin();
-
-        //Initialising things required for text
-
-
         //Loading the menu or pause screen
         initMenu(this.game);
     }
@@ -95,29 +73,27 @@ public class Menu
         //An if statement that lets the same class be used for both the pause and main menu
         //screens. It also prints an error message to the console if called using an incorrect argument
 
-        LabelStyle textStyle = new LabelStyle(game.font30, Color.RED);
-
         //Creating the label containing text and determining  its size and location on screen
         Label text;
 
-
-        TextButton newGameButton = new TextButton("", buttonSkin);
+        TextButton newGameButton;
 
         if (pauseMenu) {
-            newGameButton.setText("Resume Game");
-            text = new Label("Pause", textStyle);
+            newGameButton = Assets.getTextButton("Resume Game");
+            text = Assets.getLabel("Paused", true);
 
         } else {
-            text = new Label("Welcome To the Lorem Ipsum Murder Mystery Game!", textStyle);
-            newGameButton.setText("New Game");
+            text = Assets.getLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
+            newGameButton = Assets.getTextButton("New Game");
         }
 
         text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
-        TextButton settings = new TextButton("Settings", buttonSkin);
+        
+        TextButton settings = Assets.getTextButton("Settings");
         settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
-        TextButton quit = new TextButton("Quit", buttonSkin);
+        TextButton quit = Assets.getTextButton("Quit");
         quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 4);
 
         //Loading the buttons onto the stage
@@ -156,34 +132,6 @@ public class Menu
             	game.setScreen(game.settingsScreen);
             }
         });
-    }
-
-
-    /**
-     * This method creates the skins for the buttons
-     */
-    private void initButtonSkin()
-    {
-        //Create a font
-    	BitmapFont font = new BitmapFont();
-        buttonSkin = new Skin();
-        buttonSkin.add("default", font);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth() / 4, (int) Gdx.graphics.getHeight() / 10, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.ORANGE);
-        pixmap.fill();
-        buttonSkin.add("background", new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.down = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.checked = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.over = buttonSkin.newDrawable("background", Color.LIGHT_GRAY);
-        textButtonStyle.font = buttonSkin.getFont("default");
-        buttonSkin.add("default", textButtonStyle);
-
     }
 
     /**

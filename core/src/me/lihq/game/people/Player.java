@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
@@ -192,7 +193,7 @@ public class Player extends AbstractPerson
             score += 250;
             
             if (!Settings.MUTED)
-            	GameMain.me.sound.play(Settings.SFX_VOLUME);
+            	Assets.SOUND.play(Settings.SFX_VOLUME);
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
         }
