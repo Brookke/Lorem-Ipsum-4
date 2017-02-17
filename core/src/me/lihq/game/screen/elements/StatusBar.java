@@ -54,18 +54,19 @@ public class StatusBar
     public Stage stage;
 
     /**
-     * The different skins for different elements
+     * The skin for the UI elements
      */
-    private Skin buttonSkin;
-    private Skin labelSkin;
+    private Skin skin;
     
     /**
      * Variable for score label
      */
     private Label scoreLabel;
+    
+    private Label personalityLabel;
 
     /**
-     * The initializer for the StatusBar
+     * The constructor for the StatusBar.
      * Sets up UI controls and adds them to the stage ready for rendering
      */
     public StatusBar(final GameMain game)
@@ -81,14 +82,15 @@ public class StatusBar
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), labelSkin);
+        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        TextButton personalityMeter = new TextButton("Personality Meter", buttonSkin);
-        statusBar.add(personalityMeter).uniform();
+        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
+        personalityLabel.setAlignment(Align.center, Align.center);
+        statusBar.add(personalityLabel).uniform();
 
-        TextButton inventoryButton = new TextButton("Inventory", buttonSkin);
+        TextButton inventoryButton = new TextButton("Inventory", skin);
         statusBar.add(inventoryButton).uniform();
         inventoryButton.addListener(new ClickListener()
         {
@@ -100,7 +102,7 @@ public class StatusBar
             }
         });
 
-        TextButton pauseButton = new TextButton("Pause", buttonSkin);
+        TextButton pauseButton = new TextButton("Pause", skin);
         statusBar.add(pauseButton).uniform();
         pauseButton.addListener(new ClickListener()
         {
@@ -117,12 +119,13 @@ public class StatusBar
     }
 
     /**
-     * Renders the status bar
+     * Renders the status bar.
      * Should be called within the render() method of a screen
      */
     public void render()
     {
-    	if (game.getScreen() == game.navigationScreen) scoreLabel.setText("Score: " + game.player.getScore());
+    	scoreLabel.setText("Score: " + game.player.getScore());
+    	personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
         stage.act();
         stage.draw();
     }
@@ -147,60 +150,36 @@ public class StatusBar
     }
 
     /**
-     * Sets up skin variables used for defining UI control styles
+     * Sets up skin variable used for defining UI control styles
+     * 
+     * @author JAAPAN
      */
     private void initSkins()
     {
-        initButtonSkin();
-        initLabelSkin();
-    }
-
-    /**
-     * Sets up the skin for buttons on the status bar
-     */
-    private void initButtonSkin()
-    {
-        //Create a font
+        // Create a font
         BitmapFont font = new BitmapFont();
-        buttonSkin = new Skin();
-        buttonSkin.add("default", font);
+        skin = new Skin();
+        skin.add("default", font);
 
-        //Create a texture
-        Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        buttonSkin.add("background", new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.down = buttonSkin.newDrawable("background", Color.BLACK);
-        textButtonStyle.checked = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.over = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.font = buttonSkin.getFont("default");
-        buttonSkin.add("default", textButtonStyle);
-
-    }
-
-    /**
-     * Sets up the skin for labels on the status bar
-     */
-    private void initLabelSkin()
-    {
-        //Create a font
-        BitmapFont font = new BitmapFont();
-        labelSkin = new Skin();
-
-        //Create a texture
+        // Create a texture
         Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
         pixmap.setColor(BACKGROUND_COLOR);
         pixmap.fill();
-        labelSkin.add("background", new Texture(pixmap));
+        skin.add("background", new Texture(pixmap));
 
-        //Create a button style
+        // Create a button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.up = skin.newDrawable("background");
+        textButtonStyle.down = skin.newDrawable("background", Color.BLACK);
+        textButtonStyle.checked = skin.newDrawable("background");
+        textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
+        textButtonStyle.font = skin.getFont("default");
+        skin.add("default", textButtonStyle);
+
+
+        // Create a label style
         Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
-        labelStyle.background = labelSkin.getDrawable("background");
-        labelSkin.add("default", labelStyle);
-
+        labelStyle.background = skin.getDrawable("background");
+        skin.add("default", labelStyle);
     }
 }
