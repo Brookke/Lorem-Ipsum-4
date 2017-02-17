@@ -16,7 +16,12 @@
     "Energy Drink",
     "Red Scarf",
     "Inhaler",
-    "Hockey Stick"
+    "Hockey Stick",
+    "Hardware Magazine",
+    "Diamond Ring",
+    "Receipt",
+    "USB Stick",
+    "Sweet Wrapper"
   ],
   "personality": "NICE",
   "responses": {
