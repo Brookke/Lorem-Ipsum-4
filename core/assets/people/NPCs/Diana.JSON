@@ -1,28 +1,5 @@
 {
   "name": "Diana",
-  "clues": [
-    "Big Footprint",
-    "Small Footprint",
-    "Glasses",
-    "Bag",
-    "Lipstick",
-    "Right Handed",
-    "Dark Hair",
-    "Erotic Novel",
-    "Broken Mobile Phone",
-    "Car Keys",
-    "Knife",
-    "Cricket Bat",
-    "Energy Drink",
-    "Red Scarf",
-    "Inhaler",
-    "Hockey Stick",
-    "Hardware Magazine",
-    "Diamond Ring",
-    "Receipt",
-    "USB Stick",
-    "Sweet Wrapper"
-  ],
   "personality": "AGGRESSIVE",
   "responses": {
     "introduction": "Hello, what do you want?!",
