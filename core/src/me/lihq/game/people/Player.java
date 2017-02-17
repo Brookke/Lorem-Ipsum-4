@@ -1,7 +1,6 @@
 package me.lihq.game.people;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
@@ -29,7 +28,7 @@ public class Player extends AbstractPerson
     /**
      * Stores whether the player has picked up the murder weapon or not.
      */
-    private boolean murderWeapon = false;
+    private boolean murderWeapon = true;
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
@@ -39,12 +38,7 @@ public class Player extends AbstractPerson
      */
     private int score = 0;
 
-    /**
-     * Variables for keeping track of score
-     */
-    private Date startDate, currentDate;
-
-    private long gameDuration = 0;
+    private float gameDuration = 0f;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -56,7 +50,6 @@ public class Player extends AbstractPerson
     {
         super(name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
-        initDates();
     }
 
     /**
@@ -290,32 +283,38 @@ public class Player extends AbstractPerson
         }
     }
     
-    public void addToScore(int scoreToAdd) {
+    public void addToScore(int scoreToAdd)
+    {
     	score += scoreToAdd;
     	if (score < 0) score = 0;
     }
     
-    public int getScore() {
+    public int getScore()
+    {
     	return score;
     }
-    
-    private void initDates() {
-    	startDate = new Date();
-    	currentDate = new Date();
-    }
-    
-    public void durationCounter() {
-        currentDate = new Date();
-        int unpausedTime = (int) (currentDate.getTime() - startDate.getTime()) / 1000;
-        if (GameMain.me.isPaused) {
-            startDate = new Date();
-            gameDuration += unpausedTime;
-        }
+
+    /**
+     * Increases the gameDuration variable by the appropriate amount. Should be called
+     * from the Screen.render() method of all screens that count as playing (i.e. not the 
+     * pause screen).
+     * 
+     * @param delta - The time difference
+     * 
+     * @author JAAPAN
+     */
+    public void addPlayTime(float delta)
+    {
+    	gameDuration += delta;
     }
 
-    // Returns the duration of the game (excluding time paused) as a whole
-    // number of seconds
-    public int getPlayTime() {
+    /**
+     * @return The duration of the game (excluding time paused) as a whole number of seconds
+     * 
+     * @author JAAPAN
+     */
+    public int getPlayTime()
+    {
         return (int) gameDuration;
     }
 

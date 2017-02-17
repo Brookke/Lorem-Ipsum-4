@@ -254,6 +254,7 @@ public class NavigationScreen extends AbstractScreen
     public void render(float delta)
     {
     	update();
+    	game.player.addPlayTime(delta);
     	
         game.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {

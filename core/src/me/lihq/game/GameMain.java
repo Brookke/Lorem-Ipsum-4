@@ -135,7 +135,7 @@ public class GameMain extends Game
         
         settingsScreen = new SettingsScreen(this);
         
-        Assets.MUSIC.play();
+        //Assets.MUSIC.play();
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
@@ -151,7 +151,6 @@ public class GameMain extends Game
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
-        player.durationCounter();
         input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
@@ -353,5 +352,15 @@ public class GameMain extends Game
 
         }
 
+    }
+    
+    /**
+     * Resets the state of the game.
+     * 
+     * @author JAAPAN
+     */
+    public void resetAll()
+    {
+    	
     }
 }

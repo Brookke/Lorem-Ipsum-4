@@ -1,9 +1,15 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 /**
@@ -15,6 +21,9 @@ import me.lihq.game.GameMain;
  */
 public class WinScreen extends AbstractScreen {
 	
+	private static final float OFFSET = 50f;
+	private static final float LEFT_ALIGN = Gdx.graphics.getWidth() / 16;
+	
 	private Stage stage;
 
 	public WinScreen(GameMain game) {
@@ -22,7 +31,65 @@ public class WinScreen extends AbstractScreen {
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
-        
+        initMenu();
+	}
+	
+	private void initMenu()
+	{
+		Label title = Assets.getLabel("You Found the Killer!", true);
+		stage.addActor(title);
+		
+		Label cluesLabel = Assets.getLabel("Clues Found: " + game.player.collectedClues.size(), false);
+		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
+		
+		// TODO: Number of red herrings
+		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.collectedClues.size(), false);
+		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
+		
+		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
+		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
+		
+		Label accusedNPCs = Assets.getLabel("Number of People Wrongly Accused: ", false);
+		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
+		
+		Label basicScoreLabel = Assets.getLabel("Points Gained: " + game.player.getScore(), false);
+		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
+		
+		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getPlayTime() + "s", false);
+		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
+		
+		Label bonusScoreLabel = Assets.getLabel("Time Bonus: ", false);
+		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
+		
+		Label finalScoreLabel = Assets.getLabel("Total Score: ", false);
+		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
+		
+		stage.addActor(cluesLabel);
+		stage.addActor(redHerringLabel);
+		stage.addActor(questionsAsked);
+		stage.addActor(accusedNPCs);
+		stage.addActor(basicScoreLabel);
+		stage.addActor(timeTaken);
+		stage.addActor(bonusScoreLabel);
+		stage.addActor(finalScoreLabel);
+		
+		TextButton mainMenuButton = Assets.getTextButton("Main Menu");
+		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
+		
+		stage.addActor(mainMenuButton);
+		
+		mainMenuButton.addListener(new ClickListener()
+        {
+			/**
+			 * Resets the state of the game, so it can be played again, and opens the main menu
+			 */
+            @Override
+            public void clicked(InputEvent event, float x, float y)
+            {
+            	game.resetAll();
+            	game.setScreen(game.menuScreen);
+            }
+        });
 	}
 
 	@Override
@@ -38,6 +105,11 @@ public class WinScreen extends AbstractScreen {
 
 	@Override
 	public void render(float delta) {
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+		stage.act();
+		stage.draw();
 	}
 
 	@Override

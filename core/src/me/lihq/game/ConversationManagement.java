@@ -4,6 +4,7 @@ import me.lihq.game.models.Clue;
 import me.lihq.game.people.AbstractPerson.Personality;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
+import me.lihq.game.screen.WinScreen;
 import me.lihq.game.screen.elements.SpeechBox;
 import me.lihq.game.screen.elements.SpeechBoxButton;
 
@@ -43,6 +44,11 @@ public class ConversationManagement
      * Indicates whether the last conversation is finished or ongoing
      */
     private boolean finished;
+    
+    /**
+     * Indicates whether the player has correctly accused the killer
+     */
+    private boolean won;
 
     /**
      * This constructs a conversation manager
@@ -56,6 +62,7 @@ public class ConversationManagement
         this.speechboxMngr = speechboxManager;
 
         finished = false;
+        won = false;
     }
 
     /**
@@ -167,12 +174,14 @@ public class ConversationManagement
         	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("responses", "Accuse"), 5));
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
             player.addToScore(1000);
+            won = true;
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
             this.tempNPC.accused = true;
             player.addToScore(-2000);
         }
         finished = true;
+        won = true;
     }
 
     private void ignoreNPC()
@@ -183,7 +192,11 @@ public class ConversationManagement
     }
 
     /**
-     * This method is called when a conversation is over to change some variables back for normal gameplay to resume
+     * Called continuously from NavigationScreen.update(). Resets variables so the player can move
+     * and normal gameplay can resume, but only if the conversation is over and all speechboxes are
+     * closed. If the game has been won, opens the WinScreen.
+     * 
+     * @author JAAPAN
      */
     public void finishConversation()
     {
@@ -194,6 +207,11 @@ public class ConversationManagement
         this.player.canMove = true;
         this.player.inConversation = false;
         this.finished = false;
+        
+        if (won) {
+        	GameMain.me.setScreen(new WinScreen(GameMain.me));
+        	won = false;
+        }
     }
 
     /**

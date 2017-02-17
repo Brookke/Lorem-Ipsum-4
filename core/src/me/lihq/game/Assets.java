@@ -240,7 +240,8 @@ public class Assets
     }
     
     /**
-     * Creates a new label, using the style defined in UI_SKIN.
+     * Creates a new label, using the style defined in UI_SKIN. If the label is a title,
+     * its default position is set to the middle of the top of the screen.
      * 
      * @param text - The text to display in the label
      * @param title - Whether to use the title LabelStyle (font size 30) or
@@ -251,8 +252,12 @@ public class Assets
      */
     public static Label getLabel(String text, boolean title)
     {
-    	if (title)
-    		return new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
+    	if (title) {
+    		Label label = new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
+    		label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth()/2, 
+            		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
+    		return label;
+    	}
     	else
     		return new Label(text, UI_SKIN);
     }
