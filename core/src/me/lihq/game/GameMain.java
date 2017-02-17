@@ -94,9 +94,6 @@ public class GameMain extends Game
      */
     public InputMultiplexer inputMultiplexer;
 
-    // used to track whether the game is paused
-    public boolean isPaused = true;
-
     /**
      * This is called at start up. It initialises the game.
      */ 
@@ -135,7 +132,7 @@ public class GameMain extends Game
         
         settingsScreen = new SettingsScreen(this);
         
-        //Assets.MUSIC.play();
+        Assets.MUSIC.play();
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();

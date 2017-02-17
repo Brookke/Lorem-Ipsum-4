@@ -28,7 +28,7 @@ public class Player extends AbstractPerson
     /**
      * Stores whether the player has picked up the murder weapon or not.
      */
-    private boolean murderWeapon = true;
+    private boolean murderWeapon = false;
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
