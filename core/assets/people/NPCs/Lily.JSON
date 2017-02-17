@@ -31,5 +31,16 @@
     "Really sorry but I just don't have the time right now.",
     "I'm sure it would be fine if I helped but just don't want to be involved right now.",
     "I am not telling you, sorry."
-  ]
+  ],
+  "motives": {
+  	"Adam": "",
+  	"Colin": "",
+  	"Diana": "",
+  	"Horatio": "",
+  	"Kyle": "",
+  	"Mary": "",
+  	"Mike": "",
+  	"Roger": "",
+  	"Will": ""
+  }
 }
