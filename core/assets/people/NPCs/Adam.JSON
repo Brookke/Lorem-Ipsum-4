@@ -4,7 +4,7 @@
   "responses": {
     "introduction": "Hello",
     "Ignored Initial": "Whatever.",
-    "ignored Return": "Whatever.",
+    "ignored Return": "...",
     "Falsely Accused": "I don't think we should be talking anymore.",
     "Big Footprint": "Too big for me. Try %NPC.",
     "Small Footprint": "Looks like it could be mine. But %NPC has small feet too.",
