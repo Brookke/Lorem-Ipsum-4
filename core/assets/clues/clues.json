@@ -10,10 +10,10 @@
 		    "x": 0,
 		    "y": 1
   		},
-  		"Inhaler": {
-		    "description": "An inhaler left at the crime scene.",
-		    "x": 3,
-		    "y": 3
+  		"Small Footprint": {
+		    "description": "A small footprint left at the crime scene by the killer.",
+		    "x": 0,
+		    "y": 1
   		},
  		"Glasses": {
 		    "description": "A pair of glasses that were found by another detective at the crime scene.",
