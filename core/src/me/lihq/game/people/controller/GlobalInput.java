@@ -98,7 +98,6 @@ public class GlobalInput extends InputAdapter {
 		
 		if (paused) {
 			if (game.getScreen() == game.navigationScreen) {
-				game.navigationScreen.playerController.clear();
 				game.setScreen(game.pauseScreen);
 				paused = false;
 			} 
@@ -109,7 +108,6 @@ public class GlobalInput extends InputAdapter {
 		}
 		if (inventory) {
 			if (game.getScreen() == game.navigationScreen) {
-				game.navigationScreen.playerController.clear();
 				game.setScreen(game.inventoryScreen);
 				inventory = false;
 			} 
