@@ -25,6 +25,9 @@ public class WinScreen extends AbstractScreen {
 	private static final float LEFT_ALIGN = Gdx.graphics.getWidth() / 16;
 	
 	private Stage stage;
+	
+	private int animationCount;
+	private float animationTimer;
 
 	public WinScreen(GameMain game) {
 		super(game);
@@ -32,6 +35,9 @@ public class WinScreen extends AbstractScreen {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
         initMenu();
+        
+        animationCount = 0;
+        animationTimer = 0f;
 	}
 	
 	private void initMenu()
@@ -41,28 +47,36 @@ public class WinScreen extends AbstractScreen {
 		
 		Label cluesLabel = Assets.getLabel("Clues Found: " + game.player.collectedClues.size(), false);
 		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
+		cluesLabel.setVisible(false);
 		
 		// TODO: Number of red herrings
 		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.collectedClues.size(), false);
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
+		redHerringLabel.setVisible(false);
 		
 		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
+		questionsAsked.setVisible(false);
 		
 		Label accusedNPCs = Assets.getLabel("Number of People Wrongly Accused: ", false);
 		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
+		accusedNPCs.setVisible(false);
 		
 		Label basicScoreLabel = Assets.getLabel("Points Gained: " + game.player.getScore(), false);
 		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
+		basicScoreLabel.setVisible(false);
 		
 		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getPlayTime() + "s", false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
+		timeTaken.setVisible(false);
 		
 		Label bonusScoreLabel = Assets.getLabel("Time Bonus: ", false);
 		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
+		bonusScoreLabel.setVisible(false);
 		
 		Label finalScoreLabel = Assets.getLabel("Total Score: ", false);
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
+		finalScoreLabel.setVisible(false);
 		
 		stage.addActor(cluesLabel);
 		stage.addActor(redHerringLabel);
@@ -105,8 +119,18 @@ public class WinScreen extends AbstractScreen {
 
 	@Override
 	public void render(float delta) {
+		// Clear the screen
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
+        animationTimer += delta;
+        
+        if (animationCount < 8 && animationTimer > 0.5f) {
+        	animationCount++;
+        	animationTimer = 0f;
+        	
+        	stage.getActors().get(animationCount).setVisible(true);
+        }
         
 		stage.act();
 		stage.draw();

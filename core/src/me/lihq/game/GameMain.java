@@ -144,9 +144,7 @@ public class GameMain extends Game
     @Override
     public void render()
     {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
         input.update();
 
@@ -358,6 +356,23 @@ public class GameMain extends Game
      */
     public void resetAll()
     {
+    	// Clear the list of NPCs, ready to refill it.
+    	NPCs.clear();
     	
+    	// Recreate the map, so the murder room is randomly re-assigned
+    	gameMap = new Map();
+    	
+    	// Clear the input multiplexer, and add the global input controller
+    	inputMultiplexer.clear();
+        inputMultiplexer.addProcessor(input);
+    	
+        // Reinitialise all people and clues
+    	initialiseAllPeople();
+    	initialiseClues();
+    	
+    	// Recreate the navigation screen, so the references to the player and NPCs are
+    	// updated
+    	navigationScreen = new NavigationScreen(this);
+        navigationScreen.updateTiledMapRenderer();
     }
 }
