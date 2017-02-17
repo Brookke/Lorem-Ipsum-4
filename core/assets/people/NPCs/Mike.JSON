@@ -3,9 +3,9 @@
   "personality": "NICE",
   "responses": {
     "introduction": "Hi, have you seen my robot? It seems to have gone astray...",
-    "Ignored Initial": "##INITIAL IGNORE##",
-    "ignored Return": "##IGNORED & RETURNED##",
-    "Falsely Accused": "##FALSELY ACCUSED##",
+    "Ignored Initial": "Goodbye.",
+    "ignored Return": "Sorry, I can't really talk right now.",
+    "Falsely Accused": "Sorry, I don't think I should talk to you.",
     "Big Footprint": "Those would fit me I think. Or %NPC.",
     "Small Footprint": "Sorry, bit too small for me. Could be %NPC's.",
     "Glasses": "Yes, I do need glasses these days. Those look more like %NPC's though.",

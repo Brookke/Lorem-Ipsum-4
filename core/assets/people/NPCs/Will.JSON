@@ -3,9 +3,9 @@
   "personality":"NEUTRAL",
   "responses": {
     "introduction": "Hello",
-    "Ignored Initial": "##INITIAL IGNORE##",
-    "ignored Return": "##IGNORED & RETURNED##",
-    "Falsely Accused": "##FALSELY ACCUSED##",
+    "Ignored Initial": "OK then.",
+    "ignored Return": "I don't really want to talk right now.",
+    "Falsely Accused": "I have nothing to say to you.",
     "Big Footprint": "Oh yes, I could fit into those. So could %NPC, I think.",
     "Small Footprint": "Too small for me. You might have better luck with %NPC.",
     "Glasses": "No, I do not have glasses. %NPC does, though.",

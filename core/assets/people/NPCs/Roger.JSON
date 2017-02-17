@@ -3,9 +3,9 @@
   "personality": "NEUTRAL",
   "responses": {
     "introduction": "Hello",
-    "Ignored Initial": "##INITIAL IGNORE##",
-    "ignored Return": "##IGNORED & RETURNED##",
-    "Falsely Accused": "##FALSELY ACCUSED##",
+    "Ignored Initial": "All right.",
+    "ignored Return": "Please go away.",
+    "Falsely Accused": "I'm not speaking to you without a lawyer.",
     "Big Footprint": "Bit too big for me friend, try somebody else maybe.",
     "Small Footprint": "Looks like it could be mine!",
     "Glasses": "Unfortunately yes I do need glasses.",
