@@ -49,28 +49,6 @@
 		    "description": "A big footprint left at the crime scene by the killer.",
 		    "x": 0,
 		    "y": 0
-  		}
-  	},
-  	"weapons": {
-  		"Red Scarf": {
-    		"description": "A scarf found at the crime scene. Its colour is suspiciously similar to the colour of blood.",
-		    "x": 3,
-		    "y": 3
-  		},
-  		"Cricket Bat": {
-		    "description": "A cricket bat, but no cricket ball in sight... hmm...",
-		    "x": 3,
-		    "y": 3
-  		},
-  		"Hockey Stick": {
-		    "description": "A hockey stick belonging to the university hockey club.",
-		    "x": 3,
-		    "y": 3
-  		},
-  		"Knife": {
-		    "description": "A knife that was left near the crime scene.",
-		    "x": 3,
-		    "y": 3
   		},
   		"Right-Handed Fountain Pen": {
 		    "description": "A bloodstained fountain pen. The killer must be right-handed.",
@@ -102,7 +80,28 @@
   			"x": 3,
   			"y": 3
   		}
-  		
+  	},
+  	"weapons": {
+  		"Red Scarf": {
+    		"description": "A scarf found at the crime scene. Its colour is suspiciously similar to the colour of blood.",
+		    "x": 3,
+		    "y": 3
+  		},
+  		"Cricket Bat": {
+		    "description": "A cricket bat, but no cricket ball in sight... hmm...",
+		    "x": 3,
+		    "y": 3
+  		},
+  		"Hockey Stick": {
+		    "description": "A hockey stick belonging to the university hockey club.",
+		    "x": 3,
+		    "y": 3
+  		},
+  		"Knife": {
+		    "description": "A knife that was left near the crime scene.",
+		    "x": 3,
+		    "y": 3
+  		}  		
   	}
 }
   
