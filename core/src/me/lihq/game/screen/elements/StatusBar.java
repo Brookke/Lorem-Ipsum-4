@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 /**
@@ -183,11 +183,8 @@ public class StatusBar
      */
     private void initSkin()
     {
-        // Create a font
-        BitmapFont font = new BitmapFont();
-        skin = new Skin();
-        skin.add("default", font);
-
+    	skin = new Skin();
+    	
         // Create a texture
         Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
         pixmap.setColor(BACKGROUND_COLOR);
@@ -200,11 +197,11 @@ public class StatusBar
         textButtonStyle.down = skin.newDrawable("background", Color.BLACK);
         textButtonStyle.checked = skin.newDrawable("background");
         textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.font = skin.getFont("default");
+        textButtonStyle.font = Assets.FONT15;
         skin.add("default", textButtonStyle);
 
         // Create a label style
-        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.WHITE);
         labelStyle.background = skin.getDrawable("background");
         skin.add("default", labelStyle);
     }

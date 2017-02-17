@@ -1,11 +1,20 @@
 package me.lihq.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -50,14 +59,37 @@ public class Assets
     public static Texture TAG_BORDER;
 
     /**
-     * This is the default font for the game. Used in RoomTag
+     * The default fonts used in the game - the number specifies the size. Used to render
+     * UI elements and room tags.
      */
-    public static BitmapFont FONT;
+    public static BitmapFont FONT45, FONT30, FONT20, FONT15;
 
     /**
      * This it the animation for the clue glint to be drawn where a clue is hidden
      */
     public static Animation CLUE_GLINT;
+
+    /**
+     * Used for streaming the soundtrack
+     */
+    public static Music MUSIC;
+
+    /**
+     * Used for playing the sound effect when a clue is found
+     */
+    public static Sound SOUND;
+    
+    /**
+     * Internal skin, used in the UI factory methods.
+     */
+    private static Skin UI_SKIN;
+    
+    /**
+     * Default colours for UI buttons
+     */
+    private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY, 
+    		BUTTON_DOWN_COLOR = Color.DARK_GRAY, 
+    		BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
 
     /**
      * @param file - The file that contains the textures.
@@ -69,15 +101,14 @@ public class Assets
     }
 
     /**
-     * Loads all the elements the game needs such as the player.
+     * Loads all assets for the game, such as textures, sound files and fonts.
      */
     public static void load()
     {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fofer.otf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 45;
-        FONT = generator.generateFont(parameter);
-        generator.dispose();
+    	FONT45 = getFont("fofer", 45);
+        FONT30 = getFont("arial", 30);
+        FONT20 = getFont("arial", 20);
+        FONT15 = new BitmapFont();
 
         OPENING = loadTexture("title.png");
         INTROFRAME1 = new TextureRegion(OPENING, 0, 0, 1000, 750);
@@ -102,6 +133,68 @@ public class Assets
         TextureRegion[] frames = splitFrames[0];
 
         CLUE_GLINT = new Animation(0.1f, frames);
+
+        MUSIC = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
+        MUSIC.setVolume(Settings.MUSIC_VOLUME);
+        MUSIC.setLooping(true);
+
+        SOUND = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
+        
+        initSkin();
+    }
+    
+    /**
+     * Initialises UI_SKIN, so the UI factory methods (getTextButton() etc.) can be used. 
+     */
+    private static void initSkin()
+    {
+        UI_SKIN = new Skin();
+        
+        Label.LabelStyle titleStyle = new Label.LabelStyle(FONT30, Color.RED);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(FONT20, Color.RED);
+        UI_SKIN.add("title", titleStyle);
+        UI_SKIN.add("default", labelStyle);
+
+        //Create a texture
+        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth() / 4, (int) Gdx.graphics.getHeight() / 10, Pixmap.Format.RGB888);
+        pixmap.setColor(Color.ORANGE);
+        pixmap.fill();
+        UI_SKIN.add("background", new Texture(pixmap));
+
+        //Create a button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.up = UI_SKIN.newDrawable("background", BUTTON_BACKGROUND_COLOR);
+        textButtonStyle.down = UI_SKIN.newDrawable("background", BUTTON_DOWN_COLOR);
+        textButtonStyle.checked = UI_SKIN.newDrawable("background", BUTTON_BACKGROUND_COLOR);
+        textButtonStyle.over = UI_SKIN.newDrawable("background", BUTTON_OVER_COLOR);
+        textButtonStyle.font = FONT15;
+        UI_SKIN.add("default", textButtonStyle);
+
+        // Use the checkbox textures
+        UI_SKIN.add("uncheck", UNCHECKED_BOX);
+        UI_SKIN.add("check", CHECKED_BOX);
+
+        CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
+        checkBoxStyle.checkboxOff = UI_SKIN.getDrawable("uncheck");
+        checkBoxStyle.checkboxOn = UI_SKIN.getDrawable("check");
+        checkBoxStyle.font = FONT20;
+        checkBoxStyle.fontColor = Color.RED;
+        UI_SKIN.add("default", checkBoxStyle);
+        
+        // Create the SliderStyle, using generated block textures
+        Pixmap slider = new Pixmap(20, 20, Pixmap.Format.RGB888);
+        slider.setColor(Color.BLACK);
+        slider.fill();
+        Pixmap knob = new Pixmap(10, 10, Pixmap.Format.RGB888);
+        knob.setColor(Color.GRAY);
+        knob.fill();
+        UI_SKIN.add("slider", new Texture(slider));
+        UI_SKIN.add("knob", new Texture(knob));
+        
+        Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
+        sliderStyle.background = UI_SKIN.getDrawable("slider");
+        sliderStyle.knob = UI_SKIN.getDrawable("knob");
+        UI_SKIN.add("default-horizontal", sliderStyle);
     }
 
     /**
@@ -126,20 +219,103 @@ public class Assets
     }
 
     /**
-     * This method gets the default font but at the requested size
+     * Creates a BitmapFont with the specified font and size.
      *
-     * @param size - The size you want the font to be
-     * @return (BitmapFont) the resulting font
+     * @param font - The name of the font - must be stored as a .ttf file
+     * under this name in the fonts directory
+     * @param size - The size of the font
+     * @return (BitmapFont) The generated font
+     * 
+     * @author JAAPAN
      */
-    public static BitmapFont getFontWithSize(int size)
+    public static BitmapFont getFont(String font, int size)
     {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Fofer.otf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = size;
-        BitmapFont font = generator.generateFont(parameter);
+        BitmapFont f = generator.generateFont(parameter);
         generator.dispose();
 
-        return font;
+        return f;
+    }
+    
+    /**
+     * Creates a new label, using the style defined in UI_SKIN.
+     * 
+     * @param text - The text to display in the label
+     * @param title - Whether to use the title LabelStyle (font size 30) or
+     * the default LabelStyle (font size 20)
+     * @return (Label) The new label
+     * 
+     * @author JAAPAN
+     */
+    public static Label getLabel(String text, boolean title)
+    {
+    	if (title)
+    		return new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
+    	else
+    		return new Label(text, UI_SKIN);
+    }
+    
+    /**
+     * Creates a new text button, using the style defined in UI_SKIN.
+     * 
+     * @param text - The text to display in the button
+     * @return (TextButton) The new text button
+     * 
+     * @author JAAPAN
+     */
+    public static TextButton getTextButton(String text)
+    {
+    	return new TextButton(text, UI_SKIN);
+    }
+    
+    /**
+     * Creates a new checkbox, using the style defined in UI_SKIN.
+     * 
+     * @param text - The text to display next to the checkbox
+     * @return (CheckBox) The new checkbox
+     * 
+     * @author JAAPAN
+     */
+    public static CheckBox getCheckBox(String text)
+    {
+    	return new CheckBox(text, UI_SKIN);
+    }
+    
+    /**
+     * Creates a new slider control, using the style define in UI_SKIN.
+     * 
+     * @param min - The minimum value of the slider
+     * @param max - The maximum value of the slider
+     * @param stepSize - The size of the increments
+     * @param vertical - Whether the slider should be vertical or horizontal
+     * @return (Slider) The new slider
+     * 
+     * @author JAAPAN
+     */
+    public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
+    {
+    	return new Slider(min, max, stepSize, vertical, UI_SKIN);
+    }
+    
+    /**
+     * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
+     * will result in undefined behaviour.
+     * 
+     * @author JAAPAN
+     */
+    public static void dispose()
+    {
+    	CLUE_SHEET.dispose();
+    	OPENING.dispose();
+    	TAG_BORDER.dispose();
+    	FONT45.dispose();
+    	FONT30.dispose();
+    	FONT20.dispose();
+    	MUSIC.dispose();
+    	SOUND.dispose();
+    	UI_SKIN.dispose();
     }
 
 }
