@@ -50,11 +50,6 @@
 		    "x": 0,
 		    "y": 0
   		},
-  		"Right-Handed Fountain Pen": {
-		    "description": "A bloodstained fountain pen. The killer must be right-handed.",
-		    "x": 1,
-		    "y": 1
-  		},
   		"Hardware Magazine": {
   			"description": "A copy of a niche hardware magazine."
   			"x": 3,
@@ -96,6 +91,11 @@
 		    "description": "A hockey stick belonging to the university hockey club.",
 		    "x": 3,
 		    "y": 3
+  		},
+  		"Right-Handed Fountain Pen": {
+		    "description": "A bloodstained fountain pen. The killer must be right-handed.",
+		    "x": 1,
+		    "y": 1
   		},
   		"Knife": {
 		    "description": "A knife that was left near the crime scene.",
