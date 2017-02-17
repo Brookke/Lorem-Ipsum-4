@@ -181,7 +181,6 @@ public class ConversationManagement
             player.addToScore(-2000);
         }
         finished = true;
-        won = true;
     }
 
     private void ignoreNPC()
