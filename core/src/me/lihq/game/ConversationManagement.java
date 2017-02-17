@@ -164,7 +164,8 @@ public class ConversationManagement
     private void accuseNPC()
     {
         if (this.tempNPC.isKiller()) {
-            speechboxMngr.addSpeechBox(new SpeechBox("You found the killer well done", -1));
+        	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("responses", "Accuse"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
             player.addToScore(1000);
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));

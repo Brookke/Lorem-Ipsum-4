@@ -6,6 +6,13 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import me.lihq.game.GameMain;
 
+/**
+ * The screen that is displayed when the player wins the game. Displays their score and time,
+ * and allows them to return to the main menu.
+ * 
+ * @author JAAPAN
+ * 
+ */
 public class WinScreen extends AbstractScreen {
 	
 	private Stage stage;
