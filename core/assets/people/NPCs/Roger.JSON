@@ -1,6 +1,6 @@
 {
   "name": "Roger",
-  "personality": "NICE",
+  "personality": "NEUTRAL",
   "responses": {
     "introduction": "Hello",
     "Ignored Initial": "##INITIAL IGNORE##",
