@@ -38,7 +38,14 @@ public class Player extends AbstractPerson
      */
     private int score = 0;
 
+    // Stores the duration of the game
     private float gameDuration = 0f;
+
+    // Store the number of questions the player has asked, used for endscreen stats
+    private int questionsAsked = 0;
+
+    // Stores the number of false accusations the player has made
+    private int falseAccusations = 0;
 
     /**
      * This is the constructor for player, it creates a new playable person
@@ -324,15 +331,14 @@ public class Player extends AbstractPerson
      * @author JAAPAN
      */
     public int getTotalScore(int score, int gameDuration) {
-        System.out.println("Score: " + score + ". Game Duration: " + gameDuration);
         int totalScore = score + getTimeBonus(gameDuration);
-        System.out.println("Total Score: " + totalScore);
         return totalScore;
     }
 
     /**
      * @return Any bonus points the player receives for completing the game in a certain amount of time
      *
+     * @param gameDuration - Duration of the current game
      * @author JAAPAN
      */
     public int getTimeBonus(int gameDuration) {
@@ -347,4 +353,35 @@ public class Player extends AbstractPerson
         }
     }
 
+    /**
+     * @author JAAPAN
+     */
+    public void incrementQuestionCount() {
+        this.questionsAsked++;
+    }
+
+    /**
+     * @return Number of questions asked by the player during this game
+     *
+     * @author JAAPAN
+     */
+    public int getQuestionCount() {
+        return this.questionsAsked;
+    }
+
+    /**
+     * @author JAAPAN
+     */
+    public void incrementFalseAcc() {
+        this.falseAccusations++;
+    }
+
+    /**
+     * @return Number of false accusations made by the player during this game
+     *
+     * @author JAAPAN
+     */
+    public int getFalseAcc() {
+        return this.falseAccusations;
+    }
 }
