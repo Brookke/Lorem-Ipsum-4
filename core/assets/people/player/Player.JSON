@@ -81,6 +81,31 @@
       "AGGRESSIVE": "YOU DROPPED THIS WRAPPER, DIDN'T YOU?! LITTER BUG!",
       "NEUTRAL": "Have you seen anyone eating these sweets?",
       "NICE": "I was tidying the area and found some of these on the floor. Do you know who dropped them?"
+    },
+    "Red Scarf": {
+      "AGGRESSIVE": "THIS AWFUL SCARF IF YOURS ISN'T IT?",
+      "NEUTRAL": "Can you remember who was wearing this scarf?",
+      "NICE": "I really like the Swarovski crystals on this scarf. Can you remember who was wearing it?"
+    },
+    "Cricket Bat": {
+      "AGGRESSIVE": "CRICKET ISN'T EVEN A SPORT, SO WHY DID YOU HAVE THIS BAT!?",
+      "NEUTRAL": "Do you recall who had this cricket bat with them?",
+      "NICE": "I love standing around doing nothing. Speaking of which, do you know who left this cricket bat?"
+    },
+    "Hockey Stick": {
+      "AGGRESSIVE": "WHY ON EARTH DID YOU USE A HOCKEY STICK FOR YOUR MURDERING!?",
+      "NEUTRAL": "Did you see someone carrying this hockey stick earlier?",
+      "NICE": "I think someone dropped this, do you know who it was? I don't want them to miss the hockey tournament."
+    },
+    "Right-Handed Fountain Pen": {
+      "AGGRESSIVE": "THIS IS YOUR OVER-ENGINEERED PEN, ISN'T IT?!",
+      "NEUTRAL": "Have you seen anyone using this pen? I'd like to ask them some questions.",
+      "NICE": "This is a really ergonomic pen. Do you know who its owner is?"
+    },
+    "Knife": {
+      "AGGRESSIVE": "YOU DIDN'T HIDE THIS KNIFE VERY WELL, DID YOU!?",
+      "NEUTRAL": "Do you know who I can return this knife to?",
+      "NICE": "If I was a murderer, I'd sure pick a knife like this. Have you any idea who else has such great taste?"
     }
   }
 }
