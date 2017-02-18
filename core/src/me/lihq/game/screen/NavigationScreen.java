@@ -329,23 +329,21 @@ public class NavigationScreen extends AbstractScreen
         statusBar.resize(width, height);
     }
 
-    /**
-     * This is called when the focus is lost on the window
-     */
-    @Override
-    public void pause()
-    {
-
+	/**
+	 * Called when focus on the window is lost.
+	 */
+	@Override
+	public void pause()
+	{
+		// Pause the game, so the gameDuration counter isn't updated
+    	game.setScreen(game.pauseScreen);
     }
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume()
-    {
-
-    }
+    public void resume() {}
 
     /**
      * This method is called when the user hides the window

@@ -87,66 +87,57 @@ public class SettingsScreen extends AbstractScreen {
         
         // Event listeners for UI elements
         // Return to the previous screen (Main menu or pause)
-        backButton.addListener(new ClickListener()
-        {
+        backButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-            	if (game.mainMenu)
+            public void clicked(InputEvent event, float x, float y) {
+            	if (game.mainMenu) {
             		game.setScreen(game.menuScreen);
-            	else
+            	} else {
             		game.setScreen(game.pauseScreen);
+            	}
             }
         });
         
         // Toggle the muted state of the game
-        muteCheckBox.addListener(new ClickListener()
-        {
+        muteCheckBox.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
-            	if (Settings.MUTED)
+            public void clicked(InputEvent event, float x, float y) {
+            	if (Settings.MUTED) {
             		Assets.MUSIC.play();
-            	else
+            	} else {
             		Assets.MUSIC.pause();
+            	}
             	
             	Settings.MUTED = !Settings.MUTED;
             }
         });
 
         // Called when the slider is moved - changes the music volume
-        musicSlider.addListener(new ChangeListener()
-        {
+        musicSlider.addListener(new ChangeListener() {
 			@Override
-			public void changed(ChangeEvent event, Actor actor)
-			{
+			public void changed(ChangeEvent event, Actor actor) {
 				Assets.MUSIC.setVolume(musicSlider.getValue());
 				Settings.MUSIC_VOLUME = musicSlider.getValue();
 			}
         });
         
         // Called when the slider is moved - changes the sound effects volume
-        sfxSlider.addListener(new ChangeListener()
-        {
+        sfxSlider.addListener(new ChangeListener() {
 			@Override
-			public void changed(ChangeEvent event, Actor actor)
-			{
+			public void changed(ChangeEvent event, Actor actor) {
 				Settings.SFX_VOLUME = sfxSlider.getValue();
 			}
         });
         // Plays the sound effect when the user lets go of the slider, so they can
         // hear how loud it is.
-        sfxSlider.addListener(new InputListener()
-        {
+        sfxSlider.addListener(new InputListener() {
         	// Needed for touchUp() to work.
         	@Override
-        	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-        	{
+        	public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         		return true;
         	}
         	@Override
-        	public void touchUp(InputEvent event, float x, float y, int pointer, int button)
-        	{
+        	public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
         		if (!Settings.MUTED) {
         			Assets.SOUND.play(Settings.SFX_VOLUME);
         		}

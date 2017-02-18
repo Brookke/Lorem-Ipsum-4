@@ -56,11 +56,9 @@ public class InventoryScreen extends AbstractScreen {
         stage.addActor(resumeButton);
         zoomedStage.addActor(text2);
         
-        resumeButton.addListener(new ClickListener()
-        {
+        resumeButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(game.navigationScreen);
             }
         });
@@ -85,11 +83,9 @@ public class InventoryScreen extends AbstractScreen {
 		        stage.addActor(text);
 				
 
-				imgBtn.addListener(new ClickListener()
-		        {
+				imgBtn.addListener(new ClickListener() {
 		            @Override
-		            public void clicked(InputEvent event, float x, float y)
-		            {
+		            public void clicked(InputEvent event, float x, float y) {
 		                game.inputMultiplexer.removeProcessor(stage);
 		            	game.inputMultiplexer.addProcessor(zoomedStage);
 		            	
@@ -112,11 +108,9 @@ public class InventoryScreen extends AbstractScreen {
 		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		                zoomedStage.addActor(backButton);
 
-		                backButton.addListener(new ClickListener()
-		                {
+		                backButton.addListener(new ClickListener() {
 		                    @Override
-		                    public void clicked(InputEvent event, float x, float y)
-		                    {
+		                    public void clicked(InputEvent event, float x, float y) {
 				                game.inputMultiplexer.removeProcessor(zoomedStage);
 				            	game.inputMultiplexer.addProcessor(stage);
 				            	
@@ -134,21 +128,30 @@ public class InventoryScreen extends AbstractScreen {
 		        });
 			}
 		}
-		
-		
 	}
 
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
 	@Override
 	public void show() {
         addButtons();
         game.inputMultiplexer.addProcessor(stage);
 	}
 
+	/**
+	 * Game related logic should take place here.
+	 */
 	@Override
 	public void update() {
 		
 	}
 
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
 	@Override
 	public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -166,29 +169,47 @@ public class InventoryScreen extends AbstractScreen {
         }
 	}
 
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Called when focus on the window is lost.
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		// Pause the game, so the gameDuration counter isn't updated
+    	game.setScreen(game.pauseScreen);
 	}
 
+	/**
+	 * Called when the window regains focus.
+	 */
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
 	@Override
 	public void hide() {
         game.inputMultiplexer.removeProcessor(stage);
 	}
 
+	/**
+	 * Called when this screen should release all resources.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();
