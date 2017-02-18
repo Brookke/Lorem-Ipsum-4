@@ -76,20 +76,23 @@ public class GameMain extends Game
     public NPC victim;
 
     /**
-     * A screen to be used to display standard gameplay within the game , including the status bar.
-     */
-    public NavigationScreen navigationScreen;
-
-    /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;
+
+    /**
+     * A screen to be used to display standard gameplay within the game , including the status bar.
+     */
+    public NavigationScreen navigationScreen;
 
     /**
      * The main menu screen that shows up when the game is first started
      */
     public MainMenuScreen menuScreen;
 
+    /**
+     * 
+     */
     public PauseScreen pauseScreen;
     
     public InventoryScreen inventoryScreen;
@@ -320,8 +323,9 @@ public class GameMain extends Game
         // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
         while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
         	int r = random.nextInt(totalClues);
-        	if (!clueIndices.contains(r))
+        	if (!clueIndices.contains(r)) {
         		clueIndices.add(r);
+        	}
         }
         
         for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
@@ -331,8 +335,9 @@ public class GameMain extends Game
         	// Set the first clues in the list to red herrings (the number of red herrings
         	// specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
         	// this does not need to be further randomised.
-        	if (i < Settings.NUMBER_OF_RED_HERRINGS)
+        	if (i < Settings.NUMBER_OF_RED_HERRINGS) {
         		tempClues.get(i).setRedHerring();
+        	}
         }
         
         // Choose a random murder weapon

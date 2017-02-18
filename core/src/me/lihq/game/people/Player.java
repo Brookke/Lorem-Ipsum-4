@@ -139,7 +139,8 @@ public class Player extends AbstractPerson
     private NPC getFacingNPC()
     {
         for (NPC npc : GameMain.me.getNPCS(getRoom())) {
-            if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) && (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
+            if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) && 
+            		(npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
 
                 return npc;
@@ -171,8 +172,9 @@ public class Player extends AbstractPerson
             	score += 500;
             }
             
-            if (!clueFound.isRedHerring())
+            if (!clueFound.isRedHerring()) {
             	usefulClues++;
+            }
 
             // set all NPCs ignored to false
             for (NPC character : GameMain.me.NPCs) {
@@ -180,8 +182,9 @@ public class Player extends AbstractPerson
             }
             score += 250;
             
-            if (!Settings.MUTED)
+            if (!Settings.MUTED) {
             	Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
         } else {
             GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
         }
@@ -250,8 +253,7 @@ public class Player extends AbstractPerson
      */
     public void changePersonality(Personality change)
     {
-    	switch (change)
-    	{
+    	switch (change) {
     	case AGGRESSIVE:
     		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
     		break;
@@ -316,7 +318,8 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void addFalseAccusation() {
+    public void addFalseAccusation()
+    {
         falseAccusations++;
     }
     
@@ -349,12 +352,13 @@ public class Player extends AbstractPerson
     @Override
     public Personality getPersonality()
     {
-        if (personalityLevel < 33)
+        if (personalityLevel < 33) {
             return Personality.AGGRESSIVE;
-        else if (personalityLevel < 66)
+        } else if (personalityLevel < 66) {
             return Personality.NEUTRAL;
-        else
+        } else {
             return Personality.NICE;
+        }
     }
 
     /**
@@ -385,7 +389,8 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public int getTimeBonus() {
+    public int getTimeBonus()
+    {
         int penalty = (int) (Math.log(gameDuration/20) * 1000);
         
         int bonus = 5000 - penalty;
@@ -398,7 +403,8 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getTotalScore() {
+    public int getTotalScore()
+    {
         return score + getTimeBonus();
     }
 
@@ -455,7 +461,8 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getFalseAccusations() {
+    public int getFalseAccusations()
+    {
         return falseAccusations;
     }
 }

@@ -38,6 +38,8 @@ public abstract class AbstractPerson extends Sprite
 
     /**
      * Used for randomising non-responses
+     * 
+     * @author JAAPAN
      */
     protected Random random;
     

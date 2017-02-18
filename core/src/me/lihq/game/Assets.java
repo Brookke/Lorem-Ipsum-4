@@ -217,6 +217,29 @@ public class Assets
 
         return null;
     }
+    
+    /**
+     * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
+     * will result in undefined behaviour.
+     * 
+     * @author JAAPAN
+     */
+    public static void dispose()
+    {
+    	CLUE_SHEET.dispose();
+    	OPENING.dispose();
+    	TAG_BORDER.dispose();
+    	FONT45.dispose();
+    	FONT30.dispose();
+    	FONT20.dispose();
+    	MUSIC.dispose();
+    	SOUND.dispose();
+    	UI_SKIN.dispose();
+    }
+    
+    /*************************************************************************/
+    /**************************** Factory Methods ****************************/
+    /*************************************************************************/
 
     /**
      * Creates a BitmapFont with the specified font and size.
@@ -224,7 +247,7 @@ public class Assets
      * @param font - The name of the font - must be stored as a .ttf file
      * under this name in the fonts directory
      * @param size - The size of the font
-     * @return (BitmapFont) The generated font
+     * @return The generated font
      * 
      * @author JAAPAN
      */
@@ -246,7 +269,7 @@ public class Assets
      * @param text - The text to display in the label
      * @param title - Whether to use the title LabelStyle (font size 30) or
      * the default LabelStyle (font size 20)
-     * @return (Label) The new label
+     * @return A new label with the standard style and specified text
      * 
      * @author JAAPAN
      */
@@ -258,15 +281,16 @@ public class Assets
             		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
     		return label;
     	}
-    	else
+    	else {
     		return new Label(text, UI_SKIN);
+    	}
     }
     
     /**
      * Creates a new text button, using the style defined in UI_SKIN.
      * 
      * @param text - The text to display in the button
-     * @return (TextButton) The new text button
+     * @return A new text button with the standard style and specified text
      * 
      * @author JAAPAN
      */
@@ -279,7 +303,7 @@ public class Assets
      * Creates a new checkbox, using the style defined in UI_SKIN.
      * 
      * @param text - The text to display next to the checkbox
-     * @return (CheckBox) The new checkbox
+     * @return A new checkbox with the standard style and specified text
      * 
      * @author JAAPAN
      */
@@ -295,32 +319,13 @@ public class Assets
      * @param max - The maximum value of the slider
      * @param stepSize - The size of the increments
      * @param vertical - Whether the slider should be vertical or horizontal
-     * @return (Slider) The new slider
+     * @return A new slider with the standard style and specified attributes
      * 
      * @author JAAPAN
      */
     public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
     {
     	return new Slider(min, max, stepSize, vertical, UI_SKIN);
-    }
-    
-    /**
-     * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
-     * will result in undefined behaviour.
-     * 
-     * @author JAAPAN
-     */
-    public static void dispose()
-    {
-    	CLUE_SHEET.dispose();
-    	OPENING.dispose();
-    	TAG_BORDER.dispose();
-    	FONT45.dispose();
-    	FONT30.dispose();
-    	FONT20.dispose();
-    	MUSIC.dispose();
-    	SOUND.dispose();
-    	UI_SKIN.dispose();
     }
 
 }

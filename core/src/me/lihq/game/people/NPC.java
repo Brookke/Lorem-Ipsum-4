@@ -18,6 +18,8 @@ public class NPC extends AbstractPerson
     /**
      * List of clues NPC has already been asked about. Used to ensure the player only gets points
      * for asking an NPC about a clue once.
+     * 
+     * @author JAAPAN
      */
     public List<Clue> alreadyAskedClues = new ArrayList<>();
 
@@ -39,11 +41,15 @@ public class NPC extends AbstractPerson
     /**
      * Used to track whether the NPC has been ignored, and thus won't respond to the player
      * until another clue has been found.
+     * 
+     * @author JAAPAN
      */
     public boolean ignored = false;
 
     /**
      * Used to track whether the NPC has been accused, so they can ignore the player after a false accusation.
+     * 
+     * @author JAAPAN
      */
     public boolean accused = false;
 
@@ -209,8 +215,7 @@ public class NPC extends AbstractPerson
      */
     public String getSpeech(Clue clue, Personality style, Personality player)
     {
-    	if (style == personality && player == style)
-    	{
+    	if (style == personality && player == style) {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
@@ -219,30 +224,27 @@ public class NPC extends AbstractPerson
     		// If this NPC is the killer, point the player in the direction of a 
     		// random NPC. Otherwise, point them towards the killer. As this is an improved
     		// response, whether the clue is a red herring or not is unimportant.
-    		if (isKiller)
-    		{
+    		if (isKiller) {
     			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName())
+    			while (name == getName()) {
     				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			}
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", name);
-    		}
-    		else
-    		{
+    		} else {
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", GameMain.me.killer.getName());
     			// Add the room of the killer to the response
     			String room = GameMain.me.killer.getRoom().getName();
-    			if (room != "Outside Ron Cooke Hub")
+    			if (room != "Outside Ron Cooke Hub") {
     				response += " Last I saw them, they were in the " + room + ".";
-    			else
+    			} else {
     				response += " Last I saw them, they were outside.";
+    			}
     		}
     		
     		return response;
-    	}
-    	else if (style == personality || style == player)
-    	{
+    	} else if (style == personality || style == player) {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
@@ -250,24 +252,20 @@ public class NPC extends AbstractPerson
     		
     		// If this NPC is the killer, or the clue is a red herring, point the player
     		// in the direction of a random NPC. Otherwise, point them towards the killer
-    		if (isKiller || clue.isRedHerring())
-    		{
+    		if (isKiller || clue.isRedHerring()) {
     			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName() || name == GameMain.me.killer.getName())
+    			while (name == getName() || name == GameMain.me.killer.getName()) {
     				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			}
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", name);
-    		}
-    		else
-    		{
+    		} else {
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", GameMain.me.killer.getName());
     		}
     		
     		return response;
-        } 
-    	else
-    	{
+        } else {
             return getSpeech("noneResponses", "");
         }
     }
