@@ -32,10 +32,13 @@ public abstract class AbstractPerson extends Sprite
     protected static int SPRITE_WIDTH = 32;
     
     /**
-     * This is whether the NPC can move or not. It is mainly used to not let them move during converstation
+     * This is whether the NPC can move or not. It is mainly used to not let them move during conversation
      */
     public boolean canMove = true;
 
+    /**
+     * Used for randomising non-responses
+     */
     protected Random random;
     
     /**
@@ -133,31 +136,6 @@ public abstract class AbstractPerson extends Sprite
     }
 
     /**
-     * This method returns the Persons walking state.
-     * Either WALKING or STANDING
-     *
-     * @return (PersonState) the current state of the Person
-     */
-    public PersonState getState()
-    {
-        return state;
-    }
-
-    /**
-     * This sets the tile coordinates of the person.
-     *
-     * @param x The x coordinate of the tile grid.
-     * @param y The y coordinate of the tile grid.
-     */
-    public void setTileCoordinates(int x, int y)
-    {
-        tileCoordinates.x = x;
-        tileCoordinates.y = y;
-
-        setCoords(x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
-    }
-
-    /**
      * This is called to update the players position.
      * Called from the game loop, it interpolates the movement so that the person moves smoothly from tile to tile.
      */
@@ -201,7 +179,6 @@ public abstract class AbstractPerson extends Sprite
         updateTextureRegion();
     }
 
-
     /**
      * Finalises the move by resetting the animation timer and setting the state back to standing.
      * Called when the player is no longer moving.
@@ -223,40 +200,6 @@ public abstract class AbstractPerson extends Sprite
      * @param fileName
      */
     public abstract void importDialogue(String fileName);
-
-    /**
-     * Retrieves a line of dialogue with a specified key.
-     *
-     * @param type - The type of response to retrieve
-     * @param key - The key of the line of dialogue
-     * @return The corresponding line of dialogue
-     */
-    public String getSpeech(String type, String key)
-    {
-        try {
-        	if (type == "noneResponses") {
-        		// Randomly select a non-response
-        		int size = jsonData.get(type).size;
-        		return jsonData.get(type).getString(random.nextInt(size));
-        	} else {
-                return jsonData.get(type).getString(key);
-            }
-        } catch (Exception e) {
-            return "error speech not working";
-        }
-    }
-
-    /**
-     * This method returns the response based on the clue given
-     *
-     * @param type - The type of response to retrieve
-     * @param clue - The clue to get the response for
-     * @return The corresponding line of dialogue
-     */
-    public String getSpeech(String type, Clue clue)
-    {
-        return this.getSpeech(type, clue.getName());
-    }
 
     /**
      * Updates the texture region based upon how far though the animation time it is.
@@ -294,6 +237,24 @@ public abstract class AbstractPerson extends Sprite
             setRegion(new TextureRegion(spriteSheet, 0, row * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
         }
     }
+    
+    /*************************************************************************/
+    /****************************** Set Methods ******************************/
+    /*************************************************************************/
+
+    /**
+     * This sets the tile coordinates of the person.
+     *
+     * @param x The x coordinate of the tile grid.
+     * @param y The y coordinate of the tile grid.
+     */
+    public void setTileCoordinates(int x, int y)
+    {
+        tileCoordinates.x = x;
+        tileCoordinates.y = y;
+
+        setCoords(x * Settings.TILE_SIZE, y * Settings.TILE_SIZE);
+    }
 
     /**
      * Used internally to store the coordinates of the person.
@@ -308,9 +269,88 @@ public abstract class AbstractPerson extends Sprite
     }
 
     /**
-     * This returns the persons personality
+     * Setter for the direction the person is facing.
      *
-     * @return (Personality) returns the Persons personality
+     * @param dir - Desired direction for the person to face.
+     */
+    public void setDirection(Direction dir)
+    {
+        this.direction = dir;
+    }
+
+    /**
+     * Setter for the animation time.
+     *
+     * @param animTime - The animation time you want to set.
+     */
+    public void setAnimTime(float animTime)
+    {
+        this.animTime = animTime;
+    }
+
+    /**
+     * This method sets the currentRoom to the room parameter
+     *
+     * @param room - The room to change currentRoom to {@link #currentRoom}
+     */
+    public void setRoom(Room room)
+    {
+        this.currentRoom = room;
+    }
+    
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
+
+    /**
+     * This method returns the Persons walking state.
+     * Either WALKING or STANDING
+     *
+     * @return (PersonState) the current state of the Person
+     */
+    public PersonState getState()
+    {
+        return state;
+    }
+
+    /**
+     * Retrieves a line of dialogue with a specified key.
+     *
+     * @param type - The type of response to retrieve
+     * @param key - The key of the line of dialogue
+     * @return The corresponding line of dialogue
+     * 
+     * @author JAAPAN
+     */
+    public String getSpeech(String type, String key)
+    {
+        try {
+        	if (type == "noneResponses") {
+        		// Randomly select a non-response
+        		int size = jsonData.get(type).size;
+        		return jsonData.get(type).getString(random.nextInt(size));
+        	} else {
+                return jsonData.get(type).getString(key);
+            }
+        } catch (Exception e) {
+            return "error speech not working";
+        }
+    }
+
+    /**
+     * This method returns the response based on the clue given
+     *
+     * @param type - The type of response to retrieve
+     * @param clue - The clue to get the response for
+     * @return The corresponding line of dialogue
+     */
+    public String getSpeech(String type, Clue clue)
+    {
+        return this.getSpeech(type, clue.getName());
+    }
+
+    /**
+     * @return The current personality of the person
      */
     public abstract Personality getPersonality();
 
@@ -335,27 +375,6 @@ public abstract class AbstractPerson extends Sprite
     }
 
     /**
-     * Setter for the direction the person is facing.
-     *
-     * @param dir - Desired direction for the person to face.
-     */
-    public void setDirection(Direction dir)
-    {
-        this.direction = dir;
-    }
-
-
-    /**
-     * Setter for the animation time.
-     *
-     * @param animTime - The animation time you want to set.
-     */
-    public void setAnimTime(float animTime)
-    {
-        this.animTime = animTime;
-    }
-
-    /**
      * This method returns the room that the Person is in
      *
      * @return (Room) the room the Person is in {@link #currentRoom}
@@ -363,16 +382,6 @@ public abstract class AbstractPerson extends Sprite
     public Room getRoom()
     {
         return this.currentRoom;
-    }
-
-    /**
-     * This method sets the currentRoom to the room parameter
-     *
-     * @param room - The room to change currentRoom to {@link #currentRoom}
-     */
-    public void setRoom(Room room)
-    {
-        this.currentRoom = room;
     }
 
     /**

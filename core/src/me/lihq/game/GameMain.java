@@ -200,34 +200,34 @@ public class GameMain extends Game
         player.setRoom(gameMap.getRoom(0));
 
         //TODO: Sort NPC personalities
-        NPC npc = new NPC("Colin", "colin.png", 15, 17, gameMap.getRoom(0), true, "Colin.JSON");
+        NPC npc = new NPC("Colin", "colin.png", 15, 17, gameMap.getRoom(0), "Colin.JSON");
         NPCs.add(npc);
 
-        NPC npc2 = new NPC("Diana", "diana.png", 4, 4, gameMap.getRoom(1), true, "Diana.JSON");
+        NPC npc2 = new NPC("Diana", "diana.png", 4, 4, gameMap.getRoom(1), "Diana.JSON");
         NPCs.add(npc2);
 
-        NPC npc3 = new NPC("Lily", "lily.png", 0, 0, gameMap.getRoom(0), true, "Lily.JSON");
+        NPC npc3 = new NPC("Lily", "lily.png", 0, 0, gameMap.getRoom(0), "Lily.JSON");
         NPCs.add(npc3);
 
-        NPC npc4 = new NPC("Mary", "mary.png", 0, 0, gameMap.getRoom(0), true, "Mary.JSON");
+        NPC npc4 = new NPC("Mary", "mary.png", 0, 0, gameMap.getRoom(0), "Mary.JSON");
         NPCs.add(npc4);
 
-        NPC npc5 = new NPC("Mike", "mike.png", 0, 0, gameMap.getRoom(0), true, "Mike.JSON");
+        NPC npc5 = new NPC("Mike", "mike.png", 0, 0, gameMap.getRoom(0), "Mike.JSON");
         NPCs.add(npc5);
 
-        NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
+        NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), true, "Roger.JSON");
+        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), true, "Horatio.JSON");
+        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), "Horatio.JSON");
         NPCs.add(npc8);
 
-        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), true, "Kyle.JSON");
+        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
+        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
 
         /*
