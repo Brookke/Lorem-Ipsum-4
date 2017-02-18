@@ -136,7 +136,9 @@ public class SettingsScreen extends AbstractScreen {
         	@Override
         	public void touchUp(InputEvent event, float x, float y, int pointer, int button)
         	{
-        		Assets.SOUND.play(Settings.SFX_VOLUME);
+        		if (!Settings.MUTED) {
+        			Assets.SOUND.play(Settings.SFX_VOLUME);
+        		}
         	}
         });
 	}
