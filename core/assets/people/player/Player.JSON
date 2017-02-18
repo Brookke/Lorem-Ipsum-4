@@ -13,7 +13,7 @@
       "NICE":"Hey I like your shoes, are they the same as this footprint?"
     },
     "Glasses": {
-      "AGGRESSIVE": "DO YOU NEEED TO WEAR GLASSES?...  TELL ME NOW, OR ELSE!",
+      "AGGRESSIVE": "DO YOU NEED TO WEAR GLASSES?...  TELL ME NOW, OR ELSE!",
       "NEUTRAL": "Do you wear glasses?",
       "NICE":"Hey, I think you'd look great in these glasses I've found, have you ever seen them before?"
     },
@@ -56,24 +56,31 @@
       "AGGRESSIVE": "DO YOU RECOGNISE THIS MAGAZINE? TELL ME!",
       "NEUTRAL": "Have you seen this before?",
       "NICE": "You look pretty handy, do you know who's this is?"
-    }
+    },
     "Diamond Ring": {
       "AGGRESSIVE": "IS THIS YOUR RING?",
       "NEUTRAL": "Do you recognise this ring?",
       "NICE": "Someone dropped this expensive looking ring; do you know who's it is?"
-    }
+    },
     "Receipt": {
       "AGGRESSIVE": "THIS IS YOUR RECEIPT, ISN'T IT?",
-      "NETURAL": "Do you know who's receipt this is?",
+      "NEUTRAL": "Do you know who's receipt this is?",
       "NICE": "I found this receipt lying around, any idea who's it could be?"
-    }
+    },
     "USB Stick": {
-      "AGGRESSIVE": "
+      "AGGRESSIVE": "IS THIS MEMORY STICK YOURS!?",
+      "NEUTRAL": "Have you ever seen this memory stick?",
+      "NICE": "You seem like you know a USB stick from a floppy disk. Do you know who dropped this one?"
+    },
+    "Energy Drink": {
+      "AGGRESSIVE": "DID YOU DRINK THIS DISGUSTINGLY UNHEALTHY CAN OF EXTREME-HYPER-ENERGY??",
+      "NEUTRAL": "I found this hidden away in an odd place. Have you seen anyone drinking it?",
+      "NICE": "I'm sure you know better than to drink something so vile, but have you seen anyone else doing so?"
+    },
+    "Sweet Wrapper": {
+      "AGGRESSIVE": "YOU DROPPED THIS WRAPPER, DIDN'T YOU?! LITTER BUG!",
+      "NEUTRAL": "Have you seen anyone eating these sweets?",
+      "NICE": "I was tidying the area and found some of these on the floor. Do you know who dropped them?"
     }
-  },
-  "noneResponses": [
-    "Sorry I am a little busy for questions right now.",
-    "And why do you think I would help you?",
-    "I am not telling you."
-  ]
+  }
 }
