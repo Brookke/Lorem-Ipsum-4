@@ -41,6 +41,7 @@ import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
 import me.lihq.game.screen.PauseScreen;
 import me.lihq.game.screen.SettingsScreen;
+import me.lihq.game.screen.elements.SpeechBox;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -69,9 +70,15 @@ public class GameMain extends Game
     
     /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
-     * killer, without having to iterate through each NPC
+     * killer, without having to iterate through each NPC.
      */
     public NPC killer;
+
+    /**
+     * An NPC object for the victim. This allows us to easily access the name of the victim,
+     * without having to iterate through each NPC.
+     */
+    public NPC victim;
 
     /**
      * A screen to be used to display standard gameplay within the game , including the status bar.
@@ -167,6 +174,8 @@ public class GameMain extends Game
         inventoryScreen = new InventoryScreen(this);
         
         settingsScreen = new SettingsScreen(this);
+        
+        navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
         
         music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
         music.setVolume(Settings.MUSIC_VOLUME);
@@ -267,7 +276,7 @@ public class GameMain extends Game
             killer = NPCs.get(new Random().nextInt(NPCs.size()));
         }
 
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        victim = NPCs.get(new Random().nextInt(NPCs.size()));
         while (!victim.setVictim()) {
             victim = NPCs.get(new Random().nextInt(NPCs.size()));
         }
