@@ -217,7 +217,6 @@ public class WinScreen extends AbstractScreen {
 		}
 
 		for (int j = 0; j < 5; j++) {
-			System.out.println(scoresList.get(j));
 			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
 				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
 				scoresList.remove(scoresList.size() - 1);
