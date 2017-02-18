@@ -180,7 +180,7 @@ public class ConversationManagement
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
             this.tempNPC.accused = true;
             player.addToScore(-2000);
-            player.incrementFalseAcc();
+            player.addFalseAccusation();
         }
         finished = true;
     }

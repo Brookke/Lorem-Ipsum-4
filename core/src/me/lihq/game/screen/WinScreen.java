@@ -57,7 +57,7 @@ public class WinScreen extends AbstractScreen {
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
 
-		Label accusedNPCs = Assets.getLabel("Number of People Falsely Accused: " + game.player.getFalseAcc(), false);
+		Label accusedNPCs = Assets.getLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
 		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
 		accusedNPCs.setVisible(false);
 		
