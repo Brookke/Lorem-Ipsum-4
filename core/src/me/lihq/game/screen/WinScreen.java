@@ -12,6 +12,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The screen that is displayed when the player wins the game. Displays their score and time,
  * and allows them to return to the main menu.
@@ -29,6 +38,8 @@ public class WinScreen extends AbstractScreen {
 	private int animationCount;
 	private float animationTimer;
 
+	private boolean setHighScore = false;
+
 	public WinScreen(GameMain game) {
 		super(game);
 
@@ -42,6 +53,17 @@ public class WinScreen extends AbstractScreen {
 	
 	private void initMenu()
 	{
+		int[] highscores = new int[5];
+		try {
+			highscores = getHighScores();
+		} catch (IOException e) {
+			// TODO Should probably handle this?
+		}
+
+		for (int score : highscores) {
+			System.out.println(score);
+		}
+
 		Label title = Assets.getLabel("You Found the Killer!", true);
 		stage.addActor(title);
 		
@@ -162,4 +184,54 @@ public class WinScreen extends AbstractScreen {
 		stage.dispose();
 	}
 
+	public void addToLeaderBoard() throws IOException {
+		// if highscore file doesn't exist, create it
+
+		File desktop = new File(System.getProperty("user.home"), "Desktop\\JAAPAN-Leaderboards.txt");
+		Files.lines(Paths.get("C:\\JAAPAN-Leaderboards.txt")).forEach(System.out::println);
+
+		// open the highscore file
+		// find where the players score would go
+		// if the players score would go in positions 0-4, add it and adjust the table
+		if (game.player.getTotalScore() > 50000) {
+
+		}
+		//close the highscore file
+	}
+
+	private int[] getHighScores() throws IOException {
+		List<String> scoresList;
+		String filePath = "MITRCH-Leaderboards.txt";
+		try {
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		} catch (NoSuchFileException e) {
+			File scoresFile = new File(filePath);
+			scoresFile.createNewFile();
+			List<String> initialHighscore = new ArrayList<>();
+			for (int i = 0; i < 5; i++) {
+				initialHighscore.add(i, "0");
+			}
+
+			Files.write(Paths.get(filePath), initialHighscore);
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		}
+
+		for (int j = 0; j < 5; j++) {
+			System.out.println(scoresList.get(j));
+			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
+				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
+				scoresList.remove(scoresList.size() - 1);
+				break;
+			}
+		}
+
+		Files.write(Paths.get(filePath), scoresList);
+
+		int[] highscores = new int[5];
+		for (int k = 0; k < 5; k++) {
+			highscores[k] = Integer.parseInt(scoresList.get(k));
+		}
+
+		return highscores;
+	}
 }
