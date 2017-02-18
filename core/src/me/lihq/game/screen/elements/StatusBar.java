@@ -128,14 +128,13 @@ public class StatusBar
         {
         	/**
         	 * Called when the button is clicked. Changes the current screen to the
-        	 * pause menu, and sets the paused variable to true.
+        	 * pause menu.
         	 * 
         	 * @author JAAPAN
         	 */
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-                game.isPaused = true;
                 game.setScreen(game.pauseScreen);
             }
         });

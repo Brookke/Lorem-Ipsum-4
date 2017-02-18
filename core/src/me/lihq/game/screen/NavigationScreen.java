@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -253,7 +254,11 @@ public class NavigationScreen extends AbstractScreen
 	@Override
     public void render(float delta)
     {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        
     	update();
+    	game.player.addPlayTime(delta);
     	
         game.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {

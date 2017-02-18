@@ -15,16 +15,11 @@ import java.util.List;
  */
 public class NPC extends AbstractPerson
 {
-
-    //These variables are specific to the NPC only
-
     /**
-     * Associated clues
-     */
-    public List<Clue> associatedClues = new ArrayList<>();
-    
-    /**
-     * List of clues NPC has already been asked about
+     * List of clues NPC has already been asked about. Used to ensure the player only gets points
+     * for asking an NPC about a clue once.
+     * 
+     * @author JAAPAN
      */
     public List<Clue> alreadyAskedClues = new ArrayList<>();
 
@@ -34,17 +29,28 @@ public class NPC extends AbstractPerson
     private String motive = "";
 
     /**
-     * These two booleans decide whether an NPC has the potential to be a killer and if, in this particular game, they
-     * are the killer.
+     * Whether the NPC is the killer.
      */
-    private boolean canBeKiller = false;
     private boolean isKiller = false;
+    
+    /**
+     * Whether the NPC is the victim.
+     */
     private boolean isVictim = false;
 
-    // Used to track whether the NPC has been ignored
+    /**
+     * Used to track whether the NPC has been ignored, and thus won't respond to the player
+     * until another clue has been found.
+     * 
+     * @author JAAPAN
+     */
     public boolean ignored = false;
 
-    // Used to track whether the NPC has been accused, so they can ignore the player after a false accusation
+    /**
+     * Used to track whether the NPC has been accused, so they can ignore the player after a false accusation.
+     * 
+     * @author JAAPAN
+     */
     public boolean accused = false;
 
     /**
@@ -53,19 +59,17 @@ public class NPC extends AbstractPerson
     private Personality personality;
 
     /**
-     * Define an NPC with location coordinates , room, spritesheet and whether or not they can be the killer
+     * Define an NPC with location coordinates, room, spritesheet and name
      *
      * @param tileX       - x coordinate of tile that the NPC will be initially rendered on.
      * @param tileY       - y coordinate of tile that the NPC will be initially rendered on.
      * @param room        - ID of room they are in
      * @param spriteSheet - Spritesheet for this NPC
-     * @param canBeKiller - Boolean whether they can or cannot be the killer
      */
-    public NPC(String name, String spriteSheet, int tileX, int tileY, Room room, boolean canBeKiller, String jsonFile)
+    public NPC(String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile)
     {
         super(name, "people/NPCs/" + spriteSheet, tileX, tileY);
         this.setRoom(room);
-        this.canBeKiller = canBeKiller;
 
         importDialogue(jsonFile);
     }
@@ -81,7 +85,7 @@ public class NPC extends AbstractPerson
     }
 
     /**
-     * Reads in the JSON file of the character and stores dialogue in the dialogue HashMap
+     * Reads in the JSON file of the character.
      *
      * @param fileName - The filename to read from
      */
@@ -141,47 +145,10 @@ public class NPC extends AbstractPerson
 
         move(dir);
     }
-
-
-    /**
-     * Getter for canBeKiller
-     *
-     * @return (boolean) Returns value of canBeKiller for this object. {@link #canBeKiller}
-     */
-    public boolean canBeKiller()
-    {
-        return canBeKiller;
-    }
-
-    /**
-     * Getter for isKiller.
-     *
-     * @return (boolean) Return a value of isKiller for this object. {@link #isKiller}
-     */
-    public boolean isKiller()
-    {
-        return isKiller;
-    }
-
-    /**
-     * Getter for isVictim
-     *
-     * @return (boolean) Returns the value of isVictim for this object {@link #isVictim}
-     */
-    public boolean isVictim()
-    {
-        return isVictim;
-    }
-
-    /**
-     * Getter for motive.
-     *
-     * @return (String) Returns the motive string for this object. {@link #motive}
-     */
-    public String getMotive()
-    {
-        return motive;
-    }
+    
+    /*************************************************************************/
+    /****************************** Set Methods ******************************/
+    /*************************************************************************/
 
     /**
      * Reads and sets the NPC's motive for killing the victim from the JSON file.
@@ -206,7 +173,7 @@ public class NPC extends AbstractPerson
      */
     public boolean setKiller()
     {
-        if (isVictim() || !canBeKiller) return false;
+        if (isVictim) return false;
 
         isKiller = true;
         System.out.println(getName() + " is the killer");
@@ -222,16 +189,22 @@ public class NPC extends AbstractPerson
      */
     public boolean setVictim()
     {
-        if (isKiller()) return false;
+        if (isKiller) return false;
 
         isVictim = true;
         System.out.println(getName() + " is the victim");
         return true;
     }
 
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
 
     /**
-     * Handles speech for a question about a clue.
+     * Handles speech for a question about a clue. If the style of question matches both the
+     * player's personality and the NPC's personality, generates an improved response. If it
+     * matches just one of the player's or NPC's personalities, generates a normal response.
+     * If it matches neither, generates a non-response.
      *
      * @param clue - The clue to be questioned about
      * @param style - The style of questioning
@@ -242,8 +215,7 @@ public class NPC extends AbstractPerson
      */
     public String getSpeech(Clue clue, Personality style, Personality player)
     {
-    	if (style == personality && player == style)
-    	{
+    	if (style == personality && player == style) {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
@@ -252,30 +224,27 @@ public class NPC extends AbstractPerson
     		// If this NPC is the killer, point the player in the direction of a 
     		// random NPC. Otherwise, point them towards the killer. As this is an improved
     		// response, whether the clue is a red herring or not is unimportant.
-    		if (isKiller)
-    		{
+    		if (isKiller) {
     			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName())
+    			while (name == getName()) {
     				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			}
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", name);
-    		}
-    		else
-    		{
+    		} else {
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", GameMain.me.killer.getName());
     			// Add the room of the killer to the response
     			String room = GameMain.me.killer.getRoom().getName();
-    			if (room != "Outside Ron Cooke Hub")
+    			if (room != "Outside Ron Cooke Hub") {
     				response += " Last I saw them, they were in the " + room + ".";
-    			else
+    			} else {
     				response += " Last I saw them, they were outside.";
+    			}
     		}
     		
     		return response;
-    	}
-    	else if (style == personality || style == player)
-    	{
+    	} else if (style == personality || style == player) {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
@@ -283,36 +252,58 @@ public class NPC extends AbstractPerson
     		
     		// If this NPC is the killer, or the clue is a red herring, point the player
     		// in the direction of a random NPC. Otherwise, point them towards the killer
-    		if (isKiller || clue.isRedHerring())
-    		{
+    		if (isKiller || clue.isRedHerring()) {
     			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName() || name == GameMain.me.killer.getName())
+    			while (name == getName() || name == GameMain.me.killer.getName()) {
     				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			}
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", name);
-    		}
-    		else
-    		{
+    		} else {
     			// Replace the NPC tag in the string with the name of the NPC
     			response = response.replace("%NPC", GameMain.me.killer.getName());
     		}
     		
     		return response;
-        } 
-    	else
-    	{
+        } else {
             return getSpeech("noneResponses", "");
         }
     }
 
     /**
-     * This method returns the NPCs personality
-     *
-     * @return (Personality) the NPCs personality {@link me.lihq.game.people.AbstractPerson.Personality}
+     * @return The NPC's personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
     @Override
     public Personality getPersonality()
     {
-        return this.personality;
+        return personality;
+    }
+
+    /**
+     * @return The {@link #motive} string for this object.
+     */
+    public String getMotive()
+    {
+        return motive;
+    }
+
+    /**
+     * Getter for isKiller.
+     *
+     * @return (boolean) Return a value of isKiller for this object. {@link #isKiller}
+     */
+    public boolean isKiller()
+    {
+        return isKiller;
+    }
+
+    /**
+     * Getter for isVictim
+     *
+     * @return (boolean) Returns the value of isVictim for this object {@link #isVictim}
+     */
+    public boolean isVictim()
+    {
+        return isVictim;
     }
 }

@@ -217,87 +217,6 @@ public class Assets
 
         return null;
     }
-
-    /**
-     * Creates a BitmapFont with the specified font and size.
-     *
-     * @param font - The name of the font - must be stored as a .ttf file
-     * under this name in the fonts directory
-     * @param size - The size of the font
-     * @return (BitmapFont) The generated font
-     * 
-     * @author JAAPAN
-     */
-    public static BitmapFont getFont(String font, int size)
-    {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = size;
-        BitmapFont f = generator.generateFont(parameter);
-        generator.dispose();
-
-        return f;
-    }
-    
-    /**
-     * Creates a new label, using the style defined in UI_SKIN.
-     * 
-     * @param text - The text to display in the label
-     * @param title - Whether to use the title LabelStyle (font size 30) or
-     * the default LabelStyle (font size 20)
-     * @return (Label) The new label
-     * 
-     * @author JAAPAN
-     */
-    public static Label getLabel(String text, boolean title)
-    {
-    	if (title)
-    		return new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
-    	else
-    		return new Label(text, UI_SKIN);
-    }
-    
-    /**
-     * Creates a new text button, using the style defined in UI_SKIN.
-     * 
-     * @param text - The text to display in the button
-     * @return (TextButton) The new text button
-     * 
-     * @author JAAPAN
-     */
-    public static TextButton getTextButton(String text)
-    {
-    	return new TextButton(text, UI_SKIN);
-    }
-    
-    /**
-     * Creates a new checkbox, using the style defined in UI_SKIN.
-     * 
-     * @param text - The text to display next to the checkbox
-     * @return (CheckBox) The new checkbox
-     * 
-     * @author JAAPAN
-     */
-    public static CheckBox getCheckBox(String text)
-    {
-    	return new CheckBox(text, UI_SKIN);
-    }
-    
-    /**
-     * Creates a new slider control, using the style define in UI_SKIN.
-     * 
-     * @param min - The minimum value of the slider
-     * @param max - The maximum value of the slider
-     * @param stepSize - The size of the increments
-     * @param vertical - Whether the slider should be vertical or horizontal
-     * @return (Slider) The new slider
-     * 
-     * @author JAAPAN
-     */
-    public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
-    {
-    	return new Slider(min, max, stepSize, vertical, UI_SKIN);
-    }
     
     /**
      * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
@@ -316,6 +235,97 @@ public class Assets
     	MUSIC.dispose();
     	SOUND.dispose();
     	UI_SKIN.dispose();
+    }
+    
+    /*************************************************************************/
+    /**************************** Factory Methods ****************************/
+    /*************************************************************************/
+
+    /**
+     * Creates a BitmapFont with the specified font and size.
+     *
+     * @param font - The name of the font - must be stored as a .ttf file
+     * under this name in the fonts directory
+     * @param size - The size of the font
+     * @return The generated font
+     * 
+     * @author JAAPAN
+     */
+    public static BitmapFont getFont(String font, int size)
+    {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = size;
+        BitmapFont f = generator.generateFont(parameter);
+        generator.dispose();
+
+        return f;
+    }
+    
+    /**
+     * Creates a new label, using the style defined in UI_SKIN. If the label is a title,
+     * its default position is set to the middle of the top of the screen.
+     * 
+     * @param text - The text to display in the label
+     * @param title - Whether to use the title LabelStyle (font size 30) or
+     * the default LabelStyle (font size 20)
+     * @return A new label with the standard style and specified text
+     * 
+     * @author JAAPAN
+     */
+    public static Label getLabel(String text, boolean title)
+    {
+    	if (title) {
+    		Label label = new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
+    		label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth()/2, 
+            		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
+    		return label;
+    	}
+    	else {
+    		return new Label(text, UI_SKIN);
+    	}
+    }
+    
+    /**
+     * Creates a new text button, using the style defined in UI_SKIN.
+     * 
+     * @param text - The text to display in the button
+     * @return A new text button with the standard style and specified text
+     * 
+     * @author JAAPAN
+     */
+    public static TextButton getTextButton(String text)
+    {
+    	return new TextButton(text, UI_SKIN);
+    }
+    
+    /**
+     * Creates a new checkbox, using the style defined in UI_SKIN.
+     * 
+     * @param text - The text to display next to the checkbox
+     * @return A new checkbox with the standard style and specified text
+     * 
+     * @author JAAPAN
+     */
+    public static CheckBox getCheckBox(String text)
+    {
+    	return new CheckBox(text, UI_SKIN);
+    }
+    
+    /**
+     * Creates a new slider control, using the style define in UI_SKIN.
+     * 
+     * @param min - The minimum value of the slider
+     * @param max - The maximum value of the slider
+     * @param stepSize - The size of the increments
+     * @param vertical - Whether the slider should be vertical or horizontal
+     * @return A new slider with the standard style and specified attributes
+     * 
+     * @author JAAPAN
+     */
+    public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
+    {
+    	return new Slider(min, max, stepSize, vertical, UI_SKIN);
     }
 
 }

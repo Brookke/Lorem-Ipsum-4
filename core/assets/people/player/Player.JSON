@@ -2,6 +2,7 @@
   "name": "Player",
   "responses": {
     "Introduction": "Hello",
+    "Accuse": "You're the murderer! And I can prove it!",
     "Big Footprint": {
       "AGGRESSIVE": "THIS IS YOUR FOOTPRINT ISN'T IT?... TELL ME NOW",
       "NEUTRAL": "Is this your footprint?",

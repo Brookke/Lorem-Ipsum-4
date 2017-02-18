@@ -38,8 +38,6 @@ public class SettingsScreen extends AbstractScreen {
 	private void initMenu() {
         // Create and position the label containing title text
         Label title = Assets.getLabel("Settings", true);
-        title.setPosition(Gdx.graphics.getWidth() / 2 - title.getWidth()/2, 
-        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
 
         // Create and position the back button, using the default TextButtonStyle in uiSkins
         TextButton backButton = Assets.getTextButton("Back");

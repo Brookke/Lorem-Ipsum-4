@@ -47,11 +47,7 @@ public class InventoryScreen extends AbstractScreen {
 	private void initMenu() {
         //Creating the label containing text and determining  its size and location on screen
         Label text = Assets.getLabel("Inventory", true);
-        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
-        
         Label text2 = Assets.getLabel("Inventory", true);
-        text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
-
 
         TextButton resumeButton = Assets.getTextButton("Close");
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
@@ -158,7 +154,7 @@ public class InventoryScreen extends AbstractScreen {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.player.getScore();
+        game.player.addPlayTime(delta);
         
         if (zoomed) {
         	zoomedStage.act();

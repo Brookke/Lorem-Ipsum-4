@@ -76,20 +76,23 @@ public class GameMain extends Game
     public NPC victim;
 
     /**
-     * A screen to be used to display standard gameplay within the game , including the status bar.
-     */
-    public NavigationScreen navigationScreen;
-
-    /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;
+
+    /**
+     * A screen to be used to display standard gameplay within the game , including the status bar.
+     */
+    public NavigationScreen navigationScreen;
 
     /**
      * The main menu screen that shows up when the game is first started
      */
     public MainMenuScreen menuScreen;
 
+    /**
+     * 
+     */
     public PauseScreen pauseScreen;
     
     public InventoryScreen inventoryScreen;
@@ -107,9 +110,6 @@ public class GameMain extends Game
      * Input multiplexer to control multiple inputs across project
      */
     public InputMultiplexer inputMultiplexer;
-
-    // used to track whether the game is paused
-    public boolean isPaused = true;
 
     /**
      * This is called at start up. It initialises the game.
@@ -149,6 +149,8 @@ public class GameMain extends Game
         
         settingsScreen = new SettingsScreen(this);
         
+        navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
+        
         Assets.MUSIC.play();
 
         //Instantiate the FPSLogger to show FPS
@@ -161,11 +163,8 @@ public class GameMain extends Game
     @Override
     public void render()
     {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         FPS.log();//this is where fps is displayed
-        player.durationCounter();
         input.update();
 
         super.render(); // This calls the render method of the screen that is currently set
@@ -204,34 +203,34 @@ public class GameMain extends Game
         player.setRoom(gameMap.getRoom(0));
 
         //TODO: Sort NPC personalities
-        NPC npc = new NPC("Colin", "colin.png", 15, 17, gameMap.getRoom(0), true, "Colin.JSON");
+        NPC npc = new NPC("Colin", "colin.png", 15, 17, gameMap.getRoom(0), "Colin.JSON");
         NPCs.add(npc);
 
-        NPC npc2 = new NPC("Diana", "diana.png", 4, 4, gameMap.getRoom(1), true, "Diana.JSON");
+        NPC npc2 = new NPC("Diana", "diana.png", 4, 4, gameMap.getRoom(1), "Diana.JSON");
         NPCs.add(npc2);
 
-        NPC npc3 = new NPC("Lily", "lily.png", 0, 0, gameMap.getRoom(0), true, "Lily.JSON");
+        NPC npc3 = new NPC("Lily", "lily.png", 0, 0, gameMap.getRoom(0), "Lily.JSON");
         NPCs.add(npc3);
 
-        NPC npc4 = new NPC("Mary", "mary.png", 0, 0, gameMap.getRoom(0), true, "Mary.JSON");
+        NPC npc4 = new NPC("Mary", "mary.png", 0, 0, gameMap.getRoom(0), "Mary.JSON");
         NPCs.add(npc4);
 
-        NPC npc5 = new NPC("Mike", "mike.png", 0, 0, gameMap.getRoom(0), true, "Mike.JSON");
+        NPC npc5 = new NPC("Mike", "mike.png", 0, 0, gameMap.getRoom(0), "Mike.JSON");
         NPCs.add(npc5);
 
-        NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), true, "Will.JSON");
+        NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), true, "Roger.JSON");
+        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), true, "Horatio.JSON");
+        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), "Horatio.JSON");
         NPCs.add(npc8);
 
-        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), true, "Kyle.JSON");
+        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
+        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
 
         /*
@@ -324,8 +323,9 @@ public class GameMain extends Game
         // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
         while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
         	int r = random.nextInt(totalClues);
-        	if (!clueIndices.contains(r))
+        	if (!clueIndices.contains(r)) {
         		clueIndices.add(r);
+        	}
         }
         
         for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
@@ -335,8 +335,9 @@ public class GameMain extends Game
         	// Set the first clues in the list to red herrings (the number of red herrings
         	// specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
         	// this does not need to be further randomised.
-        	if (i < Settings.NUMBER_OF_RED_HERRINGS)
+        	if (i < Settings.NUMBER_OF_RED_HERRINGS) {
         		tempClues.get(i).setRedHerring();
+        	}
         }
         
         // Choose a random murder weapon
@@ -376,5 +377,32 @@ public class GameMain extends Game
 
         }
 
+    }
+    
+    /**
+     * Resets the state of the game.
+     * 
+     * @author JAAPAN
+     */
+    public void resetAll()
+    {
+    	// Clear the list of NPCs, ready to refill it.
+    	NPCs.clear();
+    	
+    	// Recreate the map, so the murder room is randomly re-assigned
+    	gameMap = new Map();
+    	
+    	// Clear the input multiplexer, and add the global input controller
+    	inputMultiplexer.clear();
+        inputMultiplexer.addProcessor(input);
+    	
+        // Reinitialise all people and clues
+    	initialiseAllPeople();
+    	initialiseClues();
+    	
+    	// Recreate the navigation screen, so the references to the player and NPCs are
+    	// updated
+    	navigationScreen = new NavigationScreen(this);
+        navigationScreen.updateTiledMapRenderer();
     }
 }

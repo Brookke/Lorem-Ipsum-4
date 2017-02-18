@@ -1,7 +1,6 @@
 package me.lihq.game.people;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
@@ -33,7 +32,14 @@ public class Player extends AbstractPerson
      */
     private boolean foundMurderWeapon = false;
     
+    /**
+     * The number of useful (non-red herring) clues the player has found.
+     */
     private int usefulClues = 0;
+    
+    /**
+     * The number of questions the player has asked.
+     */
     private int questionsAsked = 0;
     
     /**
@@ -47,14 +53,19 @@ public class Player extends AbstractPerson
     private int score = 0;
 
     /**
-     * Variables for keeping track of score
+     * The current duration of the game, excluding time paused. Used to calculate the time
+     * bonus for the score.
      */
-    private Date startDate, currentDate;
-
-    private long gameDuration = 0;
+    private float gameDuration = 0f;
 
     /**
-     * This is the constructor for player, it creates a new playable person
+     * The number of false accusations the player has made, used in the WinScreen.
+     */
+    private int falseAccusations = 0;
+    
+
+    /**
+     * This is the constructor for player, it creates a new playable person.
      *
      * @param name   - The name for the new player.
      * @param imgSrc - The image used to represent it.
@@ -63,7 +74,6 @@ public class Player extends AbstractPerson
     {
         super(name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
-        initDates();
     }
 
     /**
@@ -75,37 +85,6 @@ public class Player extends AbstractPerson
     public void importDialogue(String fileName)
     {
         jsonData = new JsonReader().parse(Gdx.files.internal("people/player/" + fileName));
-    }
-
-    /**
-     * Changes the player's personality towards the given type, and
-     * caps the personality between 0 and 100.
-     * 
-     * @param change - The personality type to move in the direction of
-     */
-    public void changePersonality(Personality change)
-    {
-    	switch (change)
-    	{
-    	case AGGRESSIVE:
-    		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
-    		break;
-		case NEUTRAL:
-			if (personalityLevel < 50)
-				personalityLevel += Math.ceil(10*((50-personalityLevel)/100f));
-			else
-				personalityLevel -= Math.ceil(10*((personalityLevel-50)/100f));
-			break;
-		case NICE:
-    		personalityLevel += Math.ceil(10*((100-personalityLevel)/100f));
-			break;
-    	}
-
-        if (personalityLevel < 0) {
-            personalityLevel = 0;
-        } else if (personalityLevel > 100) {
-            personalityLevel = 100;
-        }
     }
     
     /**
@@ -155,12 +134,13 @@ public class Player extends AbstractPerson
     /**
      * This method tries to get an NPC if the player is facing one
      *
-     * @return (NPC) returns null if there isn't an NPC infront of them or the NPC is moving. Otherwise, it returns the NPC
+     * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC()
     {
         for (NPC npc : GameMain.me.getNPCS(getRoom())) {
-            if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) && (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
+            if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) && 
+            		(npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
 
                 return npc;
@@ -192,8 +172,9 @@ public class Player extends AbstractPerson
             	score += 500;
             }
             
-            if (!clueFound.isRedHerring())
+            if (!clueFound.isRedHerring()) {
             	usefulClues++;
+            }
 
             // set all NPCs ignored to false
             for (NPC character : GameMain.me.NPCs) {
@@ -201,10 +182,11 @@ public class Player extends AbstractPerson
             }
             score += 250;
             
-            if (!Settings.MUTED)
+            if (!Settings.MUTED) {
             	Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
         } else {
-            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
         }
     }
 
@@ -216,36 +198,6 @@ public class Player extends AbstractPerson
     public boolean isOnTriggerTile()
     {
         return this.getRoom().isTriggerTile(this.tileCoordinates.x, this.tileCoordinates.y);
-    }
-
-    /**
-     * Getter for personality, it uses the personalityLevel of the player and thus returns either AGGRESSIVE, NEUTRAL or NICE
-     *
-     * @return - (Personality) Returns the personality of this player.
-     */
-    @Override
-    public Personality getPersonality()
-    {
-        if (personalityLevel < 33) {
-            return Personality.AGGRESSIVE;
-
-        } else if (personalityLevel < 66) {
-            return Personality.NEUTRAL;
-
-        } else if (personalityLevel <= 100) {
-            return Personality.NICE;
-        }
-        return Personality.NEUTRAL;
-    }
-
-    /**
-     * This gets the players personality level; this similar to Personality but a integer representation
-     *
-     * @return (int) value between 0-100
-     */
-    public int getPersonalityLevel()
-    {
-        return this.personalityLevel;
     }
     
     /**
@@ -261,18 +213,6 @@ public class Player extends AbstractPerson
     {
     	return (foundMurderWeapon && usefulClues >= 3 && questionsAsked >= 5);
     }
-    
-    /**
-     * Increments the counter for questions asked. Should be called when a question receives
-     * an actual response (i.e. not a non-response)
-     * 
-     * @author JAAPAN
-     */
-    public void addQuestion()
-    {
-    	questionsAsked++;
-    }
-
 
     /**
      * This takes the player at its current position, and automatically gets the transition data
@@ -298,6 +238,94 @@ public class Player extends AbstractPerson
             GameMain.me.navigationScreen.updateTiledMapRenderer();
         }
     }
+    
+    /*************************************************************************/
+    /****************************** Set Methods ******************************/
+    /*************************************************************************/
+
+    /**
+     * Changes the player's personality towards the given type, and
+     * caps the personality between 0 and 100.
+     * 
+     * @param change - The personality type to move in the direction of
+     * 
+     * @author JAAPAN
+     */
+    public void changePersonality(Personality change)
+    {
+    	switch (change) {
+    	case AGGRESSIVE:
+    		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
+    		break;
+		case NEUTRAL:
+			if (personalityLevel < 50)
+				personalityLevel += Math.ceil(10*((50-personalityLevel)/100f));
+			else
+				personalityLevel -= Math.ceil(10*((personalityLevel-50)/100f));
+			break;
+		case NICE:
+    		personalityLevel += Math.ceil(10*((100-personalityLevel)/100f));
+			break;
+    	}
+
+        if (personalityLevel < 0) {
+            personalityLevel = 0;
+        } else if (personalityLevel > 100) {
+            personalityLevel = 100;
+        }
+    }
+    
+    /**
+     * Changes the player's score by the specified amount, and caps it at 0.
+     * 
+     * @param scoreToAdd - The number of points to add to the score. Can be negative
+     * 
+     * @author JAAPAN
+     */
+    public void addToScore(int scoreToAdd)
+    {
+    	score += scoreToAdd;
+    	if (score < 0) score = 0;
+    }
+
+    /**
+     * Increases the gameDuration variable by the appropriate amount. Should be called
+     * from the Screen.render() method of all screens that count as playing (i.e. not the 
+     * pause screen).
+     * 
+     * @param delta - The time difference
+     * 
+     * @author JAAPAN
+     */
+    public void addPlayTime(float delta)
+    {
+    	gameDuration += delta;
+    }
+    
+    /**
+     * Increments the counter for questions asked. Should be called when a question receives
+     * an actual response (i.e. not a non-response).
+     * 
+     * @author JAAPAN
+     */
+    public void addQuestion()
+    {
+    	questionsAsked++;
+    }
+
+    /**
+     * Increments the counter for false accusations.
+     * 
+     * @author JAAPAN
+     */
+    public void addFalseAccusation()
+    {
+        falseAccusations++;
+    }
+    
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
 
     /**
      * Handles speech for a question about a clue.
@@ -315,34 +343,126 @@ public class Player extends AbstractPerson
             return jsonData.get("Responses").get(key).getString(style.toString());
         }
     }
-    
-    public void addToScore(int scoreToAdd) {
-    	score += scoreToAdd;
-    	if (score < 0) score = 0;
-    }
-    
-    public int getScore() {
-    	return score;
-    }
-    
-    private void initDates() {
-    	startDate = new Date();
-    	currentDate = new Date();
-    }
-    
-    public void durationCounter() {
-        currentDate = new Date();
-        int unpausedTime = (int) (currentDate.getTime() - startDate.getTime()) / 1000;
-        if (GameMain.me.isPaused) {
-            startDate = new Date();
-            gameDuration += unpausedTime;
+
+    /**
+     * @return The current personality of the player
+     * 
+     * @author JAAPAN
+     */
+    @Override
+    public Personality getPersonality()
+    {
+        if (personalityLevel < 33) {
+            return Personality.AGGRESSIVE;
+        } else if (personalityLevel < 66) {
+            return Personality.NEUTRAL;
+        } else {
+            return Personality.NICE;
         }
     }
 
-    // Returns the duration of the game (excluding time paused) as a whole
-    // number of seconds
-    public int getPlayTime() {
-        return (int) gameDuration;
+    /**
+     * This gets the players personality level; this similar to Personality but a integer representation
+     *
+     * @return Value between 0-100
+     */
+    public int getPersonalityLevel()
+    {
+        return this.personalityLevel;
+    }
+    
+    /**
+     * @return The number of points the player has earned so far this game
+     * 
+     * @author JAAPAN
+     */
+    public int getScore()
+    {
+    	return score;
     }
 
+    /**
+     * Calculates a logarithmic time bonus. No points are awarded after approximately 45 minutes
+     * (The game shouldn't take anywhere near that long to complete).
+     * 
+     * @return The number of bonus points the player has earned
+     * 
+     * @author JAAPAN
+     */
+    public int getTimeBonus()
+    {
+        int penalty = (int) (Math.log(gameDuration/20) * 1000);
+        
+        int bonus = 5000 - penalty;
+        if (bonus < 0) bonus = 0;
+        return bonus;
+    }
+
+    /**
+     * @return The total score the player has achieved throughout the game
+     *
+     * @author JAAPAN
+     */
+    public int getTotalScore()
+    {
+        return score + getTimeBonus();
+    }
+
+    /**
+     * @return The duration of the game (excluding time paused) as a whole number of seconds
+     * 
+     * @author JAAPAN
+     */
+    public int getPlayTime()
+    {
+        return (int)gameDuration;
+    }
+    
+    /**
+     * @return The duration of the game (excluding time paused) formatted as H:M:S
+     * 
+     * @author JAAPAN
+     */
+    public String getFormattedPlayTime()
+    {
+    	int time = (int)gameDuration;
+    	int hours, minutes;
+    	hours = time / 3600;
+    	time %= 3600;
+    	
+    	minutes = time / 60;
+    	time %= 60;
+    	
+    	return Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(time); 
+    }
+    
+    /**
+     * @return The number of red herrings the player has found
+     *
+     * @author JAAPAN
+     */
+    public int getRedHerrings()
+    {
+    	return collectedClues.size() - usefulClues;
+    }
+    
+    /**
+     * @return The number of questions the player has asked (excluding non-responses)
+     *
+     * @author JAAPAN
+     */
+    public int getQuestions()
+    {
+    	return questionsAsked;
+    }
+
+    /**
+     * @return The number of false accusations made by the player during this game
+     *
+     * @author JAAPAN
+     */
+    public int getFalseAccusations()
+    {
+        return falseAccusations;
+    }
 }

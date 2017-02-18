@@ -87,8 +87,6 @@ public class Menu
             newGameButton = Assets.getTextButton("New Game");
         }
 
-        text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
-
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
         
         TextButton settings = Assets.getTextButton("Settings");
@@ -110,7 +108,6 @@ public class Menu
             {
             	game.mainMenu = false;
                 game.setScreen(game.navigationScreen);
-                game.isPaused = false;
             }
         });
 
@@ -139,7 +136,6 @@ public class Menu
      */
     public void render()
     {
-        game.player.getScore();
         //Determining the background colour of the menu
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
