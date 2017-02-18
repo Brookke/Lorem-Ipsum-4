@@ -16,16 +16,16 @@
     "Erotic Novel": "Where did you get that?! I let %NPC borrow it, not you!",
     "Broken Mobile Phone": "Hey that might be mine! But it's badly damaged. It might be %NPC's instead.",
     "Car Keys": "Why would I have a car of that make? Ew! Try %NPC.",
-    "Knife": "PLACEHOLDER",
-    "Cricket Bat": "PLACEHOLDER",
-    "Energy Drink": "PLACEHOLDER",
-    "Red Scarf": "PLACEHOLDER",
-    "Hockey Stick": "PLACEHOLDER",
-    "Hardware Magazine": "PLACEHOLDER",
-    "Diamond Ring": "PLACEHOLDER",
-    "Receipt": "PLACEHOLDER",
-    "USB Stick": "PLACEHOLDER",
-    "Sweet Wrapper": "PLACEHOLDER"
+    "Knife": "That looks sharp! Hmm... I saw %NPC with a cut on their finger.",
+    "Cricket Bat": "Not the sporty type, but I know %NPC is.",
+    "Energy Drink": "Not the sporty type, but I know %NPC is.",
+    "Red Scarf": "That is very stylish! If only %NPC didn't own one already.",
+    "Hockey Stick": "Not the sporty type, but I know %NPC is.",
+    "Hardware Magazine": "Not the DIY type, but I know %NPC is.",
+    "Diamond Ring": "Thank god you found it. %NPC would be furious if they knew I'd lost it.",
+    "Receipt": "What a dreadful little shop. Did you know it's %NPC's family business?",
+    "USB Stick": "I thought you were supposed to be a detective? This is clearly labelled with %NPC's name.",
+    "Sweet Wrapper": "Sugar's so bad for your teeth. Ask %NPC - theirs are horrible."
   },
   "noneResponses": [
     "Sorry I am far too busy for you",
@@ -33,14 +33,14 @@
     "I am not telling you."
   ],
   "motives": {
-  	"Adam": "",
+  	"Adam": "He was a cheeky boy, far too rude for my taste.",
   	"Colin": "I caught him trying to curse my earlobe.",
   	"Diana": "That hair was an eyesore. I couldn't bear to look at it for another second.",
-  	"Horatio": "",
-  	"Kyle": "",
+  	"Horatio": "So pretentious, he didn't deserve to be here.",
+  	"Kyle": "He had terrible bad breath.",
   	"Lily": "She was wearing the same dress I was... and looked better in it!",
   	"Mike": "It's not my fault! He beat me in a spelling test in primary school.",
-  	"Roger": "",
+  	"Roger": "I had to destroy him, his sports team were beating mine.",
   	"Will": "What kind of whackjob would make small talk about sound waves."
   }
 }
