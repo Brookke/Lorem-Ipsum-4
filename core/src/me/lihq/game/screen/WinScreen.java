@@ -54,7 +54,7 @@ public class WinScreen extends AbstractScreen {
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
 		redHerringLabel.setVisible(false);
 
-		Label questionsAsked = Assets.getLabel("Questions Asked: " + game.player.getQuestionCount(), false);
+		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
 
@@ -66,16 +66,16 @@ public class WinScreen extends AbstractScreen {
 		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
 		basicScoreLabel.setVisible(false);
 		
-		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getPlayTime() + "s", false);
+		// TODO: Format nicely
+		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
 		timeTaken.setVisible(false);
 
-		Label bonusScoreLabel = Assets.getLabel("Time Bonus: " + game.player.getTimeBonus(game.player.getPlayTime()), false);
+		Label bonusScoreLabel = Assets.getLabel("Time Bonus: " + game.player.getTimeBonus(), false);
 		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
 		bonusScoreLabel.setVisible(false);
 
-		Label finalScoreLabel = Assets.getLabel("Total Score: " + game.player.getTotalScore(game.player.getScore(),
-				game.player.getPlayTime()), false);
+		Label finalScoreLabel = Assets.getLabel("Total Score: " + game.player.getTotalScore(), false);
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
 		finalScoreLabel.setVisible(false);
 		

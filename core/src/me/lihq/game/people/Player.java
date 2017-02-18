@@ -38,17 +38,19 @@ public class Player extends AbstractPerson
      */
     private int score = 0;
 
-    // Stores the duration of the game
+    /**
+     * The current duration of the game, excluding time paused. Used to calculate the time
+     * bonus for the score.
+     */
     private float gameDuration = 0f;
 
-    // Store the number of questions the player has asked, used for endscreen stats
-    private int questionsAsked = 0;
-
-    // Stores the number of false accusations the player has made
+    /**
+     * The number of false accusations the player has made, used in the WinScreen.
+     */
     private int falseAccusations = 0;
 
     /**
-     * This is the constructor for player, it creates a new playable person
+     * This is the constructor for player, it creates a new playable person.
      *
      * @param name   - The name for the new player.
      * @param imgSrc - The image used to represent it.
@@ -322,7 +324,20 @@ public class Player extends AbstractPerson
      */
     public int getPlayTime()
     {
-        return (int) gameDuration;
+        return (int)gameDuration;
+    }
+    
+    public String getFormattedPlayTime()
+    {
+    	int time = (int)gameDuration;
+    	int hours, minutes;
+    	hours = time / 3600;
+    	time %= 3600;
+    	
+    	minutes = time / 60;
+    	time %= 60;
+    	
+    	return Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(time); 
     }
 
     /**
@@ -330,9 +345,8 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getTotalScore(int score, int gameDuration) {
-        int totalScore = score + getTimeBonus(gameDuration);
-        return totalScore;
+    public int getTotalScore() {
+        return score + getTimeBonus();
     }
 
     /**
@@ -341,7 +355,7 @@ public class Player extends AbstractPerson
      * @param gameDuration - Duration of the current game
      * @author JAAPAN
      */
-    public int getTimeBonus(int gameDuration) {
+    public int getTimeBonus() {
         if (gameDuration < 300) {
             return 2500;
         } else if (gameDuration < 450) {
@@ -351,22 +365,6 @@ public class Player extends AbstractPerson
         } else {
             return 0;
         }
-    }
-
-    /**
-     * @author JAAPAN
-     */
-    public void incrementQuestionCount() {
-        this.questionsAsked++;
-    }
-
-    /**
-     * @return Number of questions asked by the player during this game
-     *
-     * @author JAAPAN
-     */
-    public int getQuestionCount() {
-        return this.questionsAsked;
     }
 
     /**
