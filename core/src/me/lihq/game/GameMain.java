@@ -146,6 +146,8 @@ public class GameMain extends Game
         
         settingsScreen = new SettingsScreen(this);
         
+        navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
+        
         Assets.MUSIC.play();
 
         //Instantiate the FPSLogger to show FPS

@@ -84,6 +84,8 @@ public class Player extends AbstractPerson
      * caps the personality between 0 and 100.
      * 
      * @param change - The personality type to move in the direction of
+     * 
+     * @author JAAPAN
      */
     public void changePersonality(Personality change)
     {
@@ -157,7 +159,7 @@ public class Player extends AbstractPerson
     /**
      * This method tries to get an NPC if the player is facing one
      *
-     * @return (NPC) returns null if there isn't an NPC infront of them or the NPC is moving. Otherwise, it returns the NPC
+     * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC()
     {
@@ -206,7 +208,7 @@ public class Player extends AbstractPerson
             if (!Settings.MUTED)
             	Assets.SOUND.play(Settings.SFX_VOLUME);
         } else {
-            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry no clue here", 1));
+            GameMain.me.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
         }
     }
 
@@ -221,23 +223,19 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * Getter for personality, it uses the personalityLevel of the player and thus returns either AGGRESSIVE, NEUTRAL or NICE
-     *
-     * @return - (Personality) Returns the personality of this player.
+     * @return The current personality of the player
+     * 
+     * @author JAAPAN
      */
     @Override
     public Personality getPersonality()
     {
-        if (personalityLevel < 33) {
+        if (personalityLevel < 33)
             return Personality.AGGRESSIVE;
-
-        } else if (personalityLevel < 66) {
+        else if (personalityLevel < 66)
             return Personality.NEUTRAL;
-
-        } else if (personalityLevel <= 100) {
+        else
             return Personality.NICE;
-        }
-        return Personality.NEUTRAL;
     }
 
     /**
@@ -318,12 +316,24 @@ public class Player extends AbstractPerson
         }
     }
     
+    /**
+     * Changes the player's score by the specified amount, and caps it at 0.
+     * 
+     * @param scoreToAdd - The number of points to add to the score. Can be negative
+     * 
+     * @author JAAPAN
+     */
     public void addToScore(int scoreToAdd)
     {
     	score += scoreToAdd;
     	if (score < 0) score = 0;
     }
     
+    /**
+     * @return The number of points the player has earned so far this game
+     * 
+     * @author JAAPAN
+     */
     public int getScore()
     {
     	return score;
@@ -353,6 +363,11 @@ public class Player extends AbstractPerson
         return (int)gameDuration;
     }
     
+    /**
+     * @return The duration of the game (excluding time paused) formatted as H:M:S
+     * 
+     * @author JAAPAN
+     */
     public String getFormattedPlayTime()
     {
     	int time = (int)gameDuration;
@@ -365,6 +380,26 @@ public class Player extends AbstractPerson
     	
     	return Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(time); 
     }
+    
+    /**
+     * @return The number of red herrings the player has found
+     *
+     * @author JAAPAN
+     */
+    public int getRedHerrings()
+    {
+    	return collectedClues.size() - usefulClues;
+    }
+    
+    /**
+     * @return The number of questions the player has asked (excluding non-responses)
+     *
+     * @author JAAPAN
+     */
+    public int getQuestions()
+    {
+    	return questionsAsked;
+    }
 
     /**
      * @return The total score the player has achieved throughout the game
@@ -376,24 +411,24 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * @return Any bonus points the player receives for completing the game in a certain amount of time
-     *
-     * @param gameDuration - Duration of the current game
+     * Calculates a logarithmic time bonus. No points are awarded after approximately 45 minutes
+     * (The game shouldn't take anywhere near that long to complete).
+     * 
+     * @return The number of bonus points the player has earned
+     * 
      * @author JAAPAN
      */
     public int getTimeBonus() {
-        if (gameDuration < 300) {
-            return 2500;
-        } else if (gameDuration < 450) {
-            return 1000;
-        } else if (gameDuration < 600 ) {
-            return 500;
-        } else {
-            return 0;
-        }
+        int penalty = (int) (Math.log(gameDuration/20) * 1000);
+        
+        int bonus = 5000 - penalty;
+        if (bonus < 0) bonus = 0;
+        return bonus;
     }
 
     /**
+     * Increments the number of false accusations the player has made.
+     * 
      * @author JAAPAN
      */
     public void incrementFalseAcc() {
@@ -401,7 +436,7 @@ public class Player extends AbstractPerson
     }
 
     /**
-     * @return Number of false accusations made by the player during this game
+     * @return The number of false accusations made by the player during this game
      *
      * @author JAAPAN
      */

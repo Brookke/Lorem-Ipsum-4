@@ -49,12 +49,11 @@ public class WinScreen extends AbstractScreen {
 		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
 		cluesLabel.setVisible(false);
 		
-		// TODO: Number of red herrings
-		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.collectedClues.size(), false);
+		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
 		redHerringLabel.setVisible(false);
 
-		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
+		Label questionsAsked = Assets.getLabel("Questions Asked: " + game.player.getQuestions(), false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
 
@@ -66,7 +65,6 @@ public class WinScreen extends AbstractScreen {
 		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
 		basicScoreLabel.setVisible(false);
 		
-		// TODO: Format nicely
 		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
 		timeTaken.setVisible(false);
