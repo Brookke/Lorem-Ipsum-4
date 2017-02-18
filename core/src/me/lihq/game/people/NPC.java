@@ -2,12 +2,13 @@ package me.lihq.game.people;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
+
+import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * The class which is responsible for the non-playable characters within the game that the player will meet.
@@ -21,7 +22,6 @@ public class NPC extends AbstractPerson
      * Associated clues
      */
     public List<Clue> associatedClues = new ArrayList<>();
-    private Random random;
     
     /**
      * List of clues NPC has already been asked about
@@ -65,7 +65,6 @@ public class NPC extends AbstractPerson
     {
         super(name, "people/NPCs/" + spriteSheet, tileX, tileY);
         this.setRoom(room);
-        this.random = new Random();
         this.canBeKiller = canBeKiller;
 
         importDialogue(jsonFile);
@@ -238,17 +237,67 @@ public class NPC extends AbstractPerson
      * @param style - The style of questioning
      * @param player - The personality type of the player
      * @return The appropriate line of dialogue.
+     * 
+     * @author JAAPAN
      */
     public String getSpeech(Clue clue, Personality style, Personality player)
     {
     	if (style == personality && player == style)
     	{
-    		// TODO: Retrieve improved response rather than normal response
-    		return getSpeech("responses", clue);
+    		// Increment the player's question counter
+    		GameMain.me.player.addQuestion();
+    		
+    		String response = getSpeech("responses", clue);
+    		
+    		// If this NPC is the killer, point the player in the direction of a 
+    		// random NPC. Otherwise, point them towards the killer. As this is an improved
+    		// response, whether the clue is a red herring or not is unimportant.
+    		if (isKiller)
+    		{
+    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			while (name == getName())
+    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", name);
+    		}
+    		else
+    		{
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", GameMain.me.killer.getName());
+    			// Add the room of the killer to the response
+    			String room = GameMain.me.killer.getRoom().getName();
+    			if (room != "Outside Ron Cooke Hub")
+    				response += " Last I saw them, they were in the " + room + ".";
+    			else
+    				response += " Last I saw them, they were outside.";
+    		}
+    		
+    		return response;
     	}
     	else if (style == personality || style == player)
     	{
-    		return getSpeech("responses", clue);
+    		// Increment the player's question counter
+    		GameMain.me.player.addQuestion();
+    		
+    		String response = getSpeech("responses", clue);
+    		
+    		// If this NPC is the killer, or the clue is a red herring, point the player
+    		// in the direction of a random NPC. Otherwise, point them towards the killer
+    		if (isKiller || clue.isRedHerring())
+    		{
+    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			while (name == getName() || name == GameMain.me.killer.getName())
+    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", name);
+    		}
+    		else
+    		{
+    			// Replace the NPC tag in the string with the name of the NPC
+    			response = response.replace("%NPC", GameMain.me.killer.getName());
+    		}
+    		
+    		return response;
         } 
     	else
     	{

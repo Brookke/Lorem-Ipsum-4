@@ -109,7 +109,7 @@ public class ConversationManagement
             buttons.add(new SpeechBoxButton("Question?", 0, eventHandler));
             buttons.add(new SpeechBoxButton("Ignore", 2, eventHandler));
         }
-        if (player.foundMurderWeapon()) {
+        if (player.canAccuse()) {
         	buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
     	}
         
@@ -160,6 +160,7 @@ public class ConversationManagement
      */
     private void questionNPC()
     {
+    	player.changePersonality(tempQuestionStyle);
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
         finished = true;
