@@ -53,11 +53,13 @@ public class WinScreen extends AbstractScreen {
 		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.collectedClues.size(), false);
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
 		redHerringLabel.setVisible(false);
-		
+
+		// todo: implement questions asked counter
 		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
-		
+
+		// todo: implement false accusation counter
 		Label accusedNPCs = Assets.getLabel("Number of People Wrongly Accused: ", false);
 		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
 		accusedNPCs.setVisible(false);
@@ -69,12 +71,14 @@ public class WinScreen extends AbstractScreen {
 		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getPlayTime() + "s", false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
 		timeTaken.setVisible(false);
-		
-		Label bonusScoreLabel = Assets.getLabel("Time Bonus: ", false);
+
+		Label bonusScoreLabel = Assets.getLabel("Time Bonus: " + game.player.getTimeBonus(game.player.getPlayTime()), false);
 		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
 		bonusScoreLabel.setVisible(false);
-		
-		Label finalScoreLabel = Assets.getLabel("Total Score: ", false);
+
+		// todo: calculate total score (score + time bonus)
+		Label finalScoreLabel = Assets.getLabel("Total Score: " + game.player.getTotalScore(game.player.getScore(),
+				game.player.getPlayTime()), false);
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
 		finalScoreLabel.setVisible(false);
 		

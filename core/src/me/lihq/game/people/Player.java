@@ -318,4 +318,33 @@ public class Player extends AbstractPerson
         return (int) gameDuration;
     }
 
+    /**
+     * @return The total score the player has achieved throughout the game
+     *
+     * @author JAAPAN
+     */
+    public int getTotalScore(int score, int gameDuration) {
+        System.out.println("Score: " + score + ". Game Duration: " + gameDuration);
+        int totalScore = score + getTimeBonus(gameDuration);
+        System.out.println("Total Score: " + totalScore);
+        return totalScore;
+    }
+
+    /**
+     * @return Any bonus points the player receives for completing the game in a certain amount of time
+     *
+     * @author JAAPAN
+     */
+    public int getTimeBonus(int gameDuration) {
+        if (gameDuration < 300) {
+            return 2500;
+        } else if (gameDuration < 450) {
+            return 1000;
+        } else if (gameDuration < 600 ) {
+            return 500;
+        } else {
+            return 0;
+        }
+    }
+
 }
