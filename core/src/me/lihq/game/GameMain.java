@@ -20,13 +20,8 @@ import com.badlogic.gdx.utils.JsonValue;
 
 
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
@@ -113,19 +108,6 @@ public class GameMain extends Game
      */
     public InputMultiplexer inputMultiplexer;
 
-    /**
-     * Global fonts to be used for rendering text - the number represents
-     * the size of the font
-     */
-    public BitmapFont font30, font20;
-
-    /**
-     * Used for streaming the soundtrack
-     */
-    public Music music;
-
-    public Sound sound;
-
     // used to track whether the game is paused
     public boolean isPaused = true;
 
@@ -144,14 +126,6 @@ public class GameMain extends Game
         initialiseAllPeople();
 
         initialiseClues();
-        
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/arial.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 30;
-        font30 = generator.generateFont(parameter);
-        parameter.size = 20;
-        font20 = generator.generateFont(parameter);
-        generator.dispose();
 
         // Load universal input class
         input = new GlobalInput(this);
@@ -175,14 +149,7 @@ public class GameMain extends Game
         
         settingsScreen = new SettingsScreen(this);
         
-        navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
-        
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/background.ogg"));
-        music.setVolume(Settings.MUSIC_VOLUME);
-        music.setLooping(true);
-        music.play();
-
-        sound = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
+        Assets.MUSIC.play();
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
@@ -211,8 +178,7 @@ public class GameMain extends Game
     @Override
     public void dispose()
     {
-    	music.dispose();
-    	sound.dispose();
+    	Assets.dispose();
     }
 
     /**

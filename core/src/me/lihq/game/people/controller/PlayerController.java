@@ -129,15 +129,4 @@ public class PlayerController extends InputAdapter
 
         player.move(goTo);
     }
-    
-    /**
-     * Clears all the movement variables.
-     */
-    public void clear()
-    {
-    	north = false;
-    	south = false;
-    	east = false;
-    	west = false;
-    }
 }

@@ -3,9 +3,6 @@ package me.lihq.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,17 +11,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 
 public class InventoryScreen extends AbstractScreen {
-	
-    private static final Color BACKGROUND_COLOR = Color.GRAY;
     
     private static final int CLUES_PER_ROW = 7;
     private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*2*CLUES_PER_ROW)/2f;
@@ -42,46 +37,23 @@ public class InventoryScreen extends AbstractScreen {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
+        buttonSkins = new Skin();
+        
         zoomed = false;
 		
-        initSkin();
 		initMenu();
 	}
 	
-	private void initSkin() {
-        //Create a font
-        BitmapFont font = new BitmapFont();
-        buttonSkins = new Skin();
-        buttonSkins.add("default", font);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth() / 4, (int) Gdx.graphics.getHeight() / 10, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.ORANGE);
-        pixmap.fill();
-        buttonSkins.add("background", new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = buttonSkins.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.down = buttonSkins.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.checked = buttonSkins.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.over = buttonSkins.newDrawable("background", Color.LIGHT_GRAY);
-        textButtonStyle.font = buttonSkins.getFont("default");
-        buttonSkins.add("default", textButtonStyle);
-	}
-	
 	private void initMenu() {
-        LabelStyle textStyle = new LabelStyle(game.font30, Color.RED);
-
         //Creating the label containing text and determining  its size and location on screen
-        Label text = new Label("Inventory", textStyle);
+        Label text = Assets.getLabel("Inventory", true);
         text.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
         
-        Label text2 = new Label("Inventory", textStyle);
+        Label text2 = Assets.getLabel("Inventory", true);
         text2.setBounds(Gdx.graphics.getWidth() / 2 - text.getWidth()/2, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16, text.getWidth(), text.getHeight());
 
 
-        TextButton resumeButton = new TextButton("Close", buttonSkins);
+        TextButton resumeButton = Assets.getTextButton("Close");
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
@@ -110,8 +82,8 @@ public class InventoryScreen extends AbstractScreen {
 						Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 				stage.addActor(imgBtn);
 				
-		        LabelStyle textStyle = new LabelStyle(buttonSkins.getFont("default"), Color.RED);
-		        Label text = new Label(c.getName(), textStyle);
+				Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.RED);
+		        Label text = new Label(c.getName(), labelStyle);
 		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
 		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 		        stage.addActor(text);
@@ -130,18 +102,17 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		            	zoomedStage.addActor(img);
 		            	
-		            	LabelStyle bigTextStyle = new LabelStyle(game.font20, Color.RED);
-		            	Label name = new Label(c.getName(), bigTextStyle);
+		            	Label name = Assets.getLabel(c.getName(), false);
 		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
 		            	zoomedStage.addActor(name);
 
-		            	Label description = new Label(c.getDescription(), textStyle);
+		            	Label description = new Label(c.getDescription(), labelStyle);
 		            	description.setPosition(Gdx.graphics.getWidth()/2-description.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2-description.getHeight()*2);
 		            	zoomedStage.addActor(description);
 		            	
-		                TextButton backButton = new TextButton("Back", buttonSkins);
+		                TextButton backButton = Assets.getTextButton("Back");
 		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		                zoomedStage.addActor(backButton);
 
@@ -225,6 +196,7 @@ public class InventoryScreen extends AbstractScreen {
 	@Override
 	public void dispose() {
 		stage.dispose();
+		zoomedStage.dispose();
 		buttonSkins.dispose();
 	}
 

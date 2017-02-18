@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,36 +14,40 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 /**
- * The status bar shown throughout the game
- * Contains UI controls for presenting the game status to the player
+ * The status bar shown throughout the game.
+ * Contains UI controls for presenting the game status to the player, and allowing
+ * them to access the inventory and the pause menu.
  */
 public class StatusBar
 {
 	/**
-	 * Variable for the game
+	 * Reference to the game; used for accessing the player's score and personality, 
+	 * and changing the screen when buttons are pressed
 	 */
 	private GameMain game;
 	
     /**
-     * The height of the StatusBar
+     * The height of the status bar
      */
-    public static final int HEIGHT = 50; //Used to set height of status bar
+    public static final int HEIGHT = 50;
 
     /**
-     * The amount of items that are in the StatusBar
+     * The number of items that are in the status bar. Used to set the width of the elements
+     * on the bar
      */
-    private static final int ITEM_COUNT = 4; //Used to set width of controls on bar
+    private static final int ITEM_COUNT = 4;
 
     /**
-     * The width of the StatusBar
+     * The width of each element of the status bar
      */
     private static final int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
 
     /**
-     * The background color of the StatusBar
+     * The background colour of the status bar
      */
     private static final Color BACKGROUND_COLOR = Color.GRAY;
 
@@ -54,61 +57,85 @@ public class StatusBar
     public Stage stage;
 
     /**
-     * The different skins for different elements
+     * The skin for the UI elements
+     * 
+     * @author JAAPAN
      */
-    private Skin buttonSkin;
-    private Skin labelSkin;
+    private Skin skin;
     
     /**
-     * Variable for score label
+     * The label displaying the player's current score
+     * 
+     * @author JAAPAN
      */
     private Label scoreLabel;
+    
+    /**
+     * The label displaying the player's personality
+     * 
+     * @author JAAPAN
+     */
+    private Label personalityLabel;
 
     /**
-     * The initializer for the StatusBar
-     * Sets up UI controls and adds them to the stage ready for rendering
+     * The constructor for the StatusBar.
+     * Sets up UI controls and adds them to the stage ready for rendering.
      */
     public StatusBar(final GameMain game)
     {
     	this.game = game;
     	
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        initSkins();
+        initSkin();
 
+        // Create a table, so we can more easily lay the elements out
         Table statusBar = new Table();
         statusBar.setSize(Gdx.graphics.getWidth(), HEIGHT);
         statusBar.setPosition(0, 0);
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), labelSkin);
+        /******************** Added by team JAAPAN ********************/
+        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        TextButton personalityMeter = new TextButton("Personality Meter", buttonSkin);
-        statusBar.add(personalityMeter).uniform();
+        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
+        personalityLabel.setAlignment(Align.center, Align.center);
+        statusBar.add(personalityLabel).uniform();
+        /**************************** End *****************************/
 
-        TextButton inventoryButton = new TextButton("Inventory", buttonSkin);
+        TextButton inventoryButton = new TextButton("Inventory", skin);
         statusBar.add(inventoryButton).uniform();
         inventoryButton.addListener(new ClickListener()
         {
+        	/**
+        	 * Called when the button is clicked. Changes the current screen to the
+        	 * inventory.
+        	 * 
+        	 * @author JAAPAN
+        	 */
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
-            	game.navigationScreen.playerController.clear();
             	game.setScreen(game.inventoryScreen);
             }
         });
 
-        TextButton pauseButton = new TextButton("Pause", buttonSkin);
+        TextButton pauseButton = new TextButton("Pause", skin);
         statusBar.add(pauseButton).uniform();
         pauseButton.addListener(new ClickListener()
         {
+        	/**
+        	 * Called when the button is clicked. Changes the current screen to the
+        	 * pause menu, and sets the paused variable to true.
+        	 * 
+        	 * @author JAAPAN
+        	 */
             @Override
             public void clicked(InputEvent event, float x, float y)
             {
                 game.isPaused = true;
-                game.navigationScreen.playerController.clear();
                 game.setScreen(game.pauseScreen);
             }
         });
@@ -117,18 +144,21 @@ public class StatusBar
     }
 
     /**
-     * Renders the status bar
-     * Should be called within the render() method of a screen
+     * Renders the status bar and updates the score and personality labels.
+     * Should be called within the render() method of a screen.
      */
     public void render()
     {
-    	if (game.getScreen() == game.navigationScreen) scoreLabel.setText("Score: " + game.player.getScore());
+        /******************** Added by team JAAPAN ********************/
+    	scoreLabel.setText("Score: " + game.player.getScore());
+    	personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
+        /**************************** End *****************************/
         stage.act();
         stage.draw();
     }
 
     /**
-     * This method is called on a window resize
+     * This method is called on a window resize.
      *
      * @param width  - the new width
      * @param height - the new height
@@ -139,7 +169,7 @@ public class StatusBar
     }
 
     /**
-     * This disposes all the elements
+     * Disposes all the elements
      */
     public void dispose()
     {
@@ -147,60 +177,32 @@ public class StatusBar
     }
 
     /**
-     * Sets up skin variables used for defining UI control styles
+     * Sets up skin variable used for defining UI control styles.
+     * 
+     * @author JAAPAN
      */
-    private void initSkins()
+    private void initSkin()
     {
-        initButtonSkin();
-        initLabelSkin();
-    }
-
-    /**
-     * Sets up the skin for buttons on the status bar
-     */
-    private void initButtonSkin()
-    {
-        //Create a font
-        BitmapFont font = new BitmapFont();
-        buttonSkin = new Skin();
-        buttonSkin.add("default", font);
-
-        //Create a texture
-        Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        buttonSkin.add("background", new Texture(pixmap));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.down = buttonSkin.newDrawable("background", Color.BLACK);
-        textButtonStyle.checked = buttonSkin.newDrawable("background", BACKGROUND_COLOR);
-        textButtonStyle.over = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.font = buttonSkin.getFont("default");
-        buttonSkin.add("default", textButtonStyle);
-
-    }
-
-    /**
-     * Sets up the skin for labels on the status bar
-     */
-    private void initLabelSkin()
-    {
-        //Create a font
-        BitmapFont font = new BitmapFont();
-        labelSkin = new Skin();
-
-        //Create a texture
+    	skin = new Skin();
+    	
+        // Create a texture
         Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
         pixmap.setColor(BACKGROUND_COLOR);
         pixmap.fill();
-        labelSkin.add("background", new Texture(pixmap));
+        skin.add("background", new Texture(pixmap));
 
-        //Create a button style
-        Label.LabelStyle labelStyle = new Label.LabelStyle(font, Color.WHITE);
-        labelStyle.background = labelSkin.getDrawable("background");
-        labelSkin.add("default", labelStyle);
+        // Create a button style
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.up = skin.newDrawable("background");
+        textButtonStyle.down = skin.newDrawable("background", Color.BLACK);
+        textButtonStyle.checked = skin.newDrawable("background");
+        textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
+        textButtonStyle.font = Assets.FONT15;
+        skin.add("default", textButtonStyle);
 
+        // Create a label style
+        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.WHITE);
+        labelStyle.background = skin.getDrawable("background");
+        skin.add("default", labelStyle);
     }
 }
