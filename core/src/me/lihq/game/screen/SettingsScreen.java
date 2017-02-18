@@ -18,6 +18,13 @@ import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 
+/**
+ * The screen that allows the user to change the various settings of the game.
+ * Currently limited to volume controls.
+ * 
+ * @author JAAPAN
+ *
+ */
 public class SettingsScreen extends AbstractScreen {
     
     /**
@@ -25,6 +32,9 @@ public class SettingsScreen extends AbstractScreen {
      */
     private static final float OFFSET = 20.0f;
 	
+    /**
+     * The stage used for rendering the UI and handling input.
+     */
 	private Stage stage;
 
 	public SettingsScreen(GameMain game) {
@@ -35,24 +45,25 @@ public class SettingsScreen extends AbstractScreen {
         initMenu();
 	}
 	
+	/**
+	 * Initialises the UI elements on the screen, and sets up event handlers.
+	 */
 	private void initMenu() {
         // Create and position the label containing title text
         Label title = Assets.createLabel("Settings", true);
 
-        // Create and position the back button, using the default TextButtonStyle in uiSkins
+        // Create and position the back button, using the standard style
         TextButton backButton = Assets.createTextButton("Back");
         backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
         
-        // Create and position the mute check box, using the default CheckBoxStyle in uiSkins; 
-        // the spaces in the text provide spacing between it and the check box texture
-        CheckBox muteCheckBox = Assets.createCheckBox("  Mute");
+        // Create and position the mute check box, using the standard style
+        CheckBox muteCheckBox = Assets.createCheckBox("Mute");
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*6);
         
         Label musicLabel = Assets.createLabel("Music volume:", false);
         musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*2);
         
-        // Create and position the horizontal music volume slider, using the default SliderStyle
-        // in uiSkins
+        // Create and position the horizontal music volume slider, using the standard style
         Slider musicSlider = Assets.createSlider(0f, 1f, 0.1f, false);
         musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*0.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
@@ -64,7 +75,7 @@ public class SettingsScreen extends AbstractScreen {
         sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - OFFSET*4);
         sfxSlider.setValue(Settings.SFX_VOLUME);
 
-        // Add all UI elements to the stage
+        // Add all UI elements to the stage, to handle rendering and input
         stage.addActor(title);
         stage.addActor(backButton);
         stage.addActor(muteCheckBox);
@@ -143,6 +154,9 @@ public class SettingsScreen extends AbstractScreen {
         });
 	}
 
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
 	@Override
 	public void show() {
 		// Add the stage to the input multiplexer, so it can receive input
@@ -150,10 +164,17 @@ public class SettingsScreen extends AbstractScreen {
         game.inputMultiplexer.addProcessor(stage);
 	}
 
+	/**
+	 * Game related logic should take place here.
+	 */
 	@Override
-	public void update() {
-	}
+	public void update() {}
 
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
 	@Override
 	public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -163,19 +184,32 @@ public class SettingsScreen extends AbstractScreen {
 		stage.draw();
 	}
 
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
 	@Override
 	public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
 	}
 
+	/**
+	 * Called when focus on the window is lost.
+	 */
 	@Override
-	public void pause() {
-	}
+	public void pause() {}
 
+	/**
+	 * Called when the window regains focus.
+	 */
 	@Override
-	public void resume() {
-	}
+	public void resume() {}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
 	@Override
 	public void hide() {
 		// Remove the stage from the input multiplexer, so it doesn't fire
@@ -183,6 +217,9 @@ public class SettingsScreen extends AbstractScreen {
         game.inputMultiplexer.removeProcessor(stage);
 	}
 
+	/**
+	 * Called when this screen should release all resources.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();

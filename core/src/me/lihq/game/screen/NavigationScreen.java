@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -39,44 +38,49 @@ public class NavigationScreen extends AbstractScreen
      * The controller that listens for key inputs
      */
     public PlayerController playerController;
+    
     /**
      * This is the SpeechboxManager for the main game
      */
     public SpeechboxManager speechboxMngr;
+    
     /**
      * This is the main ConversationManager that controls the conversation mechanic
      */
     public ConversationManagement convMngt;
+    
     /**
      * This boolean determines whether the black is fading in or out
      */
     private boolean fadeToBlack = true;
-    /**
-     * This is the current map that is being shown
-     */
-    private TiledMap map;
+    
     /**
      * This boolean determines whether the map needs to be updated in the next render loop
      */
     private boolean changeMap = false;
+    
     /**
      * This is the list of NPCs in the current Room
      */
     private List<NPC> currentNPCS;
+    
     /**
      * This is the map renderer that also renders Sprites
      */
     private OrthogonalTiledMapRendererWithPeople tiledMapRenderer;
+    
     /**
      * The camera to render the map to
      */
     private OrthographicCamera camera = new OrthographicCamera();
     private Viewport viewport;
     private SpriteBatch spriteBatch;
+    
     /**
      * This stores whether the game is paused or not
      */
     private boolean pause = false;
+    
     /**
      * This is the StatusBar that shows at the bottom
      */
@@ -359,7 +363,6 @@ public class NavigationScreen extends AbstractScreen
     @Override
     public void dispose()
     {
-        map.dispose();
         tiledMapRenderer.dispose();
         statusBar.dispose();
         spriteBatch.dispose();

@@ -172,12 +172,18 @@ public class GameMain extends Game
     }
 
     /**
-     * This is to be called when you want to dispose of all data
+     * Called when the Application is destroyed. Should release all assets from memory.
      */
     @Override
     public void dispose()
     {
     	Assets.dispose();
+    	
+    	navigationScreen.dispose();
+    	menuScreen.dispose();
+    	pauseScreen.dispose();
+    	inventoryScreen.dispose();
+    	settingsScreen.dispose();
     }
 
     /**

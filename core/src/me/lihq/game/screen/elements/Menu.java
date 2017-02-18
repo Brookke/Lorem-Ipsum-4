@@ -2,7 +2,6 @@ package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -38,11 +37,6 @@ public class Menu
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
      */
     private boolean pauseMenu;
-
-    /**
-     * This is the sprite batch of the menu that elements are rendered on.
-     */
-    private SpriteBatch batch;
 
     /**
      * Constructor for the menu
@@ -151,7 +145,6 @@ public class Menu
     {
         //Called when disposing the main menu
         stage.dispose();
-        batch.dispose();
     }
 
     /**
