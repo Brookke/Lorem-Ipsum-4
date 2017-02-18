@@ -79,19 +79,19 @@ public class Menu
         TextButton newGameButton;
 
         if (pauseMenu) {
-            newGameButton = Assets.getTextButton("Resume Game");
-            text = Assets.getLabel("Paused", true);
+            newGameButton = Assets.createTextButton("Resume Game");
+            text = Assets.createLabel("Paused", true);
 
         } else {
-            text = Assets.getLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
-            newGameButton = Assets.getTextButton("New Game");
+            text = Assets.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
+            newGameButton = Assets.createTextButton("New Game");
         }
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
         
-        TextButton settings = Assets.getTextButton("Settings");
+        TextButton settings = Assets.createTextButton("Settings");
         settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
-        TextButton quit = Assets.getTextButton("Quit");
+        TextButton quit = Assets.createTextButton("Quit");
         quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 4);
 
         //Loading the buttons onto the stage

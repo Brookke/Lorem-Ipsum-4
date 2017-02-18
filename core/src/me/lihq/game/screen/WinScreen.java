@@ -42,38 +42,38 @@ public class WinScreen extends AbstractScreen {
 	
 	private void initMenu()
 	{
-		Label title = Assets.getLabel("You Found the Killer!", true);
+		Label title = Assets.createLabel("You Found the Killer!", true);
 		stage.addActor(title);
 		
-		Label cluesLabel = Assets.getLabel("Clues Found: " + game.player.collectedClues.size(), false);
+		Label cluesLabel = Assets.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
 		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
 		cluesLabel.setVisible(false);
 		
-		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
+		Label redHerringLabel = Assets.createLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
 		redHerringLabel.setVisible(false);
 
-		Label questionsAsked = Assets.getLabel("Questions Asked: " + game.player.getQuestions(), false);
+		Label questionsAsked = Assets.createLabel("Questions Asked: " + game.player.getQuestions(), false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
 
-		Label accusedNPCs = Assets.getLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
+		Label accusedNPCs = Assets.createLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
 		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
 		accusedNPCs.setVisible(false);
 		
-		Label basicScoreLabel = Assets.getLabel("Points Gained: " + game.player.getScore(), false);
+		Label basicScoreLabel = Assets.createLabel("Points Gained: " + game.player.getScore(), false);
 		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
 		basicScoreLabel.setVisible(false);
 		
-		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
+		Label timeTaken = Assets.createLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
 		timeTaken.setVisible(false);
 
-		Label bonusScoreLabel = Assets.getLabel("Time Bonus: " + game.player.getTimeBonus(), false);
+		Label bonusScoreLabel = Assets.createLabel("Time Bonus: " + game.player.getTimeBonus(), false);
 		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
 		bonusScoreLabel.setVisible(false);
 
-		Label finalScoreLabel = Assets.getLabel("Total Score: " + game.player.getTotalScore(), false);
+		Label finalScoreLabel = Assets.createLabel("Total Score: " + game.player.getTotalScore(), false);
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
 		finalScoreLabel.setVisible(false);
 		
@@ -86,7 +86,7 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
 		
-		TextButton mainMenuButton = Assets.getTextButton("Main Menu");
+		TextButton mainMenuButton = Assets.createTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		
 		stage.addActor(mainMenuButton);

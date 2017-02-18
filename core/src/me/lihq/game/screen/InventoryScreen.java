@@ -46,10 +46,10 @@ public class InventoryScreen extends AbstractScreen {
 	
 	private void initMenu() {
         //Creating the label containing text and determining  its size and location on screen
-        Label text = Assets.getLabel("Inventory", true);
-        Label text2 = Assets.getLabel("Inventory", true);
+        Label text = Assets.createLabel("Inventory", true);
+        Label text2 = Assets.createLabel("Inventory", true);
 
-        TextButton resumeButton = Assets.getTextButton("Close");
+        TextButton resumeButton = Assets.createTextButton("Close");
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
@@ -98,7 +98,7 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		            	zoomedStage.addActor(img);
 		            	
-		            	Label name = Assets.getLabel(c.getName(), false);
+		            	Label name = Assets.createLabel(c.getName(), false);
 		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
 		            	zoomedStage.addActor(name);
@@ -108,7 +108,7 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2-description.getHeight()*2);
 		            	zoomedStage.addActor(description);
 		            	
-		                TextButton backButton = Assets.getTextButton("Back");
+		                TextButton backButton = Assets.createTextButton("Back");
 		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		                zoomedStage.addActor(backButton);
 

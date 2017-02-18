@@ -154,22 +154,29 @@ public class NPC extends AbstractPerson
      * Reads and sets the NPC's motive for killing the victim from the JSON file.
      *
      * @param victim - The victim of the heinous crime.
-     * @return (NPC) Returns the NPC object as this is how the NPC's are built
-     * by returning and adding each part.
+     * 
+     * @return This object once the motive has been set.
+     * 
+     * @author JAAPAN
      */
     public NPC setMotive(NPC victim)
     {
-        motive = jsonData.get("motives").getString(victim.getName());
+    	try {
+    		motive = jsonData.get("motives").getString(victim.getName());
+    	} catch (Exception e) {
+    		motive = "Error: Motive not working";
+    	}
         System.out.println(motive);
         return this;
     }
 
     /**
-     * This method sets the NPC as the killer for this game.
+     * Sets the NPC as the killer for this game.
      * <p>
-     * It first checks they aren't the victim and if they can be the killer
+     * It first checks they aren't the victim.
+     * </p>
      *
-     * @return (boolean) Returns whether it successfully set the NPC to the killer or not
+     * @return Whether it successfully set the NPC to the killer or not
      */
     public boolean setKiller()
     {
@@ -181,11 +188,12 @@ public class NPC extends AbstractPerson
     }
 
     /**
-     * This method sets the NPC to be the victim for the game
+     * Sets the NPC as the victim for this game.
      * <p>
-     * It first checks if the NPC isn't also the killer
+     * It first checks the NPC isn't the killer.
+     * </p>
      *
-     * @return (boolean) Returns whether it successfully set the NPC to the victim or not
+     * @return Whether it successfully set the NPC to the victim or not
      */
     public boolean setVictim()
     {

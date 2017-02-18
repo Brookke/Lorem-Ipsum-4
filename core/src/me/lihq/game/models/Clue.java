@@ -75,70 +75,34 @@ public class Clue extends Sprite
     {
         if (obj instanceof Clue) {
             Clue c = (Clue) obj;
-            return c.getName().equals(this.getName());
+            return c.getName().equals(getName());
         }
 
         return false;
     }
-
-    /**
-     *
-     * @return (String) The name of clue.
-     */
-    public String getName()
-    {
-        return this.name;
-    }
-
-    /**
-     *
-     * @return (String) The description of the clue.
-     */
-    public String getDescription()
-    {
-        return this.description;
-    }
     
-    /**
-     * 
-     * @return True if this is the murder weapon, false otherwise
-     * 
-     * @author JAAPAN
-     */
-    public boolean isMurderWeapon()
-    {
-    	return this.murderWeapon;
-    }
+    /*************************************************************************/
+    /****************************** Set Methods ******************************/
+    /*************************************************************************/
     
     /**
      * Sets this clue as the murder weapon.
      * 
-     * @return (Clue) This object once it has been set as the murder weapon
+     * @return This object once it has been set as the murder weapon
      * 
      * @author JAAPAN
      */
     public Clue setMurderWeapon()
     {
-    	this.murderWeapon = true;
+    	murderWeapon = true;
     	
     	return this;
     }
     
     /**
-     * 
-     * @return True if the clue is a red herring, false otherwise
-     * 
-     * @author JAAPAN
-     */
-    public boolean isRedHerring()
-    {
-    	return redHerring;
-    }
-    
-    /**
      * Sets this clue as a red herring.
      * 
-     * @return (Clue) This object once it has been set as a red herring
+     * @return This object once it has been set as a red herring
      * 
      * @author JAAPAN
      */
@@ -183,8 +147,47 @@ public class Clue extends Sprite
         return this;
     }
 
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
+
     /**
-     *
+     * @return The name of clue
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * @return The description of the clue
+     */
+    public String getDescription()
+    {
+        return description;
+    }
+    
+    /**
+     * @return True if this is the murder weapon, false otherwise
+     * 
+     * @author JAAPAN
+     */
+    public boolean isMurderWeapon()
+    {
+    	return murderWeapon;
+    }
+    
+    /**
+     * @return True if the clue is a red herring, false otherwise
+     * 
+     * @author JAAPAN
+     */
+    public boolean isRedHerring()
+    {
+    	return redHerring;
+    }
+
+    /**
      * @return (Vector2Int) The tile coordinates of the clue
      *          <p>
      *          All coordinates relative to the bottom left of the map
@@ -192,11 +195,10 @@ public class Clue extends Sprite
      */
     public Vector2Int getPosition()
     {
-        return this.tileCoordinates;
+        return tileCoordinates;
     }
 
     /**
-     *
      * @return (int) The x component of the clue's tile coordinates
      *          <p>
      *          All coordinates relative to the bottom left of the map
@@ -208,7 +210,6 @@ public class Clue extends Sprite
     }
 
     /**
-     *
      * @return (int) The y component of the clue's tile coordinates
      *          <p>
      *          All coordinates relative to the bottom left of the map

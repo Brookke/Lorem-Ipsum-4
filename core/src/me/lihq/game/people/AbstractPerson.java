@@ -143,15 +143,15 @@ public abstract class AbstractPerson extends Sprite
      */
     public void update()
     {
-        if (this.state == PersonState.WALKING) {
-            this.coordinates.x = Interpolation.linear.apply(startTile.x * Settings.TILE_SIZE, destinationTile.x * Settings.TILE_SIZE, animTimer / animTime);
-            this.coordinates.y = Interpolation.linear.apply(startTile.y * Settings.TILE_SIZE, destinationTile.y * Settings.TILE_SIZE, animTimer / animTime);
+        if (state == PersonState.WALKING) {
+            coordinates.x = Interpolation.linear.apply(startTile.x * Settings.TILE_SIZE, destinationTile.x * Settings.TILE_SIZE, animTimer / animTime);
+            coordinates.y = Interpolation.linear.apply(startTile.y * Settings.TILE_SIZE, destinationTile.y * Settings.TILE_SIZE, animTimer / animTime);
 
-            this.animTimer += 1f;
+            animTimer += 1f;
 
             if (animTimer > animTime) {
-                this.setTileCoordinates(destinationTile.x, destinationTile.y);
-                this.finishMove();
+                setTileCoordinates(destinationTile.x, destinationTile.y);
+                finishMove();
             }
         }
 
@@ -166,18 +166,18 @@ public abstract class AbstractPerson extends Sprite
      */
     public void initialiseMove(Direction dir)
     {
-        getRoom().lockCoordinate(this.tileCoordinates.x + dir.getDx(), this.tileCoordinates.y + dir.getDy());
+        getRoom().lockCoordinate(tileCoordinates.x + dir.getDx(), tileCoordinates.y + dir.getDy());
 
-        this.direction = dir;
+        direction = dir;
 
-        this.startTile.x = this.tileCoordinates.x;
-        this.startTile.y = this.tileCoordinates.y;
+        startTile.x = tileCoordinates.x;
+        startTile.y = tileCoordinates.y;
 
-        this.destinationTile.x = this.startTile.x + dir.getDx();
-        this.destinationTile.y = this.startTile.y + dir.getDy();
-        this.animTimer = 0f;
+        destinationTile.x = startTile.x + dir.getDx();
+        destinationTile.y = startTile.y + dir.getDy();
+        animTimer = 0f;
 
-        this.state = PersonState.WALKING;
+        state = PersonState.WALKING;
         updateTextureRegion();
     }
 
@@ -189,7 +189,7 @@ public abstract class AbstractPerson extends Sprite
     {
         animTimer = 0f;
 
-        this.state = PersonState.STANDING;
+        state = PersonState.STANDING;
 
         getRoom().unlockCoordinate(tileCoordinates.x, tileCoordinates.y);
 
@@ -277,7 +277,7 @@ public abstract class AbstractPerson extends Sprite
      */
     public void setDirection(Direction dir)
     {
-        this.direction = dir;
+        direction = dir;
     }
 
     /**
@@ -297,7 +297,7 @@ public abstract class AbstractPerson extends Sprite
      */
     public void setRoom(Room room)
     {
-        this.currentRoom = room;
+        currentRoom = room;
     }
     
     /*************************************************************************/
@@ -363,7 +363,7 @@ public abstract class AbstractPerson extends Sprite
      */
     public String getName()
     {
-        return this.name;
+        return name;
     }
 
     /**
@@ -373,7 +373,7 @@ public abstract class AbstractPerson extends Sprite
      */
     public Direction getDirection()
     {
-        return this.direction;
+        return direction;
     }
 
     /**
@@ -383,7 +383,7 @@ public abstract class AbstractPerson extends Sprite
      */
     public Room getRoom()
     {
-        return this.currentRoom;
+        return currentRoom;
     }
 
     /**
@@ -444,7 +444,7 @@ public abstract class AbstractPerson extends Sprite
          */
         public int getDx()
         {
-            return this.dx;
+            return dx;
         }
 
         /**
@@ -454,7 +454,7 @@ public abstract class AbstractPerson extends Sprite
          */
         public int getDy()
         {
-            return this.dy;
+            return dy;
         }
 
         /**

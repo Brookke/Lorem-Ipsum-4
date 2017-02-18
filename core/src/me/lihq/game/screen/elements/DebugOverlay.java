@@ -37,7 +37,7 @@ public class DebugOverlay
     /**
      * This is to store the font that the debug screen is written in
      */
-    private static BitmapFont font = Assets.getFont("arial", 30);
+    private static BitmapFont font = Assets.createFont("arial", 30);
 
     /**
      * This method draws the debug menu to the batch

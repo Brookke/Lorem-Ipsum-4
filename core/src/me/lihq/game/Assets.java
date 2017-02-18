@@ -92,12 +92,13 @@ public class Assets
     		BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
 
     /**
-     * @param file - The file that contains the textures.
-     * @return Returns the new texture.
+     * @param file - The file that contains the textures
+     * 
+     * @return The new texture
      */
     public static Texture loadTexture(String file)
     {
-        return new Texture(Gdx.files.internal(file));
+    	return new Texture(Gdx.files.internal(file));
     }
 
     /**
@@ -105,9 +106,9 @@ public class Assets
      */
     public static void load()
     {
-    	FONT45 = getFont("fofer", 45);
-        FONT30 = getFont("arial", 30);
-        FONT20 = getFont("arial", 20);
+    	FONT45 = createFont("fofer", 45);
+        FONT30 = createFont("arial", 30);
+        FONT20 = createFont("arial", 20);
         FONT15 = new BitmapFont();
 
         OPENING = loadTexture("title.png");
@@ -251,7 +252,7 @@ public class Assets
      * 
      * @author JAAPAN
      */
-    public static BitmapFont getFont(String font, int size)
+    public static BitmapFont createFont(String font, int size)
     {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -273,7 +274,7 @@ public class Assets
      * 
      * @author JAAPAN
      */
-    public static Label getLabel(String text, boolean title)
+    public static Label createLabel(String text, boolean title)
     {
     	if (title) {
     		Label label = new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
@@ -294,7 +295,7 @@ public class Assets
      * 
      * @author JAAPAN
      */
-    public static TextButton getTextButton(String text)
+    public static TextButton createTextButton(String text)
     {
     	return new TextButton(text, UI_SKIN);
     }
@@ -307,7 +308,7 @@ public class Assets
      * 
      * @author JAAPAN
      */
-    public static CheckBox getCheckBox(String text)
+    public static CheckBox createCheckBox(String text)
     {
     	return new CheckBox(text, UI_SKIN);
     }
@@ -323,7 +324,7 @@ public class Assets
      * 
      * @author JAAPAN
      */
-    public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
+    public static Slider createSlider(float min, float max, float stepSize, boolean vertical)
     {
     	return new Slider(min, max, stepSize, vertical, UI_SKIN);
     }

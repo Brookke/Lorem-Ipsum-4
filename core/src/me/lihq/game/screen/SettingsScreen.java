@@ -37,30 +37,30 @@ public class SettingsScreen extends AbstractScreen {
 	
 	private void initMenu() {
         // Create and position the label containing title text
-        Label title = Assets.getLabel("Settings", true);
+        Label title = Assets.createLabel("Settings", true);
 
         // Create and position the back button, using the default TextButtonStyle in uiSkins
-        TextButton backButton = Assets.getTextButton("Back");
+        TextButton backButton = Assets.createTextButton("Back");
         backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
         
         // Create and position the mute check box, using the default CheckBoxStyle in uiSkins; 
         // the spaces in the text provide spacing between it and the check box texture
-        CheckBox muteCheckBox = Assets.getCheckBox("  Mute");
+        CheckBox muteCheckBox = Assets.createCheckBox("  Mute");
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*6);
         
-        Label musicLabel = Assets.getLabel("Music volume:", false);
+        Label musicLabel = Assets.createLabel("Music volume:", false);
         musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*2);
         
         // Create and position the horizontal music volume slider, using the default SliderStyle
         // in uiSkins
-        Slider musicSlider = Assets.getSlider(0f, 1f, 0.1f, false);
+        Slider musicSlider = Assets.createSlider(0f, 1f, 0.1f, false);
         musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*0.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
         
-        Label sfxLabel = Assets.getLabel("Sound effects volume:", false);
+        Label sfxLabel = Assets.createLabel("Sound effects volume:", false);
         sfxLabel.setPosition(Gdx.graphics.getWidth() / 2 - sfxLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 - OFFSET*2.5f);
         
-        Slider sfxSlider = Assets.getSlider(0f, 1f, 0.1f, false);
+        Slider sfxSlider = Assets.createSlider(0f, 1f, 0.1f, false);
         sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - OFFSET*4);
         sfxSlider.setValue(Settings.SFX_VOLUME);
 
