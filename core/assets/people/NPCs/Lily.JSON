@@ -22,10 +22,10 @@
     "Red Scarf": "Ooooh, I like that colour! I bet it's %NPC's.",
     "Hockey Stick": "My teammate %NPC lost their stick not long ago. Ask them.",
     "Hardware Magazine": "Oh yeah I read that! I was talking to %NPC about it.",
-    "Diamond Ring": "PLACEHOLDER",
-    "Receipt": "PLACEHOLDER",
-    "USB Stick": "PLACEHOLDER",
-    "Sweet Wrapper": "PLACEHOLDER"
+    "Diamond Ring": "Oh that's so nice! I bet it belongs to %NPC.",
+    "Receipt": "I am a vegan! I talk to %NPC a lot about it.",
+    "USB Stick": "I'm sorry I don't study history. I think %NPC does?",
+    "Sweet Wrapper": "I'm not a big fan of coffee. %NPC is always drinking it though."
   },
   "noneResponses": [
     "Really sorry but I just don't have the time right now.",
