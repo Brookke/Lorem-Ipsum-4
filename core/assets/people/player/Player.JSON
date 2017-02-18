@@ -52,6 +52,24 @@
       "NEUTRAL": "Are these your car keys?",
       "NICE": "Hey you look like you have good taste in cars. What make is yours? "
     },
+    "Hardware Magazine": {
+      "AGGRESSIVE": "DO YOU RECOGNISE THIS MAGAZINE? TELL ME!",
+      "NEUTRAL": "Have you seen this before?",
+      "NICE": "You look pretty handy, do you know who's this is?"
+    }
+    "Diamond Ring": {
+      "AGGRESSIVE": "IS THIS YOUR RING?",
+      "NEUTRAL": "Do you recognise this ring?",
+      "NICE": "Someone dropped this expensive looking ring; do you know who's it is?"
+    }
+    "Receipt": {
+      "AGGRESSIVE": "THIS IS YOUR RECEIPT, ISN'T IT?",
+      "NETURAL": "Do you know who's receipt this is?",
+      "NICE": "I found this receipt lying around, any idea who's it could be?"
+    }
+    "USB Stick": {
+      "AGGRESSIVE": "
+    }
   },
   "noneResponses": [
     "Sorry I am a little busy for questions right now.",
