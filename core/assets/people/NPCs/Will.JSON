@@ -16,16 +16,16 @@
     "Erotic Novel": "Nope. Try %NPC.",
     "Broken Mobile Phone": "Nope. %NPC has a phone like that though.",
     "Car Keys": "Nope. You should ask %NPC.",
-    "Knife": "PLACEHOLDER",
-    "Cricket Bat": "PLACEHOLDER",
-    "Energy Drink": "PLACEHOLDER",
-    "Red Scarf": "PLACEHOLDER",
-    "Hockey Stick": "PLACEHOLDER",
-    "Hardware Magazine": "PLACEHOLDER",
-    "Diamond Ring": "PLACEHOLDER",
-    "Receipt": "PLACEHOLDER",
-    "USB Stick": "PLACEHOLDER",
-    "Sweet Wrapper": "PLACEHOLDER"
+    "Knife": "I do have my emergency pocket knife, I got the idea off %NPC",
+    "Cricket Bat": "Yes I play every weekend, I'm on the same team as %NPC.",
+    "Energy Drink": "God I can't stand the stuff. I saw %NPC take a swig of it earlier though.",
+    "Red Scarf": "Ah thanks %NPC and I have been looking for that all night.",
+    "Hockey Stick": "I value my teeth far too much to play hockey. %NPC is pretty keen though.",
+    "Hardware Magazine": "To be honest with you I'm not much for DIY, I normally just call %NPC instead.",
+    "Diamond Ring": "Ah, you caught me! I bought the ring off %NPC.",
+    "Receipt": "Sorry I don't shop there. Though I saw %NPC in there the other week.",
+    "USB Stick": "Oh, I bought this for %NPC as a Secret Santa last year!",
+    "Sweet Wrapper": "I'm not old enough to carry toffees around with me. %NPC is though, ask them!"
   },
   "noneResponses": [
     "Sorry I have some sound to render.",
@@ -33,14 +33,14 @@
     "I am not telling you."
   ],
   "motives": {
-  	"Adam": "",
+  	"Adam": "A great force overcame me and made me kill him. Honest.",
   	"Colin": "I wanted to make a transitive relation between me, my weapon and him.",
   	"Diana": "She spat in my ear. I think it was an accident. But still.",
-  	"Horatio": "",
-  	"Kyle": "",
+  	"Horatio": "He bullied me in school. ",
+  	"Kyle": "We collaborated on a paper and he took all the credit.",
   	"Lily": "She once cut me in line to see Star Wars - I didn't get in!",
   	"Mary": "She beat me in a poetry writing contest.",
   	"Mike": "He once dripped molten solder on me. I still have the scar."
-  	"Roger": "",
+  	"Roger": "He has such a nice bike, I thought if I killed him I could get away on it before anyone figured it out.",
   }
 }
