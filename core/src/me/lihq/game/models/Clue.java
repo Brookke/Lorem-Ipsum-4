@@ -34,7 +34,16 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    private boolean murderWeapon = false;
+    private boolean murderWeapon;
+    
+    /**
+     * True if this clue is a red herring, otherwise false.
+     * Red herrings point towards a random NPC (not the killer) when questioned
+     * about.
+     * 
+     * @author JAAPAN
+     */
+    private boolean redHerring = false;
 
     /**
      * Creates a clue
@@ -96,7 +105,8 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public boolean isMurderWeapon(){
+    public boolean isMurderWeapon()
+    {
     	return this.murderWeapon;
     }
     
@@ -110,6 +120,33 @@ public class Clue extends Sprite
     public Clue setMurderWeapon()
     {
     	this.murderWeapon = true;
+    	
+    	return this;
+    }
+    
+    /**
+     * 
+     * @return True if the clue is a red herring, false otherwise
+     * 
+     * @author JAAPAN
+     */
+    public boolean isRedHerring()
+    {
+    	return redHerring;
+    }
+    
+    /**
+     * Sets this clue as a red herring.
+     * 
+     * @return (Clue) This object once it has been set as a red herring
+     * 
+     * @author JAAPAN
+     */
+    public Clue setRedHerring()
+    {
+    	redHerring = true;
+    	
+    	System.out.println(name + " is a red herring");
     	
     	return this;
     }

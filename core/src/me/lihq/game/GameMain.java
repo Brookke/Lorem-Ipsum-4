@@ -36,6 +36,7 @@ import me.lihq.game.screen.MainMenuScreen;
 import me.lihq.game.screen.NavigationScreen;
 import me.lihq.game.screen.PauseScreen;
 import me.lihq.game.screen.SettingsScreen;
+import me.lihq.game.screen.elements.SpeechBox;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -56,10 +57,23 @@ public class GameMain extends Game
      * The game map
      */
     public Map gameMap;
+    
     /**
      * A player object for the player of the game
      */
     public Player player;
+    
+    /**
+     * An NPC object for the killer. This allows us to easily access the name and room of the
+     * killer, without having to iterate through each NPC.
+     */
+    public NPC killer;
+
+    /**
+     * An NPC object for the victim. This allows us to easily access the name of the victim,
+     * without having to iterate through each NPC.
+     */
+    public NPC victim;
 
     /**
      * A screen to be used to display standard gameplay within the game , including the status bar.
@@ -220,6 +234,24 @@ public class GameMain extends Game
         NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), true, "Adam.JSON");
         NPCs.add(npc10);
 
+        /*
+        Generate who the Killer and Victim are
+         */
+        killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!killer.setKiller()) {
+            killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+
+        victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!victim.setVictim()) {
+            victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+        
+        killer.setMotive(victim);
+        // Remove the victim from the list of NPCs, so they aren't added to the game
+        NPCs.remove(victim);
+        
+
         int amountOfRooms = gameMap.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
@@ -249,26 +281,9 @@ public class GameMain extends Game
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);
 
-            System.out.println(loopNpc.getName() + " has been placed in room " + selectedRoom + " at " + position);
+            System.out.println(loopNpc.getName() + " has been placed in room \"" + gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
         }
-
-        /*
-        Generate who the Killer and Victim are
-         */
-        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
-
-        while (!killer.setKiller()) {
-            killer = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
-
-
-        while (!victim.setVictim()) {
-            victim = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-        
-        killer.setMotive(victim);
+        System.out.println();
     }
 
     /**
@@ -316,6 +331,12 @@ public class GameMain extends Game
         for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
         	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
         	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+        	
+        	// Set the first clues in the list to red herrings (the number of red herrings
+        	// specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
+        	// this does not need to be further randomised.
+        	if (i < Settings.NUMBER_OF_RED_HERRINGS)
+        		tempClues.get(i).setRedHerring();
         }
         
         // Choose a random murder weapon
@@ -323,6 +344,8 @@ public class GameMain extends Game
         // Create the murder weapon from the JSON file.
         JsonValue entry = jsonData.get("weapons").get(murderWeapon);
         tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
+    	
+    	System.out.println(entry.name + " is the murder weapon");
         
         // Assign each clue to a randomly selected room.
         int amountOfRooms = gameMap.getAmountOfRooms();
