@@ -70,7 +70,7 @@ public class WinScreen extends AbstractScreen {
                     highScoresList.append("\n");
                 }
             }
-		} catch (IOException e) {
+		} catch (Throwable e) {
 			highScoresList.append("Error loading high scores.");
 		}
 
