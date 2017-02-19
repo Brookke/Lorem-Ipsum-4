@@ -199,14 +199,22 @@ public class WinScreen extends AbstractScreen {
 		//close the highscore file
 	}
 
+	/**
+	 * Updates the leaderboards with the players current score (if necessary)
+	 *
+	 * @return Integer array containing the 5 highscores
+	 */
 	private int[] getHighScores() throws IOException {
 		List<String> scoresList;
 		String filePath = "MITRCH-Leaderboards.txt";
+
+		// Get the contents of the leaderboards file, or create it and populate it with 0s
 		try {
 			scoresList = Files.readAllLines(Paths.get(filePath));
 		} catch (NoSuchFileException e) {
 			File scoresFile = new File(filePath);
 			scoresFile.createNewFile();
+
 			List<String> initialHighscore = new ArrayList<>();
 			for (int i = 0; i < 5; i++) {
 				initialHighscore.add(i, "0");
@@ -216,6 +224,7 @@ public class WinScreen extends AbstractScreen {
 			scoresList = Files.readAllLines(Paths.get(filePath));
 		}
 
+		// Check if the current score is a high score and insert it into appropriate index in scoresList
 		for (int j = 0; j < 5; j++) {
 			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
 				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
@@ -224,8 +233,10 @@ public class WinScreen extends AbstractScreen {
 			}
 		}
 
+		// Write the updated leaderboards back to the file
 		Files.write(Paths.get(filePath), scoresList);
 
+		//Store the highscores in an integer array
 		int[] highscores = new int[5];
 		for (int k = 0; k < 5; k++) {
 			highscores[k] = Integer.parseInt(scoresList.get(k));
