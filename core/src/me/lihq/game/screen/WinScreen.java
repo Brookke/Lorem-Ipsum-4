@@ -54,32 +54,32 @@ public class WinScreen extends AbstractScreen {
 	private void initMenu()
 	{
 		int[] highscores;
-        StringBuilder highScoresList = new StringBuilder();
-        highScoresList.append("Highscores:\n");
+        List<Label> highscoreLabels = new ArrayList<>();
+        Label highscoresTitleLabel = Assets.getLabel("Highscores", false);
+        highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2 + OFFSET);
+        highscoresTitleLabel.setVisible(false);
+
 		try {
 			highscores = getHighScores();
 			boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
             	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
-            		highScoresList.append((i + 1) + ") *" + highscores[i] + "*");
+                    highscoreLabels.add(Assets.getLabel("*" + highscores[i] + "*", false));
 					// only highlight first instance of a highscore (to prevent highlighting duplicates)
             		highlighted = true;
 				} else {
-					highScoresList.append((i + 1) + ") " + highscores[i]);
+                    highscoreLabels.add(Assets.getLabel(String.valueOf(highscores[i]), false));
 				}
-                if (i != 4) {
-            		// new lines after each score (except last)
-                    highScoresList.append("\n");
-                }
             }
 		} catch (Throwable e) {
-			highScoresList.append("Error loading high scores.");
+            highscoreLabels.add(Assets.getLabel("Error loading high scores.", false));
 		}
 
-		String highScoresLabelText = highScoresList.toString();
-		Label highscoresLabel = Assets.getLabel(highScoresLabelText, false);
-        highscoresLabel.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2);
-        highscoresLabel.setVisible(false);
+        for (int labelIndex = 0; labelIndex < highscoreLabels.size(); labelIndex++) {
+            highscoreLabels.get(labelIndex).setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2 - (labelIndex * OFFSET));
+            highscoreLabels.get(labelIndex).setVisible(false);
+        }
+
 
 		Label title = Assets.getLabel("You Found the Killer!", true);
 		stage.addActor(title);
@@ -126,7 +126,11 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(timeTaken);
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
-		stage.addActor(highscoresLabel);
+
+		stage.addActor(highscoresTitleLabel);
+		for (int i = 0; i < highscoreLabels.size(); i++) {
+		    stage.addActor(highscoreLabels.get(i));
+        }
 		
 		TextButton mainMenuButton = Assets.getTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
@@ -166,7 +170,7 @@ public class WinScreen extends AbstractScreen {
         
         animationTimer += delta;
         
-        if (animationCount < 9 && animationTimer > 0.5f) {
+        if (animationCount < 14 && animationTimer > 0.5f) {
         	animationCount++;
         	animationTimer = 0f;
         	
