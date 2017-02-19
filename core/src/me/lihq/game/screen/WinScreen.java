@@ -202,21 +202,6 @@ public class WinScreen extends AbstractScreen {
 		stage.dispose();
 	}
 
-	public void addToLeaderBoard() throws IOException {
-		// if highscore file doesn't exist, create it
-
-		File desktop = new File(System.getProperty("user.home"), "Desktop\\JAAPAN-Leaderboards.txt");
-		Files.lines(Paths.get("C:\\JAAPAN-Leaderboards.txt")).forEach(System.out::println);
-
-		// open the highscore file
-		// find where the players score would go
-		// if the players score would go in positions 0-4, add it and adjust the table
-		if (game.player.getTotalScore() > 50000) {
-
-		}
-		//close the highscore file
-	}
-
 	/**
 	 * Updates the leaderboards with the players current score (if necessary)
 	 *
