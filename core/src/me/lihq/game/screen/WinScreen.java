@@ -61,12 +61,14 @@ public class WinScreen extends AbstractScreen {
 			boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
             	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
-					highScoresList.append((i + 1) + ") *" + highscores[i] + "*");
-					highlighted = true;
+            		highScoresList.append((i + 1) + ") *" + highscores[i] + "*");
+					// only highlight first instance of a highscore (to prevent highlighting duplicates)
+            		highlighted = true;
 				} else {
 					highScoresList.append((i + 1) + ") " + highscores[i]);
 				}
                 if (i != 4) {
+            		// new lines after each score (except last)
                     highScoresList.append("\n");
                 }
             }
