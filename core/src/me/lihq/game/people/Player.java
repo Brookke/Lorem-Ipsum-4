@@ -396,7 +396,8 @@ public class Player extends AbstractPerson {
     }
     
     /**
-     * @return The duration of the game (excluding time paused) formatted as HH:MM:SS
+     * @return The duration of the game (excluding time paused) formatted as HH:MM:SS. Caps time to
+     * 99:59:59.
      * 
      * @author JAAPAN
      */
@@ -404,10 +405,17 @@ public class Player extends AbstractPerson {
     	int time = (int)gameDuration;
     	int hours, minutes;
     	hours = time / 3600;
-    	time %= 3600;
-    	
-    	minutes = time / 60;
-    	time %= 60;
+    	// Cap time if exceeded 100 hours
+    	if (hours > 99) {
+    		hours = 99;
+    		minutes = 59;
+    		time = 59;
+    	} else {
+	    	time %= 3600;
+	    	
+	    	minutes = time / 60;
+	    	time %= 60;
+    	}
     	
     	return String.format("%1$02d:%2$02d:%3$02d", hours, minutes, time); 
     }

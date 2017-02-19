@@ -129,10 +129,17 @@ public class PlayerUnitTests extends GameTester {
     public void testPlayTime() {
     	// Add 1 hour, 1 minute, 1.5 seconds to the play time
     	p.addPlayTime(3661.5f);
-    	
     	assertEquals("Fail - Play time not flooring", p.getPlayTime(), 3661);
-    	
     	assertEquals("Fail - Play time not correctly formatted", p.getFormattedPlayTime(), "01:01:01");
+    	
+    	// Add 10 minutes, 43.5 seconds
+    	p.addPlayTime(643.5f);
+    	assertEquals("Fail - Fractional time lost", p.getPlayTime(), 4305);
+    	assertEquals("Fail - Play time not correctly formatted", p.getFormattedPlayTime(), "01:11:45");
+    	
+    	// Add 100 hours - should cap
+    	p.addPlayTime(360000f);
+    	assertEquals("Fail - Formatted play time not capped", p.getFormattedPlayTime(), "99:59:59");
     }
     
 }
