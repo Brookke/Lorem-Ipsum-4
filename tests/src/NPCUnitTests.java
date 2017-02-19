@@ -7,18 +7,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Created by brookehatton on 02/01/2017.
+ * JUnit tests for the NPC class.
  */
-public class NPCUnitTests extends GameTester
-{
+public class NPCUnitTests extends GameTester {
     public NPC colin;
     public Room room;
 
     @Before
-    public void makeNPC()
-    {
+    public void makeNPC() {
         room = new Room(0, "testRoom0.tmx", "Test Room 0");
-        colin = new NPC("bob", "colin.png", 1,1, room, false, "Colin.JSON");
+        colin = new NPC("bob", "colin.png", 1,1, room, "Colin.JSON");
     }
 
     @Test
@@ -30,7 +28,6 @@ public class NPCUnitTests extends GameTester
     public void testPersonality() {
         assertEquals(AbstractPerson.Personality.NICE, colin.getPersonality());
     }
-
 
 }
 

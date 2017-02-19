@@ -396,7 +396,7 @@ public class Player extends AbstractPerson {
     }
     
     /**
-     * @return The duration of the game (excluding time paused) formatted as H:M:S
+     * @return The duration of the game (excluding time paused) formatted as HH:MM:SS
      * 
      * @author JAAPAN
      */
@@ -409,7 +409,7 @@ public class Player extends AbstractPerson {
     	minutes = time / 60;
     	time %= 60;
     	
-    	return Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(time); 
+    	return String.format("%1$02d:%2$02d:%3$02d", hours, minutes, time); 
     }
     
     /**
