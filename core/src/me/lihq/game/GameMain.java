@@ -424,7 +424,9 @@ public class GameMain extends Game {
      * @author JAAPAN
      */
     public void resetAll() {
-    	// Clear the list of NPCs, ready to refill it.
+    	// Would be better to reset the necessary variables, rather than recreate the objects
+    	
+    	// Clear the list of NPCs, ready to refill it
     	NPCs.clear();
     	
     	// Recreate the map, so the murder room is randomly re-assigned

@@ -36,17 +36,6 @@ public class Assets {
     public static TextureRegion UNCHECKED_BOX, CHECKED_BOX;
 
     /**
-     * This is the texture of splashscreen frames.
-     */
-    public static Texture OPENING;
-
-    /**
-     * The 2 seperate frames for the splashscreen.
-     */
-    public static TextureRegion INTROFRAME1;
-    public static TextureRegion INTROFRAME2;
-
-    /**
      * These TextureRegions store the 4 different directions that the room changing
      * arrows can face.
      */
@@ -127,10 +116,6 @@ public class Assets {
         FONT30 = createFont("arial", 30);
         FONT20 = createFont("arial", 20);
         FONT15 = new BitmapFont();
-
-        OPENING = loadTexture("title.png");
-        INTROFRAME1 = new TextureRegion(OPENING, 0, 0, 1000, 750);
-        INTROFRAME2 = new TextureRegion(OPENING, 0, 750, 1000, 750);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);
@@ -247,7 +232,6 @@ public class Assets {
     public static void dispose()
     {
     	CLUE_SHEET.dispose();
-    	OPENING.dispose();
     	TAG_BORDER.dispose();
     	FONT45.dispose();
     	FONT30.dispose();
