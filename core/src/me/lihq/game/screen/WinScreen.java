@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,8 @@ public class WinScreen extends AbstractScreen {
 		int[] highscores;
         List<Label> highscoreLabels = new ArrayList<>();
         Label highscoresTitleLabel = Assets.getLabel("Highscores", false);
-        highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2 + OFFSET);
+        highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f - highscoresTitleLabel.getWidth()/2,
+        		Gdx.graphics.getHeight() / 2 + OFFSET*3);
         highscoresTitleLabel.setVisible(false);
 
 		try {
@@ -70,15 +70,14 @@ public class WinScreen extends AbstractScreen {
 				} else {
                     highscoreLabels.add(Assets.getLabel(String.valueOf(highscores[i]), false));
 				}
+            	
+                highscoreLabels.get(i).setPosition(Gdx.graphics.getWidth() * 0.75f - highscoreLabels.get(i).getWidth()/2,
+                		Gdx.graphics.getHeight() / 2 + OFFSET*2 - (i * OFFSET));
+                highscoreLabels.get(i).setVisible(false);
             }
 		} catch (Throwable e) {
             highscoreLabels.add(Assets.getLabel("Error loading high scores.", false));
 		}
-
-        for (int labelIndex = 0; labelIndex < highscoreLabels.size(); labelIndex++) {
-            highscoreLabels.get(labelIndex).setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2 - (labelIndex * OFFSET));
-            highscoreLabels.get(labelIndex).setVisible(false);
-        }
 
 
 		Label title = Assets.getLabel("You Found the Killer!", true);
