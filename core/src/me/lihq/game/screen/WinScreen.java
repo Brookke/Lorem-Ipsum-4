@@ -12,6 +12,14 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The screen that is displayed when the player wins the game. Displays their score and time,
  * and allows them to return to the main menu.
@@ -34,7 +42,7 @@ public class WinScreen extends AbstractScreen {
 	/**
 	 * The number of information labels on the screen. Used for animating their appearance.
 	 */
-	private static final int INFO_LABELS = 8;
+	private static final int INFO_LABELS = 14;
 	
 	/**
 	 * The amount of time to wait before showing the next label.
@@ -55,6 +63,8 @@ public class WinScreen extends AbstractScreen {
 	 * Timer used to animate the information labels.
 	 */
 	private float animationTimer = 0f;
+
+	private boolean setHighScore = false;
 
 	public WinScreen(GameMain game) {
 		super(game);
@@ -114,6 +124,40 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(timeTaken);
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
+    
+    // Generate the leaderboard
+		int[] highscores;
+        List<Label> highscoreLabels = new ArrayList<>();
+        Label highscoresTitleLabel = Assets.createLabel("Highscores", false);
+        highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f - highscoresTitleLabel.getWidth()/2,
+        		Gdx.graphics.getHeight() / 2 + OFFSET*3);
+        highscoresTitleLabel.setVisible(false);
+
+		try {
+			highscores = getHighScores();
+			boolean highlighted = false;
+            for (int i = 0; i < 5; i++) {
+            	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
+                    highscoreLabels.add(Assets.createLabel("*" + highscores[i] + "*", false));
+					// Only highlight first instance of a highscore (to prevent highlighting duplicates)
+            		highlighted = true;
+				} else {
+                    highscoreLabels.add(Assets.createLabel(String.valueOf(highscores[i]), false));
+				}
+            	
+                highscoreLabels.get(i).setPosition(Gdx.graphics.getWidth() * 0.75f - highscoreLabels.get(i).getWidth()/2,
+                		Gdx.graphics.getHeight() / 2 + OFFSET*2 - (i * OFFSET));
+                highscoreLabels.get(i).setVisible(false);
+            }
+		} catch (Throwable e) {
+            highscoreLabels.add(Assets.createLabel("Error loading high scores.", false));
+		}
+
+    // Add all highscores labels to the stage
+		stage.addActor(highscoresTitleLabel);
+		for (int i = 0; i < highscoreLabels.size(); i++) {
+		    stage.addActor(highscoreLabels.get(i));
+        }
 		
 		// Create the button to return to the main menu and reset the game state
 		TextButton mainMenuButton = Assets.createTextButton("Main Menu");
@@ -219,4 +263,50 @@ public class WinScreen extends AbstractScreen {
 		stage.dispose();
 	}
 
+	/**
+	 * Updates the leaderboards with the players current score (if necessary)
+	 *
+	 * @return Integer array containing the 5 highscores
+	 */
+	private int[] getHighScores() throws IOException {
+		List<String> scoresList;
+		String filePath = "MITRCH-Leaderboards.txt";
+
+		// Get the contents of the leaderboards file, or create it and populate it with 0s
+		try {
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		} catch (NoSuchFileException e) {
+			File scoresFile = new File(filePath);
+			scoresFile.createNewFile();
+
+			List<String> initialHighscore = new ArrayList<>();
+			for (int i = 0; i < 5; i++) {
+				initialHighscore.add(i, "0");
+			}
+
+			Files.write(Paths.get(filePath), initialHighscore);
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		}
+
+		// Check if the current score is a high score and insert it into appropriate index in scoresList
+		for (int j = 0; j < 5; j++) {
+			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
+				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
+				scoresList.remove(scoresList.size() - 1);
+				setHighScore = true;
+				break;
+			}
+		}
+
+		// Write the updated leaderboards back to the file
+		Files.write(Paths.get(filePath), scoresList);
+
+		//Store the highscores in an integer array
+		int[] highscores = new int[5];
+		for (int k = 0; k < 5; k++) {
+			highscores[k] = Integer.parseInt(scoresList.get(k));
+		}
+
+		return highscores;
+	}
 }
