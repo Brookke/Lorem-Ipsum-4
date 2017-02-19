@@ -10,8 +10,7 @@ import me.lihq.game.Settings;
 /**
  * Defines the clues that the player needs to find in order to solve the murder.
  */
-public class Clue extends Sprite
-{
+public class Clue extends Sprite {
     /**
      * The name of the clue, set when you initialise the clue and gettable using {@link #getName()}
      */
@@ -56,8 +55,7 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public Clue(String name, String description, boolean weapon, int clueX, int clueY)
-    {
+    public Clue(String name, String description, boolean weapon, int clueX, int clueY) {
         super(new TextureRegion(Assets.CLUE_SHEET, (clueX * Settings.CLUE_SIZE), (clueY * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
         this.name = name;
         this.description = description;
@@ -71,8 +69,7 @@ public class Clue extends Sprite
      * @return True if {@code obj} is of type Clue and has the same name
      */
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (obj instanceof Clue) {
             Clue c = (Clue) obj;
             return c.getName().equals(getName());
@@ -92,8 +89,7 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public Clue setMurderWeapon()
-    {
+    public Clue setMurderWeapon() {
     	murderWeapon = true;
     	
     	return this;
@@ -106,8 +102,7 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public Clue setRedHerring()
-    {
+    public Clue setRedHerring() {
     	redHerring = true;
     	
     	System.out.println(name + " is a red herring");
@@ -124,8 +119,7 @@ public class Clue extends Sprite
      *          </p>
      * @return (Clue) This object once the location has been updated
      */
-    public Clue setTileCoordinates(Vector2Int v)
-    {
+    public Clue setTileCoordinates(Vector2Int v) {
         return setTileCoordinates(v.x, v.y);
     }
 
@@ -139,8 +133,7 @@ public class Clue extends Sprite
      *          </p>
      * @return (Clue) this object
      */
-    public Clue setTileCoordinates(int x, int y)
-    {
+    public Clue setTileCoordinates(int x, int y) {
         this.tileCoordinates.x = x;
         this.tileCoordinates.y = y;
 
@@ -154,16 +147,14 @@ public class Clue extends Sprite
     /**
      * @return The name of clue
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
     /**
      * @return The description of the clue
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return description;
     }
     
@@ -172,8 +163,7 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public boolean isMurderWeapon()
-    {
+    public boolean isMurderWeapon() {
     	return murderWeapon;
     }
     
@@ -182,8 +172,7 @@ public class Clue extends Sprite
      * 
      * @author JAAPAN
      */
-    public boolean isRedHerring()
-    {
+    public boolean isRedHerring() {
     	return redHerring;
     }
 
@@ -193,8 +182,7 @@ public class Clue extends Sprite
      *          All coordinates relative to the bottom left of the map
      *          </p>
      */
-    public Vector2Int getPosition()
-    {
+    public Vector2Int getPosition() {
         return tileCoordinates;
     }
 
@@ -204,8 +192,7 @@ public class Clue extends Sprite
      *          All coordinates relative to the bottom left of the map
      *          </p>
      */
-    public int getTileX()
-    {
+    public int getTileX() {
         return tileCoordinates.x;
     }
 
@@ -215,8 +202,7 @@ public class Clue extends Sprite
      *          All coordinates relative to the bottom left of the map
      *          </p>
      */
-    public int getTileY()
-    {
+    public int getTileY() {
         return tileCoordinates.y;
     }
 

@@ -13,11 +13,10 @@ import java.util.ArrayList;
 /**
  * This class controls conversation flow between Player and NPCs
  */
-public class ConversationManagement
-{
-    /**
-     * The player that will be starting the conversation
-     */
+public class ConversationManagement {
+	/**
+	 * The player that will be starting the conversation
+	 */
     private Player player;
 
     /**
@@ -56,8 +55,7 @@ public class ConversationManagement
      * @param player           the player that will initiate the conversation
      * @param speechboxManager the speechbox manager that is in charge of displaying the conversation
      */
-    public ConversationManagement(Player player, SpeechboxManager speechboxManager)
-    {
+    public ConversationManagement(Player player, SpeechboxManager speechboxManager) {
         this.player = player;
         this.speechboxMngr = speechboxManager;
 
@@ -70,8 +68,7 @@ public class ConversationManagement
      *
      * @param npc - The NPC to have a conversation with
      */
-    public void startConversation(NPC npc)
-    {
+    public void startConversation(NPC npc) {
         this.tempCluePos = -1;
         this.tempQuestionStyle = null;
         this.tempNPC = npc;
@@ -99,8 +96,7 @@ public class ConversationManagement
     /**
      * This constructs the speech box that finds out what question the player wishes to ask the NPC
      */
-    private void queryQuestionType()
-    {
+    private void queryQuestionType() {
 
         ArrayList<SpeechBoxButton> buttons = new ArrayList<>();
         SpeechBoxButton.EventHandler eventHandler = (result) -> handleResponse(QuestionStage.TYPE, result);
@@ -124,8 +120,7 @@ public class ConversationManagement
     /**
      * This constructs the speechbox that asks the player how they wish to ask the question
      */
-    private void queryQuestionStyle()
-    {
+    private void queryQuestionStyle() {
         ArrayList<SpeechBoxButton> buttons = new ArrayList<>();
         SpeechBoxButton.EventHandler eventHandler = (result) -> handleResponse(QuestionStage.STYLE, result);
 
@@ -138,8 +133,7 @@ public class ConversationManagement
     /**
      * This constructs the speechbox that asks the player what clue they wish to ask about
      */
-    private void queryWhichClue()
-    {
+    private void queryWhichClue() {
         ArrayList<SpeechBoxButton> buttons = new ArrayList<>();
         SpeechBoxButton.EventHandler eventHandler = (result) -> {
             handleResponse(QuestionStage.CLUE, result);
@@ -158,8 +152,7 @@ public class ConversationManagement
     /**
      * This method initialises a questioning user interface
      */
-    private void questionNPC()
-    {
+    private void questionNPC() {
     	player.changePersonality(tempQuestionStyle);
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
@@ -169,8 +162,7 @@ public class ConversationManagement
     /**
      * This method initialises an accusing user interface
      */
-    private void accuseNPC()
-    {
+    private void accuseNPC() {
         if (this.tempNPC.isKiller()) {
         	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("responses", "Accuse"), 5));
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
@@ -185,8 +177,7 @@ public class ConversationManagement
         finished = true;
     }
 
-    private void ignoreNPC()
-    {
+    private void ignoreNPC() {
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Ignored Initial"), 5));
         this.tempNPC.ignored = true;
         finished = true;
@@ -199,8 +190,7 @@ public class ConversationManagement
      * 
      * @author JAAPAN
      */
-    public void finishConversation()
-    {
+    public void finishConversation() {
     	if (!this.speechboxMngr.isEmpty() || !this.player.inConversation || !this.finished)
     		return;
     	
@@ -221,8 +211,7 @@ public class ConversationManagement
      * @param stage  - The stage of the questioning process that they are currently at
      * @param option - The option chosen by the user
      */
-    private void handleResponse(QuestionStage stage, int option)
-    {
+    private void handleResponse(QuestionStage stage, int option) {
         speechboxMngr.removeCurrentSpeechBox();
 
         switch (stage) {
@@ -262,28 +251,24 @@ public class ConversationManagement
      *              default is Neutral
      * @return
      */
-    private Personality convertToQuestionStyle(int style)
-    {
+    private Personality convertToQuestionStyle(int style) {
         switch (style) {
             case 0:
                 return Personality.NICE;
-
             case 1:
                 return Personality.NEUTRAL;
-
             case 2:
                 return Personality.AGGRESSIVE;
-
+            default:
+                //defaults to Neutral
+                return Personality.NEUTRAL;
         }
-        //defaults to Neutral
-        return Personality.NEUTRAL;
     }
 
     /**
      * This is the enumeration for the different stages of questioning the NPC
      */
-    public enum QuestionStage
-    {
+    public enum QuestionStage {
 
         /**
          * This stage indicates that the player has been asked what type of question they have asked

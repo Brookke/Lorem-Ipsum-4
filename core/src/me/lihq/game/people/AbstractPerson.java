@@ -19,8 +19,7 @@ import java.util.Random;
  * The abstract person is an abstract representation of a person. A person can be a non playable character or Player.
  * It extends the sprite class which provides methods for the person to be rendered in the game.
  */
-public abstract class AbstractPerson extends Sprite
-{
+public abstract class AbstractPerson extends Sprite {
     /**
      * The height of the texture region for each person
      */
@@ -116,8 +115,7 @@ public abstract class AbstractPerson extends Sprite
      * @param tileX - This is the start x coordinate for the Person
      * @param tileY - This is the start y coordinate for the Person
      */
-    public AbstractPerson(String name, String img, int tileX, int tileY)
-    {
+    public AbstractPerson(String name, String img, int tileX, int tileY) {
         super(new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
         this.name = name;
         this.spriteSheet = Assets.loadTexture(img);
@@ -132,8 +130,7 @@ public abstract class AbstractPerson extends Sprite
      * This method moves the coordinates in the AbstractPersons coordinates to
      * the Sprites position so that it can then be rendered at the correct location.
      */
-    public void pushCoordinatesToSprite()
-    {
+    public void pushCoordinatesToSprite() {
         setPosition(coordinates.x, coordinates.y);
     }
 
@@ -141,8 +138,7 @@ public abstract class AbstractPerson extends Sprite
      * This is called to update the players position.
      * Called from the game loop, it interpolates the movement so that the person moves smoothly from tile to tile.
      */
-    public void update()
-    {
+    public void update() {
         if (state == PersonState.WALKING) {
             coordinates.x = Interpolation.linear.apply(startTile.x * Settings.TILE_SIZE, destinationTile.x * Settings.TILE_SIZE, animTimer / animTime);
             coordinates.y = Interpolation.linear.apply(startTile.y * Settings.TILE_SIZE, destinationTile.y * Settings.TILE_SIZE, animTimer / animTime);
@@ -164,8 +160,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @param dir the direction that the person is moving in.
      */
-    public void initialiseMove(Direction dir)
-    {
+    public void initialiseMove(Direction dir) {
         getRoom().lockCoordinate(tileCoordinates.x + dir.getDx(), tileCoordinates.y + dir.getDy());
 
         direction = dir;
@@ -185,8 +180,7 @@ public abstract class AbstractPerson extends Sprite
      * Finalises the move by resetting the animation timer and setting the state back to standing.
      * Called when the player is no longer moving.
      */
-    public void finishMove()
-    {
+    public void finishMove() {
         animTimer = 0f;
 
         state = PersonState.STANDING;
@@ -206,8 +200,7 @@ public abstract class AbstractPerson extends Sprite
     /**
      * Updates the texture region based upon how far though the animation time it is.
      */
-    public void updateTextureRegion()
-    {
+    public void updateTextureRegion() {
         float quarter = animTime / 4;
         float half = animTime / 2;
         float threeQuarters = quarter * 3;
@@ -250,8 +243,7 @@ public abstract class AbstractPerson extends Sprite
      * @param x The x coordinate of the tile grid.
      * @param y The y coordinate of the tile grid.
      */
-    public void setTileCoordinates(int x, int y)
-    {
+    public void setTileCoordinates(int x, int y) {
         tileCoordinates.x = x;
         tileCoordinates.y = y;
 
@@ -264,8 +256,7 @@ public abstract class AbstractPerson extends Sprite
      * @param x the x coordinate you wish to store
      * @param y the y coordinate you wish to store
      */
-    private void setCoords(float x, float y)
-    {
+    private void setCoords(float x, float y) {
         coordinates.x = x;
         coordinates.y = y;
     }
@@ -275,8 +266,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @param dir - Desired direction for the person to face.
      */
-    public void setDirection(Direction dir)
-    {
+    public void setDirection(Direction dir) {
         direction = dir;
     }
 
@@ -285,8 +275,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @param animTime - The animation time you want to set.
      */
-    public void setAnimTime(float animTime)
-    {
+    public void setAnimTime(float animTime) {
         this.animTime = animTime;
     }
 
@@ -295,8 +284,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @param room - The room to change currentRoom to {@link #currentRoom}
      */
-    public void setRoom(Room room)
-    {
+    public void setRoom(Room room) {
         currentRoom = room;
     }
     
@@ -310,8 +298,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @return (PersonState) the current state of the Person
      */
-    public PersonState getState()
-    {
+    public PersonState getState() {
         return state;
     }
 
@@ -324,8 +311,7 @@ public abstract class AbstractPerson extends Sprite
      * 
      * @author JAAPAN
      */
-    public String getSpeech(String type, String key)
-    {
+    public String getSpeech(String type, String key) {
         try {
         	if (type == "noneResponses") {
         		// Randomly select a non-response
@@ -346,8 +332,7 @@ public abstract class AbstractPerson extends Sprite
      * @param clue - The clue to get the response for
      * @return The corresponding line of dialogue
      */
-    public String getSpeech(String type, Clue clue)
-    {
+    public String getSpeech(String type, Clue clue) {
         return this.getSpeech(type, clue.getName());
     }
 
@@ -361,8 +346,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @return (String) the persons name {@link #name}
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -371,8 +355,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @return (Direction) Returns the direction the person is facing.
      */
-    public Direction getDirection()
-    {
+    public Direction getDirection() {
         return direction;
     }
 
@@ -381,8 +364,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @return (Room) the room the Person is in {@link #currentRoom}
      */
-    public Room getRoom()
-    {
+    public Room getRoom() {
         return currentRoom;
     }
 
@@ -391,8 +373,7 @@ public abstract class AbstractPerson extends Sprite
      *
      * @return (Vector2Int) the value of tileCoordinates {@link #tileCoordinates}
      */
-    public Vector2Int getTileCoordinates()
-    {
+    public Vector2Int getTileCoordinates() {
         return tileCoordinates;
     }
 
@@ -403,8 +384,7 @@ public abstract class AbstractPerson extends Sprite
      * <li>{@link #EAST}</li>
      * <li>{@link #WEST}</li>
      */
-    public enum Direction
-    {
+    public enum Direction {
         /**
          * person is facing north
          */
@@ -431,8 +411,7 @@ public abstract class AbstractPerson extends Sprite
          * @param dx x coordinate.
          * @param dy y coordinate.
          */
-        Direction(int dx, int dy)
-        {
+        Direction(int dx, int dy) {
             this.dx = dx;
             this.dy = dy;
         }
@@ -442,8 +421,7 @@ public abstract class AbstractPerson extends Sprite
          *
          * @return returns the value of dx.
          */
-        public int getDx()
-        {
+        public int getDx() {
             return dx;
         }
 
@@ -452,8 +430,7 @@ public abstract class AbstractPerson extends Sprite
          *
          * @return returns the value of dy.
          */
-        public int getDy()
-        {
+        public int getDy() {
             return dy;
         }
 
@@ -462,8 +439,7 @@ public abstract class AbstractPerson extends Sprite
          *
          * @return (Direction) the opposite direction to this
          */
-        public Direction getOpposite()
-        {
+        public Direction getOpposite() {
             if (this == Direction.NORTH) return Direction.SOUTH;
             if (this == Direction.EAST) return Direction.WEST;
             if (this == Direction.SOUTH) return Direction.NORTH;
@@ -478,8 +454,7 @@ public abstract class AbstractPerson extends Sprite
      * <li>{@link #WALKING}</li>
      * <li>{@link #STANDING}</li>
      */
-    public enum PersonState
-    {
+    public enum PersonState {
         /**
          * Person is walking.
          */
@@ -494,8 +469,7 @@ public abstract class AbstractPerson extends Sprite
     /**
      * These are the possible personalities of the person
      */
-    public enum Personality
-    {
+    public enum Personality {
         NICE,
         NEUTRAL,
         AGGRESSIVE
@@ -507,8 +481,7 @@ public abstract class AbstractPerson extends Sprite
      * It is used to render NPCs and the Player in the correct order to avoid it appearing as though someone
      * is standing on top of someone else
      */
-    public static class PersonPositionComparator implements Comparator<AbstractPerson>
-    {
+    public static class PersonPositionComparator implements Comparator<AbstractPerson> {
         /**
          * This method compares the 2 objects.
          *
@@ -517,8 +490,7 @@ public abstract class AbstractPerson extends Sprite
          * @return (int) if <0 o1 is considered to be first in the list
          */
         @Override
-        public int compare(AbstractPerson o1, AbstractPerson o2)
-        {
+        public int compare(AbstractPerson o1, AbstractPerson o2) {
             return o2.getTileCoordinates().y - o1.getTileCoordinates().y;
         }
     }

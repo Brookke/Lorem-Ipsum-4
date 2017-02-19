@@ -13,8 +13,7 @@ import java.util.List;
 /**
  * The class which is responsible for the non-playable characters within the game that the player will meet.
  */
-public class NPC extends AbstractPerson
-{
+public class NPC extends AbstractPerson {
     /**
      * List of clues NPC has already been asked about. Used to ensure the player only gets points
      * for asking an NPC about a clue once.
@@ -66,8 +65,7 @@ public class NPC extends AbstractPerson
      * @param room        - ID of room they are in
      * @param spriteSheet - Spritesheet for this NPC
      */
-    public NPC(String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile)
-    {
+    public NPC(String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile) {
         super(name, "people/NPCs/" + spriteSheet, tileX, tileY);
         this.setRoom(room);
 
@@ -78,8 +76,7 @@ public class NPC extends AbstractPerson
      * This method is called once a game tick to randomise movement.
      */
     @Override
-    public void update()
-    {
+    public void update() {
         super.update();
         this.randomMove();
     }
@@ -90,8 +87,7 @@ public class NPC extends AbstractPerson
      * @param fileName - The filename to read from
      */
     @Override
-    public void importDialogue(String fileName)
-    {
+    public void importDialogue(String fileName) {
         jsonData = new JsonReader().parse(Gdx.files.internal("people/NPCs/" + fileName));
         this.personality = Personality.valueOf(jsonData.getString("personality"));
     }
@@ -101,8 +97,7 @@ public class NPC extends AbstractPerson
      *
      * @param dir the direction person should move in
      */
-    public void move(Direction dir)
-    {
+    public void move(Direction dir) {
         if (this.state != PersonState.STANDING) {
             return;
         }
@@ -120,8 +115,7 @@ public class NPC extends AbstractPerson
     /**
      * This method attempts to move the NPC in a random direction
      */
-    private void randomMove()
-    {
+    private void randomMove() {
         if (getState() == PersonState.WALKING) return;
 
         if (random.nextDouble() > 0.01) {
@@ -159,8 +153,7 @@ public class NPC extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public NPC setMotive(NPC victim)
-    {
+    public NPC setMotive(NPC victim) {
     	try {
     		motive = jsonData.get("motives").getString(victim.getName());
     	} catch (Exception e) {
@@ -178,8 +171,7 @@ public class NPC extends AbstractPerson
      *
      * @return Whether it successfully set the NPC to the killer or not
      */
-    public boolean setKiller()
-    {
+    public boolean setKiller() {
         if (isVictim) return false;
 
         isKiller = true;
@@ -195,8 +187,7 @@ public class NPC extends AbstractPerson
      *
      * @return Whether it successfully set the NPC to the victim or not
      */
-    public boolean setVictim()
-    {
+    public boolean setVictim() {
         if (isKiller) return false;
 
         isVictim = true;
@@ -221,8 +212,7 @@ public class NPC extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public String getSpeech(Clue clue, Personality style, Personality player)
-    {
+    public String getSpeech(Clue clue, Personality style, Personality player) {
     	if (style == personality && player == style) {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
@@ -282,16 +272,14 @@ public class NPC extends AbstractPerson
      * @return The NPC's personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
     @Override
-    public Personality getPersonality()
-    {
+    public Personality getPersonality() {
         return personality;
     }
 
     /**
      * @return The {@link #motive} string for this object.
      */
-    public String getMotive()
-    {
+    public String getMotive() {
         return motive;
     }
 
@@ -300,8 +288,7 @@ public class NPC extends AbstractPerson
      *
      * @return (boolean) Return a value of isKiller for this object. {@link #isKiller}
      */
-    public boolean isKiller()
-    {
+    public boolean isKiller() {
         return isKiller;
     }
 
@@ -310,8 +297,7 @@ public class NPC extends AbstractPerson
      *
      * @return (boolean) Returns the value of isVictim for this object {@link #isVictim}
      */
-    public boolean isVictim()
-    {
+    public boolean isVictim() {
         return isVictim;
     }
 }

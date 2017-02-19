@@ -9,8 +9,7 @@ import me.lihq.game.screen.elements.Menu;
 /**
  * This controls the MainMenuScreen that is the first thing the user sees
  */
-public class MainMenuScreen extends AbstractScreen
-{
+public class MainMenuScreen extends AbstractScreen {
     /**
      * This is the menu element
      */
@@ -26,8 +25,7 @@ public class MainMenuScreen extends AbstractScreen
      *
      * @param game - The game it is getting created for
      */
-    public MainMenuScreen(GameMain game)
-    {
+    public MainMenuScreen(GameMain game) {
         super(game);
 
         float w = Gdx.graphics.getWidth();
@@ -44,8 +42,7 @@ public class MainMenuScreen extends AbstractScreen
      * This method is called to show the Menu Screen
      */
     @Override
-    public void show()
-    {
+    public void show() {
         game.inputMultiplexer.addProcessor(menu.stage);
     }
 
@@ -53,10 +50,7 @@ public class MainMenuScreen extends AbstractScreen
      * This method is called once a tick
      */
     @Override
-    public void update()
-    {
-
-    }
+    public void update() {}
 
     /**
      * This method is called once a render loop to render the menu
@@ -64,8 +58,7 @@ public class MainMenuScreen extends AbstractScreen
      * @param delta - The time in seconds since the last draw
      */
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         //Renders the main menu
         menu.render();
     }
@@ -77,8 +70,7 @@ public class MainMenuScreen extends AbstractScreen
      * @param height - The new height
      */
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         menu.resize(width, height);
     }
 
@@ -86,26 +78,19 @@ public class MainMenuScreen extends AbstractScreen
      * This is called when the focus is lost on the window
      */
     @Override
-    public void pause()
-    {
-
-    }
+    public void pause() {}
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume()
-    {
-
-    }
+    public void resume() {}
 
     /**
      * This method is called when the user hides the window
      */
     @Override
-    public void hide()
-    {
+    public void hide() {
         game.inputMultiplexer.removeProcessor(menu.stage);
     }
 
@@ -113,8 +98,7 @@ public class MainMenuScreen extends AbstractScreen
      * This is to be called when you want to dispose of all data
      */
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         //Disposes the main menu
         menu.dispose();
     }

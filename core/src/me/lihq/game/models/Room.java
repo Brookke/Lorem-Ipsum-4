@@ -20,8 +20,7 @@ import java.util.List;
 /**
  * This class defines a room which is a game representation of a real world room in the Ron Cooke Hub.
  */
-public class Room
-{
+public class Room {
     /**
      * This list stores the coordinates of all hideable slots in this room
      * <p>
@@ -71,8 +70,7 @@ public class Room
      * @param mapFile - The String that points to the tmx map file.
      * @param name    - The name of the room
      */
-    public Room(int id, String mapFile, String name)
-    {
+    public Room(int id, String mapFile, String name) {
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;
@@ -99,8 +97,7 @@ public class Room
      * @return (boolean) Returns true if the obj is of type Room and has the exact same ID. {@link #ID}
      */
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (obj instanceof Room) {
             Room r = (Room) obj;
             return r.getID() == this.getID();
@@ -114,16 +111,14 @@ public class Room
      *
      * @return (boolean) the value of {@link #murderRoom}
      */
-    public boolean isMurderRoom()
-    {
+    public boolean isMurderRoom() {
         return murderRoom;
     }
 
     /**
      * Sets the room to be the murder room
      */
-    public void setMurderRoom()
-    {
+    public void setMurderRoom() {
         this.murderRoom = true;
         System.out.println("Room " + getID() + " is the murder room");
     }
@@ -133,8 +128,7 @@ public class Room
      *
      * @return (int) the value of {@link #ID}
      */
-    public int getID()
-    {
+    public int getID() {
         return this.ID;
     }
 
@@ -143,8 +137,7 @@ public class Room
      *
      * @return (String) the value of {@link #name}
      */
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
@@ -153,8 +146,7 @@ public class Room
      *
      * @param newClue - The clue to add to the room
      */
-    public void addClue(Clue newClue)
-    {
+    public void addClue(Clue newClue) {
         System.out.println("Added Clue " + newClue.getName() + " at location " + newClue.getPosition() + " in room \"" + getName() + "\"");
 
         if (!cluesInRoom.contains(newClue)) {
@@ -169,8 +161,7 @@ public class Room
      * @param y - The y coordinate the player is at
      * @return (Clue) returns null if there is no clue at coordinate x,y and returns the clue itself otherwise
      */
-    public Clue getClue(int x, int y)
-    {
+    public Clue getClue(int x, int y) {
         //Apply direction change
         Clue out = null;
         //Check for a clue at that coordinate
@@ -192,8 +183,7 @@ public class Room
      * @param delta - The time passed since the last draw. Used for the animation
      * @param batch - The batch to draw the sprites to
      */
-    public void drawClues(float delta, Batch batch)
-    {
+    public void drawClues(float delta, Batch batch) {
         animationStateTime += delta;
 
         for (Clue c : cluesInRoom) {
@@ -210,8 +200,7 @@ public class Room
      * @param y - The y coordinate to check
      * @return (boolean) whether the tile is a hideable tile.
      */
-    public boolean isHidingPlace(int x, int y)
-    {
+    public boolean isHidingPlace(int x, int y) {
         return hidingSpots.contains(new Vector2Int(x, y));
     }
 
@@ -221,8 +210,7 @@ public class Room
      * @param x - The x coordinate to lock
      * @param y - The y coordinate to lock
      */
-    public void lockCoordinate(int x, int y)
-    {
+    public void lockCoordinate(int x, int y) {
         this.lockedTiles[x][y] = true;
     }
 
@@ -232,8 +220,7 @@ public class Room
      * @param x - The x coordinate to unlock
      * @param y - The y coordinate to unlock
      */
-    public void unlockCoordinate(int x, int y)
-    {
+    public void unlockCoordinate(int x, int y) {
         this.lockedTiles[x][y] = false;
     }
 
@@ -245,12 +232,10 @@ public class Room
      * @param y - The y coordinate to check
      * @return - (boolean) whether or not that tile can be walked on.
      */
-    public boolean isWalkableTile(int x, int y)
-    {
+    public boolean isWalkableTile(int x, int y) {
         //reduced by one because the last layer is to be displayed over the top of the player and therefore is ignored.
         int amountOfLayers = map.getLayers().getCount() - 1;
         int emptyCellCount = 0; //The amount of empty cells on the map in the location x and y.
-
 
         for (int currentLayer = 0; currentLayer < amountOfLayers; currentLayer++) {
             TiledMapTileLayer tiledLayer = (TiledMapTileLayer) map.getLayers().get(currentLayer);
@@ -274,7 +259,6 @@ public class Room
                 return false;
             }
         }
-
 
         /*
         Check to see if the number of empty layer cells matches the number of layers,
@@ -327,8 +311,7 @@ public class Room
      * @param y - The y coordinate to check
      * @return - (boolean) whether or not the tile is a trigger tile.
      */
-    public boolean isTriggerTile(int x, int y)
-    {
+    public boolean isTriggerTile(int x, int y) {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
 
         if (layer.getCell(x, y) == null) return false;
@@ -362,8 +345,7 @@ public class Room
      * @param y = The y coordinate to  check
      * @return a String representing the direction they are facing
      */
-    public String getMatRotation(int x, int y)
-    {
+    public String getMatRotation(int x, int y) {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("Doors");
 
         if (layer.getCell(x, y) == null) return null;
@@ -376,8 +358,7 @@ public class Room
      *
      * @return - (TiledMap) the map relating to this room.
      */
-    public TiledMap getTiledMap()
-    {
+    public TiledMap getTiledMap() {
         return this.map;
     }
 
@@ -387,8 +368,7 @@ public class Room
      * @param t - The transition to be added
      * @return - (Room) itself
      */
-    public Room addTransition(Transition t)
-    {
+    public Room addTransition(Transition t) {
         roomTransitions.add(t);
         return this;
     }
@@ -398,8 +378,7 @@ public class Room
      *
      * @return (List<Vector2Int>) list of coordinates of the hideable tiles
      */
-    public List<Vector2Int> getHidingSpots()
-    {
+    public List<Vector2Int> getHidingSpots() {
         if (hidingSpots != null) return hidingSpots;
 
         List<Vector2Int> hidingSpots = new ArrayList<>();
@@ -436,21 +415,15 @@ public class Room
      *
      * @return (Vector2Int) Coordinates of the tile where the clue is to be hidden, null if there are none available
      */
-    public Vector2Int getRandHidingSpot()
-    {
-
+    public Vector2Int getRandHidingSpot() {
         if (!this.getHidingSpots().isEmpty()) {
             List<Vector2Int> potentialHidingSpots = getHidingSpots();
             Collections.shuffle(potentialHidingSpots);
 
             return potentialHidingSpots.get(0);
-
         } else {
-
             return null;
-
         }
-
     }
 
     /**
@@ -461,8 +434,7 @@ public class Room
      * @param y - The current y coordinate in the room (in terms of tiles not pixels)
      * @return - (Transition) a Transition data type. Which stores the relevant information. null if there is no transition at x, y
      */
-    public Transition getTransitionData(int x, int y)
-    {
+    public Transition getTransitionData(int x, int y) {
         return hasTransition(new Vector2Int(x, y));
     }
 
@@ -473,8 +445,7 @@ public class Room
      * @param v - The vector containing the FROM coordinates
      * @return - (Transition) nullable Transition - the transition if it exists, else, null
      */
-    private Transition hasTransition(Vector2Int v)
-    {
+    private Transition hasTransition(Vector2Int v) {
         for (Transition l : roomTransitions) {
             if (l.from.equals(v)) {
                 return (l);
@@ -489,8 +460,7 @@ public class Room
      *
      * @return (Vector2Int) the random walkable tile generated.
      */
-    public Vector2Int getRandomLocation()
-    {
+    public Vector2Int getRandomLocation() {
         int roomWidth = ((TiledMapTileLayer) getTiledMap().getLayers().get(0)).getWidth();
         int roomHeight = ((TiledMapTileLayer) getTiledMap().getLayers().get(0)).getHeight();
 
@@ -512,8 +482,7 @@ public class Room
     /**
      * This object stores data the links the rooms together
      */
-    public static class Transition
-    {
+    public static class Transition {
         /**
          * This is the coordinates that starts the transition
          */
@@ -537,9 +506,7 @@ public class Room
         /**
          * Constructor
          */
-        public Transition()
-        {
-        }
+        public Transition() {}
 
         /**
          * This method takes the parameters and sets the values of the relevant properties
@@ -550,8 +517,7 @@ public class Room
          * @param newDirection       - The direction that you will face after the transition
          * @return (Transition) this
          */
-        public Transition setTo(Room room, int newTileCoordinateX, int newTileCoordinateY, Direction newDirection)
-        {
+        public Transition setTo(Room room, int newTileCoordinateX, int newTileCoordinateY, Direction newDirection) {
             this.newRoom = room;
             this.newTileCoordinates = new Vector2Int(newTileCoordinateX, newTileCoordinateY);
             this.newDirection = newDirection;
@@ -565,8 +531,7 @@ public class Room
          * @param oldTiledCoordinateY - The y coordinate that the transition starts from
          * @return (Transition) this
          */
-        public Transition setFrom(int oldTiledCoordinateX, int oldTiledCoordinateY)
-        {
+        public Transition setFrom(int oldTiledCoordinateX, int oldTiledCoordinateY) {
             this.from = new Vector2Int(oldTiledCoordinateX, oldTiledCoordinateY);
             return this;
         }
@@ -576,8 +541,7 @@ public class Room
          *
          * @return (Room) value of newRoom
          */
-        public Room getNewRoom()
-        {
+        public Room getNewRoom() {
             return newRoom;
         }
     }

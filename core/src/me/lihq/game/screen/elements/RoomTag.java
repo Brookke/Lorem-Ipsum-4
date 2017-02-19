@@ -13,8 +13,7 @@ import me.lihq.game.Settings;
  * This class is for the RoomTag that is to be displayed at the top left
  * of the screen when a new room is entered.
  */
-public class RoomTag
-{
+public class RoomTag {
     /**
      * This is the room name it is to display
      */
@@ -52,8 +51,7 @@ public class RoomTag
      *
      * @param roomName - The name to display.
      */
-    public RoomTag(String roomName)
-    {
+    public RoomTag(String roomName) {
         this.roomName = roomName;
     }
 
@@ -64,8 +62,7 @@ public class RoomTag
      *
      * @param batch - The SpriteBatch to draw the tag to
      */
-    public void render(SpriteBatch batch)
-    {
+    public void render(SpriteBatch batch) {
         boolean toClose = false;
 
         if (!batch.isDrawing()) {
@@ -91,8 +88,7 @@ public class RoomTag
     /**
      * This method is called once per game tick. It is used to control the animation of the tag.
      */
-    public void update()
-    {
+    public void update() {
         if (animTime <= MAX_ANIM_TIME) {
             animTime++;
         } else if (timeShown <= MAX_TIME_SHOWN) {

@@ -22,8 +22,7 @@ import me.lihq.game.GameMain;
  * Contains UI controls for presenting the game status to the player, and allowing
  * them to access the inventory and the pause menu.
  */
-public class StatusBar
-{
+public class StatusBar {
 	/**
 	 * Reference to the game; used for accessing the player's score and personality, 
 	 * and changing the screen when buttons are pressed
@@ -81,8 +80,7 @@ public class StatusBar
      * The constructor for the StatusBar.
      * Sets up UI controls and adds them to the stage ready for rendering.
      */
-    public StatusBar(final GameMain game)
-    {
+    public StatusBar(final GameMain game) {
     	this.game = game;
     	
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -107,8 +105,7 @@ public class StatusBar
 
         TextButton inventoryButton = new TextButton("Inventory", skin);
         statusBar.add(inventoryButton).uniform();
-        inventoryButton.addListener(new ClickListener()
-        {
+        inventoryButton.addListener(new ClickListener() {
         	/**
         	 * Called when the button is clicked. Changes the current screen to the
         	 * inventory.
@@ -116,16 +113,14 @@ public class StatusBar
         	 * @author JAAPAN
         	 */
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
             	game.setScreen(game.inventoryScreen);
             }
         });
 
         TextButton pauseButton = new TextButton("Pause", skin);
         statusBar.add(pauseButton).uniform();
-        pauseButton.addListener(new ClickListener()
-        {
+        pauseButton.addListener(new ClickListener() {
         	/**
         	 * Called when the button is clicked. Changes the current screen to the
         	 * pause menu.
@@ -133,8 +128,7 @@ public class StatusBar
         	 * @author JAAPAN
         	 */
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(game.pauseScreen);
             }
         });
@@ -146,8 +140,7 @@ public class StatusBar
      * Renders the status bar and updates the score and personality labels.
      * Should be called within the render() method of a screen.
      */
-    public void render()
-    {
+    public void render() {
         /******************** Added by team JAAPAN ********************/
     	scoreLabel.setText("Score: " + game.player.getScore());
     	personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
@@ -162,16 +155,14 @@ public class StatusBar
      * @param width  - the new width
      * @param height - the new height
      */
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 
     /**
      * Disposes all the elements
      */
-    public void dispose()
-    {
+    public void dispose() {
         stage.dispose();
     }
 
@@ -180,8 +171,7 @@ public class StatusBar
      * 
      * @author JAAPAN
      */
-    private void initSkin()
-    {
+    private void initSkin() {
     	skin = new Skin();
     	
         // Create a texture

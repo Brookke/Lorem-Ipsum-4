@@ -22,8 +22,7 @@ import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeT
  * Defines the assets that the game uses, and provides various factory methods for loading textures
  * and creating UI elements.
  */
-public class Assets
-{
+public class Assets {
     /**
      * The asset sheet for clues.
      */

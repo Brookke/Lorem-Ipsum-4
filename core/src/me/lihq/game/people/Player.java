@@ -15,8 +15,7 @@ import me.lihq.game.screen.elements.SpeechBox;
 /**
  * This class defines the player that the person playing the game will be represented by.
  */
-public class Player extends AbstractPerson
-{
+public class Player extends AbstractPerson {
     /**
      * This object stores the clues that the player has picked up.
      */
@@ -70,8 +69,7 @@ public class Player extends AbstractPerson
      * @param name   - The name for the new player.
      * @param imgSrc - The image used to represent it.
      */
-    public Player(String name, String imgSrc, int tileX, int tileY)
-    {
+    public Player(String name, String imgSrc, int tileX, int tileY) {
         super(name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
     }
@@ -82,8 +80,7 @@ public class Player extends AbstractPerson
      * @param fileName - The file to read from
      */
     @Override
-    public void importDialogue(String fileName)
-    {
+    public void importDialogue(String fileName) {
         jsonData = new JsonReader().parse(Gdx.files.internal("people/player/" + fileName));
     }
     
@@ -92,15 +89,12 @@ public class Player extends AbstractPerson
      *
      * @param dir the direction that the player should move in.
      */
-    public void move(Direction dir)
-    {
+    public void move(Direction dir) {
         if (this.state != PersonState.STANDING) {
             return;
         }
 
-        if (!canMove) {
-            return;
-        }
+        if (!canMove) return;
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
@@ -119,8 +113,7 @@ public class Player extends AbstractPerson
     /**
      * This method is called when the player interacts with the map
      */
-    public void interact()
-    {
+    public void interact() {
         if (inConversation) return;
 
         NPC npc = getFacingNPC();
@@ -136,8 +129,7 @@ public class Player extends AbstractPerson
      *
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
-    private NPC getFacingNPC()
-    {
+    private NPC getFacingNPC() {
         for (NPC npc : GameMain.me.getNPCS(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) && 
             		(npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
@@ -153,8 +145,7 @@ public class Player extends AbstractPerson
     /**
      * This method checks to see if the tile the player is facing has a clue hidden in it or not
      */
-    private void checkForClue()
-    {
+    private void checkForClue() {
         int x = getTileCoordinates().x + getDirection().getDx();
         int y = getTileCoordinates().y + getDirection().getDy();
 
@@ -195,8 +186,7 @@ public class Player extends AbstractPerson
      *
      * @return (boolean) Whether the player is on a trigger tile or not
      */
-    public boolean isOnTriggerTile()
-    {
+    public boolean isOnTriggerTile() {
         return this.getRoom().isTriggerTile(this.tileCoordinates.x, this.tileCoordinates.y);
     }
     
@@ -209,8 +199,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public boolean canAccuse()
-    {
+    public boolean canAccuse() {
     	return (foundMurderWeapon && usefulClues >= 3 && questionsAsked >= 5);
     }
 
@@ -218,8 +207,7 @@ public class Player extends AbstractPerson
      * This takes the player at its current position, and automatically gets the transition data
      * for the next room and applies it to the player and game
      */
-    public void moveRoom()
-    {
+    public void moveRoom() {
         if (isOnTriggerTile()) {
             Room.Transition newRoomData = this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y);
 
@@ -251,17 +239,17 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void changePersonality(Personality change)
-    {
+    public void changePersonality(Personality change) {
     	switch (change) {
     	case AGGRESSIVE:
     		personalityLevel -= Math.ceil(10*(personalityLevel/100f));
     		break;
 		case NEUTRAL:
-			if (personalityLevel < 50)
+			if (personalityLevel < 50) {
 				personalityLevel += Math.ceil(10*((50-personalityLevel)/100f));
-			else
+			} else {
 				personalityLevel -= Math.ceil(10*((personalityLevel-50)/100f));
+			}
 			break;
 		case NICE:
     		personalityLevel += Math.ceil(10*((100-personalityLevel)/100f));
@@ -282,8 +270,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void addToScore(int scoreToAdd)
-    {
+    public void addToScore(int scoreToAdd) {
     	score += scoreToAdd;
     	if (score < 0) score = 0;
     }
@@ -297,8 +284,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void addPlayTime(float delta)
-    {
+    public void addPlayTime(float delta) {
     	gameDuration += delta;
     }
     
@@ -308,8 +294,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void addQuestion()
-    {
+    public void addQuestion() {
     	questionsAsked++;
     }
 
@@ -318,8 +303,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public void addFalseAccusation()
-    {
+    public void addFalseAccusation() {
         falseAccusations++;
     }
     
@@ -334,8 +318,7 @@ public class Player extends AbstractPerson
      * @param style - The style of questioning
      * @return The appropriate line of dialogue.
      */
-    public String getSpeech(Clue clue, Personality style)
-    {
+    public String getSpeech(Clue clue, Personality style) {
         String key = clue.getName();
         if (!jsonData.get("Responses").has(key)) {
             return jsonData.get("noneResponses").getString(0);
@@ -350,8 +333,7 @@ public class Player extends AbstractPerson
      * @author JAAPAN
      */
     @Override
-    public Personality getPersonality()
-    {
+    public Personality getPersonality() {
         if (personalityLevel < 33) {
             return Personality.AGGRESSIVE;
         } else if (personalityLevel < 66) {
@@ -366,8 +348,7 @@ public class Player extends AbstractPerson
      *
      * @return Value between 0-100
      */
-    public int getPersonalityLevel()
-    {
+    public int getPersonalityLevel() {
         return this.personalityLevel;
     }
     
@@ -376,8 +357,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public int getScore()
-    {
+    public int getScore() {
     	return score;
     }
 
@@ -389,8 +369,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public int getTimeBonus()
-    {
+    public int getTimeBonus() {
         int penalty = (int) (Math.log(gameDuration/20) * 1000);
         
         int bonus = 5000 - penalty;
@@ -403,8 +382,7 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getTotalScore()
-    {
+    public int getTotalScore() {
         return score + getTimeBonus();
     }
 
@@ -413,8 +391,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public int getPlayTime()
-    {
+    public int getPlayTime() {
         return (int)gameDuration;
     }
     
@@ -423,8 +400,7 @@ public class Player extends AbstractPerson
      * 
      * @author JAAPAN
      */
-    public String getFormattedPlayTime()
-    {
+    public String getFormattedPlayTime() {
     	int time = (int)gameDuration;
     	int hours, minutes;
     	hours = time / 3600;
@@ -441,8 +417,7 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getRedHerrings()
-    {
+    public int getRedHerrings() {
     	return collectedClues.size() - usefulClues;
     }
     
@@ -451,8 +426,7 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getQuestions()
-    {
+    public int getQuestions() {
     	return questionsAsked;
     }
 
@@ -461,8 +435,7 @@ public class Player extends AbstractPerson
      *
      * @author JAAPAN
      */
-    public int getFalseAccusations()
-    {
+    public int getFalseAccusations() {
         return falseAccusations;
     }
 }

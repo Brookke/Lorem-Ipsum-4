@@ -41,8 +41,7 @@ import me.lihq.game.screen.elements.SpeechBox;
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
  */
-public class GameMain extends Game
-{
+public class GameMain extends Game {
     /**
      * This is a static reference to itself. Comes in REALLY handy when in other classes that don't have a reference to the main game
      */
@@ -141,8 +140,7 @@ public class GameMain extends Game
      * This is called at start up. It initialises the game.
      */ 
     @Override
-    public void create()
-    {
+    public void create() {
         GameMain.me = this;
 
         Assets.load();// Load in the assets the game needs
@@ -190,8 +188,7 @@ public class GameMain extends Game
      * This defines what's rendered on the screen for each frame.
      */
     @Override
-    public void render()
-    {
+    public void render() {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         FPS.log();//this is where fps is displayed
         /******************** Added by team JAAPAN ********************/
@@ -207,8 +204,7 @@ public class GameMain extends Game
      * @author JAAPAN
      */
     @Override
-    public void dispose()
-    {
+    public void dispose() {
     	Assets.dispose();
     	
     	navigationScreen.dispose();
@@ -225,16 +221,14 @@ public class GameMain extends Game
      * @return The current screen of the game.
      */
     @Override
-    public AbstractScreen getScreen()
-    {
+    public AbstractScreen getScreen() {
         return (AbstractScreen) super.getScreen();
     }
 
     /**
      * Generates all the NPC's, Players
      */
-    public void initialiseAllPeople()
-    {
+    public void initialiseAllPeople() {
         //Add ALL NPCs to the list
         //This is how you initialise an NPC
         player = new Player("Player", "player.png", 3, 6);
@@ -332,8 +326,7 @@ public class GameMain extends Game
      * @param room - The room to check
      * @return (List<NPC>) The NPCs that are in the specified room
      */
-    public List<NPC> getNPCS(Room room)
-    {
+    public List<NPC> getNPCS(Room room) {
         List<NPC> npcsInRoom = new ArrayList<>();
         for (NPC n : this.NPCs) {
             if (n.getRoom() == room) {
@@ -349,8 +342,7 @@ public class GameMain extends Game
      * 
      * @author JAAPAN
      */
-    private void initialiseClues()
-    {
+    private void initialiseClues() {
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
         
@@ -423,9 +415,7 @@ public class GameMain extends Game
             if (randHidingSpot != null) {
                 room.addClue(clue.setTileCoordinates(randHidingSpot));
             }
-
         }
-
     }
     
     /**
@@ -433,8 +423,7 @@ public class GameMain extends Game
      * 
      * @author JAAPAN
      */
-    public void resetAll()
-    {
+    public void resetAll() {
     	// Clear the list of NPCs, ready to refill it.
     	NPCs.clear();
     	
