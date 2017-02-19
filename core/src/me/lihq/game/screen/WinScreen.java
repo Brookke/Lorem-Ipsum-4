@@ -21,13 +21,40 @@ import me.lihq.game.GameMain;
  */
 public class WinScreen extends AbstractScreen {
 	
+	/**
+	 * Vertical offset for label elements.
+	 */
 	private static final float OFFSET = 50f;
+	
+	/**
+	 * The x-coordinate of the information labels.
+	 */
 	private static final float LEFT_ALIGN = Gdx.graphics.getWidth() / 16;
 	
+	/**
+	 * The number of information labels on the screen. Used for animating their appearance.
+	 */
+	private static final int INFO_LABELS = 8;
+	
+	/**
+	 * The amount of time to wait before showing the next label.
+	 */
+	private static final float ANIMATION_TIME = 0.5f;
+
+    /**
+     * The stage used for rendering the UI and handling input.
+     */
 	private Stage stage;
 	
-	private int animationCount;
-	private float animationTimer;
+	/**
+	 * The number of information labels that have completed their animation.
+	 */
+	private int animationCount = 0;
+	
+	/**
+	 * Timer used to animate the information labels.
+	 */
+	private float animationTimer = 0f;
 
 	public WinScreen(GameMain game) {
 		super(game);
@@ -35,16 +62,17 @@ public class WinScreen extends AbstractScreen {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
         initMenu();
-        
-        animationCount = 0;
-        animationTimer = 0f;
 	}
-	
-	private void initMenu()
-	{
+
+	/**
+	 * Initialises the UI elements on the screen, and sets up event handlers.
+	 */
+	private void initMenu() {
 		Label title = Assets.createLabel("You Found the Killer!", true);
 		stage.addActor(title);
 		
+		// Create all information labels, retrieving the necessary data from the player
+		// Set their visibility to false, so they can be animated from the render() method
 		Label cluesLabel = Assets.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
 		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
 		cluesLabel.setVisible(false);
@@ -77,6 +105,7 @@ public class WinScreen extends AbstractScreen {
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
 		finalScoreLabel.setVisible(false);
 		
+		// Add all labels to the stage, to handle rendering
 		stage.addActor(cluesLabel);
 		stage.addActor(redHerringLabel);
 		stage.addActor(questionsAsked);
@@ -86,25 +115,29 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
 		
+		// Create the button to return to the main menu and reset the game state
 		TextButton mainMenuButton = Assets.createTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		
 		stage.addActor(mainMenuButton);
 		
-		mainMenuButton.addListener(new ClickListener()
-        {
+		mainMenuButton.addListener(new ClickListener() {
 			/**
-			 * Resets the state of the game, so it can be played again, and opens the main menu
+			 * Resets the state of the game, so it can be played again, and opens the main menu.
+			 * Also calls dispose(), to free resources.
 			 */
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
             	game.resetAll();
             	game.setScreen(game.menuScreen);
+            	dispose();
             }
         });
 	}
 
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
 	@Override
 	public void show() {
 		// Add the stage to the input multiplexer, so it can receive input
@@ -112,10 +145,17 @@ public class WinScreen extends AbstractScreen {
         game.inputMultiplexer.addProcessor(stage);
 	}
 
+	/**
+	 * Game related logic should take place here.
+	 */
 	@Override
-	public void update() {
-	}
+	public void update() {}
 
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
 	@Override
 	public void render(float delta) {
 		// Clear the screen
@@ -124,7 +164,10 @@ public class WinScreen extends AbstractScreen {
         
         animationTimer += delta;
         
-        if (animationCount < 8 && animationTimer > 0.5f) {
+        // Show a new label every 0.5s until all labels are visible
+        if (animationCount < INFO_LABELS && animationTimer > ANIMATION_TIME) {
+        	// The first label is the title label, so increment the counter BEFORE using it to get
+        	// the actor from the stage
         	animationCount++;
         	animationTimer = 0f;
         	
@@ -135,19 +178,32 @@ public class WinScreen extends AbstractScreen {
 		stage.draw();
 	}
 
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
 	@Override
 	public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
 	}
 
+	/**
+	 * Called when focus on the window is lost.
+	 */
 	@Override
-	public void pause() {
-	}
+	public void pause() {}
 
+	/**
+	 * Called when the window regains focus.
+	 */
 	@Override
-	public void resume() {
-	}
+	public void resume() {}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
 	@Override
 	public void hide() {
 		// Remove the stage from the input multiplexer, so it doesn't fire
@@ -155,6 +211,9 @@ public class WinScreen extends AbstractScreen {
         game.inputMultiplexer.removeProcessor(stage);
 	}
 
+	/**
+	 * Called when this screen should release all resources.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();
