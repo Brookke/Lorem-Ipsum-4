@@ -217,7 +217,7 @@ public class NPC extends AbstractPerson {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
-    		String response = getSpeech("responses", clue);
+    		String response = getSpeech(clue);
     		
     		// If this NPC is the killer, point the player in the direction of a 
     		// random NPC. Otherwise, point them towards the killer. As this is an improved
@@ -246,7 +246,7 @@ public class NPC extends AbstractPerson {
     		// Increment the player's question counter
     		GameMain.me.player.addQuestion();
     		
-    		String response = getSpeech("responses", clue);
+    		String response = getSpeech(clue);
     		
     		// If this NPC is the killer, or the clue is a red herring, point the player
     		// in the direction of a random NPC. Otherwise, point them towards the killer
@@ -264,7 +264,7 @@ public class NPC extends AbstractPerson {
     		
     		return response;
         } else {
-            return getSpeech("noneResponses", "");
+            return getSpeech("");
         }
     }
 

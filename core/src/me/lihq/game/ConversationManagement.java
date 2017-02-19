@@ -82,18 +82,18 @@ public class ConversationManagement {
         /******************** Added by team JAAPAN ********************/
         if (tempNPC.accused) {
             // If the NPC has been falsely accused in the past, they refuse to respond to the player
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("responses", "Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
             finished = true;
         } else if (tempNPC.ignored) {
         	// If the NPC has been ignored, they also refuse to respond to the player, but this can change
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("responses", "Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Ignored Return"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 5));
             finished = true;
         } else {
         	// Otherwise, begin a conversation with the NPC
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("responses", "Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("responses", "Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
             queryQuestionType();
         }
         /**************************** End *****************************/
@@ -177,7 +177,7 @@ public class ConversationManagement {
      */
     private void accuseNPC() {
     	// Display the accusation dialogue
-    	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("responses", "Accuse"), 5));
+    	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("Accuse"), 5));
         if (this.tempNPC.isKiller()) {
         	// If the NPC is the killer, respond with the motive
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
@@ -187,7 +187,7 @@ public class ConversationManagement {
         } else {
         	// Otherwise, respond with falsely accused dialogue and set the NPC's accused flag so they
         	// don't respond to the player anymore
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
             this.tempNPC.accused = true;
             player.addToScore(-2000);
             // Increment false accusation counter; used for endgame stats
@@ -202,7 +202,7 @@ public class ConversationManagement {
      * @author JAAPAN
      */
     private void ignoreNPC() {
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("responses", "Ignored Initial"), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 5));
         // Set the NPC's ignored flag, so they don't respond until another clue has been found
         this.tempNPC.ignored = true;
         finished = true;

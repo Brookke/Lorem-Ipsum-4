@@ -311,14 +311,14 @@ public abstract class AbstractPerson extends Sprite {
      * 
      * @author JAAPAN
      */
-    public String getSpeech(String type, String key) {
+    public String getSpeech(String key) {
         try {
-        	if (type == "noneResponses") {
+        	if (!jsonData.get("Responses").has(key)) {
         		// Randomly select a non-response
-        		int size = jsonData.get(type).size;
-        		return jsonData.get(type).getString(random.nextInt(size));
+        		int size = jsonData.get("noneResponses").size;
+        		return jsonData.get("noneResponses").getString(random.nextInt(size));
         	} else {
-                return jsonData.get(type).getString(key);
+                return jsonData.get("Responses").getString(key);
             }
         } catch (Exception e) {
             return "error speech not working";
@@ -332,8 +332,8 @@ public abstract class AbstractPerson extends Sprite {
      * @param clue - The clue to get the response for
      * @return The corresponding line of dialogue
      */
-    public String getSpeech(String type, Clue clue) {
-        return this.getSpeech(type, clue.getName());
+    public String getSpeech(Clue clue) {
+        return this.getSpeech(clue.getName());
     }
 
     /**

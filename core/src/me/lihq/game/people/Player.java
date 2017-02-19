@@ -320,11 +320,8 @@ public class Player extends AbstractPerson {
      */
     public String getSpeech(Clue clue, Personality style) {
         String key = clue.getName();
-        if (!jsonData.get("Responses").has(key)) {
-            return jsonData.get("noneResponses").getString(0);
-        } else {
-            return jsonData.get("Responses").get(key).getString(style.toString());
-        }
+
+        return jsonData.get("Responses").get(key).getString(style.toString());
     }
 
     /**
