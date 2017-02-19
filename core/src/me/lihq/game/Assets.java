@@ -102,16 +102,14 @@ public class Assets {
      * 
      * @return The new texture
      */
-    public static Texture loadTexture(String file)
-    {
+    public static Texture loadTexture(String file) {
     	return new Texture(Gdx.files.internal(file));
     }
 
     /**
      * Loads all assets for the game, such as textures, sound files and fonts.
      */
-    public static void load()
-    {
+    public static void load() {
     	FONT45 = createFont("fofer", 45);
         FONT30 = createFont("arial", 30);
         FONT20 = createFont("arial", 20);
@@ -151,8 +149,7 @@ public class Assets {
      * 
      * @author JAAPAN
      */
-    private static void initSkin()
-    {
+    private static void initSkin() {
         UI_SKIN = new Skin();
         
         Label.LabelStyle titleStyle = new Label.LabelStyle(FONT30, TEXT_COLOUR);
@@ -208,8 +205,7 @@ public class Assets {
      * @param direction - The direction to fetch
      * @return (TextureRegion) the corresponding TextureRegion
      */
-    public static TextureRegion getArrowDirection(String direction)
-    {
+    public static TextureRegion getArrowDirection(String direction) {
         if (direction.equals("NORTH")) {
             return UP_ARROW;
         } else if (direction.equals("SOUTH")) {
@@ -229,8 +225,7 @@ public class Assets {
      * 
      * @author JAAPAN
      */
-    public static void dispose()
-    {
+    public static void dispose() {
     	CLUE_SHEET.dispose();
     	TAG_BORDER.dispose();
     	FONT45.dispose();
@@ -255,8 +250,7 @@ public class Assets {
      * 
      * @author JAAPAN
      */
-    public static BitmapFont createFont(String font, int size)
-    {
+    public static BitmapFont createFont(String font, int size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = size;
