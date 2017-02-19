@@ -128,7 +128,7 @@ public class WinScreen extends AbstractScreen {
     // Generate the leaderboard
 		int[] highscores;
         List<Label> highscoreLabels = new ArrayList<>();
-        Label highscoresTitleLabel = Assets.getLabel("Highscores", false);
+        Label highscoresTitleLabel = Assets.createLabel("Highscores", false);
         highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f - highscoresTitleLabel.getWidth()/2,
         		Gdx.graphics.getHeight() / 2 + OFFSET*3);
         highscoresTitleLabel.setVisible(false);
@@ -138,11 +138,11 @@ public class WinScreen extends AbstractScreen {
 			boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
             	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
-                    highscoreLabels.add(Assets.getLabel("*" + highscores[i] + "*", false));
+                    highscoreLabels.add(Assets.createLabel("*" + highscores[i] + "*", false));
 					// Only highlight first instance of a highscore (to prevent highlighting duplicates)
             		highlighted = true;
 				} else {
-                    highscoreLabels.add(Assets.getLabel(String.valueOf(highscores[i]), false));
+                    highscoreLabels.add(Assets.createLabel(String.valueOf(highscores[i]), false));
 				}
             	
                 highscoreLabels.get(i).setPosition(Gdx.graphics.getWidth() * 0.75f - highscoreLabels.get(i).getWidth()/2,
@@ -150,7 +150,7 @@ public class WinScreen extends AbstractScreen {
                 highscoreLabels.get(i).setVisible(false);
             }
 		} catch (Throwable e) {
-            highscoreLabels.add(Assets.getLabel("Error loading high scores.", false));
+            highscoreLabels.add(Assets.createLabel("Error loading high scores.", false));
 		}
 
     // Add all highscores labels to the stage
