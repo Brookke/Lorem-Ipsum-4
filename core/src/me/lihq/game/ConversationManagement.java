@@ -62,7 +62,7 @@ public class ConversationManagement
         this.speechboxMngr = speechboxManager;
 
         finished = false;
-        won = false;
+        won = true;
     }
 
     /**

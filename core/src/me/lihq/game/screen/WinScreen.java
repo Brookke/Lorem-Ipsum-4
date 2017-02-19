@@ -58,8 +58,14 @@ public class WinScreen extends AbstractScreen {
         highScoresList.append("Highscores:\n");
 		try {
 			highscores = getHighScores();
+			boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
-                highScoresList.append((i + 1) + ") " + highscores[i]);
+            	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
+					highScoresList.append((i + 1) + ") *" + highscores[i] + "*");
+					highlighted = true;
+				} else {
+					highScoresList.append((i + 1) + ") " + highscores[i]);
+				}
                 if (i != 4) {
                     highScoresList.append("\n");
                 }
@@ -239,6 +245,7 @@ public class WinScreen extends AbstractScreen {
 			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
 				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
 				scoresList.remove(scoresList.size() - 1);
+				setHighScore = true;
 				break;
 			}
 		}
