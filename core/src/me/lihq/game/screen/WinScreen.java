@@ -53,16 +53,25 @@ public class WinScreen extends AbstractScreen {
 	
 	private void initMenu()
 	{
-		int[] highscores = new int[5];
+		int[] highscores;
+        StringBuilder highScoresList = new StringBuilder();
+        highScoresList.append("Highscores:\n");
 		try {
 			highscores = getHighScores();
+            for (int i = 0; i < 5; i++) {
+                highScoresList.append((i + 1) + ") " + highscores[i]);
+                if (i != 4) {
+                    highScoresList.append("\n");
+                }
+            }
 		} catch (IOException e) {
-			// TODO Should probably handle this?
+			highScoresList.append("Error loading high scores.");
 		}
 
-		for (int score : highscores) {
-			System.out.println(score);
-		}
+		String highScoresLabelText = highScoresList.toString();
+		Label highscoresLabel = Assets.getLabel(highScoresLabelText, false);
+        highscoresLabel.setPosition(Gdx.graphics.getWidth() * 0.75f, Gdx.graphics.getHeight() / 2);
+        highscoresLabel.setVisible(false);
 
 		Label title = Assets.getLabel("You Found the Killer!", true);
 		stage.addActor(title);
@@ -109,6 +118,7 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(timeTaken);
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
+		stage.addActor(highscoresLabel);
 		
 		TextButton mainMenuButton = Assets.getTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
@@ -148,7 +158,7 @@ public class WinScreen extends AbstractScreen {
         
         animationTimer += delta;
         
-        if (animationCount < 8 && animationTimer > 0.5f) {
+        if (animationCount < 9 && animationTimer > 0.5f) {
         	animationCount++;
         	animationTimer = 0f;
         	
