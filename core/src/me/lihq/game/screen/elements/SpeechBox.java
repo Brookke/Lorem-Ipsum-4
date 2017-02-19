@@ -24,8 +24,7 @@ import java.util.ArrayList;
  * sb.render();
  * <p>
  */
-public class SpeechBox
-{
+public class SpeechBox {
     /**
      * The constant color variables for all SpeechBox's
      */
@@ -78,8 +77,7 @@ public class SpeechBox
     /**
      * The constructor for the SpeechBox
      */
-    public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList, int timeout)
-    {
+    public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList, int timeout) {
         textContent = content;
         buttons = buttonList;
         this.timeoutDuration = timeout * Settings.TPS;
@@ -89,8 +87,7 @@ public class SpeechBox
     /**
      * The constructor for the SpeechBox with personName
      */
-    public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList, int timeout)
-    {
+    public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList, int timeout) {
         person = personName;
         textContent = speechText;
         buttons = buttonList;
@@ -101,8 +98,7 @@ public class SpeechBox
     /**
      * The constructor for the SpeechBox without buttons
      */
-    public SpeechBox(String content, int timeout)
-    {
+    public SpeechBox(String content, int timeout) {
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -112,8 +108,7 @@ public class SpeechBox
     /**
      * The constructor for the SpeechBox without buttons with personName
      */
-    public SpeechBox(String personName, String speechText, int timeout)
-    {
+    public SpeechBox(String personName, String speechText, int timeout) {
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
@@ -125,8 +120,7 @@ public class SpeechBox
      * Sets up the SpeechBox stage ready for rendering
      * The stage is a Scene2D class that deals with putting UI controls on the screen
      */
-    private void setupStage()
-    {
+    private void setupStage() {
         //Init stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
@@ -159,9 +153,7 @@ public class SpeechBox
      *
      * @param table Table to add controls to
      */
-    private void fillTableContent(Table table)
-    {
-
+    private void fillTableContent(Table table) {
         //Calculate constants for use later
         int buttonCount = 0;
         try {
@@ -170,22 +162,17 @@ public class SpeechBox
             buttonCount = 0;
         }
 
-
         //Calculate number of columns for label row to span
         int labelColSpan = buttonCount;
         if (buttonCount == 0) labelColSpan = 1;
 
-
         //Initialize text row
         table.row().height(TEXT_ROW_HEIGHT);
         if (person == null) {
-
             //Display only textContent
             Label contentLabel = new Label(textContent, labelSkin);
             table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
-
         } else {
-
             //Display both person and textContent
             HorizontalGroup textGroup = new HorizontalGroup();
 
@@ -196,9 +183,7 @@ public class SpeechBox
             textGroup.addActor(contentLabel);
 
             table.add(textGroup).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
-
         }
-
 
         //Initialize button row
         if (buttonCount > 0) {
@@ -206,16 +191,13 @@ public class SpeechBox
 
             int buttonWidth = ((TABLE_WIDTH - (2 * PADDING)) / buttonCount) - (PADDING);
             for (int i = 0; i < buttonCount; i++) {
-
                 final SpeechBoxButton button = buttons.get(i); //find button in array
 
                 //Create button, and add listener for click event
                 TextButton buttonElement = new TextButton(button.text, buttonSkin);
-                buttonElement.addListener(new ClickListener()
-                {
+                buttonElement.addListener(new ClickListener() {
                     @Override
-                    public void clicked(InputEvent event, float x, float y)
-                    {
+                    public void clicked(InputEvent event, float x, float y) {
                         //Trigger click event handler for current button (see button definition)
                         button.eventHandler.trigger(button.result);
                     }
@@ -223,10 +205,8 @@ public class SpeechBox
 
                 //Add button to table, with appropriate spacing
                 table.add(buttonElement).width(buttonWidth).pad(PADDING, PADDING / 2, 0, PADDING / 2);
-
             }
         }
-
 
         //Pack table
         table.pack();
@@ -236,8 +216,7 @@ public class SpeechBox
      * Renders the speech box
      * Should be called within the render() method of a screen
      */
-    public void render()
-    {
+    public void render() {
         stage.act();
         stage.draw();
     }
@@ -245,8 +224,7 @@ public class SpeechBox
     /**
      * This method is called once a tick by the logic Thread
      */
-    public void update()
-    {
+    public void update() {
         if (this.timeoutDuration > 0) {
             timeoutDuration--;
         }
@@ -255,8 +233,7 @@ public class SpeechBox
     /**
      * Sets up skin variables used for defining UI control styles
      */
-    private void initSkins()
-    {
+    private void initSkins() {
         initButtonSkin();
         initLabelSkin();
         initPersonLabelSkin();
@@ -265,8 +242,7 @@ public class SpeechBox
     /**
      * Sets up the skin for buttons on the speech box
      */
-    private void initButtonSkin()
-    {
+    private void initButtonSkin() {
         //Create a font
         BitmapFont font = new BitmapFont();
         font.setColor(TEXT_COLOUR);
@@ -294,8 +270,7 @@ public class SpeechBox
      * Sets up the skin for buttons on the speech box
      */
 
-    private void initLabelSkin()
-    {
+    private void initLabelSkin() {
         labelSkin = new Skin();
 
         Label.LabelStyle fontStyle = new Label.LabelStyle();
@@ -309,8 +284,7 @@ public class SpeechBox
     /**
      * Sets up the skin for buttons on the speech box
      */
-    private void initPersonLabelSkin()
-    {
+    private void initPersonLabelSkin() {
         personLabelSkin = new Skin();
 
         Label.LabelStyle fontStyle = new Label.LabelStyle();
@@ -325,8 +299,7 @@ public class SpeechBox
     /**
      * Disposes of SpeechBox resources
      */
-    public void dispose()
-    {
+    public void dispose() {
         stage.dispose();
     }
 
@@ -336,8 +309,7 @@ public class SpeechBox
      * @param width  - the new width
      * @param height - the new height
      */
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
 }

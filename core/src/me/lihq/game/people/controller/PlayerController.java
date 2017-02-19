@@ -10,8 +10,7 @@ import me.lihq.game.people.Player;
 /**
  * This class allows the player to be moved and controlled.
  */
-public class PlayerController extends InputAdapter
-{
+public class PlayerController extends InputAdapter {
     /**
      * Booleans storing what keys have been pressed and not released
      */
@@ -27,8 +26,7 @@ public class PlayerController extends InputAdapter
      *
      * @param player - The player that we want this controller to control
      */
-    public PlayerController(Player player)
-    {
+    public PlayerController(Player player) {
         this.player = player;
     }
 
@@ -39,8 +37,7 @@ public class PlayerController extends InputAdapter
      * @return (boolean) Whether this method acted upon the keypress or not. Used for InputMultiplexers
      */
     @Override
-    public boolean keyDown(int keycode)
-    {
+    public boolean keyDown(int keycode) {
     	if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
     		this.interact = true;
     		return true;
@@ -49,18 +46,14 @@ public class PlayerController extends InputAdapter
             this.west = true;
             return true;
         }
-
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             this.east = true;
             return true;
         }
-
         if (keycode == Input.Keys.UP || keycode == Input.Keys.W) {
             this.north = true;
             return true;
         }
-
-
         if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
             this.south = true;
             return true;
@@ -75,23 +68,19 @@ public class PlayerController extends InputAdapter
      * @return (boolean) Whether this method processed the key release or not. Used for input multiplexers.
      */
     @Override
-    public boolean keyUp(int keycode)
-    {
+    public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = false;
             return true;
         }
-
         if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D) {
             this.east = false;
             return true;
         }
-
         if (keycode == Input.Keys.UP || keycode == Input.Keys.W) {
             this.north = false;
             return true;
         }
-
         if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S) {
             this.south = false;
             return true;
@@ -102,16 +91,14 @@ public class PlayerController extends InputAdapter
     /**
      * This method is called once a game tick to transfer the key reads to the live game data in the logic Thread.
      */
-    public void update()
-    {
+    public void update() {
     	if (interact) {
     		GameMain.me.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
     	}
     	
-    	if (!player.canMove)
-    		return;
+    	if (!player.canMove) return;
 
         Direction goTo = null;
 

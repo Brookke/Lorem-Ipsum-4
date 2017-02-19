@@ -1,7 +1,6 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,17 +18,43 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 
+/**
+ * The screen that shows the user what clues they have collected.
+ * 
+ * @author JAAPAN
+ *
+ */
 public class InventoryScreen extends AbstractScreen {
     
+	/**
+	 * Number of clues per row; used for calculating the width of each 'slot'.
+	 */
     private static final int CLUES_PER_ROW = 7;
+    
+    /**
+     * The border offset between the end clues of a row, and the edge of the window.
+     */
     private static final float OFFSET = (Gdx.graphics.getWidth() - Settings.CLUE_SIZE*2*CLUES_PER_ROW)/2f;
 	
+    /**
+     * The main stage for rendering and handling input.
+     */
 	private Stage stage;
+	
+	/**
+	 * The stage used when zoomed in on an individual clue.
+	 */
 	private Stage zoomedStage;
 	
+	/**
+	 * The skin for storing the textures of the clues, for use in the ImageButtons.
+	 */
 	private Skin buttonSkins;
 	
-	private boolean zoomed;
+	/**
+	 * Whether the inventory is zoomed in on a particular clue or not.
+	 */
+	private boolean zoomed = false;
 
 	public InventoryScreen(GameMain game) {
 		super(game);
@@ -38,38 +63,44 @@ public class InventoryScreen extends AbstractScreen {
         zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
         buttonSkins = new Skin();
-        
-        zoomed = false;
 		
 		initMenu();
 	}
-	
-	private void initMenu() {
-        //Creating the label containing text and determining  its size and location on screen
-        Label text = Assets.getLabel("Inventory", true);
-        Label text2 = Assets.getLabel("Inventory", true);
 
-        TextButton resumeButton = Assets.getTextButton("Close");
+	/**
+	 * Initialises the UI elements on the screen, and sets up event handlers.
+	 */
+	private void initMenu() {
+        // Create and position the label containing title text
+        Label text = Assets.createLabel("Inventory", true);
+        // We need 2 copies, one for each stage
+        Label text2 = Assets.createLabel("Inventory", true);
+
+        TextButton resumeButton = Assets.createTextButton("Close");
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
         stage.addActor(resumeButton);
         zoomedStage.addActor(text2);
         
-        resumeButton.addListener(new ClickListener()
-        {
+        resumeButton.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(game.navigationScreen);
             }
         });
 	}
 	
+	/**
+	 * Checks whether any new clues have been collected since the last time the inventory was open;
+	 * if any have, they are added to the stage.
+	 */
 	private void addButtons() {
 		int count = 0;
 		for (Clue c : game.player.collectedClues) {
 			count++;
+			// If there is no TextureRegion in the skin with the clue's name, add it to the skin, create a button
+			// and a label with its name and add them to the stage
 			if (!buttonSkins.has(c.getName(), TextureRegion.class)) {
 				buttonSkins.add(c.getName(), new TextureRegion(c.getTexture(), c.getRegionX(), c.getRegionY(), c.getRegionWidth(), c.getRegionHeight()));
 				ImageButton imgBtn = new ImageButton(buttonSkins.getDrawable(c.getName()));
@@ -78,18 +109,16 @@ public class InventoryScreen extends AbstractScreen {
 						Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 				stage.addActor(imgBtn);
 				
-				Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.RED);
-		        Label text = new Label(c.getName(), labelStyle);
+		        Label text = Assets.createLabel(c.getName(), Assets.FONT15);
 		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
 		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 		        stage.addActor(text);
 				
-
-				imgBtn.addListener(new ClickListener()
-		        {
+		        // When a clue is clicked, center it on the screen, display its name and description,
+		        // and hide all other clues
+				imgBtn.addListener(new ClickListener() {
 		            @Override
-		            public void clicked(InputEvent event, float x, float y)
-		            {
+		            public void clicked(InputEvent event, float x, float y) {
 		                game.inputMultiplexer.removeProcessor(stage);
 		            	game.inputMultiplexer.addProcessor(zoomedStage);
 		            	
@@ -98,25 +127,24 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		            	zoomedStage.addActor(img);
 		            	
-		            	Label name = Assets.getLabel(c.getName(), false);
+		            	Label name = Assets.createLabel(c.getName(), false);
 		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
 		            	zoomedStage.addActor(name);
 
-		            	Label description = new Label(c.getDescription(), labelStyle);
+		            	Label description = Assets.createLabel(c.getDescription(), Assets.FONT15);
 		            	description.setPosition(Gdx.graphics.getWidth()/2-description.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2-description.getHeight()*2);
 		            	zoomedStage.addActor(description);
 		            	
-		                TextButton backButton = Assets.getTextButton("Back");
+		                TextButton backButton = Assets.createTextButton("Back");
 		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		                zoomedStage.addActor(backButton);
 
-		                backButton.addListener(new ClickListener()
-		                {
+		                // Remove the zoomed elements from the stage, and return to the normal inventory view
+		                backButton.addListener(new ClickListener() {
 		                    @Override
-		                    public void clicked(InputEvent event, float x, float y)
-		                    {
+		                    public void clicked(InputEvent event, float x, float y) {
 				                game.inputMultiplexer.removeProcessor(zoomedStage);
 				            	game.inputMultiplexer.addProcessor(stage);
 				            	
@@ -134,21 +162,32 @@ public class InventoryScreen extends AbstractScreen {
 		        });
 			}
 		}
-		
-		
 	}
 
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
 	@Override
 	public void show() {
         addButtons();
-        game.inputMultiplexer.addProcessor(stage);
+        if (zoomed) {
+        	game.inputMultiplexer.addProcessor(zoomedStage);
+        } else {
+        	game.inputMultiplexer.addProcessor(stage);
+        }
 	}
 
+	/**
+	 * Game related logic should take place here.
+	 */
 	@Override
-	public void update() {
-		
-	}
+	public void update() {}
 
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
 	@Override
 	public void render(float delta) {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
@@ -166,29 +205,47 @@ public class InventoryScreen extends AbstractScreen {
         }
 	}
 
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
+        stage.getViewport().update(width, height, true);
 	}
 
+	/**
+	 * Called when focus on the window is lost.
+	 */
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-
+		// Pause the game, so the gameDuration counter isn't updated
+    	game.setScreen(game.pauseScreen);
 	}
 
+	/**
+	 * Called when the window regains focus.
+	 */
 	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
+	public void resume() {}
 
-	}
-
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
 	@Override
 	public void hide() {
-        game.inputMultiplexer.removeProcessor(stage);
+        if (zoomed) {
+        	game.inputMultiplexer.removeProcessor(zoomedStage);
+        } else {
+        	game.inputMultiplexer.removeProcessor(stage);
+        }
 	}
 
+	/**
+	 * Called when this screen should release all resources.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();

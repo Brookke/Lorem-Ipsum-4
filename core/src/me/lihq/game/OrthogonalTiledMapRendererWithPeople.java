@@ -18,8 +18,7 @@ import java.util.*;
  * the player sprite and NPCs. So this controls that by drawing each layer until it comes to the last
  * one, then it draws the sprites, then the final layer.
  */
-public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRenderer
-{
+public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRenderer {
     /**
      * This is the list of people that are to be rendered to the map
      */
@@ -30,8 +29,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
      *
      * @param map - The TiledMap that is to be rendered using this renderer
      */
-    public OrthogonalTiledMapRendererWithPeople(TiledMap map)
-    {
+    public OrthogonalTiledMapRendererWithPeople(TiledMap map) {
         super(map);
 
         people = new ArrayList<>();
@@ -42,8 +40,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
      *
      * @param sprite - Sprite to be added
      */
-    public void addPerson(AbstractPerson sprite)
-    {
+    public void addPerson(AbstractPerson sprite) {
         people.add(sprite);
     }
 
@@ -52,8 +49,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
      *
      * @param sprites
      */
-    public void addPerson(List<AbstractPerson> sprites)
-    {
+    public void addPerson(List<AbstractPerson> sprites) {
         for (AbstractPerson a : sprites) {
             people.add(a);
         }
@@ -62,8 +58,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     /**
      * This method clears the list of people to be rendered
      */
-    public void clearPeople()
-    {
+    public void clearPeople() {
         people.clear();
     }
 
@@ -74,8 +69,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
      * sprite list, then it draws the final layer.
      */
     @Override
-    public void render()
-    {
+    public void render() {
         beginRender();
 
         people.sort(new PersonPositionComparator());
@@ -92,7 +86,6 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
             }
 
             if (currentLayer == amountOfLayers - 2 || amountOfLayers == 1) {
-
                 for (AbstractPerson s : people) {
                     s.draw(this.getBatch());
                 }

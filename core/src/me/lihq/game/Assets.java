@@ -19,30 +19,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 /**
- * This class defines the assets that the game uses.
+ * Defines the assets that the game uses, and provides various factory methods for loading textures
+ * and creating UI elements.
  */
-public class Assets
-{
+public class Assets {
     /**
-     * This is the asset sheet for clues
+     * The asset sheet for clues.
      */
     public static Texture CLUE_SHEET;
     
     /**
-     * The textures for the checkbox UI item
+     * The textures for the checkbox UI item.
+     * 
+     * @author JAAPAN
      */
     public static TextureRegion UNCHECKED_BOX, CHECKED_BOX;
-
-    /**
-     * This is the texture of splashscreen frames
-     */
-    public static Texture OPENING;
-
-    /**
-     * The 2 seperate frames for the splashscreen
-     */
-    public static TextureRegion INTROFRAME1;
-    public static TextureRegion INTROFRAME2;
 
     /**
      * These TextureRegions store the 4 different directions that the room changing
@@ -54,50 +45,66 @@ public class Assets
     public static TextureRegion RIGHT_ARROW;
 
     /**
-     * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}
+     * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}.
      */
     public static Texture TAG_BORDER;
 
     /**
      * The default fonts used in the game - the number specifies the size. Used to render
      * UI elements and room tags.
+     * 
+     * @author JAAPAN
      */
     public static BitmapFont FONT45, FONT30, FONT20, FONT15;
 
     /**
-     * This it the animation for the clue glint to be drawn where a clue is hidden
+     * This it the animation for the clue glint to be drawn where a clue is hidden.
      */
     public static Animation CLUE_GLINT;
 
     /**
-     * Used for streaming the soundtrack
+     * Used for streaming the soundtrack.
+     * 
+     * @author JAAPAN
      */
     public static Music MUSIC;
 
     /**
-     * Used for playing the sound effect when a clue is found
+     * Used for playing the sound effect when a clue is found.
+     * 
+     * @author JAAPAN
      */
     public static Sound SOUND;
     
     /**
      * Internal skin, used in the UI factory methods.
+     * 
+     * @author JAAPAN
      */
     private static Skin UI_SKIN;
     
     /**
-     * Default colours for UI buttons
+     * Default colours for UI buttons.
+     * 
+     * @author JAAPAN
      */
     private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY, 
     		BUTTON_DOWN_COLOR = Color.DARK_GRAY, 
     		BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
+    
+    /**
+     * Default colour for text.
+     */
+    private static final Color TEXT_COLOUR = Color.RED;
 
     /**
-     * @param file - The file that contains the textures.
-     * @return Returns the new texture.
+     * @param file - The file that contains the textures
+     * 
+     * @return The new texture
      */
     public static Texture loadTexture(String file)
     {
-        return new Texture(Gdx.files.internal(file));
+    	return new Texture(Gdx.files.internal(file));
     }
 
     /**
@@ -105,14 +112,10 @@ public class Assets
      */
     public static void load()
     {
-    	FONT45 = getFont("fofer", 45);
-        FONT30 = getFont("arial", 30);
-        FONT20 = getFont("arial", 20);
+    	FONT45 = createFont("fofer", 45);
+        FONT30 = createFont("arial", 30);
+        FONT20 = createFont("arial", 20);
         FONT15 = new BitmapFont();
-
-        OPENING = loadTexture("title.png");
-        INTROFRAME1 = new TextureRegion(OPENING, 0, 0, 1000, 750);
-        INTROFRAME2 = new TextureRegion(OPENING, 0, 750, 1000, 750);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);
@@ -144,14 +147,16 @@ public class Assets
     }
     
     /**
-     * Initialises UI_SKIN, so the UI factory methods (getTextButton() etc.) can be used. 
+     * Initialises UI_SKIN, so the UI factory methods (getTextButton() etc.) can be used.
+     * 
+     * @author JAAPAN
      */
     private static void initSkin()
     {
         UI_SKIN = new Skin();
         
-        Label.LabelStyle titleStyle = new Label.LabelStyle(FONT30, Color.RED);
-        Label.LabelStyle labelStyle = new Label.LabelStyle(FONT20, Color.RED);
+        Label.LabelStyle titleStyle = new Label.LabelStyle(FONT30, TEXT_COLOUR);
+        Label.LabelStyle labelStyle = new Label.LabelStyle(FONT20, TEXT_COLOUR);
         UI_SKIN.add("title", titleStyle);
         UI_SKIN.add("default", labelStyle);
 
@@ -178,7 +183,7 @@ public class Assets
         checkBoxStyle.checkboxOff = UI_SKIN.getDrawable("uncheck");
         checkBoxStyle.checkboxOn = UI_SKIN.getDrawable("check");
         checkBoxStyle.font = FONT20;
-        checkBoxStyle.fontColor = Color.RED;
+        checkBoxStyle.fontColor = TEXT_COLOUR;
         UI_SKIN.add("default", checkBoxStyle);
         
         // Create the SliderStyle, using generated block textures
@@ -217,6 +222,28 @@ public class Assets
 
         return null;
     }
+    
+    /**
+     * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
+     * will result in undefined behaviour.
+     * 
+     * @author JAAPAN
+     */
+    public static void dispose()
+    {
+    	CLUE_SHEET.dispose();
+    	TAG_BORDER.dispose();
+    	FONT45.dispose();
+    	FONT30.dispose();
+    	FONT20.dispose();
+    	MUSIC.dispose();
+    	SOUND.dispose();
+    	UI_SKIN.dispose();
+    }
+    
+    /*************************************************************************/
+    /**************************** Factory Methods ****************************/
+    /*************************************************************************/
 
     /**
      * Creates a BitmapFont with the specified font and size.
@@ -224,11 +251,11 @@ public class Assets
      * @param font - The name of the font - must be stored as a .ttf file
      * under this name in the fonts directory
      * @param size - The size of the font
-     * @return (BitmapFont) The generated font
+     * @return The generated font
      * 
      * @author JAAPAN
      */
-    public static BitmapFont getFont(String font, int size)
+    public static BitmapFont createFont(String font, int size)
     {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/" + font + ".ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -246,46 +273,64 @@ public class Assets
      * @param text - The text to display in the label
      * @param title - Whether to use the title LabelStyle (font size 30) or
      * the default LabelStyle (font size 20)
-     * @return (Label) The new label
+     * @return A new label with the standard style and specified text
      * 
      * @author JAAPAN
+     * 
+     * @see #createLabel(String, BitmapFont)
      */
-    public static Label getLabel(String text, boolean title)
-    {
+    public static Label createLabel(String text, boolean title) {
     	if (title) {
     		Label label = new Label(text, UI_SKIN.get("title", Label.LabelStyle.class));
     		label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth()/2, 
             		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
     		return label;
-    	}
-    	else
+    	} else {
     		return new Label(text, UI_SKIN);
+    	}
+    }
+    
+    /**
+     * Creates a new label with the specified text and font. This generates a new LabelStyle on the
+     * fly, which is less efficient than using one of the pre-existing ones defined in UI_SKIN. If
+     * the font is arial of size 20 or 30, therefore, use {@link #createLabel(String, boolean)}
+     * instead.
+     * 
+     * @param text - The text to display in the label
+     * @param font - The font to use
+     * 
+     * @return A new label with the specified font and text
+     * 
+     * @author JAAPAN
+     */
+    public static Label createLabel(String text, BitmapFont font) {
+    	Label.LabelStyle style = new Label.LabelStyle(font, TEXT_COLOUR);
+    	return new Label(text, style);
     }
     
     /**
      * Creates a new text button, using the style defined in UI_SKIN.
      * 
      * @param text - The text to display in the button
-     * @return (TextButton) The new text button
+     * @return A new text button with the standard style and specified text
      * 
      * @author JAAPAN
      */
-    public static TextButton getTextButton(String text)
-    {
+    public static TextButton createTextButton(String text) {
     	return new TextButton(text, UI_SKIN);
     }
     
     /**
-     * Creates a new checkbox, using the style defined in UI_SKIN.
+     * Creates a new checkbox, using the style defined in UI_SKIN. Prepends the text with
+     * 2 spaces, to add a gap between it and the checkbox texture.
      * 
      * @param text - The text to display next to the checkbox
-     * @return (CheckBox) The new checkbox
+     * @return A new checkbox with the standard style and specified text
      * 
      * @author JAAPAN
      */
-    public static CheckBox getCheckBox(String text)
-    {
-    	return new CheckBox(text, UI_SKIN);
+    public static CheckBox createCheckBox(String text) {
+    	return new CheckBox("  " + text, UI_SKIN);
     }
     
     /**
@@ -295,32 +340,12 @@ public class Assets
      * @param max - The maximum value of the slider
      * @param stepSize - The size of the increments
      * @param vertical - Whether the slider should be vertical or horizontal
-     * @return (Slider) The new slider
+     * @return A new slider with the standard style and specified attributes
      * 
      * @author JAAPAN
      */
-    public static Slider getSlider(float min, float max, float stepSize, boolean vertical)
-    {
+    public static Slider createSlider(float min, float max, float stepSize, boolean vertical) {
     	return new Slider(min, max, stepSize, vertical, UI_SKIN);
-    }
-    
-    /**
-     * Safely disposes of all assets, freeing memory. Using assets after calling dispose()
-     * will result in undefined behaviour.
-     * 
-     * @author JAAPAN
-     */
-    public static void dispose()
-    {
-    	CLUE_SHEET.dispose();
-    	OPENING.dispose();
-    	TAG_BORDER.dispose();
-    	FONT45.dispose();
-    	FONT30.dispose();
-    	FONT20.dispose();
-    	MUSIC.dispose();
-    	SOUND.dispose();
-    	UI_SKIN.dispose();
     }
 
 }

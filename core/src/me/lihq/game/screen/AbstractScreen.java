@@ -8,8 +8,7 @@ import me.lihq.game.GameMain;
  * This is defines all the common methods and properties for each screen. It implements the screen interface from com.badlogic.gdx.Screen.
  * A screen is a like the current view of the game. E.g. Main Menu or Pause screen or dialogue screen.
  */
-public abstract class AbstractScreen implements Screen
-{
+public abstract class AbstractScreen implements Screen {
     /**
      * The game that the Screen is live in
      */
@@ -20,60 +19,59 @@ public abstract class AbstractScreen implements Screen
      *
      * @param game this provides access to the gameMain class so that screens can set the states of the game.
      */
-    public AbstractScreen(GameMain game)
-    {
+    public AbstractScreen(GameMain game) {
         this.game = game;
     }
 
-    /**
-     * This method overrides the Screen method show()
-     */
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
     @Override
     public abstract void show();
 
-    /**
-     * Called every game tick, all screen related logic should be done in this method.
-     */
+	/**
+	 * Game related logic should take place here.
+	 */
     public abstract void update();
 
-    /**
-     * This method is called every render loop
-     *
-     * @param delta - The time in seconds since the last draw
-     */
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
     @Override
     public abstract void render(float delta);
 
-    /**
-     * This method is called on window resize
-     *
-     * @param width  - The new width
-     * @param height - The new height
-     */
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
     @Override
     public abstract void resize(int width, int height);
 
-    /**
-     * This is called when the focus is lost on the window
-     */
+	/**
+	 * Called when focus on the window is lost.
+	 */
     @Override
     public abstract void pause();
 
-    /**
-     * This method is called when the window is brought back into focus
-     */
+	/**
+	 * Called when the window regains focus.
+	 */
     @Override
     public abstract void resume();
 
-    /**
-     * This method is called when the user hides the window
-     */
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
     @Override
     public abstract void hide();
 
-    /**
-     * This is to be called when you want to dispose of all data
-     */
+	/**
+	 * Called when this screen should release all resources.
+	 */
     @Override
     public abstract void dispose();
 

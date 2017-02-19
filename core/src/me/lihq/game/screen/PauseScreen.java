@@ -9,8 +9,7 @@ import me.lihq.game.screen.elements.Menu;
 /**
  * Created by vishal on 18/12/2016.
  */
-public class PauseScreen extends AbstractScreen
-{
+public class PauseScreen extends AbstractScreen {
     /**
      * This is the menu element for the pause menu
      */
@@ -26,8 +25,7 @@ public class PauseScreen extends AbstractScreen
      *
      * @param game this provides access to the gameMain class so that screens can set the states of the game.
      */
-    public PauseScreen(GameMain game)
-    {
+    public PauseScreen(GameMain game) {
         super(game);
 
         float w = Gdx.graphics.getWidth();
@@ -44,8 +42,7 @@ public class PauseScreen extends AbstractScreen
      * This is ran when the navigation screen becomes the visible screen in GameMain
      */
     @Override
-    public void show()
-    {
+    public void show() {
         game.inputMultiplexer.addProcessor(pauseMenu.stage);
     }
 
@@ -53,10 +50,7 @@ public class PauseScreen extends AbstractScreen
      * This method is called once a game tick
      */
     @Override
-    public void update()
-    {
-    	
-    }
+    public void update() {}
 
     /**
      * Called when the screen should render itself.
@@ -64,8 +58,7 @@ public class PauseScreen extends AbstractScreen
      * @param delta The time in seconds since the last render.
      */
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         //Renders the pause menu
         pauseMenu.render();
     }
@@ -77,8 +70,7 @@ public class PauseScreen extends AbstractScreen
      * @param height - The new height
      */
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         pauseMenu.resize(width, height);
     }
 
@@ -86,25 +78,19 @@ public class PauseScreen extends AbstractScreen
      * This is called when the focus is lost on the window
      */
     @Override
-    public void pause()
-    {
-    }
+    public void pause() {}
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume()
-    {
-
-    }
+    public void resume() {}
 
     /**
      * This method is called when the user hides the window
      */
     @Override
-    public void hide()
-    {
+    public void hide() {
         game.inputMultiplexer.removeProcessor(pauseMenu.stage);
     }
 
@@ -112,8 +98,7 @@ public class PauseScreen extends AbstractScreen
      * This is to be called when you want to dispose of all data
      */
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         //Disposes of the Pause menu
         pauseMenu.dispose();
     }

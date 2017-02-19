@@ -17,8 +17,7 @@ import me.lihq.game.models.Vector2Int;
 /**
  * This class allows you to easily debug issues with the map
  */
-public class DebugOverlay
-{
+public class DebugOverlay {
     /**
      * This is to store the green tile overlay sprite
      */
@@ -37,15 +36,14 @@ public class DebugOverlay
     /**
      * This is to store the font that the debug screen is written in
      */
-    private static BitmapFont font = Assets.getFont("arial", 30);
+    private static BitmapFont font = Assets.createFont("arial", 30);
 
     /**
      * This method draws the debug menu to the batch
      *
      * @param batch - The batch to draw the menu on
      */
-    public static void renderDebugInfo(Batch batch)
-    {
+    public static void renderDebugInfo(Batch batch) {
         Sprite border = getColoredTileSprite(Color.BLACK);
         border.setPosition(Gdx.graphics.getWidth() - 400, Gdx.graphics.getHeight() - 190);
         border.setSize(390, 180);
@@ -62,8 +60,7 @@ public class DebugOverlay
      * @param room  - The room we are drawing on
      * @param batch - The batch to draw the tile overlays onto
      */
-    public static void renderDebugTiles(Room room, Batch batch)
-    {
+    public static void renderDebugTiles(Room room, Batch batch) {
          /*
          Draw a filter over showing whether or not a tile is "walkable"
          */
@@ -97,8 +94,7 @@ public class DebugOverlay
      * @param color - The color to set the sprite
      * @return (Sprite) the resulting sprite
      */
-    public static Sprite getColoredTileSprite(Color color)
-    {
+    public static Sprite getColoredTileSprite(Color color) {
         Pixmap map = new Pixmap(Settings.TILE_SIZE, Settings.TILE_SIZE, Pixmap.Format.RGBA8888);
         map.setColor(color);
         map.fill();

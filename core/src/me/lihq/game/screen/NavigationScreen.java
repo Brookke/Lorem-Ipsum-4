@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -33,50 +32,54 @@ import me.lihq.game.screen.elements.StatusBar;
  * This is the screen that is responsible for the navigation of the player around the game.
  * It displays the current room that the player is in, and allows the user to move the player around between rooms.
  */
-public class NavigationScreen extends AbstractScreen
-{
+public class NavigationScreen extends AbstractScreen {
     /**
      * The controller that listens for key inputs
      */
     public PlayerController playerController;
+    
     /**
      * This is the SpeechboxManager for the main game
      */
     public SpeechboxManager speechboxMngr;
+    
     /**
      * This is the main ConversationManager that controls the conversation mechanic
      */
     public ConversationManagement convMngt;
+    
     /**
      * This boolean determines whether the black is fading in or out
      */
     private boolean fadeToBlack = true;
-    /**
-     * This is the current map that is being shown
-     */
-    private TiledMap map;
+    
     /**
      * This boolean determines whether the map needs to be updated in the next render loop
      */
     private boolean changeMap = false;
+    
     /**
      * This is the list of NPCs in the current Room
      */
     private List<NPC> currentNPCS;
+    
     /**
      * This is the map renderer that also renders Sprites
      */
     private OrthogonalTiledMapRendererWithPeople tiledMapRenderer;
+    
     /**
      * The camera to render the map to
      */
     private OrthographicCamera camera = new OrthographicCamera();
     private Viewport viewport;
     private SpriteBatch spriteBatch;
+    
     /**
      * This stores whether the game is paused or not
      */
     private boolean pause = false;
+    
     /**
      * This is the StatusBar that shows at the bottom
      */
@@ -120,8 +123,7 @@ public class NavigationScreen extends AbstractScreen
      *
      * @param game - The main game instance
      */
-    public NavigationScreen(GameMain game)
-    {
+    public NavigationScreen(GameMain game) {
         super(game);
 
         float w = Gdx.graphics.getWidth();
@@ -161,8 +163,7 @@ public class NavigationScreen extends AbstractScreen
      * This is ran when the navigation screen becomes the visible screen in GameMain
      */
     @Override
-    public void show()
-    {
+    public void show() {
         game.inputMultiplexer.addProcessor(statusBar.stage);
         game.inputMultiplexer.addProcessor(speechboxMngr.multiplexer);
     }
@@ -171,8 +172,7 @@ public class NavigationScreen extends AbstractScreen
      * This method is called once a game tick
      */
     @Override
-    public void update()
-    {
+    public void update() {
     	convMngt.finishConversation();
     	
         if (!pause) { //this statement contains updates that shouldn't happen during a pause
@@ -198,8 +198,7 @@ public class NavigationScreen extends AbstractScreen
     /**
      * This method is called once a game tick to update the room transition animation
      */
-    private void updateTransition()
-    {
+    private void updateTransition() {
         if (roomTransition) {
             BLACK_BACKGROUND.setAlpha(Interpolation.pow4.apply(0, 1, animTimer / ANIM_TIME));
 
@@ -226,8 +225,7 @@ public class NavigationScreen extends AbstractScreen
     /**
      * This is called when the player decides to move to another room
      */
-    public void initialiseRoomChange()
-    {
+    public void initialiseRoomChange() {
         pause = true; //pause all non necessary updates like player movement
         roomTransition = true;
     }
@@ -236,8 +234,7 @@ public class NavigationScreen extends AbstractScreen
      * This is called when the room transition animation has completed so the necessary variables
      * can be returned to their normal values
      */
-    public void finishRoomTransition()
-    {
+    public void finishRoomTransition() {
         animTimer = 0;
         roomTransition = false;
         fadeToBlack = true;
@@ -252,8 +249,7 @@ public class NavigationScreen extends AbstractScreen
      */
     @SuppressWarnings("unchecked")
 	@Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         
@@ -319,36 +315,31 @@ public class NavigationScreen extends AbstractScreen
      * @param height - The new height
      */
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         viewport.update(width, height);
         statusBar.resize(width, height);
     }
 
-    /**
-     * This is called when the focus is lost on the window
-     */
-    @Override
-    public void pause()
-    {
-
+	/**
+	 * Called when focus on the window is lost.
+	 */
+	@Override
+	public void pause() {
+		// Pause the game, so the gameDuration counter isn't updated
+    	game.setScreen(game.pauseScreen);
     }
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume()
-    {
-
-    }
+    public void resume() {}
 
     /**
      * This method is called when the user hides the window
      */
     @Override
-    public void hide()
-    {
+    public void hide() {
         game.inputMultiplexer.removeProcessor(statusBar.stage);
         game.inputMultiplexer.removeProcessor(speechboxMngr.multiplexer);
     }
@@ -357,9 +348,7 @@ public class NavigationScreen extends AbstractScreen
      * This is to be called when you want to dispose of all data
      */
     @Override
-    public void dispose()
-    {
-        map.dispose();
+    public void dispose() {
         tiledMapRenderer.dispose();
         statusBar.dispose();
         spriteBatch.dispose();
@@ -368,8 +357,7 @@ public class NavigationScreen extends AbstractScreen
     /**
      * This lets the tiledMapRenderer know that on the next render it should reload the current room from the player.
      */
-    public void updateTiledMapRenderer()
-    {
+    public void updateTiledMapRenderer() {
         this.changeMap = true;
         this.currentNPCS = game.getNPCS(game.player.getRoom());
     }
@@ -379,8 +367,7 @@ public class NavigationScreen extends AbstractScreen
      *
      * @param tag - The RoomTag to be rendered
      */
-    public void setRoomTag(RoomTag tag)
-    {
+    public void setRoomTag(RoomTag tag) {
         this.roomTag = tag;
     }
 
@@ -389,8 +376,7 @@ public class NavigationScreen extends AbstractScreen
      *
      * @return (List<NPC>) the value of currentNPCs {@link #currentNPCS}
      */
-    public List<NPC> getNPCs()
-    {
+    public List<NPC> getNPCs() {
         return currentNPCS;
     }
 }

@@ -9,8 +9,7 @@ import java.util.Random;
 /**
  * The map is a collection of Rooms , it links them all together.
  */
-public class Map
-{
+public class Map {
     /**
      * Store of the rooms in the map
      */
@@ -19,16 +18,14 @@ public class Map
     /**
      * Constructs the map
      */
-    public Map()
-    {
+    public Map() {
         initialiseRooms();
     }
 
     /**
      * This function initialises all the rooms of the Ron Cooke Hub and their transitions
      */
-    public void initialiseRooms()
-    {
+    public void initialiseRooms() {
 
         Room mainRoom = new Room(0, "mainroom.tmx", "Main Foyer");
 
@@ -49,7 +46,6 @@ public class Map
         Room outside = new Room(8, "outside.tmx", "Outside Ron Cooke Hub");
 
         Room pod = new Room(9, "pod.tmx", "Pod");
-
 
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 
@@ -113,8 +109,7 @@ public class Map
      * @param id - The ID of the room they request.
      * @return (Room) the corresponding room
      */
-    public Room getRoom(int id)
-    {
+    public Room getRoom(int id) {
         for (Room room : rooms) {
             if (room.getID() == id) return room;
         }
@@ -122,25 +117,21 @@ public class Map
         return null;
     }
 
-
     /**
      * Returns the amount of rooms created by the map
      *
      * @return (int) number of rooms
      */
-    public int getAmountOfRooms()
-    {
+    public int getAmountOfRooms() {
         return rooms.size();
     }
-
 
     /**
      * Gets the rooms in the map
      *
      * @return (List<Room>) List of rooms that the map initialised
      */
-    public List<Room> getRooms()
-    {
+    public List<Room> getRooms() {
         return rooms;
     }
 

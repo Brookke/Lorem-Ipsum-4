@@ -9,8 +9,7 @@ import me.lihq.game.people.Player;
 /**
  * This is the arrow the indicates the movement to a new room when the player is on a floor mat.
  */
-public class RoomArrow extends Sprite
-{
+public class RoomArrow extends Sprite {
     /**
      * The player that the arrow is associated with
      */
@@ -26,11 +25,9 @@ public class RoomArrow extends Sprite
      *
      * @param player the player that the arrow is to be associated with
      */
-    public RoomArrow(Player player)
-    {
+    public RoomArrow(Player player) {
         super(Assets.getArrowDirection("NORTH"));
         this.player = player;
-
     }
 
     /**
@@ -39,8 +36,7 @@ public class RoomArrow extends Sprite
      * @param batch - the batch to draw the arrow to
      */
     @Override
-    public void draw(Batch batch)
-    {
+    public void draw(Batch batch) {
         if (this.visible) {
             super.draw(batch);
         }
@@ -51,10 +47,8 @@ public class RoomArrow extends Sprite
      * it checks to see if the player is on a trigger tile (a floor mat for example) and if so displays an arrow
      * otherwise it is hidden
      */
-    public void update()
-    {
+    public void update() {
         if (this.player.isOnTriggerTile()) {
-
             //this is the rotation of the mat (ie the way the arrow should face)
             String rotation = player.getRoom().getMatRotation(player.getTileCoordinates().x, player.getTileCoordinates().y);
 
@@ -69,10 +63,8 @@ public class RoomArrow extends Sprite
             this.setRegion(Assets.getArrowDirection(rotation));
             this.setPosition(x, y);
             this.visible = true;
-
         } else {
             this.visible = false;
         }
-
     }
 }

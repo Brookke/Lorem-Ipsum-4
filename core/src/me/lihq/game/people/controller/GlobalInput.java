@@ -7,8 +7,9 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 
 /**
- * Universal input handler for non-Player related inputs
- * @author Andrew
+ * Universal input handler for non-player related input - e.g. opening the pause menu.
+ * 
+ * @author JAAPAN
  *
  */
 public class GlobalInput extends InputAdapter {

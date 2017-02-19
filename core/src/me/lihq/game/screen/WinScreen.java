@@ -29,13 +29,40 @@ import java.util.List;
  */
 public class WinScreen extends AbstractScreen {
 	
+	/**
+	 * Vertical offset for label elements.
+	 */
 	private static final float OFFSET = 50f;
+	
+	/**
+	 * The x-coordinate of the information labels.
+	 */
 	private static final float LEFT_ALIGN = Gdx.graphics.getWidth() / 16;
 	
+	/**
+	 * The number of information labels on the screen. Used for animating their appearance.
+	 */
+	private static final int INFO_LABELS = 14;
+	
+	/**
+	 * The amount of time to wait before showing the next label.
+	 */
+	private static final float ANIMATION_TIME = 0.5f;
+
+    /**
+     * The stage used for rendering the UI and handling input.
+     */
 	private Stage stage;
 	
-	private int animationCount;
-	private float animationTimer;
+	/**
+	 * The number of information labels that have completed their animation.
+	 */
+	private int animationCount = 0;
+	
+	/**
+	 * Timer used to animate the information labels.
+	 */
+	private float animationTimer = 0f;
 
 	private boolean setHighScore = false;
 
@@ -45,13 +72,60 @@ public class WinScreen extends AbstractScreen {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         
         initMenu();
-        
-        animationCount = 0;
-        animationTimer = 0f;
 	}
-	
-	private void initMenu()
-	{
+
+	/**
+	 * Initialises the UI elements on the screen, and sets up event handlers.
+	 */
+	private void initMenu() {
+		Label title = Assets.createLabel("You Found the Killer!", true);
+		stage.addActor(title);
+		
+		// Create all information labels, retrieving the necessary data from the player
+		// Set their visibility to false, so they can be animated from the render() method
+		Label cluesLabel = Assets.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
+		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
+		cluesLabel.setVisible(false);
+		
+		Label redHerringLabel = Assets.createLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
+		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
+		redHerringLabel.setVisible(false);
+
+		Label questionsAsked = Assets.createLabel("Questions Asked: " + game.player.getQuestions(), false);
+		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
+		questionsAsked.setVisible(false);
+
+		Label accusedNPCs = Assets.createLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
+		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
+		accusedNPCs.setVisible(false);
+		
+		Label basicScoreLabel = Assets.createLabel("Points Gained: " + game.player.getScore(), false);
+		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
+		basicScoreLabel.setVisible(false);
+		
+		Label timeTaken = Assets.createLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
+		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
+		timeTaken.setVisible(false);
+
+		Label bonusScoreLabel = Assets.createLabel("Time Bonus: " + game.player.getTimeBonus(), false);
+		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
+		bonusScoreLabel.setVisible(false);
+
+		Label finalScoreLabel = Assets.createLabel("Total Score: " + game.player.getTotalScore(), false);
+		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
+		finalScoreLabel.setVisible(false);
+		
+		// Add all labels to the stage, to handle rendering
+		stage.addActor(cluesLabel);
+		stage.addActor(redHerringLabel);
+		stage.addActor(questionsAsked);
+		stage.addActor(accusedNPCs);
+		stage.addActor(basicScoreLabel);
+		stage.addActor(timeTaken);
+		stage.addActor(bonusScoreLabel);
+		stage.addActor(finalScoreLabel);
+    
+    // Generate the leaderboard
 		int[] highscores;
         List<Label> highscoreLabels = new ArrayList<>();
         Label highscoresTitleLabel = Assets.getLabel("Highscores", false);
@@ -65,7 +139,7 @@ public class WinScreen extends AbstractScreen {
             for (int i = 0; i < 5; i++) {
             	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
                     highscoreLabels.add(Assets.getLabel("*" + highscores[i] + "*", false));
-					// only highlight first instance of a highscore (to prevent highlighting duplicates)
+					// Only highlight first instance of a highscore (to prevent highlighting duplicates)
             		highlighted = true;
 				} else {
                     highscoreLabels.add(Assets.getLabel(String.valueOf(highscores[i]), false));
@@ -79,77 +153,35 @@ public class WinScreen extends AbstractScreen {
             highscoreLabels.add(Assets.getLabel("Error loading high scores.", false));
 		}
 
-
-		Label title = Assets.getLabel("You Found the Killer!", true);
-		stage.addActor(title);
-		
-		Label cluesLabel = Assets.getLabel("Clues Found: " + game.player.collectedClues.size(), false);
-		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
-		cluesLabel.setVisible(false);
-		
-		// TODO: Number of red herrings
-		Label redHerringLabel = Assets.getLabel("Red Herrings Found: " + game.player.collectedClues.size(), false);
-		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
-		redHerringLabel.setVisible(false);
-
-		Label questionsAsked = Assets.getLabel("Questions Asked: ", false);
-		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
-		questionsAsked.setVisible(false);
-
-		Label accusedNPCs = Assets.getLabel("Number of People Falsely Accused: " + game.player.getFalseAcc(), false);
-		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
-		accusedNPCs.setVisible(false);
-		
-		Label basicScoreLabel = Assets.getLabel("Points Gained: " + game.player.getScore(), false);
-		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
-		basicScoreLabel.setVisible(false);
-		
-		// TODO: Format nicely
-		Label timeTaken = Assets.getLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
-		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
-		timeTaken.setVisible(false);
-
-		Label bonusScoreLabel = Assets.getLabel("Time Bonus: " + game.player.getTimeBonus(), false);
-		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
-		bonusScoreLabel.setVisible(false);
-
-		Label finalScoreLabel = Assets.getLabel("Total Score: " + game.player.getTotalScore(), false);
-		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
-		finalScoreLabel.setVisible(false);
-		
-		stage.addActor(cluesLabel);
-		stage.addActor(redHerringLabel);
-		stage.addActor(questionsAsked);
-		stage.addActor(accusedNPCs);
-		stage.addActor(basicScoreLabel);
-		stage.addActor(timeTaken);
-		stage.addActor(bonusScoreLabel);
-		stage.addActor(finalScoreLabel);
-
+    // Add all highscores labels to the stage
 		stage.addActor(highscoresTitleLabel);
 		for (int i = 0; i < highscoreLabels.size(); i++) {
 		    stage.addActor(highscoreLabels.get(i));
         }
 		
-		TextButton mainMenuButton = Assets.getTextButton("Main Menu");
+		// Create the button to return to the main menu and reset the game state
+		TextButton mainMenuButton = Assets.createTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		
 		stage.addActor(mainMenuButton);
 		
-		mainMenuButton.addListener(new ClickListener()
-        {
+		mainMenuButton.addListener(new ClickListener() {
 			/**
-			 * Resets the state of the game, so it can be played again, and opens the main menu
+			 * Resets the state of the game, so it can be played again, and opens the main menu.
+			 * Also calls dispose(), to free resources.
 			 */
             @Override
-            public void clicked(InputEvent event, float x, float y)
-            {
+            public void clicked(InputEvent event, float x, float y) {
             	game.resetAll();
             	game.setScreen(game.menuScreen);
+            	dispose();
             }
         });
 	}
 
+	/**
+	 * Called when this screen becomes the current screen for a Game.
+	 */
 	@Override
 	public void show() {
 		// Add the stage to the input multiplexer, so it can receive input
@@ -157,10 +189,17 @@ public class WinScreen extends AbstractScreen {
         game.inputMultiplexer.addProcessor(stage);
 	}
 
+	/**
+	 * Game related logic should take place here.
+	 */
 	@Override
-	public void update() {
-	}
+	public void update() {}
 
+	/**
+	 * Called when the screen should render itself.
+	 * 
+	 * @param delta - The time in seconds since the last draw
+	 */
 	@Override
 	public void render(float delta) {
 		// Clear the screen
@@ -169,7 +208,10 @@ public class WinScreen extends AbstractScreen {
         
         animationTimer += delta;
         
-        if (animationCount < 14 && animationTimer > 0.5f) {
+        // Show a new label every 0.5s until all labels are visible
+        if (animationCount < INFO_LABELS && animationTimer > ANIMATION_TIME) {
+        	// The first label is the title label, so increment the counter BEFORE using it to get
+        	// the actor from the stage
         	animationCount++;
         	animationTimer = 0f;
         	
@@ -180,19 +222,32 @@ public class WinScreen extends AbstractScreen {
 		stage.draw();
 	}
 
+	/**
+	 * Called when the window is resized.
+	 * 
+	 * @param width - The new window width
+	 * @param height - The new window height
+	 */
 	@Override
 	public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
 	}
 
+	/**
+	 * Called when focus on the window is lost.
+	 */
 	@Override
-	public void pause() {
-	}
+	public void pause() {}
 
+	/**
+	 * Called when the window regains focus.
+	 */
 	@Override
-	public void resume() {
-	}
+	public void resume() {}
 
+	/**
+	 * Called when this screen is no longer the current screen for a Game.
+	 */
 	@Override
 	public void hide() {
 		// Remove the stage from the input multiplexer, so it doesn't fire
@@ -200,6 +255,9 @@ public class WinScreen extends AbstractScreen {
         game.inputMultiplexer.removeProcessor(stage);
 	}
 
+	/**
+	 * Called when this screen should release all resources.
+	 */
 	@Override
 	public void dispose() {
 		stage.dispose();
