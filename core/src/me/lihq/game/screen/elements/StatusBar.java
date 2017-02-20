@@ -91,16 +91,13 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        /******************** Added by team JAAPAN ********************/
-        scoreLabel = UIHelpers.createLabel("Score: " + game.player.getScore(), Assets.FONT15, Color.WHITE);
+        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = UIHelpers.createLabel("Personality: " + game.player.getPersonality().toString(),
-        		Assets.FONT15, Color.WHITE);
+        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
-        /**************************** End *****************************/
 
         TextButton inventoryButton = new TextButton("Inventory", skin);
         statusBar.add(inventoryButton).uniform();
@@ -184,5 +181,10 @@ public class StatusBar {
         textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.font = Assets.FONT15;
         skin.add("default", textButtonStyle);
+
+        //Create a button style
+        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.WHITE);
+        labelStyle.background = skin.getDrawable("background");
+        skin.add("default", labelStyle);
     }
 }
