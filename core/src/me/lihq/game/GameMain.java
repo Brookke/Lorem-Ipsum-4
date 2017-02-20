@@ -3,7 +3,7 @@
 *
 * http://jaapan.alexcummins.uk/JAAPAN-MITRCH-A3.jar
 *
- */
+*/
 
 package me.lihq.game;
 
