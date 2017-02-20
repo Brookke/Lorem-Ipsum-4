@@ -64,7 +64,6 @@ public class UIHelpers {
 	 * 
 	 * @param text - The text to display in the label
 	 * @param font - The font to use
-	 * 
 	 * @return A new label with the specified text and font
 	 * 
 	 * @author JAAPAN
@@ -81,7 +80,6 @@ public class UIHelpers {
 	 * @param text- The text to display in the label
 	 * @param font - The font to use
 	 * @param colour - The colour of the text
-	 * 
 	 * @return A new label with the specified text, font and colour
 	 * 
 	 * @author JAAPAN
