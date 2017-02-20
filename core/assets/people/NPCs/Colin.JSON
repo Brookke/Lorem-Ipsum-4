@@ -4,7 +4,7 @@
   "responses": {
     "introduction": "Hello young detective!",
     "Ignored Initial": "Oh... okay.",
-    "ignored Return": "I'm sorry but I'm too busy now. You should have talked to me earlier!s",
+    "ignored Return": "I'm sorry but I'm too busy now. You should have talked to me earlier!",
     "Falsely Accused": "Well I never! How dare you!",
     "Big Footprint": "I'm afraid my feet are smaller than that, young chap! Try %NPC instead.",
     "Small Footprint": "That looks much more similar to , but it looks closer to %NPC's.",
