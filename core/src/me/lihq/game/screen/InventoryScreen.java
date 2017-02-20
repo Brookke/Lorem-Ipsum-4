@@ -58,9 +58,10 @@ public class InventoryScreen extends AbstractScreen {
 	private boolean zoomed = false;
 
 	/**
-	 * Constructs the Inventory screen
+	 * Constructs the Inventory screen.
 	 *
-	 * @param game - Reference to the main Game class
+	 * @param game - Reference to the main Game class, used so this screen can alter the current
+	 * screen of the game, and access the player and input multiplexer
 	 */
 	public InventoryScreen(GameMain game) {
 		super(game);

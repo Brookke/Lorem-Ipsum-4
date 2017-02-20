@@ -38,6 +38,12 @@ public class SettingsScreen extends AbstractScreen {
      */
 	private Stage stage;
 
+	/**
+	 * Constructs the Settings screen.
+	 *
+	 * @param game - Reference to the main Game class, used so this screen can alter the current
+	 * screen of the game, and access the input multiplexer
+	 */
 	public SettingsScreen(GameMain game) {
 		super(game);
 		

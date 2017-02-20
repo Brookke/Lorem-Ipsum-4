@@ -64,8 +64,17 @@ public class WinScreen extends AbstractScreen {
 	 */
 	private float animationTimer = 0f;
 
+	/**
+	 * Whether the player's score is entered into the highscores table.
+	 */
 	private boolean setHighScore = false;
 
+	/**
+	 * Constructs the Win screen
+	 *
+	 * @param game - Reference to the main Game class, used so this screen can alter the current
+	 * screen of the game, and access the player and input multiplexer
+	 */
 	public WinScreen(GameMain game) {
 		super(game);
 
