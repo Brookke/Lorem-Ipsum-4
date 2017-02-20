@@ -17,6 +17,7 @@ import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
+import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * The screen that shows the user what clues they have collected.
@@ -72,11 +73,11 @@ public class InventoryScreen extends AbstractScreen {
 	 */
 	private void initMenu() {
         // Create and position the label containing title text
-        Label text = Assets.createLabel("Inventory", true);
+        Label text = UIHelpers.createLabel("Inventory", true);
         // We need 2 copies, one for each stage
-        Label text2 = Assets.createLabel("Inventory", true);
+        Label text2 = UIHelpers.createLabel("Inventory", true);
 
-        TextButton resumeButton = Assets.createTextButton("Close");
+        TextButton resumeButton = UIHelpers.createTextButton("Close");
         resumeButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         stage.addActor(text);
@@ -109,7 +110,7 @@ public class InventoryScreen extends AbstractScreen {
 						Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 				stage.addActor(imgBtn);
 				
-		        Label text = Assets.createLabel(c.getName(), Assets.FONT15);
+		        Label text = UIHelpers.createLabel(c.getName(), Assets.FONT15);
 		        text.setPosition(OFFSET+(Settings.CLUE_SIZE*2-text.getWidth())/2+Settings.CLUE_SIZE*2*((count-1)%CLUES_PER_ROW),
 		        		Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 4 - 20 - Settings.CLUE_SIZE*2*(int)((count-1)/CLUES_PER_ROW));
 		        stage.addActor(text);
@@ -127,17 +128,17 @@ public class InventoryScreen extends AbstractScreen {
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2);
 		            	zoomedStage.addActor(img);
 		            	
-		            	Label name = Assets.createLabel(c.getName(), false);
+		            	Label name = UIHelpers.createLabel(c.getName(), false);
 		            	name.setPosition(Gdx.graphics.getWidth()/2-name.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2+img.getHeight()/2+name.getHeight());
 		            	zoomedStage.addActor(name);
 
-		            	Label description = Assets.createLabel(c.getDescription(), Assets.FONT15);
+		            	Label description = UIHelpers.createLabel(c.getDescription(), Assets.FONT15);
 		            	description.setPosition(Gdx.graphics.getWidth()/2-description.getWidth()/2,
 		            			Gdx.graphics.getHeight()/2-img.getHeight()/2-description.getHeight()*2);
 		            	zoomedStage.addActor(description);
 		            	
-		                TextButton backButton = Assets.createTextButton("Back");
+		                TextButton backButton = UIHelpers.createTextButton("Back");
 		                backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		                zoomedStage.addActor(backButton);
 

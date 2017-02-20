@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
+import me.lihq.game.screen.elements.UIHelpers;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,40 +78,40 @@ public class WinScreen extends AbstractScreen {
 	 * Initialises the UI elements on the screen, and sets up event handlers.
 	 */
 	private void initMenu() {
-		Label title = Assets.createLabel("You Found the Killer!", true);
+		Label title = UIHelpers.createLabel("You Found the Killer!", true);
 		stage.addActor(title);
 		
 		// Create all information labels, retrieving the necessary data from the player
 		// Set their visibility to false, so they can be animated from the render() method
-		Label cluesLabel = Assets.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
+		Label cluesLabel = UIHelpers.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
 		cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
 		cluesLabel.setVisible(false);
 		
-		Label redHerringLabel = Assets.createLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
+		Label redHerringLabel = UIHelpers.createLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
 		redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
 		redHerringLabel.setVisible(false);
 
-		Label questionsAsked = Assets.createLabel("Questions Asked: " + game.player.getQuestions(), false);
+		Label questionsAsked = UIHelpers.createLabel("Questions Asked: " + game.player.getQuestions(), false);
 		questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 		questionsAsked.setVisible(false);
 
-		Label accusedNPCs = Assets.createLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
+		Label accusedNPCs = UIHelpers.createLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
 		accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
 		accusedNPCs.setVisible(false);
 		
-		Label basicScoreLabel = Assets.createLabel("Points Gained: " + game.player.getScore(), false);
+		Label basicScoreLabel = UIHelpers.createLabel("Points Gained: " + game.player.getScore(), false);
 		basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
 		basicScoreLabel.setVisible(false);
 		
-		Label timeTaken = Assets.createLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
+		Label timeTaken = UIHelpers.createLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
 		timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
 		timeTaken.setVisible(false);
 
-		Label bonusScoreLabel = Assets.createLabel("Time Bonus: " + game.player.getTimeBonus(), false);
+		Label bonusScoreLabel = UIHelpers.createLabel("Time Bonus: " + game.player.getTimeBonus(), false);
 		bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
 		bonusScoreLabel.setVisible(false);
 
-		Label finalScoreLabel = Assets.createLabel("Total Score: " + game.player.getTotalScore(), false);
+		Label finalScoreLabel = UIHelpers.createLabel("Total Score: " + game.player.getTotalScore(), false);
 		finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
 		finalScoreLabel.setVisible(false);
 		
@@ -128,7 +128,7 @@ public class WinScreen extends AbstractScreen {
     // Generate the leaderboard
 		int[] highscores;
         List<Label> highscoreLabels = new ArrayList<>();
-        Label highscoresTitleLabel = Assets.createLabel("Highscores", false);
+        Label highscoresTitleLabel = UIHelpers.createLabel("Highscores", false);
         highscoresTitleLabel.setPosition(Gdx.graphics.getWidth() * 0.75f - highscoresTitleLabel.getWidth()/2,
         		Gdx.graphics.getHeight() / 2 + OFFSET*3);
         highscoresTitleLabel.setVisible(false);
@@ -138,11 +138,11 @@ public class WinScreen extends AbstractScreen {
 			boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
             	if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
-                    highscoreLabels.add(Assets.createLabel("*" + highscores[i] + "*", false));
+                    highscoreLabels.add(UIHelpers.createLabel("*" + highscores[i] + "*", false));
 					// Only highlight first instance of a highscore (to prevent highlighting duplicates)
             		highlighted = true;
 				} else {
-                    highscoreLabels.add(Assets.createLabel(String.valueOf(highscores[i]), false));
+                    highscoreLabels.add(UIHelpers.createLabel(String.valueOf(highscores[i]), false));
 				}
             	
                 highscoreLabels.get(i).setPosition(Gdx.graphics.getWidth() * 0.75f - highscoreLabels.get(i).getWidth()/2,
@@ -150,7 +150,7 @@ public class WinScreen extends AbstractScreen {
                 highscoreLabels.get(i).setVisible(false);
             }
 		} catch (Throwable e) {
-            highscoreLabels.add(Assets.createLabel("Error loading high scores.", false));
+            highscoreLabels.add(UIHelpers.createLabel("Error loading high scores.", false));
 		}
 
     // Add all highscores labels to the stage
@@ -160,7 +160,7 @@ public class WinScreen extends AbstractScreen {
         }
 		
 		// Create the button to return to the main menu and reset the game state
-		TextButton mainMenuButton = Assets.createTextButton("Main Menu");
+		TextButton mainMenuButton = UIHelpers.createTextButton("Main Menu");
 		mainMenuButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 		
 		stage.addActor(mainMenuButton);

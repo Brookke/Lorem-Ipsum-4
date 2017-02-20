@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
+import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * The screen that allows the user to change the various settings of the game.
@@ -50,28 +51,28 @@ public class SettingsScreen extends AbstractScreen {
 	 */
 	private void initMenu() {
         // Create and position the label containing title text
-        Label title = Assets.createLabel("Settings", true);
+        Label title = UIHelpers.createLabel("Settings", true);
 
         // Create and position the back button, using the standard style
-        TextButton backButton = Assets.createTextButton("Back");
+        TextButton backButton = UIHelpers.createTextButton("Back");
         backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
         
         // Create and position the mute check box, using the standard style
-        CheckBox muteCheckBox = Assets.createCheckBox("Mute");
+        CheckBox muteCheckBox = UIHelpers.createCheckBox("Mute");
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*6);
         
-        Label musicLabel = Assets.createLabel("Music volume:", false);
+        Label musicLabel = UIHelpers.createLabel("Music volume:", false);
         musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*2);
         
         // Create and position the horizontal music volume slider, using the standard style
-        Slider musicSlider = Assets.createSlider(0f, 1f, 0.1f, false);
+        Slider musicSlider = UIHelpers.createSlider(0f, 1f, 0.1f, false);
         musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 + OFFSET*0.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
         
-        Label sfxLabel = Assets.createLabel("Sound effects volume:", false);
+        Label sfxLabel = UIHelpers.createLabel("Sound effects volume:", false);
         sfxLabel.setPosition(Gdx.graphics.getWidth() / 2 - sfxLabel.getWidth()/2, Gdx.graphics.getHeight() / 2 - OFFSET*2.5f);
         
-        Slider sfxSlider = Assets.createSlider(0f, 1f, 0.1f, false);
+        Slider sfxSlider = UIHelpers.createSlider(0f, 1f, 0.1f, false);
         sfxSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth()/2, Gdx.graphics.getHeight() / 2 - OFFSET*4);
         sfxSlider.setValue(Settings.SFX_VOLUME);
 

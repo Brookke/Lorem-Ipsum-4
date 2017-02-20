@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
 /**
@@ -66,19 +65,19 @@ public class Menu {
         TextButton newGameButton;
 
         if (pauseMenu) {
-            newGameButton = Assets.createTextButton("Resume Game");
-            text = Assets.createLabel("Paused", true);
+            newGameButton = UIHelpers.createTextButton("Resume Game");
+            text = UIHelpers.createLabel("Paused", true);
 
         } else {
-            text = Assets.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
-            newGameButton = Assets.createTextButton("New Game");
+            text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
+            newGameButton = UIHelpers.createTextButton("New Game");
         }
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
         
-        TextButton settings = Assets.createTextButton("Settings");
+        TextButton settings = UIHelpers.createTextButton("Settings");
         settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
-        TextButton quit = Assets.createTextButton("Quit");
+        TextButton quit = UIHelpers.createTextButton("Quit");
         quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 4);
 
         //Loading the buttons onto the stage
