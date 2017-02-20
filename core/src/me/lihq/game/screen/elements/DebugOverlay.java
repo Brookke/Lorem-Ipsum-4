@@ -2,8 +2,6 @@ package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -95,10 +93,9 @@ public class DebugOverlay {
      * @return (Sprite) the resulting sprite
      */
     public static Sprite getColoredTileSprite(Color color) {
-        Pixmap map = new Pixmap(Settings.TILE_SIZE, Settings.TILE_SIZE, Pixmap.Format.RGBA8888);
-        map.setColor(color);
-        map.fill();
-        Sprite sprite = new Sprite(new Texture(map));
+        /******************** Added by team JAAPAN ********************/
+        Sprite sprite = new Sprite(UIHelpers.createBackgroundTexture(color, Settings.TILE_SIZE, Settings.TILE_SIZE));
+        /**************************** End *****************************/
         sprite.setAlpha(0.4f);
 
         return sprite;

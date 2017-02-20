@@ -2,8 +2,6 @@ package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -94,11 +92,12 @@ public class StatusBar {
         statusBar.defaults().width(WIDTH);
 
         /******************** Added by team JAAPAN ********************/
-        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
+        scoreLabel = UIHelpers.createLabel("Score: " + game.player.getScore(), Assets.FONT15, Color.WHITE);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
+        personalityLabel = UIHelpers.createLabel("Personality: " + game.player.getPersonality().toString(),
+        		Assets.FONT15, Color.WHITE);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
         /**************************** End *****************************/
@@ -173,12 +172,9 @@ public class StatusBar {
      */
     private void initSkin() {
     	skin = new Skin();
-    	
+
         // Create a texture
-        Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
-        pixmap.setColor(BACKGROUND_COLOR);
-        pixmap.fill();
-        skin.add("background", new Texture(pixmap));
+        skin.add("background", UIHelpers.createBackgroundTexture(BACKGROUND_COLOR, WIDTH, HEIGHT));
 
         // Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -188,10 +184,5 @@ public class StatusBar {
         textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.font = Assets.FONT15;
         skin.add("default", textButtonStyle);
-
-        // Create a label style
-        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.WHITE);
-        labelStyle.background = skin.getDrawable("background");
-        skin.add("default", labelStyle);
     }
 }

@@ -2,14 +2,14 @@ package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
+import me.lihq.game.Assets;
 import me.lihq.game.Settings;
 
 import java.util.ArrayList;
@@ -71,8 +71,6 @@ public class SpeechBox {
     private ArrayList<SpeechBoxButton> buttons;
     //Styles
     private Skin buttonSkin;
-    private Skin labelSkin;
-    private Skin personLabelSkin;
 
     /**
      * The constructor for the SpeechBox
@@ -129,13 +127,13 @@ public class SpeechBox {
         //Init container
         Container<Table> container = new Container<Table>();
         container.setBounds(0, Y_OFFSET, WIDTH, HEIGHT);
-        container.setBackground(UIHelpers.getBackgroundDrawable(BORDER_COLOUR, WIDTH, HEIGHT));
+        container.setBackground(UIHelpers.createBackgroundDrawable(BORDER_COLOUR, WIDTH, HEIGHT));
 
         //Init table containing contents of speech box
         Table table = new Table();
 
         table.setSize(TABLE_WIDTH, TABLE_HEIGHT);
-        table.setBackground(UIHelpers.getBackgroundDrawable(BACKGROUND_COLOR, TABLE_WIDTH, TABLE_HEIGHT));
+        table.setBackground(UIHelpers.createBackgroundDrawable(BACKGROUND_COLOR, TABLE_WIDTH, TABLE_HEIGHT));
         fillTableContent(table);
 
         //Add table to container contents, and add padding
@@ -170,16 +168,19 @@ public class SpeechBox {
         table.row().height(TEXT_ROW_HEIGHT);
         if (person == null) {
             //Display only textContent
-            Label contentLabel = new Label(textContent, labelSkin);
+            /******************** Added by team JAAPAN ********************/
+            Label contentLabel = UIHelpers.createLabel(textContent, Assets.FONT15, TEXT_COLOUR);
+            /**************************** End *****************************/
             table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
         } else {
             //Display both person and textContent
             HorizontalGroup textGroup = new HorizontalGroup();
 
-            Label personLabel = new Label(person + ": ", personLabelSkin);
+            /******************** Added by team JAAPAN ********************/
+            Label personLabel = UIHelpers.createLabel(person + ": ", Assets.FONT15, Color.SCARLET);
+            Label contentLabel = UIHelpers.createLabel(textContent, Assets.FONT15, TEXT_COLOUR);
+            /**************************** End *****************************/
             textGroup.addActor(personLabel);
-
-            Label contentLabel = new Label(textContent, labelSkin);
             textGroup.addActor(contentLabel);
 
             table.add(textGroup).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
@@ -235,8 +236,6 @@ public class SpeechBox {
      */
     private void initSkins() {
         initButtonSkin();
-        initLabelSkin();
-        initPersonLabelSkin();
     }
 
     /**
@@ -249,11 +248,10 @@ public class SpeechBox {
         buttonSkin = new Skin();
         buttonSkin.add("default", font);
 
+        /******************** Added by team JAAPAN ********************/
         //Create a texture
-        Pixmap pixmap = new Pixmap(WIDTH, HEIGHT, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        buttonSkin.add("background", new Texture(pixmap));
+        buttonSkin.add("background", UIHelpers.createBackgroundTexture(Color.WHITE, WIDTH, HEIGHT));
+        /**************************** End *****************************/
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -263,44 +261,16 @@ public class SpeechBox {
         textButtonStyle.over = buttonSkin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.font = buttonSkin.getFont("default");
         buttonSkin.add("default", textButtonStyle);
-
     }
-
-    /**
-     * Sets up the skin for buttons on the speech box
-     */
-
-    private void initLabelSkin() {
-        labelSkin = new Skin();
-
-        Label.LabelStyle fontStyle = new Label.LabelStyle();
-        BitmapFont font = new BitmapFont();
-        fontStyle.font = font;
-        fontStyle.fontColor = TEXT_COLOUR;
-
-        labelSkin.add("default", fontStyle);
-    }
-
-    /**
-     * Sets up the skin for buttons on the speech box
-     */
-    private void initPersonLabelSkin() {
-        personLabelSkin = new Skin();
-
-        Label.LabelStyle fontStyle = new Label.LabelStyle();
-        BitmapFont font = new BitmapFont();
-        fontStyle.font = font;
-        fontStyle.fontColor = Color.SCARLET;
-
-        personLabelSkin.add("default", fontStyle);
-    }
-
 
     /**
      * Disposes of SpeechBox resources
      */
     public void dispose() {
         stage.dispose();
+        /******************** Added by team JAAPAN ********************/
+        buttonSkin.dispose();
+        /**************************** End *****************************/
     }
 
     /**

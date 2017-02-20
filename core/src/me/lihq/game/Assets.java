@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -13,6 +12,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
+import me.lihq.game.screen.elements.UIHelpers;
+
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
@@ -149,10 +151,8 @@ public class Assets {
         UI_SKIN.add("default", labelStyle);
 
         //Create a texture
-        Pixmap pixmap = new Pixmap(Gdx.graphics.getWidth() / 4, (int) Gdx.graphics.getHeight() / 10, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.ORANGE);
-        pixmap.fill();
-        UI_SKIN.add("background", new Texture(pixmap));
+        UI_SKIN.add("background", UIHelpers.createBackgroundTexture(Color.ORANGE, Gdx.graphics.getWidth() / 4,
+        		Gdx.graphics.getHeight() / 10));
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -175,14 +175,8 @@ public class Assets {
         UI_SKIN.add("default", checkBoxStyle);
         
         // Create the SliderStyle, using generated block textures
-        Pixmap slider = new Pixmap(20, 20, Pixmap.Format.RGB888);
-        slider.setColor(Color.BLACK);
-        slider.fill();
-        Pixmap knob = new Pixmap(10, 10, Pixmap.Format.RGB888);
-        knob.setColor(Color.GRAY);
-        knob.fill();
-        UI_SKIN.add("slider", new Texture(slider));
-        UI_SKIN.add("knob", new Texture(knob));
+        UI_SKIN.add("slider", UIHelpers.createBackgroundTexture(Color.BLACK, 20, 20));
+        UI_SKIN.add("knob", UIHelpers.createBackgroundTexture(Color.GRAY, 10, 10));
         
         Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
         sliderStyle.background = UI_SKIN.getDrawable("slider");

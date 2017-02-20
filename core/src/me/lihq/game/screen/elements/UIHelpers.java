@@ -18,18 +18,37 @@ import me.lihq.game.Assets;
  * Provides various factory methods for use in creating a UI.
  */
 public class UIHelpers {
+    
+    /**
+     * Creates a new block texture, for use as the background of UI controls.
+     * 
+     * @param colour - The colour of the texture
+     * @param width - The width of the texture
+     * @param height - The height of the texture
+     * @return A new texture with the specified parameters
+	 * 
+	 * @author JAAPAN
+     */
+    public static Texture createBackgroundTexture(Color colour, int width, int height) {
+        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(colour);
+        pixmap.fill();
+    	
+        return new Texture(pixmap);
+    }
 	
     /**
-     * Returns drawable with single colour fill
+     * Creates a new block texture, and returns it as a {@link Drawable} object.
      *
-     * @param color Colour to fill drawable with
-     * @return Drawable to use with LibGdx Scene2d controls
+     * @param colour - The colour of the texture
+     * @param width - The width of the texture
+     * @param height - The height of the texture
+     * @return A new {@link Drawable} object with the specified parameters
+	 * 
+	 * @author JAAPAN
      */
-    public static Drawable getBackgroundDrawable(Color color, int width, int height) {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        pixmap.setColor(color);
-        pixmap.fill();
-        return new Image(new Texture(pixmap)).getDrawable();
+    public static Drawable createBackgroundDrawable(Color colour, int width, int height) {
+        return new Image(createBackgroundTexture(colour, width, height)).getDrawable();
     }
 
 	/**

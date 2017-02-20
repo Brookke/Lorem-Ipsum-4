@@ -7,8 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -27,6 +25,7 @@ import me.lihq.game.screen.elements.DebugOverlay;
 import me.lihq.game.screen.elements.RoomArrow;
 import me.lihq.game.screen.elements.RoomTag;
 import me.lihq.game.screen.elements.StatusBar;
+import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * This is the screen that is responsible for the navigation of the player around the game.
@@ -131,12 +130,9 @@ public class NavigationScreen extends AbstractScreen {
         camera.setToOrtho(false, w, h);
         camera.update();
 
-        Pixmap pixMap = new Pixmap(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGBA8888);
-
-        pixMap.setColor(Color.BLACK);
-        pixMap.fill();
-
-        BLACK_BACKGROUND = new Sprite(new Texture(pixMap));
+        /******************** Added by team JAAPAN ********************/
+        BLACK_BACKGROUND = new Sprite(UIHelpers.createBackgroundTexture(Color.BLACK, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        /**************************** End *****************************/
 
         viewport = new FitViewport(w / Settings.ZOOM, h / Settings.ZOOM, camera);
 
