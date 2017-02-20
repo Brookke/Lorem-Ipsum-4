@@ -134,7 +134,7 @@ public class WinScreen extends AbstractScreen {
 		stage.addActor(bonusScoreLabel);
 		stage.addActor(finalScoreLabel);
     
-    // Generate the leaderboard
+		// Generate the leaderboard
 		int[] highscores;
         List<Label> highscoreLabels = new ArrayList<>();
         Label highscoresTitleLabel = UIHelpers.createLabel("Highscores", false);
@@ -162,7 +162,7 @@ public class WinScreen extends AbstractScreen {
             highscoreLabels.add(UIHelpers.createLabel("Error loading high scores.", false));
 		}
 
-    // Add all highscores labels to the stage
+		// Add all highscores labels to the stage
 		stage.addActor(highscoresTitleLabel);
 		for (int i = 0; i < highscoreLabels.size(); i++) {
 		    stage.addActor(highscoreLabels.get(i));
@@ -186,6 +186,53 @@ public class WinScreen extends AbstractScreen {
             	dispose();
             }
         });
+	}
+
+	/**
+	 * Updates the leaderboards with the players current score (if necessary)
+	 *
+	 * @return Integer array containing the 5 highscores
+	 */
+	private int[] getHighScores() throws IOException {
+		List<String> scoresList;
+		String filePath = "MITRCH-Leaderboards.txt";
+
+		// Get the contents of the leaderboards file, or create it and populate it with 0s
+		try {
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		} catch (NoSuchFileException e) {
+			File scoresFile = new File(filePath);
+			scoresFile.createNewFile();
+
+			List<String> initialHighscore = new ArrayList<>();
+			for (int i = 0; i < 5; i++) {
+				initialHighscore.add(i, "0");
+			}
+
+			Files.write(Paths.get(filePath), initialHighscore);
+			scoresList = Files.readAllLines(Paths.get(filePath));
+		}
+
+		// Check if the current score is a high score and insert it into appropriate index in scoresList
+		for (int j = 0; j < 5; j++) {
+			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
+				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
+				scoresList.remove(scoresList.size() - 1);
+				setHighScore = true;
+				break;
+			}
+		}
+
+		// Write the updated leaderboards back to the file
+		Files.write(Paths.get(filePath), scoresList);
+
+		//Store the highscores in an integer array
+		int[] highscores = new int[5];
+		for (int k = 0; k < 5; k++) {
+			highscores[k] = Integer.parseInt(scoresList.get(k));
+		}
+
+		return highscores;
 	}
 
 	/**
@@ -270,52 +317,5 @@ public class WinScreen extends AbstractScreen {
 	@Override
 	public void dispose() {
 		stage.dispose();
-	}
-
-	/**
-	 * Updates the leaderboards with the players current score (if necessary)
-	 *
-	 * @return Integer array containing the 5 highscores
-	 */
-	private int[] getHighScores() throws IOException {
-		List<String> scoresList;
-		String filePath = "MITRCH-Leaderboards.txt";
-
-		// Get the contents of the leaderboards file, or create it and populate it with 0s
-		try {
-			scoresList = Files.readAllLines(Paths.get(filePath));
-		} catch (NoSuchFileException e) {
-			File scoresFile = new File(filePath);
-			scoresFile.createNewFile();
-
-			List<String> initialHighscore = new ArrayList<>();
-			for (int i = 0; i < 5; i++) {
-				initialHighscore.add(i, "0");
-			}
-
-			Files.write(Paths.get(filePath), initialHighscore);
-			scoresList = Files.readAllLines(Paths.get(filePath));
-		}
-
-		// Check if the current score is a high score and insert it into appropriate index in scoresList
-		for (int j = 0; j < 5; j++) {
-			if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
-				scoresList.add(j, String.valueOf(game.player.getTotalScore()));
-				scoresList.remove(scoresList.size() - 1);
-				setHighScore = true;
-				break;
-			}
-		}
-
-		// Write the updated leaderboards back to the file
-		Files.write(Paths.get(filePath), scoresList);
-
-		//Store the highscores in an integer array
-		int[] highscores = new int[5];
-		for (int k = 0; k < 5; k++) {
-			highscores[k] = Integer.parseInt(scoresList.get(k));
-		}
-
-		return highscores;
 	}
 }
