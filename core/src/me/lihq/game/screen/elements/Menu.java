@@ -102,6 +102,7 @@ public class Menu {
                 Gdx.app.exit();
             }
         });
+        /******************** Added by team JAAPAN ********************/
         //Making the "Settings" button clickable and causing it to load the settings screen
         settings.addListener(new ClickListener() {
             @Override
@@ -109,6 +110,7 @@ public class Menu {
             	game.setScreen(game.settingsScreen);
             }
         });
+        /**************************** End *****************************/
     }
 
     /**
