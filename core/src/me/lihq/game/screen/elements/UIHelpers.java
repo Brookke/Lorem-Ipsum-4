@@ -57,20 +57,37 @@ public class UIHelpers {
 	}
 
 	/**
-	 * Creates a new label with the specified text and font. This generates a new LabelStyle on the
-	 * fly, which is less efficient than using one of the pre-existing ones defined in UI_SKIN. If
-	 * the font is arial of size 20 or 30, therefore, use {@link createLabel}
-	 * instead.
+	 * Creates a new label with the specified text and font, and the standard text colour. This
+	 * generates a new LabelStyle on the fly, which is less efficient than using one of the
+	 * pre-existing ones defined in UI_SKIN. If the font is arial of size 20 or 30, therefore, use
+	 * {@link #createLabel(String, boolean)} instead.
 	 * 
 	 * @param text - The text to display in the label
 	 * @param font - The font to use
 	 * 
-	 * @return A new label with the specified font and text
+	 * @return A new label with the specified text and font
 	 * 
 	 * @author JAAPAN
 	 */
 	public static Label createLabel(String text, BitmapFont font) {
-		Label.LabelStyle style = new Label.LabelStyle(font, Assets.TEXT_COLOUR);
+		return createLabel(text, font, Assets.TEXT_COLOUR);
+	}
+	
+	/**
+	 * Creates a new label with the specified text, font and colour. Identical to a call to 
+	 * {@link #createLabel(String, BitmapFont)}, except it allows you to set the text colour
+	 * as well.
+	 * 
+	 * @param text- The text to display in the label
+	 * @param font - The font to use
+	 * @param colour - The colour of the text
+	 * 
+	 * @return A new label with the specified text, font and colour
+	 * 
+	 * @author JAAPAN
+	 */
+	public static Label createLabel(String text, BitmapFont font, Color colour) {
+		Label.LabelStyle style = new Label.LabelStyle(font, colour);
 		return new Label(text, style);
 	}
 
