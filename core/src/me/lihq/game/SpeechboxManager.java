@@ -62,8 +62,8 @@ public class SpeechboxManager {
     /**
      * This is called when the window is resized
      *
-     * @param width - The new width
-     * @param height - The new height
+     * @param width The new width
+     * @param height The new height
      */
     public void resize(int width, int height) {
         if (!stack.isEmpty()) {
@@ -82,7 +82,7 @@ public class SpeechboxManager {
 
     /**
      * This method adds a SpeechBox to the stack
-     * @param speechBox - The SpeechBox to add to the stack
+     * @param speechBox The SpeechBox to add to the stack
      */
     public void addSpeechBox(SpeechBox speechBox) {
         stack.add(speechBox);

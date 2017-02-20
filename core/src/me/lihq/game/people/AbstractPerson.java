@@ -110,10 +110,10 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * This constructs the player calling super on the sprite class
      *
-     * @param name  - The name of the Person
-     * @param img   - this a path to the sprite sheet image
-     * @param tileX - This is the start x coordinate for the Person
-     * @param tileY - This is the start y coordinate for the Person
+     * @param name  The name of the Person
+     * @param img   This a path to the sprite sheet image
+     * @param tileX This is the start x coordinate for the Person
+     * @param tileY This is the start y coordinate for the Person
      */
     public AbstractPerson(String name, String img, int tileX, int tileY) {
         super(new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
@@ -264,7 +264,7 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * Setter for the direction the person is facing.
      *
-     * @param dir - Desired direction for the person to face.
+     * @param dir Desired direction for the person to face.
      */
     public void setDirection(Direction dir) {
         direction = dir;
@@ -273,7 +273,7 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * Setter for the animation time.
      *
-     * @param animTime - The animation time you want to set.
+     * @param animTime The animation time you want to set.
      */
     public void setAnimTime(float animTime) {
         this.animTime = animTime;
@@ -282,7 +282,7 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * This method sets the currentRoom to the room parameter
      *
-     * @param room - The room to change currentRoom to {@link #currentRoom}
+     * @param room The room to change currentRoom to {@link #currentRoom}
      */
     public void setRoom(Room room) {
         currentRoom = room;
@@ -305,8 +305,8 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * Retrieves a line of dialogue with a specified key.
      *
-     * @param type - The type of response to retrieve
-     * @param key - The key of the line of dialogue
+     * @param type The type of response to retrieve
+     * @param key The key of the line of dialogue
      * @return The corresponding line of dialogue
      * 
      * @author JAAPAN
@@ -328,8 +328,8 @@ public abstract class AbstractPerson extends Sprite {
     /**
      * This method returns the response based on the clue given
      *
-     * @param type - The type of response to retrieve
-     * @param clue - The clue to get the response for
+     * @param type The type of response to retrieve
+     * @param clue The clue to get the response for
      * @return The corresponding line of dialogue
      */
     public String getSpeech(Clue clue) {
@@ -485,8 +485,8 @@ public abstract class AbstractPerson extends Sprite {
         /**
          * This method compares the 2 objects.
          *
-         * @param o1 - The first object to compare
-         * @param o2 - The second object to compare
+         * @param o1 The first object to compare
+         * @param o2 The second object to compare
          * @return (int) if <0 o1 is considered to be first in the list
          */
         @Override

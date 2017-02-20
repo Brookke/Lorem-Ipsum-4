@@ -151,8 +151,8 @@ public class StatusBar {
     /**
      * This method is called on a window resize.
      *
-     * @param width  - the new width
-     * @param height - the new height
+     * @param width  the new width
+     * @param height the new height
      */
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);

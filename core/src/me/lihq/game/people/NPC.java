@@ -60,10 +60,10 @@ public class NPC extends AbstractPerson {
     /**
      * Define an NPC with location coordinates, room, spritesheet and name
      *
-     * @param tileX       - x coordinate of tile that the NPC will be initially rendered on.
-     * @param tileY       - y coordinate of tile that the NPC will be initially rendered on.
-     * @param room        - ID of room they are in
-     * @param spriteSheet - Spritesheet for this NPC
+     * @param tileX       x coordinate of tile that the NPC will be initially rendered on.
+     * @param tileY       y coordinate of tile that the NPC will be initially rendered on.
+     * @param room        ID of room they are in
+     * @param spriteSheet Spritesheet for this NPC
      */
     public NPC(String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile) {
         super(name, "people/NPCs/" + spriteSheet, tileX, tileY);
@@ -84,7 +84,7 @@ public class NPC extends AbstractPerson {
     /**
      * Reads in the JSON file of the character.
      *
-     * @param fileName - The filename to read from
+     * @param fileName The filename to read from
      */
     @Override
     public void importDialogue(String fileName) {
@@ -147,8 +147,7 @@ public class NPC extends AbstractPerson {
     /**
      * Reads and sets the NPC's motive for killing the victim from the JSON file.
      *
-     * @param victim - The victim of the heinous crime.
-     * 
+     * @param victim The victim of the heinous crime.
      * @return This object once the motive has been set.
      * 
      * @author JAAPAN
@@ -205,9 +204,9 @@ public class NPC extends AbstractPerson {
      * matches just one of the player's or NPC's personalities, generates a normal response.
      * If it matches neither, generates a non-response.
      *
-     * @param clue - The clue to be questioned about
-     * @param style - The style of questioning
-     * @param player - The personality type of the player
+     * @param clue The clue to be questioned about
+     * @param style The style of questioning
+     * @param player The personality type of the player
      * @return The appropriate line of dialogue.
      * 
      * @author JAAPAN

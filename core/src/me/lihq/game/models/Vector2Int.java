@@ -13,8 +13,8 @@ public class Vector2Int {
     /**
      * Creates a new Vector2Int object.
      *
-     * @param x - x coordinate.
-     * @param y - y coordinate.
+     * @param x x coordinate.
+     * @param y y coordinate.
      */
     public Vector2Int(int x, int y) {
         this.x = x;
@@ -42,7 +42,7 @@ public class Vector2Int {
     /**
      * This is a method override which allows the use of equality in the newly defined Vector2Int objects.
      *
-     * @param obj - The Vector2Int object.
+     * @param obj The Vector2Int object.
      * @return Returns true or false depending on whether the equality is true or false.
      */
     @Override

@@ -37,7 +37,7 @@ public abstract class AbstractScreen implements Screen {
 	/**
 	 * Called when the screen should render itself.
 	 * 
-	 * @param delta - The time in seconds since the last draw
+	 * @param delta The time in seconds since the last draw
 	 */
     @Override
     public abstract void render(float delta);
@@ -45,8 +45,8 @@ public abstract class AbstractScreen implements Screen {
 	/**
 	 * Called when the window is resized.
 	 * 
-	 * @param width - The new window width
-	 * @param height - The new window height
+	 * @param width The new window width
+	 * @param height The new window height
 	 */
     @Override
     public abstract void resize(int width, int height);

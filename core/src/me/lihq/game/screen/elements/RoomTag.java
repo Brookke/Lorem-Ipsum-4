@@ -49,7 +49,7 @@ public class RoomTag {
     /**
      * Initiate a new RoomTag. When the variable roomTag in NavigationScreen is NOT NULL, it is updated and rendered.
      *
-     * @param roomName - The name to display.
+     * @param roomName The name to display.
      */
     public RoomTag(String roomName) {
         this.roomName = roomName;
@@ -60,7 +60,7 @@ public class RoomTag {
      * <p>
      * It is called by the screens render method.
      *
-     * @param batch - The SpriteBatch to draw the tag to
+     * @param batch The SpriteBatch to draw the tag to
      */
     public void render(SpriteBatch batch) {
         boolean toClose = false;

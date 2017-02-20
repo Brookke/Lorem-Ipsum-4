@@ -66,8 +66,8 @@ public class Player extends AbstractPerson {
     /**
      * This is the constructor for player, it creates a new playable person.
      *
-     * @param name   - The name for the new player.
-     * @param imgSrc - The image used to represent it.
+     * @param name   The name for the new player.
+     * @param imgSrc The image used to represent it.
      */
     public Player(String name, String imgSrc, int tileX, int tileY) {
         super(name, "people/player/" + imgSrc, tileX, tileY);
@@ -77,7 +77,7 @@ public class Player extends AbstractPerson {
     /**
      * Reads in the JSON file of the character and stores dialogue in the dialogue HashMap
      *
-     * @param fileName - The file to read from
+     * @param fileName The file to read from
      */
     @Override
     public void importDialogue(String fileName) {
@@ -235,7 +235,7 @@ public class Player extends AbstractPerson {
      * Changes the player's personality towards the given type, and
      * caps the personality between 0 and 100.
      * 
-     * @param change - The personality type to move in the direction of
+     * @param change The personality type to move in the direction of
      * 
      * @author JAAPAN
      */
@@ -266,7 +266,7 @@ public class Player extends AbstractPerson {
     /**
      * Changes the player's score by the specified amount, and caps it at 0.
      * 
-     * @param scoreToAdd - The number of points to add to the score. Can be negative
+     * @param scoreToAdd The number of points to add to the score. Can be negative
      * 
      * @author JAAPAN
      */
@@ -280,7 +280,7 @@ public class Player extends AbstractPerson {
      * from the Screen.render() method of all screens that count as playing (i.e. not the 
      * pause screen).
      * 
-     * @param delta - The time difference
+     * @param delta The time difference
      * 
      * @author JAAPAN
      */
@@ -314,8 +314,8 @@ public class Player extends AbstractPerson {
     /**
      * Handles speech for a question about a clue.
      *
-     * @param clue - The clue to be questioned about
-     * @param style - The style of questioning
+     * @param clue The clue to be questioned about
+     * @param style The style of questioning
      * @return The appropriate line of dialogue.
      */
     public String getSpeech(Clue clue, Personality style) {

@@ -187,7 +187,7 @@ public class Assets {
     /**
      * This method takes a direction and returns the corresponding arrow asset for that direction
      *
-     * @param direction - The direction to fetch
+     * @param direction The direction to fetch
      * @return (TextureRegion) the corresponding TextureRegion
      */
     public static TextureRegion getArrowDirection(String direction) {
@@ -226,8 +226,7 @@ public class Assets {
     /*************************************************************************/
 
     /**
-     * @param file - The file that contains the textures
-     * 
+     * @param file The file that contains the textures
      * @return The new texture
      */
     public static Texture loadTexture(String file) {
@@ -237,9 +236,9 @@ public class Assets {
     /**
      * Creates a BitmapFont with the specified font and size.
      *
-     * @param font - The name of the font - must be stored as a .ttf file
+     * @param font The name of the font - must be stored as a .ttf file
      * under this name in the fonts directory
-     * @param size - The size of the font
+     * @param size The size of the font
      * @return The generated font
      * 
      * @author JAAPAN

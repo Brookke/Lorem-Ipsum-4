@@ -67,7 +67,7 @@ public class ConversationManagement {
     /**
      * This method starts a conversation with the specified NPC
      *
-     * @param npc - The NPC to have a conversation with
+     * @param npc The NPC to have a conversation with
      */
     public void startConversation(NPC npc) {
         this.tempCluePos = -1;
@@ -235,8 +235,8 @@ public class ConversationManagement {
     /**
      * This method is called to handle a users input
      *
-     * @param stage  - The stage of the questioning process that they are currently at
-     * @param option - The option chosen by the user
+     * @param stage  The stage of the questioning process that they are currently at
+     * @param option The option chosen by the user
      */
     private void handleResponse(QuestionStage stage, int option) {
         speechboxMngr.removeCurrentSpeechBox();

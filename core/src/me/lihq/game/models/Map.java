@@ -106,7 +106,7 @@ public class Map {
     /**
      * This returns a room from the list based on the id.
      *
-     * @param id - The ID of the room they request.
+     * @param id The ID of the room they request.
      * @return (Room) the corresponding room
      */
     public Room getRoom(int id) {

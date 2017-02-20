@@ -120,7 +120,7 @@ public class NavigationScreen extends AbstractScreen {
     /**
      * Initialises the navigation screen
      *
-     * @param game - The main game instance
+     * @param game The main game instance
      */
     public NavigationScreen(GameMain game) {
         super(game);
@@ -307,8 +307,8 @@ public class NavigationScreen extends AbstractScreen {
     /**
      * This is called when the window is resized
      *
-     * @param width  - The new width
-     * @param height - The new height
+     * @param width  The new width
+     * @param height The new height
      */
     @Override
     public void resize(int width, int height) {
@@ -361,7 +361,7 @@ public class NavigationScreen extends AbstractScreen {
     /**
      * This method sets the RoomTag to the parameter which is then rendered next render loop
      *
-     * @param tag - The RoomTag to be rendered
+     * @param tag The RoomTag to be rendered
      */
     public void setRoomTag(RoomTag tag) {
         this.roomTag = tag;

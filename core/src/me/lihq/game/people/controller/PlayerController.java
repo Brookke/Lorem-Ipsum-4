@@ -24,7 +24,7 @@ public class PlayerController extends InputAdapter {
     /**
      * Constructor to create the PlayerController to control the provided Player
      *
-     * @param player - The player that we want this controller to control
+     * @param player The player that we want this controller to control
      */
     public PlayerController(Player player) {
         this.player = player;
@@ -33,15 +33,17 @@ public class PlayerController extends InputAdapter {
     /**
      * This method is called when a key press is read
      *
-     * @param keycode - The code of the key pressed
+     * @param keycode The code of the key pressed
      * @return (boolean) Whether this method acted upon the keypress or not. Used for InputMultiplexers
      */
     @Override
     public boolean keyDown(int keycode) {
+        /******************** Added by team JAAPAN ********************/
     	if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
     		this.interact = true;
     		return true;
     	}
+        /**************************** End *****************************/
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = true;
             return true;
@@ -64,7 +66,7 @@ public class PlayerController extends InputAdapter {
     /**
      * This method is called when a key release is read
      *
-     * @param keycode - The keycode of the released key
+     * @param keycode The keycode of the released key
      * @return (boolean) Whether this method processed the key release or not. Used for input multiplexers.
      */
     @Override
@@ -92,11 +94,13 @@ public class PlayerController extends InputAdapter {
      * This method is called once a game tick to transfer the key reads to the live game data in the logic Thread.
      */
     public void update() {
+        /******************** Added by team JAAPAN ********************/
     	if (interact) {
     		GameMain.me.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
     	}
+        /**************************** End *****************************/
     	
     	if (!player.canMove) return;
 

@@ -66,9 +66,9 @@ public class Room {
     /**
      * Constructor that builds a Room object from the given parameters
      *
-     * @param id      - The integer ID of the room
-     * @param mapFile - The String that points to the tmx map file.
-     * @param name    - The name of the room
+     * @param id      The integer ID of the room
+     * @param mapFile The String that points to the tmx map file.
+     * @param name    The name of the room
      */
     public Room(int id, String mapFile, String name) {
         this.ID = id;
@@ -93,7 +93,7 @@ public class Room {
     /**
      * This method checks equality between the Room and another object
      *
-     * @param obj - The object to be checked against
+     * @param obj The object to be checked against
      * @return (boolean) Returns true if the obj is of type Room and has the exact same ID. {@link #ID}
      */
     @Override
@@ -144,7 +144,7 @@ public class Room {
     /**
      * Adds a clue to the room.
      *
-     * @param newClue - The clue to add to the room
+     * @param newClue The clue to add to the room
      */
     public void addClue(Clue newClue) {
         System.out.println("Added Clue " + newClue.getName() + " at location " + newClue.getPosition() + " in room \"" + getName() + "\"");
@@ -157,8 +157,8 @@ public class Room {
     /**
      * This method takes a location parameter and checks it for a clue, if a clue is found it is removed from the map and return
      *
-     * @param x - The x coordinate the player is at
-     * @param y - The y coordinate the player is at
+     * @param x The x coordinate the player is at
+     * @param y The y coordinate the player is at
      * @return (Clue) returns null if there is no clue at coordinate x,y and returns the clue itself otherwise
      */
     public Clue getClue(int x, int y) {
@@ -180,8 +180,8 @@ public class Room {
     /**
      * This method draws the clues that are in the clue with the asset CLUE_GLINT
      *
-     * @param delta - The time passed since the last draw. Used for the animation
-     * @param batch - The batch to draw the sprites to
+     * @param delta The time passed since the last draw. Used for the animation
+     * @param batch The batch to draw the sprites to
      */
     public void drawClues(float delta, Batch batch) {
         animationStateTime += delta;
@@ -196,8 +196,8 @@ public class Room {
      * This method checks whether the tile at x, y is a tile you can hide a clue
      * in
      *
-     * @param x - The x coordinate to check
-     * @param y - The y coordinate to check
+     * @param x The x coordinate to check
+     * @param y The y coordinate to check
      * @return (boolean) whether the tile is a hideable tile.
      */
     public boolean isHidingPlace(int x, int y) {
@@ -207,8 +207,8 @@ public class Room {
     /**
      * This method locks the specified coordinates so no other people object can move to it
      *
-     * @param x - The x coordinate to lock
-     * @param y - The y coordinate to lock
+     * @param x The x coordinate to lock
+     * @param y The y coordinate to lock
      */
     public void lockCoordinate(int x, int y) {
         this.lockedTiles[x][y] = true;
@@ -217,8 +217,8 @@ public class Room {
     /**
      * This method unlocks the specified coordinates so other people object can move to it
      *
-     * @param x - The x coordinate to unlock
-     * @param y - The y coordinate to unlock
+     * @param x The x coordinate to unlock
+     * @param y The y coordinate to unlock
      */
     public void unlockCoordinate(int x, int y) {
         this.lockedTiles[x][y] = false;
@@ -228,9 +228,9 @@ public class Room {
      * This method takes a current X and Y coordinate and checks through all the layers on the map to see if any tile IS NOT
      * movable. If any tile IS NOT movable, it returns false.
      *
-     * @param x - The x coordinate to check
-     * @param y - The y coordinate to check
-     * @return - (boolean) whether or not that tile can be walked on.
+     * @param x The x coordinate to check
+     * @param y The y coordinate to check
+     * @return (boolean) whether or not that tile can be walked on.
      */
     public boolean isWalkableTile(int x, int y) {
         //reduced by one because the last layer is to be displayed over the top of the player and therefore is ignored.
@@ -307,9 +307,9 @@ public class Room {
      * This method checks ALL layers for the tile at x, y to see if it is a trigger tile.
      * If any of them are true, it returns true
      *
-     * @param x - The x coordinate to check
-     * @param y - The y coordinate to check
-     * @return - (boolean) whether or not the tile is a trigger tile.
+     * @param x The x coordinate to check
+     * @param y The y coordinate to check
+     * @return (boolean) whether or not the tile is a trigger tile.
      */
     public boolean isTriggerTile(int x, int y) {
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
@@ -341,8 +341,8 @@ public class Room {
      * This method gets the rotation that the map is that they are standing on.
      * If they aren't on a mat, it returns null
      *
-     * @param x - The x coordinate to check
-     * @param y = The y coordinate to  check
+     * @param x The x coordinate to check
+     * @param y The y coordinate to  check
      * @return a String representing the direction they are facing
      */
     public String getMatRotation(int x, int y) {
@@ -365,8 +365,8 @@ public class Room {
     /**
      * This adds a transition to the map.
      *
-     * @param t - The transition to be added
-     * @return - (Room) itself
+     * @param t The transition to be added
+     * @return (Room) itself
      */
     public Room addTransition(Transition t) {
         roomTransitions.add(t);
@@ -430,9 +430,9 @@ public class Room {
      * This method will get the transition data (if available)
      * for the associated door mat in this room at the location x y.
      *
-     * @param x - The current x coordinate in the room (in terms of tiles not pixels)
-     * @param y - The current y coordinate in the room (in terms of tiles not pixels)
-     * @return - (Transition) a Transition data type. Which stores the relevant information. null if there is no transition at x, y
+     * @param x The current x coordinate in the room (in terms of tiles not pixels)
+     * @param y The current y coordinate in the room (in terms of tiles not pixels)
+     * @return (Transition) a Transition data type. Which stores the relevant information. null if there is no transition at x, y
      */
     public Transition getTransitionData(int x, int y) {
         return hasTransition(new Vector2Int(x, y));
@@ -442,8 +442,8 @@ public class Room {
      * This method checks through all the transitions of this room and if one exists where the FROM property is equal to the parameter 'v' then
      * it returns that Transition, else, it returns null
      *
-     * @param v - The vector containing the FROM coordinates
-     * @return - (Transition) nullable Transition - the transition if it exists, else, null
+     * @param v The vector containing the FROM coordinates
+     * @return (Transition) nullable Transition - the transition if it exists, else, null
      */
     private Transition hasTransition(Vector2Int v) {
         for (Transition l : roomTransitions) {
@@ -511,10 +511,10 @@ public class Room {
         /**
          * This method takes the parameters and sets the values of the relevant properties
          *
-         * @param room               - The room that the transition takes you to
-         * @param newTileCoordinateX - The x coordinate that the transition takes you to
-         * @param newTileCoordinateY - The y coordinates that the transition takes you to
-         * @param newDirection       - The direction that you will face after the transition
+         * @param room               The room that the transition takes you to
+         * @param newTileCoordinateX The x coordinate that the transition takes you to
+         * @param newTileCoordinateY The y coordinates that the transition takes you to
+         * @param newDirection       The direction that you will face after the transition
          * @return (Transition) this
          */
         public Transition setTo(Room room, int newTileCoordinateX, int newTileCoordinateY, Direction newDirection) {
@@ -527,8 +527,8 @@ public class Room {
         /**
          * This method takes the parameters and sets the values of the relevant properties
          *
-         * @param oldTiledCoordinateX - The x coordinate that the transition starts from
-         * @param oldTiledCoordinateY - The y coordinate that the transition starts from
+         * @param oldTiledCoordinateX The x coordinate that the transition starts from
+         * @param oldTiledCoordinateY The y coordinate that the transition starts from
          * @return (Transition) this
          */
         public Transition setFrom(int oldTiledCoordinateX, int oldTiledCoordinateY) {

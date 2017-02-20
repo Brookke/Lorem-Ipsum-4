@@ -72,7 +72,7 @@ public class WinScreen extends AbstractScreen {
 	/**
 	 * Constructs the Win screen
 	 *
-	 * @param game - Reference to the main Game class, used so this screen can alter the current
+	 * @param game Reference to the main Game class, used so this screen can alter the current
 	 * screen of the game, and access the player and input multiplexer
 	 */
 	public WinScreen(GameMain game) {
@@ -254,7 +254,7 @@ public class WinScreen extends AbstractScreen {
 	/**
 	 * Called when the screen should render itself.
 	 * 
-	 * @param delta - The time in seconds since the last draw
+	 * @param delta The time in seconds since the last draw
 	 */
 	@Override
 	public void render(float delta) {
@@ -281,8 +281,8 @@ public class WinScreen extends AbstractScreen {
 	/**
 	 * Called when the window is resized.
 	 * 
-	 * @param width - The new window width
-	 * @param height - The new window height
+	 * @param width The new window width
+	 * @param height The new window height
 	 */
 	@Override
 	public void resize(int width, int height) {

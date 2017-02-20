@@ -27,7 +27,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     /**
      * Constructor for the map renderer
      *
-     * @param map - The TiledMap that is to be rendered using this renderer
+     * @param map The TiledMap that is to be rendered using this renderer
      */
     public OrthogonalTiledMapRendererWithPeople(TiledMap map) {
         super(map);
@@ -38,7 +38,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     /**
      * This adds sprite to the list of sprites to be rendered before the final layer.
      *
-     * @param sprite - Sprite to be added
+     * @param sprite Sprite to be added
      */
     public void addPerson(AbstractPerson sprite) {
         people.add(sprite);

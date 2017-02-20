@@ -22,9 +22,9 @@ public class UIHelpers {
     /**
      * Creates a new block texture, for use as the background of UI controls.
      * 
-     * @param colour - The colour of the texture
-     * @param width - The width of the texture
-     * @param height - The height of the texture
+     * @param colour The colour of the texture
+     * @param width The width of the texture
+     * @param height The height of the texture
      * @return A new texture with the specified parameters
 	 * 
 	 * @author JAAPAN
@@ -40,9 +40,9 @@ public class UIHelpers {
     /**
      * Creates a new block texture, and returns it as a {@link Drawable} object.
      *
-     * @param colour - The colour of the texture
-     * @param width - The width of the texture
-     * @param height - The height of the texture
+     * @param colour The colour of the texture
+     * @param width The width of the texture
+     * @param height The height of the texture
      * @return A new {@link Drawable} object with the specified parameters
 	 * 
 	 * @author JAAPAN
@@ -55,8 +55,8 @@ public class UIHelpers {
 	 * Creates a new label, using the style defined in UI_SKIN. If the label is a title,
 	 * its default position is set to the middle of the top of the screen.
 	 * 
-	 * @param text - The text to display in the label
-	 * @param title - Whether to use the title LabelStyle (font size 30) or
+	 * @param text The text to display in the label
+	 * @param title Whether to use the title LabelStyle (font size 30) or
 	 * the default LabelStyle (font size 20)
 	 * @return A new label with the standard style and specified text
 	 * 
@@ -81,8 +81,8 @@ public class UIHelpers {
 	 * pre-existing ones defined in UI_SKIN. If the font is arial of size 20 or 30, therefore, use
 	 * {@link #createLabel(String, boolean)} instead.
 	 * 
-	 * @param text - The text to display in the label
-	 * @param font - The font to use
+	 * @param text The text to display in the label
+	 * @param font The font to use
 	 * @return A new label with the specified text and font
 	 * 
 	 * @author JAAPAN
@@ -96,9 +96,9 @@ public class UIHelpers {
 	 * {@link #createLabel(String, BitmapFont)}, except it allows you to set the text colour
 	 * as well.
 	 * 
-	 * @param text- The text to display in the label
-	 * @param font - The font to use
-	 * @param colour - The colour of the text
+	 * @param text The text to display in the label
+	 * @param font The font to use
+	 * @param colour The colour of the text
 	 * @return A new label with the specified text, font and colour
 	 * 
 	 * @author JAAPAN
@@ -111,7 +111,7 @@ public class UIHelpers {
 	/**
 	 * Creates a new text button, using the style defined in UI_SKIN.
 	 * 
-	 * @param text - The text to display in the button
+	 * @param text The text to display in the button
 	 * @return A new text button with the standard style and specified text
 	 * 
 	 * @author JAAPAN
@@ -124,7 +124,7 @@ public class UIHelpers {
 	 * Creates a new checkbox, using the style defined in UI_SKIN. Prepends the text with
 	 * 2 spaces, to add a gap between it and the checkbox texture.
 	 * 
-	 * @param text - The text to display next to the checkbox
+	 * @param text The text to display next to the checkbox
 	 * @return A new checkbox with the standard style and specified text
 	 * 
 	 * @author JAAPAN
@@ -136,10 +136,10 @@ public class UIHelpers {
 	/**
 	 * Creates a new slider control, using the style define in UI_SKIN.
 	 * 
-	 * @param min - The minimum value of the slider
-	 * @param max - The maximum value of the slider
-	 * @param stepSize - The size of the increments
-	 * @param vertical - Whether the slider should be vertical or horizontal
+	 * @param min The minimum value of the slider
+	 * @param max The maximum value of the slider
+	 * @param stepSize The size of the increments
+	 * @param vertical Whether the slider should be vertical or horizontal
 	 * @return A new slider with the standard style and specified attributes
 	 * 
 	 * @author JAAPAN

@@ -47,11 +47,11 @@ public class Clue extends Sprite {
     /**
      * Creates a clue
      *
-     * @param name 			- The name of the clue i.e. what it is
-     * @param description 	- Describes what the clue is
-     * @param weapon		- Whether this clue is the murder weapon or not
-     * @param clueX			- The column of the texture on the spritesheet
-     * @param clueY			- The row of the texture on the spritesheet
+     * @param name 			The name of the clue i.e. what it is
+     * @param description 	Describes what the clue is
+     * @param weapon		Whether this clue is the murder weapon or not
+     * @param clueX			The column of the texture on the spritesheet
+     * @param clueY			The row of the texture on the spritesheet
      * 
      * @author JAAPAN
      */
@@ -65,7 +65,7 @@ public class Clue extends Sprite {
     /**
      * Checks equality of this Clue object and another object.
      *
-     * @param obj - The clue object to test against
+     * @param obj The clue object to test against
      * @return True if {@code obj} is of type Clue and has the same name
      */
     @Override
@@ -113,7 +113,7 @@ public class Clue extends Sprite {
     /**
      * Sets the tile coordinates of the clue in the map.
      *
-     * @param v - The Vector2Int that the clue's tile coordinates are to be set to
+     * @param v The Vector2Int that the clue's tile coordinates are to be set to
      *          <p>
      *          All coordinates relative to the bottom left of the map
      *          </p>
@@ -126,8 +126,8 @@ public class Clue extends Sprite {
     /**
      * Sets the tile coordinates of the clue in the map.
      *
-     * @param x - The x coordinate for where the clue is, in terms of tiles.
-     * @param y - The y coordinate for where the clue is, in terms of tiles.
+     * @param x The x coordinate for where the clue is, in terms of tiles.
+     * @param y The y coordinate for where the clue is, in terms of tiles.
      *          <p>
      *          All coordinates relative to the bottom left of the map
      *          </p>

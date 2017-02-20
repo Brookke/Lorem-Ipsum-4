@@ -39,7 +39,7 @@ public class DebugOverlay {
     /**
      * This method draws the debug menu to the batch
      *
-     * @param batch - The batch to draw the menu on
+     * @param batch The batch to draw the menu on
      */
     public static void renderDebugInfo(Batch batch) {
         Sprite border = getColoredTileSprite(Color.BLACK);
@@ -55,8 +55,8 @@ public class DebugOverlay {
     /**
      * This method draws overlays on the tiles to display whether a tile is both walkable and hideable
      *
-     * @param room  - The room we are drawing on
-     * @param batch - The batch to draw the tile overlays onto
+     * @param room  The room we are drawing on
+     * @param batch The batch to draw the tile overlays onto
      */
     public static void renderDebugTiles(Room room, Batch batch) {
          /*
@@ -89,7 +89,7 @@ public class DebugOverlay {
     /**
      * This method returns a tile overlay of the specified color
      *
-     * @param color - The color to set the sprite
+     * @param color The color to set the sprite
      * @return (Sprite) the resulting sprite
      */
     public static Sprite getColoredTileSprite(Color color) {

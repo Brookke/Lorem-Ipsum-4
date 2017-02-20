@@ -33,7 +33,7 @@ public class RoomArrow extends Sprite {
     /**
      * This is called to draw the RoomArrow
      *
-     * @param batch - the batch to draw the arrow to
+     * @param batch the batch to draw the arrow to
      */
     @Override
     public void draw(Batch batch) {

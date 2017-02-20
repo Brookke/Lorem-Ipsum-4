@@ -23,7 +23,7 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * The constructor for the MainMenuScreen
      *
-     * @param game - The game it is getting created for
+     * @param game The game it is getting created for
      */
     public MainMenuScreen(GameMain game) {
         super(game);
@@ -55,7 +55,7 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * This method is called once a render loop to render the menu
      *
-     * @param delta - The time in seconds since the last draw
+     * @param delta The time in seconds since the last draw
      */
     @Override
     public void render(float delta) {
@@ -66,8 +66,8 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * This is called when the window is resized
      *
-     * @param width  - The new width
-     * @param height - The new height
+     * @param width  The new width
+     * @param height The new height
      */
     @Override
     public void resize(int width, int height) {
