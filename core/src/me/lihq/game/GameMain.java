@@ -1,10 +1,8 @@
 /*
-* This is the link to the executable jar file created from this project
+* Game executable:
 *
-* http://www.lihq.me/Downloads/Assessment2/Game.jar
+* http://jaapan.alexcummins.uk/JAAPAN-MITRCH-A3.jar
 *
-* or visit http://www.lihq.me
-* and click "Download Game"
  */
 
 package me.lihq.game;
