@@ -1,5 +1,5 @@
-# Lorem Ipsum 
-Visit out website at http://www.lihq.me, or read the documentation at http://docs.lihq.me
+# JAAPAN 
+Visit out website at http://jaapan.alexcummins.uk, or read the documentation at http://jaapan.alexcummins.uk/javadoc
 
 ## Get started
 ### What you need
@@ -40,9 +40,6 @@ To build the game use the built in run configuration *Desktop* in the same way t
 
 ## Testing
 This project is tested using JUnit. Tests are located within the `/game/tests` directory. For test documentation, please see https://github.com/junit-team/junit4/wiki
-
-### Running Tests
-For every commit CircleCI runs all the included tests, however we recomend that you run test locally too before committing.
 
 ####Running tests locally
 We have included a handy test configuration that can be ran from intellij.
