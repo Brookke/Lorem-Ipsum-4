@@ -2,7 +2,6 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
 
@@ -50,7 +49,8 @@ public class MainMenuScreen extends AbstractScreen {
      * This method is called once a tick
      */
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     /**
      * This method is called once a render loop to render the menu
@@ -78,13 +78,15 @@ public class MainMenuScreen extends AbstractScreen {
      * This is called when the focus is lost on the window
      */
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     /**
      * This method is called when the user hides the window

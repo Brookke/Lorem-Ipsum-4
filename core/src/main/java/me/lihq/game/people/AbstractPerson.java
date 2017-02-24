@@ -29,7 +29,7 @@ public abstract class AbstractPerson extends Sprite {
      * The width of the texture region for each person
      */
     protected static int SPRITE_WIDTH = 32;
-    
+
     /**
      * This is whether the NPC can move or not. It is mainly used to not let them move during conversation
      */
@@ -37,71 +37,71 @@ public abstract class AbstractPerson extends Sprite {
 
     /**
      * Used for randomising non-responses
-     * 
+     *
      * @author JAAPAN
      */
     protected Random random;
-    
+
     /**
      * This is the location of the person in the room in terms of tiles eg (0,0) would be the bottom left of the room
      * Uses the Vector2Int as the tileCoordinates should never be floats as the person should only be between tiles during the move process.
      */
     protected Vector2Int tileCoordinates = new Vector2Int(0, 0);
-    
+
     /**
      * This is the players location in the current room.
      * Note this is different to sprite position, the sprite position is the location that the person is currently drawn.
      * Avoid using Sprites setPosition as if it is changed mid render it will cause jolting.
      */
     protected Vector2 coordinates = new Vector2().set(0.0f, 0.0f);
-    
+
     /**
      * A store of the starting point for a movement.
      */
     protected Vector2Int startTile = new Vector2Int(0, 0);
-    
+
     /**
      * A store of the destination for a movement.
      */
     protected Vector2Int destinationTile = new Vector2Int(0, 0);
-    
+
     /**
      * The following variables control the walking animation speed
      */
     protected float animTimer;
     protected float animTime = Settings.TPS / 3f;
-    
+
     /**
      * This stores the sprite sheet of the Player/NPC
      */
     protected Texture spriteSheet;
-    
+
     /**
      * This stores the current region of the above texture that is to be drawn
      * to the map
      */
     protected TextureRegion currentRegion;
-    
+
     /**
      * This is the JSON data for the Player/NPC
      */
     protected JsonValue jsonData;
-    
+
     /**
      * The direction determines the way the character is facing.
      */
     protected Direction direction = Direction.EAST;
-    
+
     /**
      * This is the current walking state of the Person. {@link #getState()}
      */
     protected PersonState state;
-    
+
     /**
      * The Name of the Person
      */
     private String name;
-    
+
     /**
      * The current room of the AbstractPerson.
      */
@@ -232,7 +232,7 @@ public abstract class AbstractPerson extends Sprite {
             setRegion(new TextureRegion(spriteSheet, 0, row * SPRITE_HEIGHT, SPRITE_WIDTH, SPRITE_HEIGHT));
         }
     }
-    
+
     /*************************************************************************/
     /****************************** Set Methods ******************************/
     /*************************************************************************/
@@ -262,15 +262,6 @@ public abstract class AbstractPerson extends Sprite {
     }
 
     /**
-     * Setter for the direction the person is facing.
-     *
-     * @param dir Desired direction for the person to face.
-     */
-    public void setDirection(Direction dir) {
-        direction = dir;
-    }
-
-    /**
      * Setter for the animation time.
      *
      * @param animTime The animation time you want to set.
@@ -278,19 +269,6 @@ public abstract class AbstractPerson extends Sprite {
     public void setAnimTime(float animTime) {
         this.animTime = animTime;
     }
-
-    /**
-     * This method sets the currentRoom to the room parameter
-     *
-     * @param room The room to change currentRoom to {@link #currentRoom}
-     */
-    public void setRoom(Room room) {
-        currentRoom = room;
-    }
-    
-    /*************************************************************************/
-    /****************************** Get Methods ******************************/
-    /*************************************************************************/
 
     /**
      * This method returns the Persons walking state.
@@ -306,24 +284,27 @@ public abstract class AbstractPerson extends Sprite {
      * Retrieves a line of dialogue with a specified key.
      *
      * @param type The type of response to retrieve
-     * @param key The key of the line of dialogue
+     * @param key  The key of the line of dialogue
      * @return The corresponding line of dialogue
-     * 
      * @author JAAPAN
      */
     public String getSpeech(String key) {
         try {
-        	if (!jsonData.get("Responses").has(key)) {
-        		// Randomly select a non-response
-        		int size = jsonData.get("noneResponses").size;
-        		return jsonData.get("noneResponses").getString(random.nextInt(size));
-        	} else {
+            if (!jsonData.get("Responses").has(key)) {
+                // Randomly select a non-response
+                int size = jsonData.get("noneResponses").size;
+                return jsonData.get("noneResponses").getString(random.nextInt(size));
+            } else {
                 return jsonData.get("Responses").getString(key);
             }
         } catch (Exception e) {
             return "error speech not working";
         }
     }
+
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
 
     /**
      * This method returns the response based on the clue given
@@ -360,12 +341,30 @@ public abstract class AbstractPerson extends Sprite {
     }
 
     /**
+     * Setter for the direction the person is facing.
+     *
+     * @param dir Desired direction for the person to face.
+     */
+    public void setDirection(Direction dir) {
+        direction = dir;
+    }
+
+    /**
      * This method returns the room that the Person is in
      *
      * @return (Room) the room the Person is in {@link #currentRoom}
      */
     public Room getRoom() {
         return currentRoom;
+    }
+
+    /**
+     * This method sets the currentRoom to the room parameter
+     *
+     * @param room The room to change currentRoom to {@link #currentRoom}
+     */
+    public void setRoom(Room room) {
+        currentRoom = room;
     }
 
     /**

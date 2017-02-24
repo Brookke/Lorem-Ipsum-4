@@ -37,7 +37,7 @@ android/gen/
 .idea/**
 !.idea/runConfigurations/
 .idea/runConfigurations/**
-!.idea/runConfigurations/Tests.xml
+!.idea/runConfigurations/Test.xml
 !.idea/runConfigurations/Desktop.xml
 !.idea/runConfigurations/TestsGradle.xml
 *.ipr

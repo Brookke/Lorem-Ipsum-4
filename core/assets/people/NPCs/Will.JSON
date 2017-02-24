@@ -1,6 +1,6 @@
 {
-  "name":"Will",
-  "personality":"NEUTRAL",
+  "name": "Will",
+  "personality": "NEUTRAL",
   "responses": {
     "introduction": "Hello",
     "Ignored Initial": "OK then.",
@@ -33,14 +33,14 @@
     "I am not telling you."
   ],
   "motives": {
-  	"Adam": "A great force overcame me and made me kill him. Honest.",
-  	"Colin": "I wanted to make a transitive relation between me, my weapon and him.",
-  	"Diana": "She spat in my ear. I think it was an accident. But still.",
-  	"Horatio": "He bullied me in school.",
-  	"Kyle": "We collaborated on a paper and he took all the credit.",
-  	"Lily": "She once cut me in line to see Star Wars - I didn't get in!",
-  	"Mary": "She beat me in a poetry writing contest.",
-  	"Mike": "He once dripped molten solder on me. I still have the scar."
-  	"Roger": "He has such a nice bike, I thought if I killed him I could get away on it before anyone figured it out.",
+    "Adam": "A great force overcame me and made me kill him. Honest.",
+    "Colin": "I wanted to make a transitive relation between me, my weapon and him.",
+    "Diana": "She spat in my ear. I think it was an accident. But still.",
+    "Horatio": "He bullied me in school.",
+    "Kyle": "We collaborated on a paper and he took all the credit.",
+    "Lily": "She once cut me in line to see Star Wars - I didn't get in!",
+    "Mary": "She beat me in a poetry writing contest.",
+    "Mike": "He once dripped molten solder on me. I still have the scar.",
+    "Roger": "He has such a nice bike, I thought if I killed him I could get away on it before anyone figured it out."
   }
 }

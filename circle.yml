@@ -9,6 +9,6 @@ test:
     - mkdir -p $CIRCLE_TEST_REPORTS/html/ 
     - mkdir -p $CIRCLE_ARTIFACTS/coverage/
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - if test -d build/reports/tests; then cp -r build/reports/tests/* $CIRCLE_TEST_REPORTS/html/; fi
+    - if test -d core/build/reports/tests; then cp -r core/build/reports/tests/* $CIRCLE_TEST_REPORTS/html/; fi
     - cp -r core/build/reports/jacoco/test/* $CIRCLE_ARTIFACTS/coverage/;
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;

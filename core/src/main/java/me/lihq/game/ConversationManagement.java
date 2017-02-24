@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * This class controls conversation flow between Player and NPCs.
  */
 public class ConversationManagement {
-	/**
-	 * The player that will be starting the conversation.
-	 */
+    /**
+     * The player that will be starting the conversation.
+     */
     private Player player;
 
     /**
@@ -38,17 +38,17 @@ public class ConversationManagement {
      * This stores the style of questioning for how the player wants to ask the question.
      */
     private Personality tempQuestionStyle;
-    
+
     /**
      * Indicates whether the last conversation is finished or ongoing.
-     * 
+     *
      * @author JAAPAN
      */
     private boolean finished = false;
-    
+
     /**
      * Indicates whether the player has correctly accused the killer.
-     * 
+     *
      * @author JAAPAN
      */
     private boolean won = false;
@@ -86,12 +86,12 @@ public class ConversationManagement {
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
             finished = true;
         } else if (tempNPC.ignored) {
-        	// If the NPC has been ignored, they also refuse to respond to the player, but this can change
+            // If the NPC has been ignored, they also refuse to respond to the player, but this can change
             speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 5));
             finished = true;
         } else {
-        	// Otherwise, begin a conversation with the NPC
+            // Otherwise, begin a conversation with the NPC
             speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
             speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
             queryQuestionType();
@@ -114,10 +114,10 @@ public class ConversationManagement {
         /******************** Added by team JAAPAN ********************/
         // If the player can accuse the NPC, add the accuse button
         if (player.canAccuse()) {
-        	buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
-    	}
+            buttons.add(new SpeechBoxButton("Accuse?", 1, eventHandler));
+        }
         /**************************** End *****************************/
-        
+
         if (buttons.size() > 0) {
             speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));
         } else {
@@ -162,8 +162,8 @@ public class ConversationManagement {
      */
     private void questionNPC() {
         /******************** Added by team JAAPAN ********************/
-    	// Change the player's personality towards the style of questioning they chose
-    	player.changePersonality(tempQuestionStyle);
+        // Change the player's personality towards the style of questioning they chose
+        player.changePersonality(tempQuestionStyle);
         /**************************** End *****************************/
         speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
         speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
@@ -172,21 +172,21 @@ public class ConversationManagement {
 
     /**
      * Initialises an accusing user interface.
-     * 
+     *
      * @author JAAPAN
      */
     private void accuseNPC() {
-    	// Display the accusation dialogue
-    	speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("Accuse"), 5));
+        // Display the accusation dialogue
+        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("Accuse"), 5));
         if (this.tempNPC.isKiller()) {
-        	// If the NPC is the killer, respond with the motive
+            // If the NPC is the killer, respond with the motive
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
             player.addToScore(1000);
             // Set the won flag, so the game ends
             won = true;
         } else {
-        	// Otherwise, respond with falsely accused dialogue and set the NPC's accused flag so they
-        	// don't respond to the player anymore
+            // Otherwise, respond with falsely accused dialogue and set the NPC's accused flag so they
+            // don't respond to the player anymore
             speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
             this.tempNPC.accused = true;
             player.addToScore(-2000);
@@ -198,7 +198,7 @@ public class ConversationManagement {
 
     /**
      * Initialises the ignore user interface.
-     * 
+     *
      * @author JAAPAN
      */
     private void ignoreNPC() {
@@ -212,23 +212,23 @@ public class ConversationManagement {
      * Called continuously from NavigationScreen.update(). Resets variables so the player can move
      * and normal gameplay can resume, but only if the conversation is over and all speechboxes are
      * closed. If the game has been won, opens the WinScreen.
-     * 
+     *
      * @author JAAPAN
      */
     public void finishConversation() {
-    	// Checks the player is in a conversation, and it is finished
-    	if (!this.speechboxMngr.isEmpty() || !this.player.inConversation || !this.finished)
-    		return;
-    	
+        // Checks the player is in a conversation, and it is finished
+        if (!this.speechboxMngr.isEmpty() || !this.player.inConversation || !this.finished)
+            return;
+
         this.tempNPC.canMove = true;
         this.player.canMove = true;
         this.player.inConversation = false;
         this.finished = false;
-        
+
         // End the game, and show the winning screen
         if (won) {
-        	GameMain.me.setScreen(new WinScreen(GameMain.me));
-        	won = false;
+            GameMain.me.setScreen(new WinScreen(GameMain.me));
+            won = false;
         }
     }
 
@@ -247,7 +247,7 @@ public class ConversationManagement {
                     queryQuestionStyle();
                 } else if (option == 1) {
                     accuseNPC();
-                /******************** Added by team JAAPAN ********************/
+                    /******************** Added by team JAAPAN ********************/
                 } else if (option == 2) {
                     ignoreNPC();
                 }
@@ -265,8 +265,8 @@ public class ConversationManagement {
                 /******************** Added by team JAAPAN ********************/
                 // Check the player hasn't already asked this NPC about this clue, and add points
                 if (!tempNPC.alreadyAskedClues.contains(player.collectedClues.get(tempCluePos))) {
-                	player.addToScore(100);
-                	tempNPC.alreadyAskedClues.add(player.collectedClues.get(tempCluePos));
+                    player.addToScore(100);
+                    tempNPC.alreadyAskedClues.add(player.collectedClues.get(tempCluePos));
                 }
                 /**************************** End *****************************/
                 break;
