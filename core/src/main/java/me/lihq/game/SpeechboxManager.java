@@ -1,5 +1,6 @@
 package me.lihq.game;
 
+import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;

@@ -1,7 +1,9 @@
-import me.lihq.game.Assets;
+package me.lihq.game;
+
 import me.lihq.game.models.Clue;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**

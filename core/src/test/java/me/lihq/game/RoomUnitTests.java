@@ -1,3 +1,5 @@
+package me.lihq.game;
+
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;

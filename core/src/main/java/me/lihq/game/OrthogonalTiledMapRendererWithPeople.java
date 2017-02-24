@@ -4,6 +4,8 @@ import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import me.lihq.game.GameMain;
+import me.lihq.game.Settings;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.AbstractPerson.PersonPositionComparator;
 import me.lihq.game.screen.elements.DebugOverlay;

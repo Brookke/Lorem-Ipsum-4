@@ -1,3 +1,5 @@
+package me.lihq.game;
+
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
 import me.lihq.game.models.Room;

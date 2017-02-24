@@ -1,3 +1,5 @@
+package me.lihq.game;
+
 import me.lihq.game.Settings;
 import me.lihq.game.people.Player;
 import me.lihq.game.models.Room;

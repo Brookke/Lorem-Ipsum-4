@@ -21,6 +21,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 
+import me.lihq.game.Assets;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
