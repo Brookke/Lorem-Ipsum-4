@@ -3,6 +3,7 @@ package me.lihq.game.people.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import me.lihq.game.GameMain;
+import me.lihq.game.ScreenManager;
 import me.lihq.game.people.AbstractPerson.Direction;
 import me.lihq.game.people.Player;
 
@@ -95,7 +96,7 @@ public class PlayerController extends InputAdapter {
     public void update() {
         /******************** Added by team JAAPAN ********************/
         if (interact) {
-            GameMain.me.navigationScreen.speechboxMngr.skipMessage();
+            GameMain.me.screenManager.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
         }

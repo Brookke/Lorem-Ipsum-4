@@ -67,55 +67,14 @@ public class GameMain extends Game {
      * @author JAAPAN
      */
     public NPC victim;
-    /**
-     * A screen to be used to display standard gameplay within the game , including the status bar.
-     */
-    public NavigationScreen navigationScreen;
-    /**
-     * The main menu screen that shows up when the game is first started.
-     */
-    public MainMenuScreen menuScreen;
-    /**
-     * The screen that is displayed when the game is paused.
-     *
-     * @author JAAPAN
-     */
-    public PauseScreen pauseScreen;
-    /**
-     * The screen that displays the player's inventory.
-     *
-     * @author JAAPAN
-     */
-    public InventoryScreen inventoryScreen;
-    /**
-     * The screen that allows the player to modify settings.
-     *
-     * @author JAAPAN
-     */
-    public SettingsScreen settingsScreen;
-    /**
-     * True if we're in the main menu, false otherwise. Used to determine whether to return
-     * to the MainMenuScreen or PauseScreen when leaving the SettingsScreen.
-     *
-     * @author JAAPAN
-     */
-    public boolean mainMenu = true;
-    /**
-     * Universal input handler
-     *
-     * @author JAAPAN
-     */
-    public GlobalInput input;
-    /**
-     * Input multiplexer to control multiple inputs across project
-     *
-     * @author JAAPAN
-     */
-    public InputMultiplexer inputMultiplexer;
+
     /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;
+
+
+    public ScreenManager screenManager;
 
     /**
      * This is called at start up. It initialises the game.
@@ -132,34 +91,13 @@ public class GameMain extends Game {
 
         initialiseClues();
 
-        /******************** Added by team JAAPAN ********************/
-        // Load universal input class
-        input = new GlobalInput(this);
-
-        // Load input multiplexer and add universal input to it
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(input);
-        Gdx.input.setInputProcessor(inputMultiplexer);
-        /**************************** End *****************************/
-
-        // Set up the various screens
-        menuScreen = new MainMenuScreen(this);
-        this.setScreen(menuScreen);
-
-        navigationScreen = new NavigationScreen(this);
-        navigationScreen.updateTiledMapRenderer();
-
-
-        /******************** Added by team JAAPAN ********************/
-        pauseScreen = new PauseScreen(this);
-        inventoryScreen = new InventoryScreen(this);
-        settingsScreen = new SettingsScreen(this);
+        screenManager = new ScreenManager(this);
+        screenManager.setScreen(ScreenManager.Screens.mainMenu);
 
         // Add an introductory speechbox
-        navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
 
         Assets.MUSIC.play();
-        /**************************** End *****************************/
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
@@ -173,7 +111,7 @@ public class GameMain extends Game {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         FPS.log();//this is where fps is displayed
         /******************** Added by team JAAPAN ********************/
-        input.update(); // Update the global input controller
+        screenManager.update();
         /**************************** End *****************************/
 
         super.render(); // This calls the render method of the screen that is currently set
@@ -187,12 +125,7 @@ public class GameMain extends Game {
     @Override
     public void dispose() {
         Assets.dispose();
-
-        navigationScreen.dispose();
-        menuScreen.dispose();
-        pauseScreen.dispose();
-        inventoryScreen.dispose();
-        settingsScreen.dispose();
+        screenManager.dispose();
     }
 
     /**
@@ -413,19 +346,15 @@ public class GameMain extends Game {
         // Recreate the map, so the murder room is randomly re-assigned
         gameMap = new Map();
 
-        // Clear the input multiplexer, and add the global input controller
-        inputMultiplexer.clear();
-        inputMultiplexer.addProcessor(input);
-
         // Reinitialise all people and clues
         initialiseAllPeople();
         initialiseClues();
 
-        // Recreate the navigation screen, so the references to the player and NPCs are
-        // updated
-        navigationScreen = new NavigationScreen(this);
-        navigationScreen.updateTiledMapRenderer();
-
-        mainMenu = true;
+        // Reset screenManager
+        screenManager.reset();
+        screenManager.setScreen(ScreenManager.Screens.mainMenu);
     }
+
+    //TODO: refactor this
+    public InputMultiplexer inputMultiplexer = screenManager.inputMultiplexer;
 }

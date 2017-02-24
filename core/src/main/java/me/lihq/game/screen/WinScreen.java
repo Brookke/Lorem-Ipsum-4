@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
+import me.lihq.game.ScreenManager;
 import me.lihq.game.screen.elements.UIHelpers;
 
 import java.io.File;
@@ -180,7 +181,7 @@ public class WinScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.resetAll();
-                game.setScreen(game.menuScreen);
+                game.screenManager.setScreen(ScreenManager.Screens.mainMenu);
                 dispose();
             }
         });

@@ -313,7 +313,7 @@ public class NavigationScreen extends AbstractScreen {
     @Override
     public void pause() {
         // Pause the game, so the gameDuration counter isn't updated
-        game.setScreen(game.pauseScreen);
+        game.screenManager.setScreen(ScreenManager.Screens.pauseMenu);
     }
 
     /**

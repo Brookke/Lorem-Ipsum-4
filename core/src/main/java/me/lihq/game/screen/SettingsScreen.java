@@ -18,6 +18,8 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.screen.elements.UIHelpers;
 
+import static me.lihq.game.ScreenManager.Screens;
+
 /**
  * The screen that allows the user to change the various settings of the game.
  * Currently limited to volume controls.
@@ -95,10 +97,10 @@ public class SettingsScreen extends AbstractScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.mainMenu) {
-                    game.setScreen(game.menuScreen);
+                if (game.screenManager.currentScreen == Screens.mainMenu) {
+                    game.screenManager.setScreen(Screens.mainMenu);
                 } else {
-                    game.setScreen(game.pauseScreen);
+                    game.screenManager.setScreen(Screens.pauseMenu);
                 }
             }
         });
