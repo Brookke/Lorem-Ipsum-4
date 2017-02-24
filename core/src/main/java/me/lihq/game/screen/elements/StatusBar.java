@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 
@@ -21,55 +20,49 @@ import me.lihq.game.GameMain;
  * them to access the inventory and the pause menu.
  */
 public class StatusBar {
-	/**
-	 * Reference to the game; used for accessing the player's score and personality, 
-	 * and changing the screen when buttons are pressed
-	 */
-	private GameMain game;
-	
     /**
      * The height of the status bar
      */
     public static final int HEIGHT = 50;
-
     /**
      * The number of items that are in the status bar. Used to set the width of the elements
      * on the bar
      */
     private static final int ITEM_COUNT = 4;
-
     /**
      * The width of each element of the status bar
      */
     private static final int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
-
     /**
      * The background colour of the status bar
      */
     private static final Color BACKGROUND_COLOR = Color.GRAY;
-
     /**
      * The stage to render the elements to
      */
     public Stage stage;
-
+    /**
+     * Reference to the game; used for accessing the player's score and personality,
+     * and changing the screen when buttons are pressed
+     */
+    private GameMain game;
     /**
      * The skin for the UI elements
-     * 
+     *
      * @author JAAPAN
      */
     private Skin skin;
-    
+
     /**
      * The label displaying the player's current score
-     * 
+     *
      * @author JAAPAN
      */
     private Label scoreLabel;
-    
+
     /**
      * The label displaying the player's personality
-     * 
+     *
      * @author JAAPAN
      */
     private Label personalityLabel;
@@ -79,8 +72,8 @@ public class StatusBar {
      * Sets up UI controls and adds them to the stage ready for rendering.
      */
     public StatusBar(final GameMain game) {
-    	this.game = game;
-    	
+        this.game = game;
+
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         initSkin();
 
@@ -102,27 +95,27 @@ public class StatusBar {
         TextButton inventoryButton = new TextButton("Inventory", skin);
         statusBar.add(inventoryButton).uniform();
         inventoryButton.addListener(new ClickListener() {
-        	/**
-        	 * Called when the button is clicked. Changes the current screen to the
-        	 * inventory.
-        	 * 
-        	 * @author JAAPAN
-        	 */
+            /**
+             * Called when the button is clicked. Changes the current screen to the
+             * inventory.
+             *
+             * @author JAAPAN
+             */
             @Override
             public void clicked(InputEvent event, float x, float y) {
-            	game.setScreen(game.inventoryScreen);
+                game.setScreen(game.inventoryScreen);
             }
         });
 
         TextButton pauseButton = new TextButton("Pause", skin);
         statusBar.add(pauseButton).uniform();
         pauseButton.addListener(new ClickListener() {
-        	/**
-        	 * Called when the button is clicked. Changes the current screen to the
-        	 * pause menu.
-        	 * 
-        	 * @author JAAPAN
-        	 */
+            /**
+             * Called when the button is clicked. Changes the current screen to the
+             * pause menu.
+             *
+             * @author JAAPAN
+             */
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(game.pauseScreen);
@@ -138,8 +131,8 @@ public class StatusBar {
      */
     public void render() {
         /******************** Added by team JAAPAN ********************/
-    	scoreLabel.setText("Score: " + game.player.getScore());
-    	personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
+        scoreLabel.setText("Score: " + game.player.getScore());
+        personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
         /**************************** End *****************************/
         stage.act();
         stage.draw();
@@ -164,11 +157,11 @@ public class StatusBar {
 
     /**
      * Sets up skin variable used for defining UI control styles.
-     * 
+     *
      * @author JAAPAN
      */
     private void initSkin() {
-    	skin = new Skin();
+        skin = new Skin();
 
         // Create a texture
         skin.add("background", UIHelpers.createBackgroundTexture(BACKGROUND_COLOR, WIDTH, HEIGHT));

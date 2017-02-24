@@ -506,7 +506,8 @@ public class Room {
         /**
          * Constructor
          */
-        public Transition() {}
+        public Transition() {
+        }
 
         /**
          * This method takes the parameters and sets the values of the relevant properties

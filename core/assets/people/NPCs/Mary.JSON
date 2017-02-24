@@ -1,6 +1,6 @@
 {
-  "name":"Mary",
-  "personality":"AGGRESSIVE",
+  "name": "Mary",
+  "personality": "AGGRESSIVE",
   "responses": {
     "introduction": "Hello",
     "Ignored Initial": "Ugh, go then.",
@@ -33,14 +33,14 @@
     "I am not telling you."
   ],
   "motives": {
-  	"Adam": "He was cheeky, far too rude for my taste.",
-  	"Colin": "I caught him trying to curse my earlobe.",
-  	"Diana": "That hair was an eyesore. I couldn't bear to look at it for another second.",
-  	"Horatio": "So pretentious, he didn't deserve to be here.",
-  	"Kyle": "He had terrible bad breath.",
-  	"Lily": "She was wearing the same dress I was... and looked better in it!",
-  	"Mike": "It's not my fault! He beat me in a spelling test in primary school.",
-  	"Roger": "I had to destroy him, his sports team were beating mine.",
-  	"Will": "What kind of whackjob would make small talk about sound waves?"
+    "Adam": "He was cheeky, far too rude for my taste.",
+    "Colin": "I caught him trying to curse my earlobe.",
+    "Diana": "That hair was an eyesore. I couldn't bear to look at it for another second.",
+    "Horatio": "So pretentious, he didn't deserve to be here.",
+    "Kyle": "He had terrible bad breath.",
+    "Lily": "She was wearing the same dress I was... and looked better in it!",
+    "Mike": "It's not my fault! He beat me in a spelling test in primary school.",
+    "Roger": "I had to destroy him, his sports team were beating mine.",
+    "Will": "What kind of whackjob would make small talk about sound waves?"
   }
 }

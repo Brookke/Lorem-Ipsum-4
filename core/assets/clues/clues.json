@@ -1,107 +1,107 @@
 {
-	"clues": {
-		"Bag": {
-			"description": "A bag. Somebody must have left in a hurry...",
-    		"x": 3,
-    		"y": 0
-  		},
-  		"Lipstick": {
-		    "description": "Lipstick, a killer's best friend.",
-		    "x": 0,
-		    "y": 1
-  		},
-  		"Small Footprint": {
-		    "description": "A small footprint left at the crime scene by the killer.",
-		    "x": 1,
-		    "y": 0
-  		},
- 		"Glasses": {
-		    "description": "A pair of glasses that were found by another detective at the crime scene.",
-		    "x": 2,
-		    "y": 0
-  		},
-  		"Erotic Novel": {
-		    "description": "An erotic novel the killer left behind. At least now we know that they have terrible taste",
-		    "x": 3,
-		    "y": 1
-  		},
-  		"Energy Drink": {
-		    "description": "An empty can of energy drink. Not many people drink this brand.",
-		    "x": 2,
-		    "y": 2
-  		},
-  		"Dark Hair": {
-		    "description": "A dark hair from from the crime scene.",
-		    "x": 2,
-		    "y": 1
-  		},
-  		"Car Keys": {
-		    "description": "A set of car keys left at the crime scene by the killer.",
-		    "x": 1,
-		    "y": 2
-  		},
-  		"Broken Mobile Phone": {
-		    "description": "A broken mobile phone. Perhaps somebody will recognise it.",
-		    "x": 0,
-		    "y": 2
-  		},
-  		"Big Footprint": {
-		    "description": "A big footprint left at the crime scene by the killer.",
-		    "x": 0,
-		    "y": 0
-  		},
-  		"Hardware Magazine": {
-  			"description": "A copy of a niche hardware magazine.",
-  			"x": 3,
-  			"y": 2
-  		},
-  		"Diamond Ring": {
-  			"description": "An expensive diamond ring found near the crime scene.",
-  			"x": 4,
-  			"y": 0
-  		},
-  		"Receipt": {
-  			"description": "A receipt from the Ron Cooke Cafe for a Vegan sandwich.",
-  			"x": 4, 
-  			"y": 1
-  		},
-  		"USB Stick": {
-  			"description": "A USB stick containing nothing but an unnamed, incomplete history essay.",
-  			"x": 4,
-  			"y": 2
-  		},
-  		"Sweet Wrapper": {
-  			"description": "A wrapper for a sweet that's... coffee flavour? Eww, who even eats those?",
-  			"x": 0,
-  			"y": 3
-  		}
-  	},
-  	"weapons": {
-  		"Red Scarf": {
-    		"description": "A scarf found at the crime scene. Its colour is suspiciously similar to the colour of blood.",
-		    "x": 1,
-		    "y": 3
-  		},
-  		"Cricket Bat": {
-		    "description": "A cricket bat, but no cricket ball in sight... hmm...",
-		    "x": 2,
-		    "y": 3
-  		},
-  		"Hockey Stick": {
-		    "description": "A hockey stick belonging to the university hockey club.",
-		    "x": 3,
-		    "y": 3
-  		},
-  		"Right-Handed Fountain Pen": {
-		    "description": "A bloodstained fountain pen. The killer must be right-handed.",
-		    "x": 1,
-		    "y": 1
-  		},
-  		"Knife": {
-		    "description": "A knife that was left near the crime scene.",
-		    "x": 4,
-		    "y": 3
-  		}  		
-  	}
+  "clues": {
+    "Bag": {
+      "description": "A bag. Somebody must have left in a hurry...",
+      "x": 3,
+      "y": 0
+    },
+    "Lipstick": {
+      "description": "Lipstick, a killer's best friend.",
+      "x": 0,
+      "y": 1
+    },
+    "Small Footprint": {
+      "description": "A small footprint left at the crime scene by the killer.",
+      "x": 1,
+      "y": 0
+    },
+    "Glasses": {
+      "description": "A pair of glasses that were found by another detective at the crime scene.",
+      "x": 2,
+      "y": 0
+    },
+    "Erotic Novel": {
+      "description": "An erotic novel the killer left behind. At least now we know that they have terrible taste",
+      "x": 3,
+      "y": 1
+    },
+    "Energy Drink": {
+      "description": "An empty can of energy drink. Not many people drink this brand.",
+      "x": 2,
+      "y": 2
+    },
+    "Dark Hair": {
+      "description": "A dark hair from from the crime scene.",
+      "x": 2,
+      "y": 1
+    },
+    "Car Keys": {
+      "description": "A set of car keys left at the crime scene by the killer.",
+      "x": 1,
+      "y": 2
+    },
+    "Broken Mobile Phone": {
+      "description": "A broken mobile phone. Perhaps somebody will recognise it.",
+      "x": 0,
+      "y": 2
+    },
+    "Big Footprint": {
+      "description": "A big footprint left at the crime scene by the killer.",
+      "x": 0,
+      "y": 0
+    },
+    "Hardware Magazine": {
+      "description": "A copy of a niche hardware magazine.",
+      "x": 3,
+      "y": 2
+    },
+    "Diamond Ring": {
+      "description": "An expensive diamond ring found near the crime scene.",
+      "x": 4,
+      "y": 0
+    },
+    "Receipt": {
+      "description": "A receipt from the Ron Cooke Cafe for a Vegan sandwich.",
+      "x": 4,
+      "y": 1
+    },
+    "USB Stick": {
+      "description": "A USB stick containing nothing but an unnamed, incomplete history essay.",
+      "x": 4,
+      "y": 2
+    },
+    "Sweet Wrapper": {
+      "description": "A wrapper for a sweet that's... coffee flavour? Eww, who even eats those?",
+      "x": 0,
+      "y": 3
+    }
+  },
+  "weapons": {
+    "Red Scarf": {
+      "description": "A scarf found at the crime scene. Its colour is suspiciously similar to the colour of blood.",
+      "x": 1,
+      "y": 3
+    },
+    "Cricket Bat": {
+      "description": "A cricket bat, but no cricket ball in sight... hmm...",
+      "x": 2,
+      "y": 3
+    },
+    "Hockey Stick": {
+      "description": "A hockey stick belonging to the university hockey club.",
+      "x": 3,
+      "y": 3
+    },
+    "Right-Handed Fountain Pen": {
+      "description": "A bloodstained fountain pen. The killer must be right-handed.",
+      "x": 1,
+      "y": 1
+    },
+    "Knife": {
+      "description": "A knife that was left near the crime scene.",
+      "x": 4,
+      "y": 3
+    }
+  }
 }
   

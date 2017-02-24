@@ -2,7 +2,6 @@ package me.lihq.game.people;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
-
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
@@ -17,41 +16,35 @@ public class NPC extends AbstractPerson {
     /**
      * List of clues NPC has already been asked about. Used to ensure the player only gets points
      * for asking an NPC about a clue once.
-     * 
+     *
      * @author JAAPAN
      */
     public List<Clue> alreadyAskedClues = new ArrayList<>();
-
+    /**
+     * Used to track whether the NPC has been ignored, and thus won't respond to the player
+     * until another clue has been found.
+     *
+     * @author JAAPAN
+     */
+    public boolean ignored = false;
+    /**
+     * Used to track whether the NPC has been accused, so they can ignore the player after a false accusation.
+     *
+     * @author JAAPAN
+     */
+    public boolean accused = false;
     /**
      * The motive string details why the NPC committed the murder.
      */
     private String motive = "";
-
     /**
      * Whether the NPC is the killer.
      */
     private boolean isKiller = false;
-    
     /**
      * Whether the NPC is the victim.
      */
     private boolean isVictim = false;
-
-    /**
-     * Used to track whether the NPC has been ignored, and thus won't respond to the player
-     * until another clue has been found.
-     * 
-     * @author JAAPAN
-     */
-    public boolean ignored = false;
-
-    /**
-     * Used to track whether the NPC has been accused, so they can ignore the player after a false accusation.
-     * 
-     * @author JAAPAN
-     */
-    public boolean accused = false;
-
     /**
      * This stores the players personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
@@ -139,28 +132,10 @@ public class NPC extends AbstractPerson {
 
         move(dir);
     }
-    
+
     /*************************************************************************/
     /****************************** Set Methods ******************************/
     /*************************************************************************/
-
-    /**
-     * Reads and sets the NPC's motive for killing the victim from the JSON file.
-     *
-     * @param victim The victim of the heinous crime.
-     * @return This object once the motive has been set.
-     * 
-     * @author JAAPAN
-     */
-    public NPC setMotive(NPC victim) {
-    	try {
-    		motive = jsonData.get("motives").getString(victim.getName());
-    	} catch (Exception e) {
-    		motive = "Error: Motive not working";
-    	}
-        System.out.println(motive);
-        return this;
-    }
 
     /**
      * Sets the NPC as the killer for this game.
@@ -194,78 +169,77 @@ public class NPC extends AbstractPerson {
         return true;
     }
 
-    /*************************************************************************/
-    /****************************** Get Methods ******************************/
-    /*************************************************************************/
-
     /**
      * Handles speech for a question about a clue. If the style of question matches both the
      * player's personality and the NPC's personality, generates an improved response. If it
      * matches just one of the player's or NPC's personalities, generates a normal response.
      * If it matches neither, generates a non-response.
      *
-     * @param clue The clue to be questioned about
-     * @param style The style of questioning
+     * @param clue   The clue to be questioned about
+     * @param style  The style of questioning
      * @param player The personality type of the player
      * @return The appropriate line of dialogue.
-     * 
      * @author JAAPAN
      */
     public String getSpeech(Clue clue, Personality style, Personality player) {
-    	if (style == personality && player == style) {
-    		// Increment the player's question counter
-    		GameMain.me.player.addQuestion();
-    		
-    		String response = getSpeech(clue);
-    		
-    		// If this NPC is the killer, point the player in the direction of a 
-    		// random NPC. Otherwise, point them towards the killer. As this is an improved
-    		// response, whether the clue is a red herring or not is unimportant.
-    		if (isKiller) {
-    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName()) {
-    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			}
-    			// Replace the NPC tag in the string with the name of the NPC
-    			response = response.replace("%NPC", name);
-    		} else {
-    			// Replace the NPC tag in the string with the name of the NPC
-    			response = response.replace("%NPC", GameMain.me.killer.getName());
-    			// Add the room of the killer to the response
-    			String room = GameMain.me.killer.getRoom().getName();
-    			if (room != "Outside Ron Cooke Hub") {
-    				response += " Last I saw them, they were in the " + room + ".";
-    			} else {
-    				response += " Last I saw them, they were outside.";
-    			}
-    		}
-    		
-    		return response;
-    	} else if (style == personality || style == player) {
-    		// Increment the player's question counter
-    		GameMain.me.player.addQuestion();
-    		
-    		String response = getSpeech(clue);
-    		
-    		// If this NPC is the killer, or the clue is a red herring, point the player
-    		// in the direction of a random NPC. Otherwise, point them towards the killer
-    		if (isKiller || clue.isRedHerring()) {
-    			String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			while (name == getName() || name == GameMain.me.killer.getName()) {
-    				name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
-    			}
-    			// Replace the NPC tag in the string with the name of the NPC
-    			response = response.replace("%NPC", name);
-    		} else {
-    			// Replace the NPC tag in the string with the name of the NPC
-    			response = response.replace("%NPC", GameMain.me.killer.getName());
-    		}
-    		
-    		return response;
+        if (style == personality && player == style) {
+            // Increment the player's question counter
+            GameMain.me.player.addQuestion();
+
+            String response = getSpeech(clue);
+
+            // If this NPC is the killer, point the player in the direction of a
+            // random NPC. Otherwise, point them towards the killer. As this is an improved
+            // response, whether the clue is a red herring or not is unimportant.
+            if (isKiller) {
+                String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+                while (name == getName()) {
+                    name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+                }
+                // Replace the NPC tag in the string with the name of the NPC
+                response = response.replace("%NPC", name);
+            } else {
+                // Replace the NPC tag in the string with the name of the NPC
+                response = response.replace("%NPC", GameMain.me.killer.getName());
+                // Add the room of the killer to the response
+                String room = GameMain.me.killer.getRoom().getName();
+                if (room != "Outside Ron Cooke Hub") {
+                    response += " Last I saw them, they were in the " + room + ".";
+                } else {
+                    response += " Last I saw them, they were outside.";
+                }
+            }
+
+            return response;
+        } else if (style == personality || style == player) {
+            // Increment the player's question counter
+            GameMain.me.player.addQuestion();
+
+            String response = getSpeech(clue);
+
+            // If this NPC is the killer, or the clue is a red herring, point the player
+            // in the direction of a random NPC. Otherwise, point them towards the killer
+            if (isKiller || clue.isRedHerring()) {
+                String name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+                while (name == getName() || name == GameMain.me.killer.getName()) {
+                    name = GameMain.me.NPCs.get(random.nextInt(GameMain.me.NPCs.size())).getName();
+                }
+                // Replace the NPC tag in the string with the name of the NPC
+                response = response.replace("%NPC", name);
+            } else {
+                // Replace the NPC tag in the string with the name of the NPC
+                response = response.replace("%NPC", GameMain.me.killer.getName());
+            }
+
+            return response;
         } else {
             return getSpeech("");
         }
     }
+
+    /*************************************************************************/
+    /****************************** Get Methods ******************************/
+    /*************************************************************************/
 
     /**
      * @return The NPC's personality {@link me.lihq.game.people.AbstractPerson.Personality}
@@ -280,6 +254,23 @@ public class NPC extends AbstractPerson {
      */
     public String getMotive() {
         return motive;
+    }
+
+    /**
+     * Reads and sets the NPC's motive for killing the victim from the JSON file.
+     *
+     * @param victim The victim of the heinous crime.
+     * @return This object once the motive has been set.
+     * @author JAAPAN
+     */
+    public NPC setMotive(NPC victim) {
+        try {
+            motive = jsonData.get("motives").getString(victim.getName());
+        } catch (Exception e) {
+            motive = "Error: Motive not working";
+        }
+        System.out.println(motive);
+        return this;
     }
 
     /**

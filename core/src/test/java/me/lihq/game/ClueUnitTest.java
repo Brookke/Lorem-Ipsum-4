@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class ClueUnitTest extends GameTester {
     public Clue shoe, book, knife;
-    
+
     @Before
     public void createClues() {
         Assets.load();
@@ -48,27 +48,27 @@ public class ClueUnitTest extends GameTester {
         assertEquals("Equality test failing", shoe, shoe2);
         assertNotEquals("Equality test always true", shoe, book);
     }
-    
+
     /**
      * @author JAAPAN
      */
     @Test
     public void testMurderWeapon() {
-    	assertFalse("Fail - Shoe shouldn't be a murder weapon", shoe.isMurderWeapon());
-    	
-    	assertTrue("Fail - Knife should be a murder weapon", knife.isMurderWeapon());
+        assertFalse("Fail - Shoe shouldn't be a murder weapon", shoe.isMurderWeapon());
+
+        assertTrue("Fail - Knife should be a murder weapon", knife.isMurderWeapon());
     }
-    
+
     /**
      * @author JAAPAN
      */
     @Test
     public void testRedHerring() {
-    	book.setRedHerring();
-    	
-    	assertFalse("Fail - Shoe shouldn't be a red herring", shoe.isRedHerring());
-    	
-    	assertTrue("Fail - Book should be a red herring", book.isRedHerring());
+        book.setRedHerring();
+
+        assertFalse("Fail - Shoe shouldn't be a red herring", shoe.isRedHerring());
+
+        assertTrue("Fail - Book should be a red herring", book.isRedHerring());
     }
 
 }

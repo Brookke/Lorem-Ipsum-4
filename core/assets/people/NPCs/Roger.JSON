@@ -12,7 +12,7 @@
     "Bag": "Yes I do have a bag, but I think I left it in my car. This looks a bit like %NPC's.",
     "Lipstick": "I love a good lipstick. %NPC put me on to that shade.",
     "Right Handed": "Yes I do normally use my right hand, although I'm a little ambidextrous. Just like %NPC!",
-    "Dark Hair": "My hair is tan mahogany by Loréal. Boy was %NPC mad when they found out I had the same hair colour.",
+    "Dark Hair": "My hair is tan mahogany by Lorï¿½al. Boy was %NPC mad when they found out I had the same hair colour.",
     "Erotic Novel": "Sorry, that sort of book isn't really my thing. I think I saw a copy in %NPC's bag, though.",
     "Broken Mobile Phone": "Oh I'm sorry, I don't recognise it. Look's like the one %NPC was using earlier.",
     "Car Keys": "I wish hahaha! I can't afford a car. %NPC works at that car dealership though.",
@@ -33,14 +33,14 @@
     "I am not telling you, sorry."
   ],
   "motives": {
-  	"Adam": "Have you seen his parking job? Awful.",
-  	"Colin": "I caught him trying to curse my nostril.",
-  	"Diana": "But she had such big teeth. I couldn't eat dinner for staring at them.",
-  	"Horatio": "He bullied me when we were at boarding school.",
-  	"Kyle": "His hair offended me.",
-  	"Lily": "Her dog gave my dog diseases.",
-  	"Mary": "We play on opposing sports teams - her team will never win now!",
-  	"Mike": "He's a crazy lab guy. That never ends well.",
-  	"Will": "I was overcome with a fit of jealous rage - his shoes were shinier than mine."
+    "Adam": "Have you seen his parking job? Awful.",
+    "Colin": "I caught him trying to curse my nostril.",
+    "Diana": "But she had such big teeth. I couldn't eat dinner for staring at them.",
+    "Horatio": "He bullied me when we were at boarding school.",
+    "Kyle": "His hair offended me.",
+    "Lily": "Her dog gave my dog diseases.",
+    "Mary": "We play on opposing sports teams - her team will never win now!",
+    "Mike": "He's a crazy lab guy. That never ends well.",
+    "Will": "I was overcome with a fit of jealous rage - his shoes were shinier than mine."
   }
 }
