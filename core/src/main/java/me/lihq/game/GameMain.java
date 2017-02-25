@@ -20,6 +20,7 @@ import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
+import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.*;
 import me.lihq.game.screen.elements.SpeechBox;
 
@@ -72,10 +73,21 @@ public class GameMain extends Game {
      */
     FPSLogger FPS;
 
+    /**
+     * Universal input handler
+     *
+     * @author JAAPAN
+     */
+    public GlobalInput input;
+
+    /**
+     * Input multiplexer to control multiple inputs across project
+     *
+     * @author JAAPAN
+     */
+    public InputMultiplexer inputMultiplexer;
 
     public ScreenManager screenManager;
-
-    public InputMultiplexer inputMultiplexer;
 
     /**
      * This is called at start up. It initialises the game.
@@ -92,8 +104,15 @@ public class GameMain extends Game {
 
         initialiseClues();
 
+        // Load universal input class
+        input = new GlobalInput(this);
+
+        // Load input multiplexer and add universal input to it
+        inputMultiplexer = new InputMultiplexer();
+        inputMultiplexer.addProcessor(input);
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
         screenManager = new ScreenManager(this);
-        inputMultiplexer = screenManager.inputMultiplexer;
         screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
@@ -113,7 +132,7 @@ public class GameMain extends Game {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         FPS.log();//this is where fps is displayed
         /******************** Added by team JAAPAN ********************/
-        screenManager.update();
+        input.update();
         /**************************** End *****************************/
 
         super.render(); // This calls the render method of the screen that is currently set
@@ -351,6 +370,11 @@ public class GameMain extends Game {
         // Reinitialise all people and clues
         initialiseAllPeople();
         initialiseClues();
+
+
+        // Clear the input multiplexer, and add the global input controller
+        inputMultiplexer.clear();
+        inputMultiplexer.addProcessor(input);
 
         // Reset screenManager
         screenManager.reset();

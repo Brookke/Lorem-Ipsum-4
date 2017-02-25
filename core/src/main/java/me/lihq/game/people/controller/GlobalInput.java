@@ -2,8 +2,9 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import me.lihq.game.screen.ScreenManager;
+import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
+import me.lihq.game.screen.ScreenManager;
 import me.lihq.game.screen.Screens;
 
 /**
@@ -16,15 +17,15 @@ public class GlobalInput extends InputAdapter {
     /**
      * Variable for game for input to use
      */
-    private ScreenManager screenManager;
+    private GameMain game;
 
     /**
      * Variables storing state of inputs
      */
     private boolean paused, inventory, showWalkable, showHideable, debug;
 
-    public GlobalInput(ScreenManager screenManager) {
-        this.screenManager = screenManager;
+    public GlobalInput(GameMain game) {
+        this.game = game;
     }
 
     @Override
@@ -93,6 +94,8 @@ public class GlobalInput extends InputAdapter {
             Settings.DEBUG = !Settings.DEBUG;
             debug = false;
         }
+
+        ScreenManager screenManager = game.screenManager;
 
         if (screenManager.currentScreen == Screens.mainMenu) return;
 

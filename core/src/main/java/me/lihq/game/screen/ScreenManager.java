@@ -57,13 +57,6 @@ public class ScreenManager {
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
 
-        // Load universal input class
-        input = new GlobalInput(this);
-
-        // Load input multiplexer and add universal input to it
-        inputMultiplexer = new InputMultiplexer();
-        inputMultiplexer.addProcessor(input);
-        Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
     public void setScreen(Screens screen) {
@@ -87,15 +80,7 @@ public class ScreenManager {
         currentScreen = screen;
     }
 
-    public void update() {
-        input.update(); // Update the global input controller
-    }
-
     public void reset() {
-        // Clear the input multiplexer, and add the global input controller
-        inputMultiplexer.clear();
-        inputMultiplexer.addProcessor(input);
-
         // Recreate the navigation screen, so the references to the player and NPCs are updated
         navigationScreen = new NavigationScreen(game);
         navigationScreen.updateTiledMapRenderer();
