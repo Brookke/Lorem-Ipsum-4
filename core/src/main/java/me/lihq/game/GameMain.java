@@ -69,11 +69,6 @@ public class GameMain extends Game {
     public NPC victim;
 
     /**
-     * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
-     */
-    FPSLogger FPS;
-
-    /**
      * Universal input handler
      *
      * @author JAAPAN
@@ -87,6 +82,14 @@ public class GameMain extends Game {
      */
     public InputMultiplexer inputMultiplexer;
 
+    /**
+     * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
+     */
+    FPSLogger FPS;
+
+    /**
+     * The ScreenManager to handle all GUI screens of the game
+     */
     public ScreenManager screenManager;
 
     /**
@@ -131,10 +134,7 @@ public class GameMain extends Game {
     public void render() {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         FPS.log();//this is where fps is displayed
-        /******************** Added by team JAAPAN ********************/
-        input.update();
-        /**************************** End *****************************/
-
+        input.update(); // Update the global input controller
         super.render(); // This calls the render method of the screen that is currently set
     }
 
@@ -187,7 +187,6 @@ public class GameMain extends Game {
         NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        /******************** Added by team JAAPAN ********************/
         NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
@@ -199,7 +198,6 @@ public class GameMain extends Game {
 
         NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
-        /**************************** End *****************************/
 
         /*
         Generate who the Killer and Victim are
@@ -214,12 +212,9 @@ public class GameMain extends Game {
             victim = NPCs.get(new Random().nextInt(NPCs.size()));
         }
 
-        /******************** Added by team JAAPAN ********************/
         killer.setMotive(victim);
         // Remove the victim from the list of NPCs, so they aren't added to the game
         NPCs.remove(victim);
-        /**************************** End *****************************/
-
 
         int amountOfRooms = gameMap.getAmountOfRooms();
 
@@ -367,11 +362,6 @@ public class GameMain extends Game {
         // Recreate the map, so the murder room is randomly re-assigned
         gameMap = new Map();
 
-        // Reinitialise all people and clues
-        initialiseAllPeople();
-        initialiseClues();
-
-
         // Clear the input multiplexer, and add the global input controller
         inputMultiplexer.clear();
         inputMultiplexer.addProcessor(input);
@@ -379,5 +369,10 @@ public class GameMain extends Game {
         // Reset screenManager
         screenManager.reset();
         screenManager.setScreen(Screens.mainMenu);
+
+        // Reinitialise all people and clues
+        initialiseAllPeople();
+        initialiseClues();
+
     }
 }
