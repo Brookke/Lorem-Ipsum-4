@@ -127,45 +127,7 @@ public class Assets {
      * @author JAAPAN
      */
     private static void initSkin() {
-        UI_SKIN = new Skin();
-
-        Label.LabelStyle titleStyle = new Label.LabelStyle(FONT30, TEXT_COLOUR);
-        Label.LabelStyle labelStyle = new Label.LabelStyle(FONT20, TEXT_COLOUR);
-        UI_SKIN.add("title", titleStyle);
-        UI_SKIN.add("default", labelStyle);
-
-        //Create a texture
-        UI_SKIN.add("background", UIHelpers.createBackgroundTexture(Color.ORANGE, Gdx.graphics.getWidth() / 4,
-                Gdx.graphics.getHeight() / 10));
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = UI_SKIN.newDrawable("background", BUTTON_BACKGROUND_COLOR);
-        textButtonStyle.down = UI_SKIN.newDrawable("background", BUTTON_DOWN_COLOR);
-        textButtonStyle.checked = UI_SKIN.newDrawable("background", BUTTON_BACKGROUND_COLOR);
-        textButtonStyle.over = UI_SKIN.newDrawable("background", BUTTON_OVER_COLOR);
-        textButtonStyle.font = FONT15;
-        UI_SKIN.add("default", textButtonStyle);
-
-        // Use the checkbox textures
-        UI_SKIN.add("uncheck", UNCHECKED_BOX);
-        UI_SKIN.add("check", CHECKED_BOX);
-
-        CheckBox.CheckBoxStyle checkBoxStyle = new CheckBox.CheckBoxStyle();
-        checkBoxStyle.checkboxOff = UI_SKIN.getDrawable("uncheck");
-        checkBoxStyle.checkboxOn = UI_SKIN.getDrawable("check");
-        checkBoxStyle.font = FONT20;
-        checkBoxStyle.fontColor = TEXT_COLOUR;
-        UI_SKIN.add("default", checkBoxStyle);
-
-        // Create the SliderStyle, using generated block textures
-        UI_SKIN.add("slider", UIHelpers.createBackgroundTexture(Color.BLACK, 20, 20));
-        UI_SKIN.add("knob", UIHelpers.createBackgroundTexture(Color.GRAY, 10, 10));
-
-        Slider.SliderStyle sliderStyle = new Slider.SliderStyle();
-        sliderStyle.background = UI_SKIN.getDrawable("slider");
-        sliderStyle.knob = UI_SKIN.getDrawable("knob");
-        UI_SKIN.add("default-horizontal", sliderStyle);
+        UI_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
     }
 
     /**
