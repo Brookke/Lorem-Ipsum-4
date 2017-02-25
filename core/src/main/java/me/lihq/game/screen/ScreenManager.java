@@ -7,12 +7,19 @@ import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.*;
 
 /**
- * Created by jason on 24/02/2017.
+ * ScreenManager handles the GUI screens within the game
  */
 public class ScreenManager {
 
+
+    /**
+     * Reference to game
+     */
     public GameMain game;
 
+    /**
+     * Defines screen currently shown
+     */
     public Screens currentScreen = Screens.mainMenu;
 
     /**
@@ -46,6 +53,11 @@ public class ScreenManager {
     public InputMultiplexer inputMultiplexer;
 
 
+    /**
+     * Constructor for ScreenManager
+     * Initialises screens ready to render
+     * @param game reference to GameMain
+     */
     public ScreenManager(GameMain game) {
         this.game = game;
 
@@ -59,6 +71,10 @@ public class ScreenManager {
 
     }
 
+    /**
+     * Changes currently displayed screen
+     * @param screen Screen to display
+     */
     public void setScreen(Screens screen) {
         switch (screen) {
             case mainMenu:
@@ -80,12 +96,18 @@ public class ScreenManager {
         currentScreen = screen;
     }
 
+    /**
+     * Resets the screens for restarting the game
+     */
     public void reset() {
         // Recreate the navigation screen, so the references to the player and NPCs are updated
         navigationScreen = new NavigationScreen(game);
         navigationScreen.updateTiledMapRenderer();
     }
 
+    /**
+     * Disposes of associated resources
+     */
     public void dispose() {
         navigationScreen.dispose();
         menuScreen.dispose();
