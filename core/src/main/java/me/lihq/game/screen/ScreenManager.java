@@ -1,7 +1,8 @@
-package me.lihq.game;
+package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import me.lihq.game.GameMain;
 import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.*;
 
@@ -11,10 +12,6 @@ import me.lihq.game.screen.*;
 public class ScreenManager {
 
     public GameMain game;
-
-    public enum Screens {
-        navigation, mainMenu, pauseMenu, inventory, settings
-    }
 
     public Screens currentScreen = Screens.mainMenu;
 

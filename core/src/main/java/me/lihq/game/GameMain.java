@@ -20,7 +20,6 @@ import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
-import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.*;
 import me.lihq.game.screen.elements.SpeechBox;
 
@@ -76,6 +75,8 @@ public class GameMain extends Game {
 
     public ScreenManager screenManager;
 
+    public InputMultiplexer inputMultiplexer;
+
     /**
      * This is called at start up. It initialises the game.
      */
@@ -92,7 +93,8 @@ public class GameMain extends Game {
         initialiseClues();
 
         screenManager = new ScreenManager(this);
-        screenManager.setScreen(ScreenManager.Screens.mainMenu);
+        inputMultiplexer = screenManager.inputMultiplexer;
+        screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
         screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
@@ -352,9 +354,6 @@ public class GameMain extends Game {
 
         // Reset screenManager
         screenManager.reset();
-        screenManager.setScreen(ScreenManager.Screens.mainMenu);
+        screenManager.setScreen(Screens.mainMenu);
     }
-
-    //TODO: refactor this
-    public InputMultiplexer inputMultiplexer = screenManager.inputMultiplexer;
 }

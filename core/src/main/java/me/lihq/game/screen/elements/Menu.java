@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
-import me.lihq.game.ScreenManager;
+import me.lihq.game.screen.Screens;
 
 /**
  * Reusable Menu UI, can be used for the pause screen as well.
@@ -87,7 +87,7 @@ public class Menu {
         newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.screenManager.setScreen(ScreenManager.Screens.navigation);
+                game.screenManager.setScreen(Screens.navigation);
             }
         });
 
@@ -103,7 +103,7 @@ public class Menu {
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.screenManager.setScreen(ScreenManager.Screens.settings);
+                game.screenManager.setScreen(Screens.settings);
             }
         });
         /**************************** End *****************************/

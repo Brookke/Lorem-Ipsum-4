@@ -3,7 +3,6 @@ package me.lihq.game.people.controller;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import me.lihq.game.GameMain;
-import me.lihq.game.ScreenManager;
 import me.lihq.game.people.AbstractPerson.Direction;
 import me.lihq.game.people.Player;
 

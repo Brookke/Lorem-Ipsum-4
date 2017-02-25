@@ -18,8 +18,6 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.screen.elements.UIHelpers;
 
-import static me.lihq.game.ScreenManager.Screens;
-
 /**
  * The screen that allows the user to change the various settings of the game.
  * Currently limited to volume controls.

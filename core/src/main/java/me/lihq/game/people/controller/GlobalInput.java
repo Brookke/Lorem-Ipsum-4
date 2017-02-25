@@ -2,10 +2,9 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import me.lihq.game.ScreenManager;
+import me.lihq.game.screen.ScreenManager;
 import me.lihq.game.Settings;
-
-import static me.lihq.game.ScreenManager.Screens;
+import me.lihq.game.screen.Screens;
 
 /**
  * Universal input handler for non-player related input - e.g. opening the pause menu.

@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
-import me.lihq.game.ScreenManager;
+import me.lihq.game.screen.Screens;
 
 /**
  * The status bar shown throughout the game.
@@ -104,7 +104,7 @@ public class StatusBar {
              */
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.screenManager.setScreen(ScreenManager.Screens.inventory);
+                game.screenManager.setScreen(Screens.inventory);
             }
         });
 
@@ -119,7 +119,7 @@ public class StatusBar {
              */
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.screenManager.setScreen(ScreenManager.Screens.pauseMenu);
+                game.screenManager.setScreen(Screens.pauseMenu);
             }
         });
 
