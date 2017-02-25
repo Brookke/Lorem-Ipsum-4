@@ -23,55 +23,55 @@ public abstract class AbstractScreen implements Screen {
         this.game = game;
     }
 
-	/**
-	 * Called when this screen becomes the current screen for a Game.
-	 */
+    /**
+     * Called when this screen becomes the current screen for a Game.
+     */
     @Override
     public abstract void show();
 
-	/**
-	 * Game related logic should take place here.
-	 */
+    /**
+     * Game related logic should take place here.
+     */
     public abstract void update();
 
-	/**
-	 * Called when the screen should render itself.
-	 * 
-	 * @param delta The time in seconds since the last draw
-	 */
+    /**
+     * Called when the screen should render itself.
+     *
+     * @param delta The time in seconds since the last draw
+     */
     @Override
     public abstract void render(float delta);
 
-	/**
-	 * Called when the window is resized.
-	 * 
-	 * @param width The new window width
-	 * @param height The new window height
-	 */
+    /**
+     * Called when the window is resized.
+     *
+     * @param width  The new window width
+     * @param height The new window height
+     */
     @Override
     public abstract void resize(int width, int height);
 
-	/**
-	 * Called when focus on the window is lost.
-	 */
+    /**
+     * Called when focus on the window is lost.
+     */
     @Override
     public abstract void pause();
 
-	/**
-	 * Called when the window regains focus.
-	 */
+    /**
+     * Called when the window regains focus.
+     */
     @Override
     public abstract void resume();
 
-	/**
-	 * Called when this screen is no longer the current screen for a Game.
-	 */
+    /**
+     * Called when this screen is no longer the current screen for a Game.
+     */
     @Override
     public abstract void hide();
 
-	/**
-	 * Called when this screen should release all resources.
-	 */
+    /**
+     * Called when this screen should release all resources.
+     */
     @Override
     public abstract void dispose();
 

@@ -6,27 +6,27 @@
     "Big Footprint": {
       "AGGRESSIVE": "THIS IS YOUR FOOTPRINT ISN'T IT?... TELL ME NOW",
       "NEUTRAL": "Is this your footprint?",
-      "NICE":"Hey I like your shoes, are they the same as this footprint?"
+      "NICE": "Hey I like your shoes, are they the same as this footprint?"
     },
     "Small Footprint": {
       "AGGRESSIVE": "THIS IS YOUR FOOTPRINT ISN'T IT?... TELL ME NOW",
       "NEUTRAL": "Is this your footprint?",
-      "NICE":"Hey I like your shoes, are they the same as this footprint?"
+      "NICE": "Hey I like your shoes, are they the same as this footprint?"
     },
     "Glasses": {
       "AGGRESSIVE": "DO YOU NEED TO WEAR GLASSES?...  TELL ME NOW, OR ELSE!",
       "NEUTRAL": "Do you wear glasses?",
-      "NICE":"Hey, I think you'd look great in these glasses I've found, have you ever seen them before?"
+      "NICE": "Hey, I think you'd look great in these glasses I've found, have you ever seen them before?"
     },
     "Bag": {
       "AGGRESSIVE": "DO YOU OWN A BAG!?... TELL ME NOW!",
       "NEUTRAL": "Do you own a bag?",
-      "NICE":"You seem like someone with a keen eye for fashion, what do you think about this bag?"
+      "NICE": "You seem like someone with a keen eye for fashion, what do you think about this bag?"
     },
     "Lipstick": {
       "AGGRESSIVE": "IS THAT LIPSTICK YOU ARE WEARING?",
       "NEUTRAL": "Do you wear lipstick?",
-      "NICE":"Your lips look great, do you wear lipstick?"
+      "NICE": "Your lips look great, do you wear lipstick?"
     },
     "Right Handed": {
       "AGGRESSIVE": "ARE YOU OR ARE YOU NOT RIGHT HANDED!?... TELL ME NOW AND YOU BETTER NOT LIE!",

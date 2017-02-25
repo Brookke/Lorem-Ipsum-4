@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
 import me.lihq.game.GameMain;
 
 /**
@@ -16,21 +15,18 @@ import me.lihq.game.GameMain;
  */
 
 public class Menu {
-	/**
-	 * Game for menu
-	 */
-	private GameMain game;
-
     /**
      * The width of the menu
      */
     private static final int WIDTH = Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8;
-
     /**
      * the stage to render the menu to
      */
     public Stage stage;
-
+    /**
+     * Game for menu
+     */
+    private GameMain game;
     /**
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
      */
@@ -43,8 +39,8 @@ public class Menu {
      * @param pauseMenu Whether it is a pause menu or not
      */
     public Menu(final GameMain game, boolean pauseMenu) {
-    	this.game = game;
-    	
+        this.game = game;
+
         //Initialising new stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         this.pauseMenu = pauseMenu;
@@ -74,7 +70,7 @@ public class Menu {
         }
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
-        
+
         TextButton settings = UIHelpers.createTextButton("Settings");
         settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
         TextButton quit = UIHelpers.createTextButton("Quit");
@@ -90,7 +86,7 @@ public class Menu {
         newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-            	game.mainMenu = false;
+                game.mainMenu = false;
                 game.setScreen(game.navigationScreen);
             }
         });
@@ -107,7 +103,7 @@ public class Menu {
         settings.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-            	game.setScreen(game.settingsScreen);
+                game.setScreen(game.settingsScreen);
             }
         });
         /**************************** End *****************************/
