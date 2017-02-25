@@ -1,13 +1,13 @@
 package me.lihq.game;
 
-import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.models.Room;
 import me.lihq.game.models.Vector2Int;
+import me.lihq.game.people.AbstractPerson;
 import org.junit.Before;
 import org.junit.Test;
 
-import static me.lihq.game.models.Room.*;
-import static org.junit.Assert.*;
+import static me.lihq.game.models.Room.Transition;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit tests for the Room class.
@@ -20,7 +20,7 @@ public class RoomUnitTests extends GameTester {
         room0 = new Room(0, "testRoom0.tmx", "Test Room 0");
         room1 = new Room(1, "testRoom1.tmx", "Test Room 1");
 
-        room0.addTransition(new Room.Transition().setFrom(0, 4).setTo(room1, 0,0, AbstractPerson.Direction.EAST));
+        room0.addTransition(new Room.Transition().setFrom(0, 4).setTo(room1, 0, 0, AbstractPerson.Direction.EAST));
     }
 
     @Test

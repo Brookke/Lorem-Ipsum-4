@@ -2,7 +2,6 @@ package me.lihq.game.models;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
 import me.lihq.game.Assets;
 import me.lihq.game.Settings;
 
@@ -27,19 +26,19 @@ public class Clue extends Sprite {
      * whereas this is in terms of map tiles relative to the bottom left of the map.
      */
     private Vector2Int tileCoordinates = new Vector2Int(0, 0);
-    
+
     /**
      * True if clue is a murder weapon, otherwise false.
-     * 
+     *
      * @author JAAPAN
      */
     private boolean murderWeapon;
-    
+
     /**
      * True if this clue is a red herring, otherwise false.
      * Red herrings point towards a random NPC (not the killer) when questioned
      * about.
-     * 
+     *
      * @author JAAPAN
      */
     private boolean redHerring = false;
@@ -47,12 +46,11 @@ public class Clue extends Sprite {
     /**
      * Creates a clue
      *
-     * @param name 			The name of the clue i.e. what it is
-     * @param description 	Describes what the clue is
-     * @param weapon		Whether this clue is the murder weapon or not
-     * @param clueX			The column of the texture on the spritesheet
-     * @param clueY			The row of the texture on the spritesheet
-     * 
+     * @param name        The name of the clue i.e. what it is
+     * @param description Describes what the clue is
+     * @param weapon      Whether this clue is the murder weapon or not
+     * @param clueX       The column of the texture on the spritesheet
+     * @param clueY       The row of the texture on the spritesheet
      * @author JAAPAN
      */
     public Clue(String name, String description, boolean weapon, int clueX, int clueY) {
@@ -61,7 +59,7 @@ public class Clue extends Sprite {
         this.description = description;
         this.murderWeapon = weapon;
     }
-    
+
     /**
      * Checks equality of this Clue object and another object.
      *
@@ -77,39 +75,37 @@ public class Clue extends Sprite {
 
         return false;
     }
-    
+
     /*************************************************************************/
     /****************************** Set Methods ******************************/
     /*************************************************************************/
-    
+
     /**
      * Sets this clue as the murder weapon.
-     * 
+     *
      * @return This object once it has been set as the murder weapon
-     * 
      * @author JAAPAN
      */
     public Clue setMurderWeapon() {
-    	murderWeapon = true;
-    	
-    	return this;
+        murderWeapon = true;
+
+        return this;
     }
-    
+
     /**
      * Sets this clue as a red herring.
-     * 
+     *
      * @return This object once it has been set as a red herring
-     * 
      * @author JAAPAN
      */
     public Clue setRedHerring() {
-    	redHerring = true;
-    	
-    	System.out.println(name + " is a red herring");
-    	
-    	return this;
+        redHerring = true;
+
+        System.out.println(name + " is a red herring");
+
+        return this;
     }
-    
+
     /**
      * Sets the tile coordinates of the clue in the map.
      *
@@ -157,30 +153,28 @@ public class Clue extends Sprite {
     public String getDescription() {
         return description;
     }
-    
+
     /**
      * @return True if this is the murder weapon, false otherwise
-     * 
      * @author JAAPAN
      */
     public boolean isMurderWeapon() {
-    	return murderWeapon;
+        return murderWeapon;
     }
-    
+
     /**
      * @return True if the clue is a red herring, false otherwise
-     * 
      * @author JAAPAN
      */
     public boolean isRedHerring() {
-    	return redHerring;
+        return redHerring;
     }
 
     /**
      * @return (Vector2Int) The tile coordinates of the clue
-     *          <p>
-     *          All coordinates relative to the bottom left of the map
-     *          </p>
+     * <p>
+     * All coordinates relative to the bottom left of the map
+     * </p>
      */
     public Vector2Int getPosition() {
         return tileCoordinates;
@@ -188,9 +182,9 @@ public class Clue extends Sprite {
 
     /**
      * @return (int) The x component of the clue's tile coordinates
-     *          <p>
-     *          All coordinates relative to the bottom left of the map
-     *          </p>
+     * <p>
+     * All coordinates relative to the bottom left of the map
+     * </p>
      */
     public int getTileX() {
         return tileCoordinates.x;
@@ -198,9 +192,9 @@ public class Clue extends Sprite {
 
     /**
      * @return (int) The y component of the clue's tile coordinates
-     *          <p>
-     *          All coordinates relative to the bottom left of the map
-     *          </p>
+     * <p>
+     * All coordinates relative to the bottom left of the map
+     * </p>
      */
     public int getTileY() {
         return tileCoordinates.y;

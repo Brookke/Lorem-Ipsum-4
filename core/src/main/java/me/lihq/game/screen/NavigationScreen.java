@@ -1,8 +1,6 @@
 package me.lihq.game.screen;
 
 
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,20 +10,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import me.lihq.game.ConversationManagement;
-import me.lihq.game.GameMain;
-import me.lihq.game.OrthogonalTiledMapRendererWithPeople;
-import me.lihq.game.Settings;
-import me.lihq.game.SpeechboxManager;
+import me.lihq.game.*;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.controller.PlayerController;
-import me.lihq.game.screen.elements.DebugOverlay;
-import me.lihq.game.screen.elements.RoomArrow;
-import me.lihq.game.screen.elements.RoomTag;
-import me.lihq.game.screen.elements.StatusBar;
-import me.lihq.game.screen.elements.UIHelpers;
+import me.lihq.game.screen.elements.*;
+
+import java.util.List;
 
 /**
  * This is the screen that is responsible for the navigation of the player around the game.
@@ -36,49 +27,49 @@ public class NavigationScreen extends AbstractScreen {
      * The controller that listens for key inputs
      */
     public PlayerController playerController;
-    
+
     /**
      * This is the SpeechboxManager for the main game
      */
     public SpeechboxManager speechboxMngr;
-    
+
     /**
      * This is the main ConversationManager that controls the conversation mechanic
      */
     public ConversationManagement convMngt;
-    
+
     /**
      * This boolean determines whether the black is fading in or out
      */
     private boolean fadeToBlack = true;
-    
+
     /**
      * This boolean determines whether the map needs to be updated in the next render loop
      */
     private boolean changeMap = false;
-    
+
     /**
      * This is the list of NPCs in the current Room
      */
     private List<NPC> currentNPCS;
-    
+
     /**
      * This is the map renderer that also renders Sprites
      */
     private OrthogonalTiledMapRendererWithPeople tiledMapRenderer;
-    
+
     /**
      * The camera to render the map to
      */
     private OrthographicCamera camera = new OrthographicCamera();
     private Viewport viewport;
     private SpriteBatch spriteBatch;
-    
+
     /**
      * This stores whether the game is paused or not
      */
     private boolean pause = false;
-    
+
     /**
      * This is the StatusBar that shows at the bottom
      */
@@ -169,8 +160,8 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void update() {
-    	convMngt.finishConversation();
-    	
+        convMngt.finishConversation();
+
         if (!pause) { //this statement contains updates that shouldn't happen during a pause
             playerController.update();
             game.player.update();
@@ -244,14 +235,14 @@ public class NavigationScreen extends AbstractScreen {
      * @param delta The time in seconds since the last render.
      */
     @SuppressWarnings("unchecked")
-	@Override
+    @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        
-    	update();
-    	game.player.addPlayTime(delta);
-    	
+
+        update();
+        game.player.addPlayTime(delta);
+
         game.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {
             n.pushCoordinatesToSprite();
@@ -316,20 +307,21 @@ public class NavigationScreen extends AbstractScreen {
         statusBar.resize(width, height);
     }
 
-	/**
-	 * Called when focus on the window is lost.
-	 */
-	@Override
-	public void pause() {
-		// Pause the game, so the gameDuration counter isn't updated
-    	game.setScreen(game.pauseScreen);
+    /**
+     * Called when focus on the window is lost.
+     */
+    @Override
+    public void pause() {
+        // Pause the game, so the gameDuration counter isn't updated
+        game.setScreen(game.pauseScreen);
     }
 
     /**
      * This method is called when the window is brought back into focus
      */
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     /**
      * This method is called when the user hides the window

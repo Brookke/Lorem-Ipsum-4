@@ -7,21 +7,13 @@
 
 package me.lihq.game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-
-
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
-
-import me.lihq.game.Assets;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
@@ -29,13 +21,12 @@ import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.GlobalInput;
-import me.lihq.game.screen.AbstractScreen;
-import me.lihq.game.screen.InventoryScreen;
-import me.lihq.game.screen.MainMenuScreen;
-import me.lihq.game.screen.NavigationScreen;
-import me.lihq.game.screen.PauseScreen;
-import me.lihq.game.screen.SettingsScreen;
+import me.lihq.game.screen.*;
 import me.lihq.game.screen.elements.SpeechBox;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -55,16 +46,16 @@ public class GameMain extends Game {
      * The game map
      */
     public Map gameMap;
-    
+
     /**
      * A player object for the player of the game
      */
     public Player player;
-    
+
     /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
      * killer, without having to iterate through each NPC.
-     * 
+     *
      * @author JAAPAN
      */
     public NPC killer;
@@ -72,72 +63,63 @@ public class GameMain extends Game {
     /**
      * An NPC object for the victim. This allows us to easily access the name of the victim,
      * without having to iterate through each NPC.
-     * 
+     *
      * @author JAAPAN
      */
     public NPC victim;
-
+    /**
+     * A screen to be used to display standard gameplay within the game , including the status bar.
+     */
+    public NavigationScreen navigationScreen;
+    /**
+     * The main menu screen that shows up when the game is first started.
+     */
+    public MainMenuScreen menuScreen;
+    /**
+     * The screen that is displayed when the game is paused.
+     *
+     * @author JAAPAN
+     */
+    public PauseScreen pauseScreen;
+    /**
+     * The screen that displays the player's inventory.
+     *
+     * @author JAAPAN
+     */
+    public InventoryScreen inventoryScreen;
+    /**
+     * The screen that allows the player to modify settings.
+     *
+     * @author JAAPAN
+     */
+    public SettingsScreen settingsScreen;
+    /**
+     * True if we're in the main menu, false otherwise. Used to determine whether to return
+     * to the MainMenuScreen or PauseScreen when leaving the SettingsScreen.
+     *
+     * @author JAAPAN
+     */
+    public boolean mainMenu = true;
+    /**
+     * Universal input handler
+     *
+     * @author JAAPAN
+     */
+    public GlobalInput input;
+    /**
+     * Input multiplexer to control multiple inputs across project
+     *
+     * @author JAAPAN
+     */
+    public InputMultiplexer inputMultiplexer;
     /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;
 
     /**
-     * A screen to be used to display standard gameplay within the game , including the status bar.
-     */
-    public NavigationScreen navigationScreen;
-
-    /**
-     * The main menu screen that shows up when the game is first started.
-     */
-    public MainMenuScreen menuScreen;
-
-    /**
-     * The screen that is displayed when the game is paused.
-     * 
-     * @author JAAPAN
-     */
-    public PauseScreen pauseScreen;
-    
-    /**
-     * The screen that displays the player's inventory.
-     * 
-     * @author JAAPAN
-     */
-    public InventoryScreen inventoryScreen;
-    
-    /**
-     * The screen that allows the player to modify settings.
-     * 
-     * @author JAAPAN
-     */
-    public SettingsScreen settingsScreen;
-    
-    /**
-     * True if we're in the main menu, false otherwise. Used to determine whether to return
-     * to the MainMenuScreen or PauseScreen when leaving the SettingsScreen.
-     * 
-     * @author JAAPAN
-     */
-    public boolean mainMenu = true;
-    
-    /**
-     * Universal input handler
-     * 
-     * @author JAAPAN
-     */
-    public GlobalInput input;
-    
-    /**
-     * Input multiplexer to control multiple inputs across project
-     * 
-     * @author JAAPAN
-     */
-    public InputMultiplexer inputMultiplexer;
-
-    /**
      * This is called at start up. It initialises the game.
-     */ 
+     */
     @Override
     public void create() {
         GameMain.me = this;
@@ -153,7 +135,7 @@ public class GameMain extends Game {
         /******************** Added by team JAAPAN ********************/
         // Load universal input class
         input = new GlobalInput(this);
-        
+
         // Load input multiplexer and add universal input to it
         inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(input);
@@ -166,16 +148,16 @@ public class GameMain extends Game {
 
         navigationScreen = new NavigationScreen(this);
         navigationScreen.updateTiledMapRenderer();
-        
+
 
         /******************** Added by team JAAPAN ********************/
         pauseScreen = new PauseScreen(this);
         inventoryScreen = new InventoryScreen(this);
         settingsScreen = new SettingsScreen(this);
-        
+
         // Add an introductory speechbox
         navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
-        
+
         Assets.MUSIC.play();
         /**************************** End *****************************/
 
@@ -199,18 +181,18 @@ public class GameMain extends Game {
 
     /**
      * Called when the Application is destroyed. Should release all assets from memory.
-     * 
+     *
      * @author JAAPAN
      */
     @Override
     public void dispose() {
-    	Assets.dispose();
-    	
-    	navigationScreen.dispose();
-    	menuScreen.dispose();
-    	pauseScreen.dispose();
-    	inventoryScreen.dispose();
-    	settingsScreen.dispose();
+        Assets.dispose();
+
+        navigationScreen.dispose();
+        menuScreen.dispose();
+        pauseScreen.dispose();
+        inventoryScreen.dispose();
+        settingsScreen.dispose();
     }
 
     /**
@@ -283,7 +265,7 @@ public class GameMain extends Game {
         // Remove the victim from the list of NPCs, so they aren't added to the game
         NPCs.remove(victim);
         /**************************** End *****************************/
-        
+
 
         int amountOfRooms = gameMap.getAmountOfRooms();
 
@@ -338,56 +320,56 @@ public class GameMain extends Game {
 
     /**
      * Initialises all the clues that are to be added to the game.
-     * 
+     *
      * @author JAAPAN
      */
     private void initialiseClues() {
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
-        
+
         Random random = new Random();
         List<Integer> clueIndices = new ArrayList<>();
-        
+
         try {
             JsonValue jsonData = new JsonReader().parse(Gdx.files.internal("clues/clues.json"));
-            
-	        // Get the total number of generic clues in the JSON file
-	        int totalClues = jsonData.get("clues").size;
-	        
-	        // Randomly select a number of clues, by generating random indices. 
-	        // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
-	        while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
-	        	int r = random.nextInt(totalClues);
-	        	if (!clueIndices.contains(r)) {
-	        		clueIndices.add(r);
-	        	}
-	        }
-	        
-	        for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
-	        	JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
-	        	tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
-	        	
-	        	// Set the first clues in the list to red herrings (the number of red herrings
-	        	// specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
-	        	// this does not need to be further randomised.
-	        	if (i < Settings.NUMBER_OF_RED_HERRINGS) {
-	        		tempClues.get(i).setRedHerring();
-	        	}
-	        }
-	        
-	        // Choose a random murder weapon
-	        int murderWeapon = random.nextInt(jsonData.get("weapons").size);
-	        // Create the murder weapon from the JSON file
-	        JsonValue entry = jsonData.get("weapons").get(murderWeapon);
-	        tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
-	    	
-	    	System.out.println(entry.name + " is the murder weapon");
+
+            // Get the total number of generic clues in the JSON file
+            int totalClues = jsonData.get("clues").size;
+
+            // Randomly select a number of clues, by generating random indices.
+            // NUMBER_OF_CLUES - 1 is used because the murder weapon is added later.
+            while (clueIndices.size() < Settings.NUMBER_OF_CLUES - 1) {
+                int r = random.nextInt(totalClues);
+                if (!clueIndices.contains(r)) {
+                    clueIndices.add(r);
+                }
+            }
+
+            for (int i = 0; i < Settings.NUMBER_OF_CLUES - 1; i++) {
+                JsonValue entry = jsonData.get("clues").get(clueIndices.get(i));
+                tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
+
+                // Set the first clues in the list to red herrings (the number of red herrings
+                // specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
+                // this does not need to be further randomised.
+                if (i < Settings.NUMBER_OF_RED_HERRINGS) {
+                    tempClues.get(i).setRedHerring();
+                }
+            }
+
+            // Choose a random murder weapon
+            int murderWeapon = random.nextInt(jsonData.get("weapons").size);
+            // Create the murder weapon from the JSON file
+            JsonValue entry = jsonData.get("weapons").get(murderWeapon);
+            tempClues.add(new Clue(entry.name, entry.getString("description"), true, entry.getInt("x"), entry.getInt("y")));
+
+            System.out.println(entry.name + " is the murder weapon");
         } catch (Exception e) {
-        	// Display error message and close the game
-        	System.out.println("Fatal Error: Clues not working");
-        	Gdx.app.exit();
+            // Display error message and close the game
+            System.out.println("Fatal Error: Clues not working");
+            Gdx.app.exit();
         }
-        
+
         // Assign each clue to a randomly selected room.
         int amountOfRooms = gameMap.getAmountOfRooms();
 
@@ -398,7 +380,7 @@ public class GameMain extends Game {
         }
 
         for (Clue clue : tempClues) {
-        	// Refill the rooms left list if there are more clues than rooms. This will put AT LEAST one clue per room if so.
+            // Refill the rooms left list if there are more clues than rooms. This will put AT LEAST one clue per room if so.
             if (roomsLeft.isEmpty()) {
                 for (int i = 0; i < amountOfRooms; i++) {
                     roomsLeft.add(i);
@@ -416,34 +398,34 @@ public class GameMain extends Game {
             }
         }
     }
-    
+
     /**
      * Resets the state of the game.
-     * 
+     *
      * @author JAAPAN
      */
     public void resetAll() {
-    	// Would be better to reset the necessary variables, rather than recreate the objects
-    	
-    	// Clear the list of NPCs, ready to refill it
-    	NPCs.clear();
-    	
-    	// Recreate the map, so the murder room is randomly re-assigned
-    	gameMap = new Map();
-    	
-    	// Clear the input multiplexer, and add the global input controller
-    	inputMultiplexer.clear();
+        // Would be better to reset the necessary variables, rather than recreate the objects
+
+        // Clear the list of NPCs, ready to refill it
+        NPCs.clear();
+
+        // Recreate the map, so the murder room is randomly re-assigned
+        gameMap = new Map();
+
+        // Clear the input multiplexer, and add the global input controller
+        inputMultiplexer.clear();
         inputMultiplexer.addProcessor(input);
-    	
+
         // Reinitialise all people and clues
-    	initialiseAllPeople();
-    	initialiseClues();
-    	
-    	// Recreate the navigation screen, so the references to the player and NPCs are
-    	// updated
-    	navigationScreen = new NavigationScreen(this);
+        initialiseAllPeople();
+        initialiseClues();
+
+        // Recreate the navigation screen, so the references to the player and NPCs are
+        // updated
+        navigationScreen = new NavigationScreen(this);
         navigationScreen.updateTiledMapRenderer();
-        
+
         mainMenu = true;
     }
 }

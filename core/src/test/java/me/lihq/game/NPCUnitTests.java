@@ -1,12 +1,12 @@
 package me.lihq.game;
 
+import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
-import me.lihq.game.models.Room;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * JUnit tests for the NPC class.
@@ -18,7 +18,7 @@ public class NPCUnitTests extends GameTester {
     @Before
     public void makeNPC() {
         room = new Room(0, "testRoom0.tmx", "Test Room 0");
-        colin = new NPC("bob", "colin.png", 1,1, room, "Colin.JSON");
+        colin = new NPC("bob", "colin.png", 1, 1, room, "Colin.JSON");
     }
 
     @Test
