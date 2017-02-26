@@ -21,8 +21,9 @@ import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.GlobalInput;
-import me.lihq.game.screen.*;
-import me.lihq.game.screen.elements.DebugOverlay;
+import me.lihq.game.screen.AbstractScreen;
+import me.lihq.game.screen.ScreenManager;
+import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
@@ -182,8 +183,7 @@ public class GameMain extends Game {
         NPC npc6 = new NPC(this, "Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
-
+        NPC npc7 = new NPC(this, "Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
         NPC npc8 = new NPC(this, "Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), "Horatio.JSON");
