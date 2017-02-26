@@ -17,6 +17,11 @@ import me.lihq.game.models.Vector2Int;
  */
 public class DebugOverlay {
     /**
+     * This is a reference to the main game
+     */
+    private static GameMain mainGame;
+
+    /**
      * This is to store the green tile overlay sprite
      */
     private static Sprite greenSprite = getColoredTileSprite(Color.GREEN);
@@ -35,6 +40,16 @@ public class DebugOverlay {
      * This is to store the font that the debug screen is written in
      */
     private static BitmapFont font = Assets.createFont("arial", 30);
+
+    /**
+     * This method sets the reference to the main game
+     *
+     * @param game - The game instance
+     */
+    public static void setGame(GameMain game)
+    {
+        mainGame = game;
+    }
 
     /**
      * This method draws the debug menu to the batch
@@ -69,7 +84,7 @@ public class DebugOverlay {
         for (int w = 0; w < roomWidth; w++) {
             for (int h = 0; h < roomHeight; h++) {
                 if (Settings.DEBUG_OPTIONS.get("showWalkable")) {
-                    if (GameMain.me.player.getRoom().isWalkableTile(w, h)) {
+                    if (mainGame.player.getRoom().isWalkableTile(w, h)) {
                         greenSprite.setPosition(w * Settings.TILE_SIZE, h * Settings.TILE_SIZE);
                         greenSprite.draw(batch);
                     } else {

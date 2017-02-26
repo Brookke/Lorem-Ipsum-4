@@ -14,6 +14,12 @@ import me.lihq.game.Settings;
  * of the screen when a new room is entered.
  */
 public class RoomTag {
+
+    /**
+     * This is a reference to the main game class
+     */
+    private GameMain mainGame;
+
     /**
      * This is the room name it is to display
      */
@@ -51,7 +57,8 @@ public class RoomTag {
      *
      * @param roomName The name to display.
      */
-    public RoomTag(String roomName) {
+    public RoomTag(GameMain game, String roomName) {
+        this.mainGame = game;
         this.roomName = roomName;
     }
 
@@ -97,7 +104,7 @@ public class RoomTag {
             animTime++;
 
             if (animTime >= 2 * MAX_ANIM_TIME) {
-                GameMain.me.navigationScreen.setRoomTag(null);
+                mainGame.navigationScreen.setRoomTag(null);
             }
         }
 

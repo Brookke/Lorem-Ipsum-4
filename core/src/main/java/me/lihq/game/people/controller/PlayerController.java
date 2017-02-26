@@ -10,6 +10,12 @@ import me.lihq.game.people.Player;
  * This class allows the player to be moved and controlled.
  */
 public class PlayerController extends InputAdapter {
+
+    /**
+     * This is a reference to the main game class
+     */
+    private GameMain mainGame;
+
     /**
      * Booleans storing what keys have been pressed and not released
      */
@@ -25,7 +31,8 @@ public class PlayerController extends InputAdapter {
      *
      * @param player The player that we want this controller to control
      */
-    public PlayerController(Player player) {
+    public PlayerController(GameMain game, Player player) {
+        this.mainGame = game;
         this.player = player;
     }
 
@@ -95,7 +102,7 @@ public class PlayerController extends InputAdapter {
     public void update() {
         /******************** Added by team JAAPAN ********************/
         if (interact) {
-            GameMain.me.navigationScreen.speechboxMngr.skipMessage();
+            mainGame.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
         }

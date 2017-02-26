@@ -26,13 +26,19 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     public List<AbstractPerson> people;
 
     /**
+     * This is a reference to the main game class
+     */
+    private GameMain mainGame;
+
+    /**
      * Constructor for the map renderer
      *
      * @param map The TiledMap that is to be rendered using this renderer
      */
-    public OrthogonalTiledMapRendererWithPeople(TiledMap map) {
+    public OrthogonalTiledMapRendererWithPeople(TiledMap map, GameMain game) {
         super(map);
 
+        mainGame = game;
         people = new ArrayList<>();
     }
 
@@ -80,7 +86,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         for (int currentLayer = 0; currentLayer < amountOfLayers; currentLayer++) {
             MapLayer layer = map.getLayers().get(currentLayer);
 
-            if (layer.getName().equals("Blood") && !GameMain.me.player.getRoom().isMurderRoom()) {
+            if (layer.getName().equals("Blood") && !mainGame.player.getRoom().isMurderRoom()) {
                 //Don't draw the layer as its not the murder room
             } else {
                 renderTileLayer((TiledMapTileLayer) layer);
@@ -94,7 +100,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         }
 
         if (Settings.DEBUG) {
-            DebugOverlay.renderDebugTiles(GameMain.me.player.getRoom(), this.getBatch());
+            DebugOverlay.renderDebugTiles(mainGame.player.getRoom(), this.getBatch());
         }
 
         endRender();

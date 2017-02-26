@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import me.lihq.game.Assets;
+import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
@@ -20,6 +21,12 @@ import java.util.Random;
  * It extends the sprite class which provides methods for the person to be rendered in the game.
  */
 public abstract class AbstractPerson extends Sprite {
+
+    /**
+     * This is a reference to the main game class
+     */
+    protected GameMain mainGame;
+
     /**
      * The height of the texture region for each person
      */
@@ -115,8 +122,9 @@ public abstract class AbstractPerson extends Sprite {
      * @param tileX This is the start x coordinate for the Person
      * @param tileY This is the start y coordinate for the Person
      */
-    public AbstractPerson(String name, String img, int tileX, int tileY) {
+    public AbstractPerson(GameMain game, String name, String img, int tileX, int tileY) {
         super(new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
+        this.mainGame = game;
         this.name = name;
         this.spriteSheet = Assets.loadTexture(img);
         this.currentRegion = new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);

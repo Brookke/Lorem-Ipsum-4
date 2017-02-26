@@ -21,6 +21,12 @@ import java.util.List;
  * This class defines a room which is a game representation of a real world room in the Ron Cooke Hub.
  */
 public class Room {
+
+    /**
+     * This is a reference to the main game class
+     */
+    private GameMain mainGame;
+
     /**
      * This list stores the coordinates of all hideable slots in this room
      * <p>
@@ -70,7 +76,8 @@ public class Room {
      * @param mapFile The String that points to the tmx map file.
      * @param name    The name of the room
      */
-    public Room(int id, String mapFile, String name) {
+    public Room(GameMain game, int id, String mapFile, String name) {
+        this.mainGame = game;
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;
@@ -240,7 +247,7 @@ public class Room {
         for (int currentLayer = 0; currentLayer < amountOfLayers; currentLayer++) {
             TiledMapTileLayer tiledLayer = (TiledMapTileLayer) map.getLayers().get(currentLayer);
 
-            if (tiledLayer.getName().equals("Blood") && !GameMain.me.player.getRoom().isMurderRoom()) {
+            if (tiledLayer.getName().equals("Blood") && !isMurderRoom()) {
                 //Don't check the layer as the blood splat isn't there
                 emptyCellCount++;
                 continue;
@@ -272,14 +279,14 @@ public class Room {
              /*
             Check to see if the player is standing in the target destination
             */
-            if (GameMain.me.player.getTileCoordinates().x == x && GameMain.me.player.getTileCoordinates().y == y) {
+            if (mainGame.player.getTileCoordinates().x == x && mainGame.player.getTileCoordinates().y == y) {
                 return false;
             }
 
              /*
              Check to see if any NPCs are standing in the target destination
              */
-            for (Sprite sprite : GameMain.me.navigationScreen.getNPCs()) {
+            for (Sprite sprite : mainGame.navigationScreen.getNPCs()) {
                 NPC npc = (NPC) sprite;
 
                 if (npc.getTileCoordinates().x == x && npc.getTileCoordinates().y == y) {

@@ -1,5 +1,6 @@
 package me.lihq.game.models;
 
+import me.lihq.game.GameMain;
 import me.lihq.game.people.AbstractPerson.Direction;
 
 import java.util.Arrays;
@@ -10,6 +11,12 @@ import java.util.Random;
  * The map is a collection of Rooms , it links them all together.
  */
 public class Map {
+
+    /**
+     * This is s reference ot the main game
+     */
+    private GameMain mainGame;
+
     /**
      * Store of the rooms in the map
      */
@@ -18,7 +25,8 @@ public class Map {
     /**
      * Constructs the map
      */
-    public Map() {
+    public Map(GameMain game) {
+        this.mainGame = game;
         initialiseRooms();
     }
 
@@ -27,25 +35,25 @@ public class Map {
      */
     public void initialiseRooms() {
 
-        Room mainRoom = new Room(0, "mainroom.tmx", "Main Foyer");
+        Room mainRoom = new Room(mainGame, 0, "mainroom.tmx", "Main Foyer");
 
-        Room rch037 = new Room(1, "rch037.tmx", "RCH/037 Lecture Theatre");
+        Room rch037 = new Room(mainGame, 1, "rch037.tmx", "RCH/037 Lecture Theatre");
 
-        Room portersOffice = new Room(2, "portersoffice.tmx", "Porters Office");
+        Room portersOffice = new Room(mainGame, 2, "portersoffice.tmx", "Porters Office");
 
-        Room kitchen = new Room(3, "kitchen.tmx", "Kitchen");
+        Room kitchen = new Room(mainGame, 3, "kitchen.tmx", "Kitchen");
 
-        Room islandOfInteraction = new Room(4, "islandofinteraction.tmx", "Island of Interaction");
+        Room islandOfInteraction = new Room(mainGame, 4, "islandofinteraction.tmx", "Island of Interaction");
 
-        Room toilet = new Room(5, "toilet.tmx", "Toilet");
+        Room toilet = new Room(mainGame, 5, "toilet.tmx", "Toilet");
 
-        Room computerRoom = new Room(6, "computerroom.tmx", "Computer Room");
+        Room computerRoom = new Room(mainGame, 6, "computerroom.tmx", "Computer Room");
 
-        Room lakeHouse = new Room(7, "lakehouse.tmx", "Lakehouse");
+        Room lakeHouse = new Room(mainGame, 7, "lakehouse.tmx", "Lakehouse");
 
-        Room outside = new Room(8, "outside.tmx", "Outside Ron Cooke Hub");
+        Room outside = new Room(mainGame, 8, "outside.tmx", "Outside Ron Cooke Hub");
 
-        Room pod = new Room(9, "pod.tmx", "Pod");
+        Room pod = new Room(mainGame, 9, "pod.tmx", "Pod");
 
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 
