@@ -98,7 +98,7 @@ public class Player extends AbstractPerson {
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            mainGame.navigationScreen.initialiseRoomChange();
+            mainGame.screenManager.navigationScreen.initialiseRoomChange();
             return;
         }
 
@@ -118,7 +118,7 @@ public class Player extends AbstractPerson {
 
         NPC npc = getFacingNPC();
         if (npc != null) {
-            mainGame.navigationScreen.convMngt.startConversation(npc);
+            mainGame.screenManager.navigationScreen.convMngt.startConversation(npc);
         } else {
             checkForClue();
         }
@@ -156,7 +156,7 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            mainGame.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            mainGame.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -177,7 +177,7 @@ public class Player extends AbstractPerson {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
         } else {
-            mainGame.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
+            mainGame.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
         }
     }
 
@@ -222,7 +222,7 @@ public class Player extends AbstractPerson {
 
             //TODO: Look into making a getter for the players Game this way we can do this.getGame() here instead of GameMain.
 
-            mainGame.navigationScreen.updateTiledMapRenderer();
+            mainGame.screenManager.navigationScreen.updateTiledMapRenderer();
         }
     }
 

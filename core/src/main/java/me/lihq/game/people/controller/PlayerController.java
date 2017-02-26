@@ -102,7 +102,7 @@ public class PlayerController extends InputAdapter {
     public void update() {
         /******************** Added by team JAAPAN ********************/
         if (interact) {
-            mainGame.navigationScreen.speechboxMngr.skipMessage();
+            mainGame.screenManager.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
         }

@@ -286,7 +286,7 @@ public class Room {
              /*
              Check to see if any NPCs are standing in the target destination
              */
-            for (Sprite sprite : mainGame.navigationScreen.getNPCs()) {
+            for (Sprite sprite : mainGame.screenManager.navigationScreen.getNPCs()) {
                 NPC npc = (NPC) sprite;
 
                 if (npc.getTileCoordinates().x == x && npc.getTileCoordinates().y == y) {

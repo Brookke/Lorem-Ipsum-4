@@ -104,7 +104,7 @@ public class RoomTag {
             animTime++;
 
             if (animTime >= 2 * MAX_ANIM_TIME) {
-                mainGame.navigationScreen.setRoomTag(null);
+                mainGame.screenManager.navigationScreen.setRoomTag(null);
             }
         }
 
