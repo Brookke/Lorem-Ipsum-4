@@ -142,6 +142,18 @@ public class SpeechBox {
         container.setActor(table);
 
 
+        //This will skip the message if the space bar is pressed
+        stage.addListener(new InputListener() {
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.SPACE) {
+                    timeoutDuration = 0;
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         //Add container to stage for rendering later
         stage.addActor(container);
     }
