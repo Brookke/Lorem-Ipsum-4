@@ -55,13 +55,11 @@ public class SettingsScreen extends AbstractScreen {
      */
     private void initMenu() {
         // Create and position the label containing title text
-        Label title = UIHelpers.createLabel("Settings", Assets.titleFont);
-        title.setPosition(Gdx.graphics.getWidth()/2-title.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
-
+        Label title = UIHelpers.createLabel("Settings", true);
 
         // Create and position the back button, using the standard style
         TextButton backButton = UIHelpers.createTextButton("Back");
-        backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2, Gdx.graphics.getHeight() / 16);
+        backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
 
         // Create and position the mute check box, using the standard style
         CheckBox muteCheckBox = UIHelpers.createCheckBox("Mute");
