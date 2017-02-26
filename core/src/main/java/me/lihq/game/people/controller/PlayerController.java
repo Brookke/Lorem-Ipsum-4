@@ -14,7 +14,7 @@ public class PlayerController extends InputAdapter {
     /**
      * This is a reference to the main game class
      */
-    private GameMain mainGame;
+    private GameMain game;
 
     /**
      * Booleans storing what keys have been pressed and not released
@@ -32,7 +32,7 @@ public class PlayerController extends InputAdapter {
      * @param player The player that we want this controller to control
      */
     public PlayerController(GameMain game, Player player) {
-        this.mainGame = game;
+        this.game = game;
         this.player = player;
     }
 
@@ -102,7 +102,7 @@ public class PlayerController extends InputAdapter {
     public void update() {
         /******************** Added by team JAAPAN ********************/
         if (interact) {
-            mainGame.screenManager.navigationScreen.speechboxMngr.skipMessage();
+            game.screenManager.navigationScreen.speechboxMngr.skipMessage();
             player.interact();
             interact = false;
         }

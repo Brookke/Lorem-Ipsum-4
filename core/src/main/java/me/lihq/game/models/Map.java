@@ -15,7 +15,7 @@ public class Map {
     /**
      * This is s reference ot the main game
      */
-    private GameMain mainGame;
+    private GameMain game;
 
     /**
      * Store of the rooms in the map
@@ -26,7 +26,7 @@ public class Map {
      * Constructs the map
      */
     public Map(GameMain game) {
-        this.mainGame = game;
+        this.game = game;
         initialiseRooms();
     }
 
@@ -35,25 +35,25 @@ public class Map {
      */
     public void initialiseRooms() {
 
-        Room mainRoom = new Room(mainGame, 0, "mainroom.tmx", "Main Foyer");
+        Room mainRoom = new Room(game, 0, "mainroom.tmx", "Main Foyer");
 
-        Room rch037 = new Room(mainGame, 1, "rch037.tmx", "RCH/037 Lecture Theatre");
+        Room rch037 = new Room(game, 1, "rch037.tmx", "RCH/037 Lecture Theatre");
 
-        Room portersOffice = new Room(mainGame, 2, "portersoffice.tmx", "Porters Office");
+        Room portersOffice = new Room(game, 2, "portersoffice.tmx", "Porters Office");
 
-        Room kitchen = new Room(mainGame, 3, "kitchen.tmx", "Kitchen");
+        Room kitchen = new Room(game, 3, "kitchen.tmx", "Kitchen");
 
-        Room islandOfInteraction = new Room(mainGame, 4, "islandofinteraction.tmx", "Island of Interaction");
+        Room islandOfInteraction = new Room(game, 4, "islandofinteraction.tmx", "Island of Interaction");
 
-        Room toilet = new Room(mainGame, 5, "toilet.tmx", "Toilet");
+        Room toilet = new Room(game, 5, "toilet.tmx", "Toilet");
 
-        Room computerRoom = new Room(mainGame, 6, "computerroom.tmx", "Computer Room");
+        Room computerRoom = new Room(game, 6, "computerroom.tmx", "Computer Room");
 
-        Room lakeHouse = new Room(mainGame, 7, "lakehouse.tmx", "Lakehouse");
+        Room lakeHouse = new Room(game, 7, "lakehouse.tmx", "Lakehouse");
 
-        Room outside = new Room(mainGame, 8, "outside.tmx", "Outside Ron Cooke Hub");
+        Room outside = new Room(game, 8, "outside.tmx", "Outside Ron Cooke Hub");
 
-        Room pod = new Room(mainGame, 9, "pod.tmx", "Pod");
+        Room pod = new Room(game, 9, "pod.tmx", "Pod");
 
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 

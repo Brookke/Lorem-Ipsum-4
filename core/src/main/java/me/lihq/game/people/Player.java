@@ -98,7 +98,7 @@ public class Player extends AbstractPerson {
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            mainGame.screenManager.navigationScreen.initialiseRoomChange();
+            game.screenManager.navigationScreen.initialiseRoomChange();
             return;
         }
 
@@ -118,7 +118,7 @@ public class Player extends AbstractPerson {
 
         NPC npc = getFacingNPC();
         if (npc != null) {
-            mainGame.screenManager.navigationScreen.convMngt.startConversation(npc);
+            game.screenManager.navigationScreen.convMngt.startConversation(npc);
         } else {
             checkForClue();
         }
@@ -130,7 +130,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : mainGame.getNPCS(getRoom())) {
+        for (NPC npc : game.getNPCS(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -156,7 +156,7 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            mainGame.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -168,7 +168,7 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : mainGame.NPCs) {
+            for (NPC character : game.NPCs) {
                 character.ignored = false;
             }
             score += 250;
@@ -177,7 +177,7 @@ public class Player extends AbstractPerson {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
         } else {
-            mainGame.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here", 1));
         }
     }
 
@@ -222,7 +222,7 @@ public class Player extends AbstractPerson {
 
             //TODO: Look into making a getter for the players Game this way we can do this.getGame() here instead of GameMain.
 
-            mainGame.screenManager.navigationScreen.updateTiledMapRenderer();
+            game.screenManager.navigationScreen.updateTiledMapRenderer();
         }
     }
 

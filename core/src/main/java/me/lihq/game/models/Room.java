@@ -25,7 +25,7 @@ public class Room {
     /**
      * This is a reference to the main game class
      */
-    private GameMain mainGame;
+    private GameMain game;
 
     /**
      * This list stores the coordinates of all hideable slots in this room
@@ -77,7 +77,7 @@ public class Room {
      * @param name    The name of the room
      */
     public Room(GameMain game, int id, String mapFile, String name) {
-        this.mainGame = game;
+        this.game = game;
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;
@@ -279,14 +279,14 @@ public class Room {
              /*
             Check to see if the player is standing in the target destination
             */
-            if (mainGame.player.getTileCoordinates().x == x && mainGame.player.getTileCoordinates().y == y) {
+            if (game.player.getTileCoordinates().x == x && game.player.getTileCoordinates().y == y) {
                 return false;
             }
 
              /*
              Check to see if any NPCs are standing in the target destination
              */
-            for (Sprite sprite : mainGame.screenManager.navigationScreen.getNPCs()) {
+            for (Sprite sprite : game.screenManager.navigationScreen.getNPCs()) {
                 NPC npc = (NPC) sprite;
 
                 if (npc.getTileCoordinates().x == x && npc.getTileCoordinates().y == y) {

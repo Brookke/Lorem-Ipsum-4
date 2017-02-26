@@ -17,7 +17,7 @@ public class ConversationManagement {
     /**
      * This is a reference to the main game
      */
-    private GameMain mainGame;
+    private GameMain game;
 
     /**
      * The player that will be starting the conversation.
@@ -65,7 +65,7 @@ public class ConversationManagement {
      * @param speechboxManager the speechbox manager that is in charge of displaying the conversation
      */
     public ConversationManagement(GameMain game, Player player, SpeechboxManager speechboxManager) {
-        this.mainGame = game;
+        this.game = game;
         this.player = player;
         this.speechboxMngr = speechboxManager;
     }
@@ -233,7 +233,7 @@ public class ConversationManagement {
 
         // End the game, and show the winning screen
         if (won) {
-            mainGame.setScreen(new WinScreen(mainGame));
+            game.setScreen(new WinScreen(game));
             won = false;
         }
     }

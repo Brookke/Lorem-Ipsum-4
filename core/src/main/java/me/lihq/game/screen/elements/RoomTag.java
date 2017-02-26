@@ -18,7 +18,7 @@ public class RoomTag {
     /**
      * This is a reference to the main game class
      */
-    private GameMain mainGame;
+    private GameMain game;
 
     /**
      * This is the room name it is to display
@@ -58,7 +58,7 @@ public class RoomTag {
      * @param roomName The name to display.
      */
     public RoomTag(GameMain game, String roomName) {
-        this.mainGame = game;
+        this.game = game;
         this.roomName = roomName;
     }
 
@@ -104,7 +104,7 @@ public class RoomTag {
             animTime++;
 
             if (animTime >= 2 * MAX_ANIM_TIME) {
-                mainGame.screenManager.navigationScreen.setRoomTag(null);
+                game.screenManager.navigationScreen.setRoomTag(null);
             }
         }
 
