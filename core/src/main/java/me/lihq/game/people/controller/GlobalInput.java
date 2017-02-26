@@ -4,6 +4,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
+import me.lihq.game.screen.ScreenManager;
+import me.lihq.game.screen.Screens;
 
 /**
  * Universal input handler for non-player related input - e.g. opening the pause menu.
@@ -93,23 +95,25 @@ public class GlobalInput extends InputAdapter {
             debug = false;
         }
 
-        if (game.getScreen() == game.menuScreen) return;
+        ScreenManager screenManager = game.screenManager;
+
+        if (screenManager.currentScreen == Screens.mainMenu) return;
 
         if (paused) {
-            if (game.getScreen() == game.navigationScreen) {
-                game.setScreen(game.pauseScreen);
+            if (screenManager.currentScreen == Screens.navigation) {
+                screenManager.setScreen(Screens.pauseMenu);
                 paused = false;
-            } else if (game.getScreen() == game.pauseScreen) {
-                game.setScreen(game.navigationScreen);
+            } else if (screenManager.currentScreen == Screens.pauseMenu) {
+                screenManager.setScreen(Screens.navigation);
                 paused = false;
             }
         }
         if (inventory) {
-            if (game.getScreen() == game.navigationScreen) {
-                game.setScreen(game.inventoryScreen);
+            if (screenManager.currentScreen == Screens.navigation) {
+                screenManager.setScreen(Screens.inventory);
                 inventory = false;
-            } else if (game.getScreen() == game.inventoryScreen) {
-                game.setScreen(game.navigationScreen);
+            } else if (screenManager.currentScreen == Screens.inventory) {
+                screenManager.setScreen(Screens.navigation);
                 inventory = false;
             }
         }

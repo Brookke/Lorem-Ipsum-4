@@ -95,10 +95,10 @@ public class SettingsScreen extends AbstractScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.mainMenu) {
-                    game.setScreen(game.menuScreen);
+                if (game.screenManager.currentScreen == Screens.mainMenu) {
+                    game.screenManager.setScreen(Screens.mainMenu);
                 } else {
-                    game.setScreen(game.pauseScreen);
+                    game.screenManager.setScreen(Screens.pauseMenu);
                 }
             }
         });
