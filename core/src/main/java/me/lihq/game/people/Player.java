@@ -178,6 +178,7 @@ public class Player extends AbstractPerson {
             }
         } else {
             GameMain.me.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here"));
+
         }
     }
 
