@@ -12,7 +12,7 @@ public class PlayerController extends InputAdapter {
     /**
      * Booleans storing what keys have been pressed and not released
      */
-    private boolean north, south, west, east, interact;
+    private boolean north, south, west, east;
 
     /**
      * This stores the player that the controller controls
@@ -90,13 +90,6 @@ public class PlayerController extends InputAdapter {
      * This method is called once a game tick to transfer the key reads to the live game data in the logic Thread.
      */
     public void update() {
-        /******************** Added by team JAAPAN ********************/
-        if (interact) {
-
-            interact = false;
-        }
-        /**************************** End *****************************/
-
         if (!player.canMove) return;
 
         Direction goTo = null;
