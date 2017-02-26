@@ -97,18 +97,6 @@ public class SpeechboxManager {
         }
     }
 
-    /**
-     * Removes the current speechbox, if it contains only text. If it contains buttons (i.e.
-     * is waiting for user input), it is not removed. Allows the player to skip dialogue.
-     *
-     * @author JAAPAN
-     */
-    public void skipMessage() {
-        // ensure the message has a positive timeout, otherwise it contains buttons and shouldn't be skippable
-        if (!stack.isEmpty() && (stack.get(0).timeoutDuration > 0)) {
-            removeCurrentSpeechBox();
-        }
-    }
 
     /**
      * @return True if the stack of speechboxes is empty, false otherwise

@@ -1,9 +1,11 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -211,7 +213,6 @@ public class SpeechBox {
         //Pack table
         table.pack();
     }
-
     /**
      * Renders the speech box
      * Should be called within the render() method of a screen

@@ -2,7 +2,6 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import me.lihq.game.GameMain;
 import me.lihq.game.people.AbstractPerson.Direction;
 import me.lihq.game.people.Player;
 
@@ -37,12 +36,10 @@ public class PlayerController extends InputAdapter {
      */
     @Override
     public boolean keyDown(int keycode) {
-        /******************** Added by team JAAPAN ********************/
-        if (keycode == Input.Keys.ENTER || keycode == Input.Keys.SPACE) {
-            this.interact = true;
+        if (keycode == Input.Keys.SPACE)  {
+            player.interact();
             return true;
         }
-        /**************************** End *****************************/
         if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A) {
             this.west = true;
             return true;
@@ -95,8 +92,7 @@ public class PlayerController extends InputAdapter {
     public void update() {
         /******************** Added by team JAAPAN ********************/
         if (interact) {
-            GameMain.me.screenManager.navigationScreen.speechboxMngr.skipMessage();
-            player.interact();
+
             interact = false;
         }
         /**************************** End *****************************/
