@@ -180,7 +180,7 @@ public class WinScreen extends AbstractScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.resetAll();
-                game.setScreen(game.menuScreen);
+                game.screenManager.setScreen(Screens.mainMenu);
                 dispose();
             }
         });

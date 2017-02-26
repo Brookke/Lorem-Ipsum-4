@@ -57,7 +57,7 @@ public class UIHelpers {
      */
     public static Label createLabel(String text, boolean title) {
         if (title) {
-            Label label = new Label(text, Assets.UI_SKIN.get("title", Label.LabelStyle.class));
+            Label label = new Label(text, Assets.UI_SKIN.get("default", Label.LabelStyle.class));
             label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() / 2,
                     Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
             return label;

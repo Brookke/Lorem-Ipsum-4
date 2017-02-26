@@ -87,7 +87,7 @@ public class InventoryScreen extends AbstractScreen {
         resumeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(game.navigationScreen);
+                game.screenManager.setScreen(Screens.navigation);
             }
         });
     }
@@ -223,7 +223,7 @@ public class InventoryScreen extends AbstractScreen {
     @Override
     public void pause() {
         // Pause the game, so the gameDuration counter isn't updated
-        game.setScreen(game.pauseScreen);
+        game.screenManager.setScreen(Screens.pauseMenu);
     }
 
     /**
