@@ -64,7 +64,7 @@ public class SettingsScreen extends AbstractScreen {
         backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2, Gdx.graphics.getHeight() / 16);
 
         // Create and position the mute check box, using the standard style
-        CheckBox muteCheckBox = UIHelpers.createCheckBox("Mute");
+        CheckBox muteCheckBox = UIHelpers.createCheckBox("Play Music");
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 6);
 
         Label musicLabel = UIHelpers.createLabel("Music volume:", false);

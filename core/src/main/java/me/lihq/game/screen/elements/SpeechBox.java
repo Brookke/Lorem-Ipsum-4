@@ -210,7 +210,7 @@ public class SpeechBox {
                 final SpeechBoxButton button = buttons.get(i); //find button in array
 
                 //Create button, and add listener for click event
-                TextButton buttonElement = new TextButton(button.text, buttonSkin);
+                TextButton buttonElement = new TextButton(button.text, Assets.UI_SKIN);
                 buttonElement.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
