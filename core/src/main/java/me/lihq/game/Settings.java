@@ -50,7 +50,7 @@ public class Settings {
      *
      * @author JAAPAN
      */
-    public static boolean MUTED = false;
+    public static boolean MUTED = true;
 
     /**
      * The volume of the music. Represented by a value between 0 (effectively muted) and

@@ -119,7 +119,7 @@ public class GameMain extends Game {
         screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!"));
 
         Assets.MUSIC.play();
 

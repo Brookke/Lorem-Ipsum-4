@@ -95,7 +95,8 @@ public class SpeechBox {
     /**
      * The constructor for the SpeechBox without buttons
      */
-    public SpeechBox(String content, int timeout) {
+    public SpeechBox(String content) {
+        int timeout=3;
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -105,7 +106,8 @@ public class SpeechBox {
     /**
      * The constructor for the SpeechBox without buttons with personName
      */
-    public SpeechBox(String personName, String speechText, int timeout) {
+    public SpeechBox(String personName, String speechText) {
+        int timeout=3;
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
