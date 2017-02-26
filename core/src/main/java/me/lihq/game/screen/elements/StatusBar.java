@@ -76,7 +76,6 @@ public class StatusBar {
         this.game = game;
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        initSkin();
 
         // Create a table, so we can more easily lay the elements out
         Table statusBar = new Table();
@@ -85,15 +84,15 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
+        scoreLabel = new Label("Score: " + game.player.getScore(), Assets.UI_SKIN);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
+        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), Assets.UI_SKIN);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
 
-        TextButton inventoryButton = new TextButton("Inventory", skin);
+        TextButton inventoryButton = new TextButton("Inventory", Assets.UI_SKIN);
         statusBar.add(inventoryButton).uniform();
         inventoryButton.addListener(new ClickListener() {
             /**
@@ -108,7 +107,7 @@ public class StatusBar {
             }
         });
 
-        TextButton pauseButton = new TextButton("Pause", skin);
+        TextButton pauseButton = new TextButton("Pause", Assets.UI_SKIN);
         statusBar.add(pauseButton).uniform();
         pauseButton.addListener(new ClickListener() {
             /**
@@ -161,24 +160,5 @@ public class StatusBar {
      *
      * @author JAAPAN
      */
-    private void initSkin() {
-        skin = new Skin();
 
-        // Create a texture
-        skin.add("background", UIHelpers.createBackgroundTexture(BACKGROUND_COLOR, WIDTH, HEIGHT));
-
-        // Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = skin.newDrawable("background");
-        textButtonStyle.down = skin.newDrawable("background", Color.BLACK);
-        textButtonStyle.checked = skin.newDrawable("background");
-        textButtonStyle.over = skin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.font = Assets.FONT15;
-        skin.add("default", textButtonStyle);
-
-        //Create a button style
-        Label.LabelStyle labelStyle = new Label.LabelStyle(Assets.FONT15, Color.WHITE);
-        labelStyle.background = skin.getDrawable("background");
-        skin.add("default", labelStyle);
-    }
 }
