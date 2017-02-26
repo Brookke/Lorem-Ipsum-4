@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset name="tileset2" tilewidth="32" tileheight="32" tilecount="459" columns="17">
- <image source="tileset2.png" width="544" height="864"/>
+<tileset name="tileset2" tilewidth="32" tileheight="32" spacing="2" margin="1" tilecount="459" columns="17">
+ <image source="tileset3.png" width="578" height="918"/>
  <tile id="0">
   <properties>
    <property name="hidingSpot" type="bool" value="false"/>
