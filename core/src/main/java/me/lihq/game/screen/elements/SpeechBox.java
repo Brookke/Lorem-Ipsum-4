@@ -1,9 +1,11 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -140,6 +142,18 @@ public class SpeechBox {
         container.setActor(table);
 
 
+        //This will skip the message if the space bar is pressed
+        stage.addListener(new InputListener() {
+            public boolean keyDown(InputEvent event, int keycode) {
+                if (keycode == Input.Keys.SPACE) {
+                    timeoutDuration = 0;
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         //Add container to stage for rendering later
         stage.addActor(container);
     }
@@ -211,7 +225,6 @@ public class SpeechBox {
         //Pack table
         table.pack();
     }
-
     /**
      * Renders the speech box
      * Should be called within the render() method of a screen

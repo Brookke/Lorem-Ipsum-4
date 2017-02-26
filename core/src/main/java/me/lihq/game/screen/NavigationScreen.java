@@ -143,7 +143,7 @@ public class NavigationScreen extends AbstractScreen {
 
         arrow = new RoomArrow(game.player);
 
-        game.inputMultiplexer.addProcessor(playerController);
+
     }
 
     /**
@@ -151,8 +151,9 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void show() {
-        game.inputMultiplexer.addProcessor(statusBar.stage);
         game.inputMultiplexer.addProcessor(speechboxMngr.multiplexer);
+        game.inputMultiplexer.addProcessor(statusBar.stage);
+        game.inputMultiplexer.addProcessor(playerController);
     }
 
     /**
@@ -330,6 +331,7 @@ public class NavigationScreen extends AbstractScreen {
     public void hide() {
         game.inputMultiplexer.removeProcessor(statusBar.stage);
         game.inputMultiplexer.removeProcessor(speechboxMngr.multiplexer);
+        game.inputMultiplexer.removeProcessor(playerController);
     }
 
     /**
