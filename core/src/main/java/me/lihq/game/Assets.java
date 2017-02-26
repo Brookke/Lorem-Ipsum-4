@@ -84,6 +84,20 @@ public class Assets {
     public static Skin UI_SKIN;
 
     /**
+     * Global skin storing the standard UI style for titles.
+     *
+     * @author LOREM IPSUM
+     */
+    public static Skin TITLE_SKIN;
+
+    /**
+     * Global font storing the standard UI style for titles.
+     *
+     * @author LOREM IPSUM
+     */
+    public static BitmapFont titleFont;
+
+    /**
      * Loads all assets for the game, such as textures, sound files and fonts.
      */
     public static void load() {
@@ -91,6 +105,7 @@ public class Assets {
         FONT30 = createFont("arial", 30);
         FONT20 = createFont("arial", 20);
         FONT15 = new BitmapFont();
+        titleFont= createFont("Stranger back in the Night", 80);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);
@@ -127,7 +142,27 @@ public class Assets {
      * @author JAAPAN
      */
     private static void initSkin() {
+        /**
+         * Creating the global skins using freetype fonts.
+         *
+         * @author LOREM IPSUM
+         */
+        FreeTypeFontGenerator funFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Montserrat-Bold.ttf"));
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+        parameter.size = 40;
+        BitmapFont newDefaultFont = funFont.generateFont(parameter);
+
         UI_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
+        UI_SKIN.add("default-font", newDefaultFont, BitmapFont.class);
+        funFont.dispose();
+
+        FreeTypeFontGenerator titleFreeFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Stranger back in the Night.ttf"));
+        FreeTypeFontParameter titleParameter = new FreeTypeFontParameter();
+        titleParameter.size = 24;
+        BitmapFont titleFont = titleFreeFont.generateFont(titleParameter);
+
+        titleFreeFont.dispose();
+
     }
 
     /**

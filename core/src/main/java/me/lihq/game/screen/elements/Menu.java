@@ -1,6 +1,9 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -8,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.Screens;
 
@@ -17,9 +21,17 @@ import me.lihq.game.screen.Screens;
 
 public class Menu {
     /**
+     * Button width and height
+     *
+     * @author Lorem Ipsum
+     */
+    private static final int BUTTON_WIDTH = Gdx.graphics.getWidth() / 3;
+    private static final int BUTTON_HEIGHT = 80;
+
+    /**
      * The width of the menu
      */
-    private static final int WIDTH = Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8;
+    private static final int WIDTH = Gdx.graphics.getWidth() / 2 - BUTTON_WIDTH/2;
     /**
      * the stage to render the menu to
      */
@@ -61,23 +73,32 @@ public class Menu {
 
         TextButton newGameButton;
 
+        //Setting the background
+        Image background = new Image(new TextureRegion(Assets.loadTexture("menuBackground.jpg")));
+
         if (pauseMenu) {
             newGameButton = UIHelpers.createTextButton("Resume Game");
-            text = UIHelpers.createLabel("Paused", true);
+            text = UIHelpers.createLabel("Paused", Assets.titleFont, Color.RED);
 
         } else {
-            text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
+            text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", Assets.titleFont, Color.RED );
             newGameButton = UIHelpers.createTextButton("New Game");
         }
 
-        newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
+        text.setPosition(Gdx.graphics.getWidth()/2-text.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
+
+        newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/3-50);
+        newGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         TextButton settings = UIHelpers.createTextButton("Settings");
-        settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
+        settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2-50);
+        settings.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
         TextButton quit = UIHelpers.createTextButton("Quit");
-        quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 4);
+        quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 3-50);
+        quit.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
-        //Loading the buttons onto the stage
+        //Loading the buttons and the background onto the stage
+        //stage.addActor(background);
         stage.addActor(text);
         stage.addActor(settings);
         stage.addActor(newGameButton);
