@@ -96,7 +96,7 @@ public class Player extends AbstractPerson {
 
         if (!canMove) return;
 
-        //Taken the code that did this test and turned it into a method
+        //Taken the code that did this test and turned it into a method @author Lorem-Ipsum
         if (roomChangeCheck(dir)) return;
 
 
