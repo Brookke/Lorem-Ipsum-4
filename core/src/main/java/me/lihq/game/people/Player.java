@@ -215,8 +215,11 @@ public class Player extends AbstractPerson {
         }
         return false;
     }
+
     /**
-     * This in
+     * This changes the room of the player based on the transition data provided to it
+     *
+     * @author Lorem-Ipsum
      */
     public void moveRoom(Room.Transition transition) {
 
