@@ -4,7 +4,7 @@ import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Puzzle;
 
 /**
- * Created by brooke on 28/02/2017.
+ * @author Lorem-Ipsum
  */
 public class PuzzleScreen extends AbstractScreen {
 
