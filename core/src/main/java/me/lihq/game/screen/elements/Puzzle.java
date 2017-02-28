@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
- * Created by brooke on 28/02/2017.
+ * @author Lorem-Ipsum
  */
 public class Puzzle {
 
