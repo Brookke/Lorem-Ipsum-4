@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
+import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.controller.PlayerController;
@@ -76,10 +77,10 @@ public class NavigationScreen extends AbstractScreen {
     private StatusBar statusBar;
 
     /**
-     * This determines whether the player is currently changing rooms, it will fade out to black, change
-     * the room, then fade back in.
+     * This contains the transition data for the player, if they are moving rooms.
+     * @author Lorem-Ipsum
      */
-    private boolean roomTransition = false;
+    private Room.Transition roomTransition = null;
 
     /**
      * The amount of ticks it takes for the black to fade in and out
@@ -187,14 +188,14 @@ public class NavigationScreen extends AbstractScreen {
      * This method is called once a game tick to update the room transition animation
      */
     private void updateTransition() {
-        if (roomTransition) {
+        if (roomTransition != null) {
             BLACK_BACKGROUND.setAlpha(Interpolation.pow4.apply(0, 1, animTimer / ANIM_TIME));
 
             if (fadeToBlack) {
                 animTimer++;
 
                 if (animTimer == ANIM_TIME) {
-                    game.player.moveRoom();
+                    game.player.moveRoom(roomTransition);
                 }
 
                 if (animTimer > ANIM_TIME) {
@@ -212,10 +213,13 @@ public class NavigationScreen extends AbstractScreen {
 
     /**
      * This is called when the player decides to move to another room
+     *
+     * Changed to now take transition data
+     * @author Lorem Ipsum
      */
-    public void initialiseRoomChange() {
+    public void initialiseRoomChange(Room.Transition transition) {
         pause = true; //pause all non necessary updates like player movement
-        roomTransition = true;
+        roomTransition = transition;
     }
 
     /**
@@ -224,7 +228,7 @@ public class NavigationScreen extends AbstractScreen {
      */
     public void finishRoomTransition() {
         animTimer = 0;
-        roomTransition = false;
+        roomTransition = null;
         fadeToBlack = true;
         pause = false;
         roomTag = new RoomTag(game.player.getRoom().getName());
@@ -277,7 +281,7 @@ public class NavigationScreen extends AbstractScreen {
         //Everything to be drawn relative to bottom left of the screen
         spriteBatch.begin();
 
-        if (roomTransition) {
+        if (roomTransition != null) {
             BLACK_BACKGROUND.draw(spriteBatch);
         }
 
