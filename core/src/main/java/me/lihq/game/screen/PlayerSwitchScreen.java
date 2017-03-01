@@ -31,11 +31,11 @@ public class PlayerSwitchScreen extends AbstractScreen {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
         /**
-         * Set up the Text Label that tells teh players to switch
+         * Set up the Text Label that tells the players to switch
          */
         Label text;
         text = UIHelpers.createLabel("Time to switch players!", true);//<<<<<<<<NOTE<<<<<<<<<<<<<<<<NOTE<<<<<<<<<<<<<NOTE<<<<<<<<<<<<NOTE<<<<<<<<<not sure what to say here, i assume this is fine.
-        text.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 3/4);
+        text.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 3/4); //is this line needed?
 
         /**
          * Set up the button to click
