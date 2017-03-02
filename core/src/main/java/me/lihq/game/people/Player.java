@@ -208,7 +208,7 @@ public class Player extends AbstractPerson {
     {
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            GameMain.me.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
+            game.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
             return true;
         }
         return false;
