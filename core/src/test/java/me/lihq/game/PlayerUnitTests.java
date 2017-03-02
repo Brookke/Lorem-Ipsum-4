@@ -17,8 +17,8 @@ public class PlayerUnitTests extends GameTester {
 
     @Before
     public void before() {
-        p = new Player("Test Name", "player.png", 0, 0);
-        p.setRoom(new Room(0, "testMap.tmx", "Test Map"));
+        p = new Player(null, "Test Name", "player.png", 0, 0);
+        p.setRoom(new Room(null, 0, "testMap.tmx", "Test Map"));
     }
 
     @Test

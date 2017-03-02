@@ -2,6 +2,7 @@ package me.lihq.game.people.controller;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import me.lihq.game.GameMain;
 import me.lihq.game.people.AbstractPerson.Direction;
 import me.lihq.game.people.Player;
 
@@ -9,6 +10,16 @@ import me.lihq.game.people.Player;
  * This class allows the player to be moved and controlled.
  */
 public class PlayerController extends InputAdapter {
+
+    /**
+     * This is a reference to the main game class
+     *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
+     * @author Lorem-Ipsum
+     */
+    private GameMain game;
+
     /**
      * Booleans storing what keys have been pressed and not released
      */
@@ -24,7 +35,8 @@ public class PlayerController extends InputAdapter {
      *
      * @param player The player that we want this controller to control
      */
-    public PlayerController(Player player) {
+    public PlayerController(GameMain game, Player player) {
+        this.game = game;
         this.player = player;
     }
 

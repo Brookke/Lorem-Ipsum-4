@@ -15,6 +15,15 @@ import java.util.ArrayList;
  */
 public class ConversationManagement {
     /**
+     * This is a reference to the main game
+     *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
+     * @author Lorem-Ipsum
+     */
+    private GameMain game;
+
+    /**
      * The player that will be starting the conversation.
      */
     private Player player;
@@ -58,8 +67,11 @@ public class ConversationManagement {
      *
      * @param player           the player that will initiate the conversation
      * @param speechboxManager the speechbox manager that is in charge of displaying the conversation
+     *
+     * @author Lorem-Ipsum
      */
-    public ConversationManagement(Player player, SpeechboxManager speechboxManager) {
+    public ConversationManagement(GameMain game, Player player, SpeechboxManager speechboxManager) {
+        this.game = game;
         this.player = player;
         this.speechboxMngr = speechboxManager;
     }
@@ -79,7 +91,6 @@ public class ConversationManagement {
         player.canMove = false;
         player.inConversation = true;
 
-        /******************** Added by team JAAPAN ********************/
         if (tempNPC.accused) {
             // If the NPC has been falsely accused in the past, they refuse to respond to the player
             speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
@@ -96,7 +107,6 @@ public class ConversationManagement {
             speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
             queryQuestionType();
         }
-        /**************************** End *****************************/
     }
 
     /**
@@ -227,7 +237,7 @@ public class ConversationManagement {
 
         // End the game, and show the winning screen
         if (won) {
-            GameMain.me.setScreen(new WinScreen(GameMain.me));
+            game.setScreen(new WinScreen(game));    
             won = false;
         }
     }
