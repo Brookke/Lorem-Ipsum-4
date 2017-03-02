@@ -14,8 +14,10 @@ public class Settings {
 
     /**
      * The zoom level of the camera
+     *
+     * @author Lorem-Ipsum
      */
-    public static final int ZOOM = 2;
+    public static final int ZOOM = 1;
 
     /**
      * The maximum amount of ticks per second

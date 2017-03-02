@@ -6,7 +6,7 @@ package me.lihq.game;
 public class ConversationManagementTest {
     @org.junit.Before
     public void setUp() throws Exception {
-        ConversationManagement c = new ConversationManagement(null, null);
+        ConversationManagement c = new ConversationManagement(null, null, null);
     }
 
     @org.junit.Test

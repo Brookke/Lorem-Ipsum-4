@@ -128,9 +128,9 @@ public class NavigationScreen extends AbstractScreen {
 
         viewport = new FitViewport(w / Settings.ZOOM, h / Settings.ZOOM, camera);
 
-        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.player.getRoom().getTiledMap());
+        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.player.getRoom().getTiledMap(), game);
 
-        playerController = new PlayerController(game.player);
+        playerController = new PlayerController(game, game.player);
 
         spriteBatch = new SpriteBatch();
 
@@ -138,7 +138,7 @@ public class NavigationScreen extends AbstractScreen {
 
         speechboxMngr = new SpeechboxManager(game);
 
-        convMngt = new ConversationManagement(game.player, speechboxMngr);
+        convMngt = new ConversationManagement(game, game.player, speechboxMngr);
 
         tiledMapRenderer.addPerson(game.player);
 
@@ -231,7 +231,7 @@ public class NavigationScreen extends AbstractScreen {
         roomTransition = null;
         fadeToBlack = true;
         pause = false;
-        roomTag = new RoomTag(game.player.getRoom().getName());
+        roomTag = new RoomTag(game, game.player.getRoom().getName());
     }
 
     /**
