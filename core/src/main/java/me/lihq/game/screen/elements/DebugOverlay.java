@@ -41,6 +41,7 @@ public class DebugOverlay {
      */
     private static BitmapFont font = Assets.createFont("arial", 30);
 
+    /*=========== ADDED BY LOREM IPSUM =============*/
     /**
      * This method sets the reference to the main game
      *
@@ -48,8 +49,10 @@ public class DebugOverlay {
      */
     public static void setGame(GameMain game)
     {
-        game = game;
+        DebugOverlay.game = game;
     }
+    /*==============================================*/
+
 
     /**
      * This method draws the debug menu to the batch
