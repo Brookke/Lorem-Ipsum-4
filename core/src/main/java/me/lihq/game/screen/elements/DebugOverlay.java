@@ -19,6 +19,8 @@ public class DebugOverlay {
     /**
      * This is a reference to the main game
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private static GameMain game;
@@ -112,9 +114,7 @@ public class DebugOverlay {
      * @return (Sprite) the resulting sprite
      */
     public static Sprite getColoredTileSprite(Color color) {
-        /******************** Added by team JAAPAN ********************/
         Sprite sprite = new Sprite(UIHelpers.createBackgroundTexture(color, Settings.TILE_SIZE, Settings.TILE_SIZE));
-        /**************************** End *****************************/
         sprite.setAlpha(0.4f);
 
         return sprite;

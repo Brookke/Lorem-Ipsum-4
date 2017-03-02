@@ -17,6 +17,8 @@ public class ConversationManagement {
     /**
      * This is a reference to the main game
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;
@@ -89,7 +91,6 @@ public class ConversationManagement {
         player.canMove = false;
         player.inConversation = true;
 
-        /******************** Added by team JAAPAN ********************/
         if (tempNPC.accused) {
             // If the NPC has been falsely accused in the past, they refuse to respond to the player
             speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
@@ -106,7 +107,6 @@ public class ConversationManagement {
             speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
             queryQuestionType();
         }
-        /**************************** End *****************************/
     }
 
     /**
@@ -237,7 +237,7 @@ public class ConversationManagement {
 
         // End the game, and show the winning screen
         if (won) {
-            game.setScreen(new WinScreen(game));    /*@author Lorem-Ipsum*/
+            game.setScreen(new WinScreen(game));    
             won = false;
         }
     }

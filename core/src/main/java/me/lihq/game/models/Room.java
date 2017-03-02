@@ -25,6 +25,8 @@ public class Room {
     /**
      * This is a reference to the main game class
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;
@@ -79,7 +81,7 @@ public class Room {
      * @param name    The name of the room
      */
     public Room(GameMain game, int id, String mapFile, String name) {
-        this.game = game;   /*@author Lorem-Ipsum*/
+        this.game = game;   
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;

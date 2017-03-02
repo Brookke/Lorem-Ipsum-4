@@ -28,6 +28,8 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     /**
      * This is a reference to the main game class
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;
@@ -40,7 +42,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     public OrthogonalTiledMapRendererWithPeople(TiledMap map, GameMain game) {
         super(map);
 
-        this.game = game;   /*@author Lorem-Ipsum*/
+        this.game = game;   
         people = new ArrayList<>();
     }
 
@@ -102,7 +104,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         }
 
         if (Settings.DEBUG) {
-            DebugOverlay.renderDebugTiles(game.player.getRoom(), this.getBatch()); /*@author Lorem-Ipsum*/
+            DebugOverlay.renderDebugTiles(game.player.getRoom(), this.getBatch()); 
         }
 
         endRender();

@@ -14,6 +14,8 @@ public class PlayerController extends InputAdapter {
     /**
      * This is a reference to the main game class
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;

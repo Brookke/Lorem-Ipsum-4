@@ -15,6 +15,8 @@ public class Map {
     /**
      * This is s reference ot the main game
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;
@@ -28,7 +30,7 @@ public class Map {
      * Constructs the map
      */
     public Map(GameMain game) {
-        this.game = game;   /*@author Lorem-Ipsum*/
+        this.game = game;   
         initialiseRooms();
     }
 

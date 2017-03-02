@@ -18,6 +18,8 @@ public class RoomTag {
     /**
      * This is a reference to the main game class
      *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
      * @author Lorem-Ipsum
      */
     private GameMain game;
@@ -60,7 +62,7 @@ public class RoomTag {
      * @param roomName The name to display.
      */
     public RoomTag(GameMain game, String roomName) {
-        this.game = game;   /*@author Lorem-Ipsum*/
+        this.game = game;   
         this.roomName = roomName;
     }
 
