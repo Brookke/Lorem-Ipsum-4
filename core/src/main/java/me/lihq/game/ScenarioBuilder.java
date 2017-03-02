@@ -21,38 +21,10 @@ import java.util.Random;
  */
 public class ScenarioBuilder {
 
+    /**
+     * Reference to the main game object
+     */
     private GameMain game;
-
-    /**
-     * A list holding NPC objects
-     */
-    public List<NPC> NPCs = new ArrayList<>();
-
-    /**
-     * The game map
-     */
-    public Map gameMap;
-
-    /**
-     * A player object for the player of the game
-     */
-    public Player player;
-
-    /**
-     * An NPC object for the killer. This allows us to easily access the name and room of the
-     * killer, without having to iterate through each NPC.
-     *
-     * @author JAAPAN
-     */
-    public NPC killer;
-
-    /**
-     * An NPC object for the victim. This allows us to easily access the name of the victim,
-     * without having to iterate through each NPC.
-     *
-     * @author JAAPAN
-     */
-    public NPC victim;
 
     public ScenarioBuilder(GameMain game)
     {
@@ -64,7 +36,7 @@ public class ScenarioBuilder {
      *
      * @author Lorem-Ipsum
      */
-    private List<Clue> initialiseClues() {
+    private void initialiseClues(Map map) {
 
         //This is a temporary list of clues
         List<Clue> tempClues = new ArrayList<>();
@@ -119,7 +91,7 @@ public class ScenarioBuilder {
         }
 
         // Assign each clue to a randomly selected room.
-        int amountOfRooms = game.gameMap.getAmountOfRooms();
+        int amountOfRooms = map.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
 
@@ -137,7 +109,7 @@ public class ScenarioBuilder {
             int toTake = random.nextInt(roomsLeft.size());
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
-            Room room = game.gameMap.getRoom(selectedRoom);
+            Room room = map.getRoom(selectedRoom);
 
             Vector2Int randHidingSpot = room.getRandHidingSpot();
 
@@ -145,17 +117,15 @@ public class ScenarioBuilder {
                 room.addClue(clue.setTileCoordinates(randHidingSpot));
             }
         }
-
-        return tempClues;
     }
 
     /**
      * This method generates the single player
      */
-    private Player initialisePlayer()
+    private Player initialisePlayer(Map map)
     {
         Player player = new Player(game, "Player", "player.png", 3, 6);
-        player.setRoom(game.gameMap.getRoom(0));
+        player.setRoom(map.getRoom(0));
         return player;
     }
 
@@ -164,40 +134,40 @@ public class ScenarioBuilder {
      *
      * @author Lorem-Ipsum
      */
-    private List<NPC> initialiseAllPeople() {
+    private List<NPC> initialiseAllPeople(Map map) {
 
         List<NPC> NPCs = new ArrayList<NPC>();
 
         //Add ALL NPCs to the list
         //This is how you initialise an NPC
-        NPC npc = new NPC(game, "Colin", "colin.png", 15, 17, game.gameMap.getRoom(0), "Colin.JSON");
+        NPC npc = new NPC(game, "Colin", "colin.png", 15, 17, map.getRoom(0), "Colin.JSON");
         NPCs.add(npc);
 
-        NPC npc2 = new NPC(game, "Diana", "diana.png", 4, 4, game.gameMap.getRoom(1), "Diana.JSON");
+        NPC npc2 = new NPC(game, "Diana", "diana.png", 4, 4, map.getRoom(1), "Diana.JSON");
         NPCs.add(npc2);
 
-        NPC npc3 = new NPC(game, "Lily", "lily.png", 0, 0, game.gameMap.getRoom(0), "Lily.JSON");
+        NPC npc3 = new NPC(game, "Lily", "lily.png", 0, 0, map.getRoom(0), "Lily.JSON");
         NPCs.add(npc3);
 
-        NPC npc4 = new NPC(game, "Mary", "mary.png", 0, 0, game.gameMap.getRoom(0), "Mary.JSON");
+        NPC npc4 = new NPC(game, "Mary", "mary.png", 0, 0, map.getRoom(0), "Mary.JSON");
         NPCs.add(npc4);
 
-        NPC npc5 = new NPC(game, "Mike", "mike.png", 0, 0, game.gameMap.getRoom(0), "Mike.JSON");
+        NPC npc5 = new NPC(game, "Mike", "mike.png", 0, 0, map.getRoom(0), "Mike.JSON");
         NPCs.add(npc5);
 
-        NPC npc6 = new NPC(game, "Will", "will.png", 0, 0, game.gameMap.getRoom(0), "Will.JSON");
+        NPC npc6 = new NPC(game, "Will", "will.png", 0, 0, map.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC(game, "Roger", "Roger.png", 0, 0, game.gameMap.getRoom(0), "Roger.JSON");
+        NPC npc7 = new NPC(game, "Roger", "Roger.png", 0, 0, map.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC(game, "Horatio", "Horatio.png", 0, 0, game.gameMap.getRoom(0), "Horatio.JSON");
+        NPC npc8 = new NPC(game, "Horatio", "Horatio.png", 0, 0, map.getRoom(0), "Horatio.JSON");
         NPCs.add(npc8);
 
-        NPC npc9 = new NPC(game, "Kyle", "Kyle.png", 0, 0, game.gameMap.getRoom(0), "Kyle.JSON");
+        NPC npc9 = new NPC(game, "Kyle", "Kyle.png", 0, 0, map.getRoom(0), "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC(game, "Adam", "Adam.png", 0, 0, game.gameMap.getRoom(0), "Adam.JSON");
+        NPC npc10 = new NPC(game, "Adam", "Adam.png", 0, 0, map.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
 
         /*
@@ -217,7 +187,7 @@ public class ScenarioBuilder {
         // Remove the victim from the list of NPCs, so they aren't added to the game
         NPCs.remove(victim);
 
-        int amountOfRooms = game.gameMap.getAmountOfRooms();
+        int amountOfRooms = map.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
 
@@ -242,11 +212,11 @@ public class ScenarioBuilder {
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
-            loopNpc.setRoom(game.gameMap.getRoom(selectedRoom));
+            loopNpc.setRoom(map.getRoom(selectedRoom));
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);
 
-            System.out.println(loopNpc.getName() + " has been placed in room \"" + game.gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
+            System.out.println(loopNpc.getName() + " has been placed in room \"" + map.getRoom(selectedRoom).getName() + "\" at " + position);
         }
 
         return NPCs;
@@ -260,9 +230,16 @@ public class ScenarioBuilder {
      *
      * @author Lorem-Ipsum
      */
-    public GameMain generateGame(GameMain game) //I am aware this needs to be changed to GameSnapshot when I have the class
+    public GameSnapshot generateGame()
     {
+        Map map = new Map(game);
 
+        Player player = initialisePlayer(map);
+        List<NPC> npcs = initialiseAllPeople(map);
+
+        //This is open for discussion. Do we need to store the list of clues? Because the Clues are stored in the Room which is stored in the Map...
+        //I dont think we need to store the clues seperately as they are in the rooms
+        initialiseClues(map);
 
         return null;
     }

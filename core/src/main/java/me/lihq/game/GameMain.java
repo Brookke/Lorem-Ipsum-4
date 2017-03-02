@@ -12,23 +12,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.JsonReader;
-import com.badlogic.gdx.utils.JsonValue;
-import me.lihq.game.models.Clue;
-import me.lihq.game.models.Map;
-import me.lihq.game.models.Room;
-import me.lihq.game.models.Vector2Int;
-import me.lihq.game.people.NPC;
-import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.AbstractScreen;
 import me.lihq.game.screen.ScreenManager;
 import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
@@ -66,11 +54,9 @@ public class GameMain extends Game {
     public void create() {
         Assets.load();// Load in the assets the game needs
 
-        gameMap = new Map(this); //instantiate game map 
-
-        initialiseAllPeople();
-
-        initialiseClues();
+        //INITIALISE GAME SNAPSHOTS
+        ScenarioBuilder builder = new ScenarioBuilder(this);
+        GameSnapshot testSnapshot = builder.generateGame();
 
         // Load universal input class
         input = new GlobalInput(this);
@@ -84,7 +70,7 @@ public class GameMain extends Game {
         screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(testSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
 
         Assets.MUSIC.play();
 
@@ -123,25 +109,6 @@ public class GameMain extends Game {
     @Override
     public AbstractScreen getScreen() {
         return (AbstractScreen) super.getScreen();
-    }
-
-
-    /**MOVE TO SNAPSHOT*/
-    /**
-     * This method returns a list of the NPCs that are in the specified room
-     *
-     * @param room The room to check
-     * @return (List<NPC>) The NPCs that are in the specified room
-     */
-    public List<NPC> getNPCS(Room room) {
-        List<NPC> npcsInRoom = new ArrayList<>();
-        for (NPC n : this.NPCs) {
-            if (n.getRoom() == room) {
-                npcsInRoom.add(n);
-            }
-        }
-
-        return npcsInRoom;
     }
 
     /**
