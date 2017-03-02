@@ -12,10 +12,12 @@ public class Settings {
      */
     public static final int TILE_SIZE = 32;
 
+    /*=========== CHANGED BY LOREM IPSUM =============*/
     /**
      * The zoom level of the camera
      */
     public static final int ZOOM = 1;
+    /*==============================================*/
 
     /**
      * The maximum amount of ticks per second
