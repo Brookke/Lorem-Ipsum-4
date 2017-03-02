@@ -170,23 +170,6 @@ public class ScenarioBuilder {
         NPC npc10 = new NPC(game, "Adam", "Adam.png", 0, 0, map.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
 
-        /*
-        Generate who the Killer and Victim are
-         */
-        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
-        while (!killer.setKiller()) {
-            killer = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-
-        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
-        while (!victim.setVictim()) {
-            victim = NPCs.get(new Random().nextInt(NPCs.size()));
-        }
-
-        killer.setMotive(victim);
-        // Remove the victim from the list of NPCs, so they aren't added to the game
-        NPCs.remove(victim);
-
         int amountOfRooms = map.getAmountOfRooms();
 
         List<Integer> roomsLeft = new ArrayList<>();
@@ -235,13 +218,35 @@ public class ScenarioBuilder {
         Map map = new Map(game);
 
         Player player = initialisePlayer(map);
-        List<NPC> npcs = initialiseAllPeople(map);
+        List<NPC> NPCs = initialiseAllPeople(map);
+
+        /*
+        Generate who the Killer and Victim are
+         */
+        NPC killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!killer.setKiller()) {
+            killer = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+
+        NPC victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        while (!victim.setVictim()) {
+            victim = NPCs.get(new Random().nextInt(NPCs.size()));
+        }
+
+        killer.setMotive(victim);
+        // Remove the victim from the list of NPCs, so they aren't added to the game
+        NPCs.remove(victim);
 
         //This is open for discussion. Do we need to store the list of clues? Because the Clues are stored in the Room which is stored in the Map...
         //I dont think we need to store the clues seperately as they are in the rooms
         initialiseClues(map);
 
-        return null;
+        GameSnapshot snapshot = new GameSnapshot();
+
+        snapshot.victim = victim;
+        snapshot.killer = killer;
+
+        return snapshot;
     }
 
 

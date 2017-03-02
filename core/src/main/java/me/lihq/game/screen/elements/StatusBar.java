@@ -85,11 +85,11 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), skin);
+        scoreLabel = new Label("Score: " + game.currentSnapshot.player.getScore(), skin);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), skin);
+        personalityLabel = new Label("Personality: " + game.currentSnapshot.player.getPersonality().toString(), skin);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
 
@@ -132,8 +132,8 @@ public class StatusBar {
      */
     public void render() {
         /******************** Added by team JAAPAN ********************/
-        scoreLabel.setText("Score: " + game.player.getScore());
-        personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
+        scoreLabel.setText("Score: " + game.currentSnapshot.player.getScore());
+        personalityLabel.setText("Personality: " + game.currentSnapshot.player.getPersonality().toString());
         /**************************** End *****************************/
         stage.act();
         stage.draw();

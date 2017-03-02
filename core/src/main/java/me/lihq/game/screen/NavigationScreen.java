@@ -127,9 +127,9 @@ public class NavigationScreen extends AbstractScreen {
 
         viewport = new FitViewport(w / Settings.ZOOM, h / Settings.ZOOM, camera);
 
-        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.player.getRoom().getTiledMap(), game);
+        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.currentSnapshot.player.getRoom().getTiledMap(), game);
 
-        playerController = new PlayerController(game, game.player);
+        playerController = new PlayerController(game, game.currentSnapshot.player);
 
         spriteBatch = new SpriteBatch();
 
@@ -137,11 +137,11 @@ public class NavigationScreen extends AbstractScreen {
 
         speechboxMngr = new SpeechboxManager(game);
 
-        convMngt = new ConversationManagement(game, game.player, speechboxMngr);
+        convMngt = new ConversationManagement(game, game.currentSnapshot.player, speechboxMngr);
 
-        tiledMapRenderer.addPerson(game.player);
+        tiledMapRenderer.addPerson(game.currentSnapshot.player);
 
-        arrow = new RoomArrow(game.player);
+        arrow = new RoomArrow(game.currentSnapshot.player);
 
 
     }
@@ -165,7 +165,7 @@ public class NavigationScreen extends AbstractScreen {
 
         if (!pause) { //this statement contains updates that shouldn't happen during a pause
             playerController.update();
-            game.player.update();
+            game.currentSnapshot.player.update();
             arrow.update();
 
             for (AbstractPerson n : currentNPCS) {
@@ -194,7 +194,7 @@ public class NavigationScreen extends AbstractScreen {
                 animTimer++;
 
                 if (animTimer == ANIM_TIME) {
-                    game.player.moveRoom();
+                    game.currentSnapshot.player.moveRoom();
                 }
 
                 if (animTimer > ANIM_TIME) {
@@ -227,7 +227,7 @@ public class NavigationScreen extends AbstractScreen {
         roomTransition = false;
         fadeToBlack = true;
         pause = false;
-        roomTag = new RoomTag(game, game.player.getRoom().getName());
+        roomTag = new RoomTag(game, game.currentSnapshot.player.getRoom().getName());
     }
 
     /**
@@ -242,24 +242,24 @@ public class NavigationScreen extends AbstractScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update();
-        game.player.addPlayTime(delta);
+        game.currentSnapshot.player.addPlayTime(delta);
 
-        game.player.pushCoordinatesToSprite();
+        game.currentSnapshot.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {
             n.pushCoordinatesToSprite();
 
         }
 
         if (changeMap) {
-            tiledMapRenderer.setMap(game.player.getRoom().getTiledMap());
+            tiledMapRenderer.setMap(game.currentSnapshot.player.getRoom().getTiledMap());
             tiledMapRenderer.clearPeople();
             tiledMapRenderer.addPerson((List<AbstractPerson>) ((List<? extends AbstractPerson>) currentNPCS));
-            tiledMapRenderer.addPerson(game.player);
+            tiledMapRenderer.addPerson(game.currentSnapshot.player);
             changeMap = false;
         }
 
-        camera.position.x = game.player.getX();
-        camera.position.y = game.player.getY();
+        camera.position.x = game.currentSnapshot.player.getX();
+        camera.position.y = game.currentSnapshot.player.getY();
         camera.update();
 
         tiledMapRenderer.setView(camera);
@@ -270,7 +270,7 @@ public class NavigationScreen extends AbstractScreen {
 
         arrow.draw(tiledMapRenderer.getBatch());
 
-        game.player.getRoom().drawClues(delta, tiledMapRenderer.getBatch());
+        game.currentSnapshot.player.getRoom().drawClues(delta, tiledMapRenderer.getBatch());
 
         tiledMapRenderer.getBatch().end();
 
@@ -349,7 +349,7 @@ public class NavigationScreen extends AbstractScreen {
      */
     public void updateTiledMapRenderer() {
         this.changeMap = true;
-        this.currentNPCS = game.getNPCS(game.player.getRoom());
+        this.currentNPCS = game.currentSnapshot.getNPCS(game.currentSnapshot.player.getRoom());
     }
 
     /**

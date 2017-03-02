@@ -43,6 +43,13 @@ public class GameMain extends Game {
     FPSLogger FPS;
 
     /**
+     * This is the game snapshot of the currently playing player
+     *
+     * @author Lorem-Ipsum
+     */
+    public GameSnapshot currentSnapshot;
+
+    /**
      * The ScreenManager to handle all GUI screens of the game
      */
     public ScreenManager screenManager;
@@ -56,7 +63,7 @@ public class GameMain extends Game {
 
         //INITIALISE GAME SNAPSHOTS
         ScenarioBuilder builder = new ScenarioBuilder(this);
-        GameSnapshot testSnapshot = builder.generateGame();
+        currentSnapshot = builder.generateGame();
 
         // Load universal input class
         input = new GlobalInput(this);
@@ -70,7 +77,7 @@ public class GameMain extends Game {
         screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(testSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
 
         Assets.MUSIC.play();
 
