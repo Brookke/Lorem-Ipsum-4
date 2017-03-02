@@ -14,6 +14,8 @@ public class Settings {
 
     /**
      * The zoom level of the camera
+     *
+     * @author Lorem-Ipsum
      */
     public static final int ZOOM = 1;
 
