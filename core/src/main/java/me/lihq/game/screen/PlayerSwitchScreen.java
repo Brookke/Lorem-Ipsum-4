@@ -35,14 +35,14 @@ public class PlayerSwitchScreen extends AbstractScreen {
          */
         Label text;
         text = UIHelpers.createLabel("Time to switch players!", true);//<<<<<<<<NOTE<<<<<<<<<<<<<<<<NOTE<<<<<<<<<<<<<NOTE<<<<<<<<<<<<NOTE<<<<<<<<<not sure what to say here, i assume this is fine.
-        text.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 3/4); //is this line needed?
+        text.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() * 3/4); //is this line needed?
 
         /**
          * Set up the button to click
          */
         TextButton continueButton;
         continueButton = UIHelpers.createTextButton("Ready?");
-        continueButton.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() / 2);
+        continueButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() / 2);
 
         /**
          * Add the actors and a button listener
