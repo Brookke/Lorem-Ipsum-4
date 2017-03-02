@@ -24,6 +24,8 @@ public abstract class AbstractPerson extends Sprite {
 
     /**
      * This is a reference to the main game class
+     *
+     * @author Lorem-Ipsum
      */
     protected GameMain game;
 
@@ -124,7 +126,7 @@ public abstract class AbstractPerson extends Sprite {
      */
     public AbstractPerson(GameMain game, String name, String img, int tileX, int tileY) {
         super(new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT));
-        this.game = game;
+        this.game = game;   /*@author Lorem-Ipsum*/
         this.name = name;
         this.spriteSheet = Assets.loadTexture(img);
         this.currentRegion = new TextureRegion(Assets.loadTexture(img), 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);

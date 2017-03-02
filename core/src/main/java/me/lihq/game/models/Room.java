@@ -24,6 +24,8 @@ public class Room {
 
     /**
      * This is a reference to the main game class
+     *
+     * @author Lorem-Ipsum
      */
     private GameMain game;
 
@@ -77,7 +79,7 @@ public class Room {
      * @param name    The name of the room
      */
     public Room(GameMain game, int id, String mapFile, String name) {
-        this.game = game;
+        this.game = game;   /*@author Lorem-Ipsum*/
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;

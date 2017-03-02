@@ -27,6 +27,8 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
 
     /**
      * This is a reference to the main game class
+     *
+     * @author Lorem-Ipsum
      */
     private GameMain game;
 
@@ -38,7 +40,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     public OrthogonalTiledMapRendererWithPeople(TiledMap map, GameMain game) {
         super(map);
 
-        this.game = game;
+        this.game = game;   /*@author Lorem-Ipsum*/
         people = new ArrayList<>();
     }
 
@@ -100,7 +102,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         }
 
         if (Settings.DEBUG) {
-            DebugOverlay.renderDebugTiles(game.player.getRoom(), this.getBatch());
+            DebugOverlay.renderDebugTiles(game.player.getRoom(), this.getBatch()); /*@author Lorem-Ipsum*/
         }
 
         endRender();

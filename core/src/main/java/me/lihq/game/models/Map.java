@@ -14,6 +14,8 @@ public class Map {
 
     /**
      * This is s reference ot the main game
+     *
+     * @author Lorem-Ipsum
      */
     private GameMain game;
 
@@ -26,12 +28,14 @@ public class Map {
      * Constructs the map
      */
     public Map(GameMain game) {
-        this.game = game;
+        this.game = game;   /*@author Lorem-Ipsum*/
         initialiseRooms();
     }
 
     /**
      * This function initialises all the rooms of the Ron Cooke Hub and their transitions
+     *
+     * @author Lorem-Ipsum
      */
     public void initialiseRooms() {
 

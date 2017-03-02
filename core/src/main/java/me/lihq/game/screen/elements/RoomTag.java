@@ -17,6 +17,8 @@ public class RoomTag {
 
     /**
      * This is a reference to the main game class
+     *
+     * @author Lorem-Ipsum
      */
     private GameMain game;
 
@@ -58,7 +60,7 @@ public class RoomTag {
      * @param roomName The name to display.
      */
     public RoomTag(GameMain game, String roomName) {
-        this.game = game;
+        this.game = game;   /*@author Lorem-Ipsum*/
         this.roomName = roomName;
     }
 

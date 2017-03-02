@@ -59,7 +59,7 @@ public class NPC extends AbstractPerson {
      * @param spriteSheet Spritesheet for this NPC
      */
     public NPC(GameMain game, String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile) {
-        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);
+        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);  /*@author Lorem-Ipsum*/
         this.setRoom(room);
 
         importDialogue(jsonFile);

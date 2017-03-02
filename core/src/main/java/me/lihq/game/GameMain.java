@@ -97,7 +97,7 @@ public class GameMain extends Game {
     public void create() {
         Assets.load();// Load in the assets the game needs
 
-        gameMap = new Map(this); //instantiate game map
+        gameMap = new Map(this); //instantiate game map /*@author Lorem-Ipsum*/
 
         initialiseAllPeople();
 
@@ -158,6 +158,8 @@ public class GameMain extends Game {
 
     /**
      * Generates all the NPC's, Players
+     *
+     * @author Lorem-Ipsum
      */
     public void initialiseAllPeople() {
         //Add ALL NPCs to the list
@@ -356,7 +358,7 @@ public class GameMain extends Game {
         NPCs.clear();
 
         // Recreate the map, so the murder room is randomly re-assigned
-        gameMap = new Map(this);
+        gameMap = new Map(this); /*@author Lorem-Ipsum*/
 
         // Clear the input multiplexer, and add the global input controller
         inputMultiplexer.clear();
