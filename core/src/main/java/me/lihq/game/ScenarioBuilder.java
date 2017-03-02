@@ -26,6 +26,10 @@ public class ScenarioBuilder {
      */
     private GameMain game;
 
+    /**
+     * Constructor. Sets the game variable to the parameter
+     * @param game
+     */
     public ScenarioBuilder(GameMain game)
     {
         this.game = game;
