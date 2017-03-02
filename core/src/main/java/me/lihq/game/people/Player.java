@@ -69,8 +69,8 @@ public class Player extends AbstractPerson {
      * @param name   The name for the new player.
      * @param imgSrc The image used to represent it.
      */
-    public Player(String name, String imgSrc, int tileX, int tileY) {
-        super(name, "people/player/" + imgSrc, tileX, tileY);
+    public Player(GameMain game, String name, String imgSrc, int tileX, int tileY) {
+        super(game, name, "people/player/" + imgSrc, tileX, tileY); 
         importDialogue("Player.JSON");
     }
 
@@ -98,7 +98,7 @@ public class Player extends AbstractPerson {
 
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
-            GameMain.me.screenManager.navigationScreen.initialiseRoomChange();
+            game.screenManager.navigationScreen.initialiseRoomChange();
             return;
         }
 
@@ -118,7 +118,7 @@ public class Player extends AbstractPerson {
 
         NPC npc = getFacingNPC();
         if (npc != null) {
-            GameMain.me.screenManager.navigationScreen.convMngt.startConversation(npc);
+            game.screenManager.navigationScreen.convMngt.startConversation(npc);
         } else {
             checkForClue();
         }
@@ -130,7 +130,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : GameMain.me.getNPCS(getRoom())) {
+        for (NPC npc : game.getNPCS(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -156,7 +156,7 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            GameMain.me.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -168,7 +168,7 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : GameMain.me.NPCs) {
+            for (NPC character : game.NPCs) {
                 character.ignored = false;
             }
             score += 250;
@@ -220,7 +220,7 @@ public class Player extends AbstractPerson {
 
             //TODO: Look into making a getter for the players Game this way we can do this.getGame() here instead of GameMain.
 
-            GameMain.me.screenManager.navigationScreen.updateTiledMapRenderer();
+            game.screenManager.navigationScreen.updateTiledMapRenderer();
         }
     }
 

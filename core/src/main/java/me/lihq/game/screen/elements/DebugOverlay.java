@@ -17,6 +17,15 @@ import me.lihq.game.models.Vector2Int;
  */
 public class DebugOverlay {
     /**
+     * This is a reference to the main game
+     *
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
+     * @author Lorem-Ipsum
+     */
+    private static GameMain game;
+
+    /**
      * This is to store the green tile overlay sprite
      */
     private static Sprite greenSprite = getColoredTileSprite(Color.GREEN);
@@ -35,6 +44,18 @@ public class DebugOverlay {
      * This is to store the font that the debug screen is written in
      */
     private static BitmapFont font = Assets.createFont("arial", 30);
+
+    /**
+     * This method sets the reference to the main game
+     *
+     * @param game - The game instance
+     *
+     * @author Lorem-Ipsum
+     */
+    public static void setGame(GameMain game)
+    {
+        DebugOverlay.game = game;
+    }
 
     /**
      * This method draws the debug menu to the batch
@@ -69,7 +90,7 @@ public class DebugOverlay {
         for (int w = 0; w < roomWidth; w++) {
             for (int h = 0; h < roomHeight; h++) {
                 if (Settings.DEBUG_OPTIONS.get("showWalkable")) {
-                    if (GameMain.me.player.getRoom().isWalkableTile(w, h)) {
+                    if (game.player.getRoom().isWalkableTile(w, h)) {
                         greenSprite.setPosition(w * Settings.TILE_SIZE, h * Settings.TILE_SIZE);
                         greenSprite.draw(batch);
                     } else {
@@ -93,9 +114,7 @@ public class DebugOverlay {
      * @return (Sprite) the resulting sprite
      */
     public static Sprite getColoredTileSprite(Color color) {
-        /******************** Added by team JAAPAN ********************/
         Sprite sprite = new Sprite(UIHelpers.createBackgroundTexture(color, Settings.TILE_SIZE, Settings.TILE_SIZE));
-        /**************************** End *****************************/
         sprite.setAlpha(0.4f);
 
         return sprite;
