@@ -60,11 +60,6 @@ public class InventoryScreen extends AbstractScreen {
     public InventoryScreen(GameMain game) {
         super(game);
 
-        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-
-        buttonSkins = new Skin();
-
         initMenu();
     }
 
@@ -72,6 +67,11 @@ public class InventoryScreen extends AbstractScreen {
      * Initialises the UI elements on the screen, and sets up event handlers.
      */
     private void initMenu() {
+        stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        zoomedStage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+
+        buttonSkins = new Skin();
+
         // Create and position the label containing title text
         Label text = UIHelpers.createLabel("Inventory", true);
         // We need 2 copies, one for each stage
@@ -170,7 +170,9 @@ public class InventoryScreen extends AbstractScreen {
      */
     @Override
     public void show() {
+        initMenu();
         addButtons();
+
         if (zoomed) {
             game.inputMultiplexer.addProcessor(zoomedStage);
         } else {

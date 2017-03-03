@@ -150,6 +150,7 @@ public class GameMain extends Game {
         currentSnapshot = gameSnapshots.get(currentPlayerId);
 
         // Add an introductory SpeechBox
+        screenManager.navigationScreen.init();
         screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
     }
 
@@ -158,7 +159,9 @@ public class GameMain extends Game {
         if (currentPlayerId == noPlayers) {
             currentPlayerId = 0;
         }
-        //TODO: Change screen here?
+
+        currentSnapshot = gameSnapshots.get(currentPlayerId);
+        screenManager.setScreen(Screens.navigation);
     }
 
     /**

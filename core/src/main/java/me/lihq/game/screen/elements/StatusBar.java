@@ -119,7 +119,8 @@ public class StatusBar {
              */
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.screenManager.setScreen(Screens.pauseMenu);
+                //game.screenManager.setScreen(Screens.pauseMenu);
+                game.nextPlayer();
             }
         });
 

@@ -59,17 +59,17 @@ public class Menu {
         //Creating the label containing text and determining its size and location on screen
         Label text;
 
-        TextButton newGameButton;
-
         if (pauseMenu) {
-            newGameButton = UIHelpers.createTextButton("Resume Game");
             text = UIHelpers.createLabel("Paused", true);
 
         } else {
             text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
-            newGameButton = UIHelpers.createTextButton("New Game");
         }
 
+        TextButton resumeGameButton = UIHelpers.createTextButton("Resume Game");
+        resumeGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
+
+        TextButton newGameButton = UIHelpers.createTextButton("New Game");
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
 
         TextButton settings = UIHelpers.createTextButton("Settings");
@@ -85,6 +85,15 @@ public class Menu {
 
         //Making the "New Game" button clickable and causing it to start the game
         newGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.startGame(2);
+                game.screenManager.setScreen(Screens.navigation);
+            }
+        });
+
+        //Making the "Resume" button clickable and causing it to start the game
+        resumeGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.screenManager.setScreen(Screens.navigation);

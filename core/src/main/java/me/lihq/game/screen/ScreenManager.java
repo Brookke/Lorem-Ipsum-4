@@ -64,7 +64,6 @@ public class ScreenManager {
         // Set up the various screens
         menuScreen = new MainMenuScreen(game);
         navigationScreen = new NavigationScreen(game);
-        navigationScreen.updateTiledMapRenderer();
         pauseScreen = new PauseScreen(game);
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
@@ -102,7 +101,6 @@ public class ScreenManager {
     public void reset() {
         // Recreate the navigation screen, so the references to the player and NPCs are updated
         navigationScreen = new NavigationScreen(game);
-        navigationScreen.updateTiledMapRenderer();
     }
 
     /**
