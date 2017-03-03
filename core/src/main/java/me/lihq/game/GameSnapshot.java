@@ -1,5 +1,6 @@
 package me.lihq.game;
 
+import com.badlogic.gdx.Game;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.NPC;
@@ -14,11 +15,6 @@ import java.util.List;
  * @author Lorem-Ipsum
  */
 public class GameSnapshot {
-
-    /**
-     * Reference to the main game object
-     */
-    private GameMain game;
 
     /**
      * A list holding NPC objects
@@ -38,18 +34,20 @@ public class GameSnapshot {
     /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
      * killer, without having to iterate through each NPC.
-     *
-     * @author JAAPAN
      */
     public NPC killer;
 
     /**
      * An NPC object for the victim. This allows us to easily access the name of the victim,
      * without having to iterate through each NPC.
-     *
-     * @author JAAPAN
      */
     public NPC victim;
+
+    public GameSnapshot(Map map, Player player, List<NPC> npcs) {
+        this.gameMap = map;
+        this.player = player;
+        this.NPCs = npcs;
+    }
 
     /**
      * This method returns a list of the NPCs that are in the specified room

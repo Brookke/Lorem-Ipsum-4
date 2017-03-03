@@ -212,7 +212,6 @@ public class ScenarioBuilder {
     /**
      * This method creates and returns the game data
      *
-     * @param game - The reference to the main game class
      * @return GameSnapshot - The game data
      *
      * @author Lorem-Ipsum
@@ -220,9 +219,10 @@ public class ScenarioBuilder {
     public GameSnapshot generateGame()
     {
         Map map = new Map(game);
-
         Player player = initialisePlayer(map);
         List<NPC> NPCs = initialiseAllPeople(map);
+
+        GameSnapshot snapshot = new GameSnapshot(map, player, NPCs);
 
         /*
         Generate who the Killer and Victim are
@@ -245,7 +245,6 @@ public class ScenarioBuilder {
         //I dont think we need to store the clues seperately as they are in the rooms
         initialiseClues(map);
 
-        GameSnapshot snapshot = new GameSnapshot();
 
         snapshot.victim = victim;
         snapshot.killer = killer;

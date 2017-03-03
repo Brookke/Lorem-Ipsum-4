@@ -132,6 +132,8 @@ public class GameMain extends Game {
         screenManager.reset();
         screenManager.setScreen(Screens.mainMenu);
 
-        //POTENTIALLY GENERATE A NEW GAMESNAPSHOT HERE?!?!
+        // Reset game snapshot
+        ScenarioBuilder builder = new ScenarioBuilder(this);
+        currentSnapshot = builder.generateGame();
     }
 }
