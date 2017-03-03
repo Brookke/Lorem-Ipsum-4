@@ -178,7 +178,7 @@ public class Player extends AbstractPerson {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
         } else {
-            GameMain.me.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here"));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here"));
 
         }
     }
