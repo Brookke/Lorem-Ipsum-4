@@ -2,7 +2,6 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
-import com.sun.java.util.jar.pack.Instruction;
 import me.lihq.game.GameMain;
 import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.*;
