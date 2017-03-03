@@ -30,6 +30,8 @@ public class PuzzleScreen extends AbstractScreen {
         if (puzzle.hasBeenSolved()) {
             //game.screenManager.navigationScreen.initialiseRoomChange(null);
         }
+
+        game.inputMultiplexer.addProcessor(puzzle.stage);
     }
 
     /**
@@ -49,8 +51,7 @@ public class PuzzleScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
 
-
-
+        puzzle.render();
     }
 
     /**
@@ -85,7 +86,7 @@ public class PuzzleScreen extends AbstractScreen {
      */
     @Override
     public void hide() {
-
+        game.inputMultiplexer.removeProcessor(puzzle.stage);
     }
 
     /**
