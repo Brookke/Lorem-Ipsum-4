@@ -148,7 +148,9 @@ public class SpeechBox {
         stage.addListener(new InputListener() {
             public boolean keyDown(InputEvent event, int keycode) {
                 if (keycode == Input.Keys.SPACE) {
-                    timeoutDuration = 0;
+                    if (buttons.isEmpty()) {
+                        timeoutDuration = 0;
+                    }
                     return true;
                 }
                 return false;
