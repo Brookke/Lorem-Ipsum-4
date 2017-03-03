@@ -30,12 +30,12 @@ public class Puzzle {
     /**
      * The number of reset buttons in the puzzle, these are buttons that if pressed cause the game to be reset
      */
-    int resetButtons = 6;
+    int resetSwitches = 6;
 
     /**
      * The total number of buttons in the game
      */
-    int totalButtons = 9;
+    int totalSwitches = 9;
 
     boolean solved = false;
 
@@ -52,8 +52,8 @@ public class Puzzle {
 
 
         //Creates all the reset buttons
-        for (int i = 0; i < resetButtons; i++) {
-            Button b = UIHelpers.createButton();
+        for (int i = 0; i < resetSwitches; i++) {
+            final Button b = UIHelpers.createButton();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -66,12 +66,15 @@ public class Puzzle {
         }
 
         //Creates all of the other buttons
-        for (int i = 0; i < totalButtons - resetButtons ; i++) {
-            Button b = UIHelpers.createButton();
+        for (int i = 0; i < totalSwitches - resetSwitches; i++) {
+            final Button b = UIHelpers.createButton();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     //TODO: somehow disable the button
+                    b.setDisabled(true);
+                    b.moveBy(0,-20);
+                    b.setTouchable(Touchable.disabled);
                     handleSwitch(false);
                 }
             });
@@ -85,10 +88,7 @@ public class Puzzle {
         //This distributes all of the buttons in a square
         for (int i = 0; i < buttons.size(); i++) {
 
-            table.add(buttons.get(i)).width(100).height(100);
-            if ((i + 1) % Math.sqrt(totalButtons) == 0 && i != 0) {
-                table.row();
-            }
+            table.add(buttons.get(i)).width(60).height(500);
         }
 
         stage.addActor(table);
@@ -105,8 +105,11 @@ public class Puzzle {
             resetPuzzle();
         } else {
             switchesPressed++;
-            if (switchesPressed >= 3) {
+            if (switchesPressed >= totalSwitches - resetSwitches) {
                 solved = true;
+                table.clear();
+
+                table.add(UIHelpers.createTextButton("Unlock")).pad(100,0,0,0).width(100).center();
             }
 
         }
@@ -139,6 +142,7 @@ public class Puzzle {
         for (Button b : buttons) {
             b.setDisabled(false);
             b.setTouchable(Touchable.enabled);
+            b.reset();
         }
 
 
