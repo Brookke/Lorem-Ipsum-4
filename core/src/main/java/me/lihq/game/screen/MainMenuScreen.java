@@ -27,7 +27,12 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * maximum number of players in one game
      */
-    public float maxPlayers = 2f;
+    public float maxPlayers = 10f;
+
+    /**
+     * Label for the playerCount
+     */
+    private Label playerCountLabel;
 
     /**
      * slider to change the number of players in a game
@@ -59,7 +64,6 @@ public class MainMenuScreen extends AbstractScreen {
         playerCount = UIHelpers.createSlider(1f,maxPlayers,1f,false);
         playerCount.setPosition(Gdx.graphics.getWidth()/2-playerCount.getWidth()/2,Gdx.graphics.getHeight()/12);
 
-        Label playerCountLabel;
         playerCountLabel = UIHelpers.createLabel("Number of Players: "+getNumPlayers(),false);
         playerCountLabel.setPosition(Gdx.graphics.getWidth()/2-playerCountLabel.getWidth()/2,Gdx.graphics.getHeight()/10);
 
@@ -93,6 +97,7 @@ public class MainMenuScreen extends AbstractScreen {
     public void render(float delta) {
         //Renders the main menu
         menu.render();
+        playerCountLabel.setText("Number of Players: "+getNumPlayers());
     }
 
     /**
