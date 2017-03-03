@@ -81,7 +81,7 @@ public class Menu {
             text = UIHelpers.createLabel("Paused", Assets.titleFont, Color.RED);
 
         } else {
-            text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", Assets.titleFont, Color.RED );
+            text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", Assets.FONT45, Color.RED );
             newGameButton = UIHelpers.createTextButton("New Game");
         }
 

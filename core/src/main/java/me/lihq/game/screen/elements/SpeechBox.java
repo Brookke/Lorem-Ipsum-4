@@ -125,7 +125,7 @@ public class SpeechBox {
         //Init stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
-        initSkins();
+        //initSkins();
 
         //Init container
         Container<Table> container = new Container<Table>();

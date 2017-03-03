@@ -28,9 +28,9 @@ public class Assets {
      *
      * @author JAAPAN
      */
-    private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY,
-            BUTTON_DOWN_COLOR = Color.DARK_GRAY,
-            BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
+    //private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY,
+           // BUTTON_DOWN_COLOR = Color.DARK_GRAY,
+           // BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
     /**
      * The asset sheet for clues.
      */
