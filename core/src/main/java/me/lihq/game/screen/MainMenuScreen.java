@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
 import me.lihq.game.screen.elements.UIHelpers;
@@ -31,7 +32,7 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * slider to change the number of players in a game
      */
-    private Slider playerCount = new Slider(1f,maxPlayers,1f,false,new Skin());
+    private Slider playerCount = new Slider(1f,maxPlayers,1f,false, Assets.UI_SKIN);
 
     /**
      * The constructor for the MainMenuScreen
