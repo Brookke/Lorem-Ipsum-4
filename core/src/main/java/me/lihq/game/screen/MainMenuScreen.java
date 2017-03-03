@@ -2,8 +2,12 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
+import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * This controls the MainMenuScreen that is the first thing the user sees
@@ -18,6 +22,16 @@ public class MainMenuScreen extends AbstractScreen {
      * This is the camera for the screen
      */
     private OrthographicCamera camera = new OrthographicCamera();
+
+    /**
+     * maximum number of players in one game
+     */
+    public float maxPlayers = 2f;
+
+    /**
+     * slider to change the number of players in a game
+     */
+    private Slider playerCount = new Slider(1f,maxPlayers,1f,false,new Skin());
 
     /**
      * The constructor for the MainMenuScreen
@@ -35,6 +49,22 @@ public class MainMenuScreen extends AbstractScreen {
 
         //Creates a Main Menu object thus creating the main menu
         menu = new Menu(game, false);
+
+        /**
+         * add in the field to change the number of players.
+         *
+         * @autor Lorem Ipsum
+         **/
+        Label playerCountLabel;
+        playerCountLabel = UIHelpers.createLabel("Number of Players:",false);
+        playerCountLabel.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/16);
+
+        playerCount.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/20);
+
+        menu.stage.addActor(playerCount);
+        menu.stage.addActor(playerCountLabel);
+
+        /**end of addition**/
     }
 
     /**
@@ -105,5 +135,14 @@ public class MainMenuScreen extends AbstractScreen {
         menu.dispose();
     }
 
+    /**
+     * This method is called at the start of a game to determine how many players are playing.
+     *
+     * @return current value of the playerCount slider
+     */
+    public int getNumPlayers()
+    {
+        return (int)playerCount.getValue();
+    }
 
 }
