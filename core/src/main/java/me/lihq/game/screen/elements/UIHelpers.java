@@ -109,6 +109,16 @@ public class UIHelpers {
     }
 
     /**
+     * Creates a new button, using the style defined in UI_SKIN.
+     *
+     * @return A new text button with the standard style and specified text
+     * @author Lorem-Ipsum
+     */
+    public static Button createButton() {
+        return new Button(Assets.UI_SKIN);
+    }
+
+    /**
      * Creates a new checkbox, using the style defined in UI_SKIN. Prepends the text with
      * 2 spaces, to add a gap between it and the checkbox texture.
      *
