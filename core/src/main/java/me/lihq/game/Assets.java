@@ -59,7 +59,7 @@ public class Assets {
      *
      * @author JAAPAN
      */
-    public static BitmapFont FONT45, FONT30, FONT20, FONT15;
+    public static BitmapFont FONT15;
     /**
      * This it the animation for the clue glint to be drawn where a clue is hidden.
      */
@@ -101,10 +101,11 @@ public class Assets {
      * Loads all assets for the game, such as textures, sound files and fonts.
      */
     public static void load() {
-        FONT45 = createFont("fofer", 45);
-        FONT30 = createFont("arial", 30);
-        FONT20 = createFont("arial", 20);
+
         FONT15 = new BitmapFont();
+        /**
+         * @Lorem Ipsum
+         */
         titleFont= createFont("Stranger back in the Night", 80);
 
         Texture arrows = loadTexture("arrows.png");
@@ -156,13 +157,6 @@ public class Assets {
         UI_SKIN.add("default-font", newDefaultFont, BitmapFont.class);
         funFont.dispose();
 
-        FreeTypeFontGenerator titleFreeFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Stranger back in the Night.ttf"));
-        FreeTypeFontParameter titleParameter = new FreeTypeFontParameter();
-        titleParameter.size = 24;
-        BitmapFont titleFont = titleFreeFont.generateFont(titleParameter);
-
-        titleFreeFont.dispose();
-
     }
 
     /**
@@ -194,9 +188,6 @@ public class Assets {
     public static void dispose() {
         CLUE_SHEET.dispose();
         TAG_BORDER.dispose();
-        FONT45.dispose();
-        FONT30.dispose();
-        FONT20.dispose();
         MUSIC.dispose();
         SOUND.dispose();
         UI_SKIN.dispose();

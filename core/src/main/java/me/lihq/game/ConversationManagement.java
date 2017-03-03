@@ -129,7 +129,7 @@ public class ConversationManagement {
         /**************************** End *****************************/
 
         if (buttons.size() > 0) {
-            speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));
+            speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons));
         } else {
             speechboxMngr.addSpeechBox(new SpeechBox("You need to find some clues before you question a suspect"));
             finished = true;
@@ -146,7 +146,7 @@ public class ConversationManagement {
         buttons.add(new SpeechBoxButton("Nicely", 0, eventHandler));
         buttons.add(new SpeechBoxButton("Neutrally", 1, eventHandler));
         buttons.add(new SpeechBoxButton("Aggressively", 2, eventHandler));
-        speechboxMngr.addSpeechBox(new SpeechBox("How do you want to ask the question?", buttons, -1));
+        speechboxMngr.addSpeechBox(new SpeechBox("How do you want to ask the question?", buttons));
     }
 
     /**
@@ -164,7 +164,7 @@ public class ConversationManagement {
             i++;
         }
 
-        speechboxMngr.addSpeechBox(new SpeechBox("What clue do you want to ask about?", buttons, -1));
+        speechboxMngr.addSpeechBox(new SpeechBox("What clue do you want to ask about?", buttons));
     }
 
     /**

@@ -49,11 +49,9 @@ public class UIHelpers {
      * its default position is set to the middle of the top of the screen.
      *
      * @param text  The text to display in the label
-     * @param title Whether to use the title LabelStyle (font size 30) or
-     *              the default LabelStyle (font size 20)
+     * @param title Use the title font
      * @return A new label with the standard style and specified text
-     * @author JAAPAN
-     * @see #createLabel(String, BitmapFont)
+     * @author JAAPAN/Lorem Ipsum
      */
     public static Label createLabel(String text, boolean title) {
         if (title) {
