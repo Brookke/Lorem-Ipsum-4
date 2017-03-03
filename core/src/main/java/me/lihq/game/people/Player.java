@@ -130,7 +130,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : game.getNPCS(getRoom())) {
+        for (NPC npc : game.currentSnapshot.getNPCS(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -168,7 +168,7 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : game.NPCs) {
+            for (NPC character : game.currentSnapshot.NPCs) {
                 character.ignored = false;
             }
             score += 250;

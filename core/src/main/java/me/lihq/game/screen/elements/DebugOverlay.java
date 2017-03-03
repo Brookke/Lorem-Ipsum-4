@@ -90,7 +90,7 @@ public class DebugOverlay {
         for (int w = 0; w < roomWidth; w++) {
             for (int h = 0; h < roomHeight; h++) {
                 if (Settings.DEBUG_OPTIONS.get("showWalkable")) {
-                    if (game.player.getRoom().isWalkableTile(w, h)) {
+                    if (game.currentSnapshot.player.getRoom().isWalkableTile(w, h)) {
                         greenSprite.setPosition(w * Settings.TILE_SIZE, h * Settings.TILE_SIZE);
                         greenSprite.draw(batch);
                     } else {

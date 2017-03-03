@@ -98,7 +98,7 @@ public class InventoryScreen extends AbstractScreen {
      */
     private void addButtons() {
         int count = 0;
-        for (Clue c : game.player.collectedClues) {
+        for (Clue c : game.currentSnapshot.player.collectedClues) {
             count++;
             // If there is no TextureRegion in the skin with the clue's name, add it to the skin, create a button
             // and a label with its name and add them to the stage
@@ -195,7 +195,7 @@ public class InventoryScreen extends AbstractScreen {
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        game.player.addPlayTime(delta);
+        game.currentSnapshot.player.addPlayTime(delta);
 
         if (zoomed) {
             zoomedStage.act();

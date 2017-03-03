@@ -283,7 +283,7 @@ public class Room {
              /*
             Check to see if the player is standing in the target destination
             */
-            if (game.player.getTileCoordinates().x == x && game.player.getTileCoordinates().y == y) {
+            if (game.currentSnapshot.player.getTileCoordinates().x == x && game.currentSnapshot.player.getTileCoordinates().y == y) {
                 return false;
             }
 

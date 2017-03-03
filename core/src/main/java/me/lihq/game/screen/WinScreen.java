@@ -90,35 +90,35 @@ public class WinScreen extends AbstractScreen {
 
         // Create all information labels, retrieving the necessary data from the player
         // Set their visibility to false, so they can be animated from the render() method
-        Label cluesLabel = UIHelpers.createLabel("Clues Found: " + game.player.collectedClues.size(), false);
+        Label cluesLabel = UIHelpers.createLabel("Clues Found: " + game.currentSnapshot.player.collectedClues.size(), false);
         cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
         cluesLabel.setVisible(false);
 
-        Label redHerringLabel = UIHelpers.createLabel("Red Herrings Found: " + game.player.getRedHerrings(), false);
+        Label redHerringLabel = UIHelpers.createLabel("Red Herrings Found: " + game.currentSnapshot.player.getRedHerrings(), false);
         redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
         redHerringLabel.setVisible(false);
 
-        Label questionsAsked = UIHelpers.createLabel("Questions Asked: " + game.player.getQuestions(), false);
+        Label questionsAsked = UIHelpers.createLabel("Questions Asked: " + game.currentSnapshot.player.getQuestions(), false);
         questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
         questionsAsked.setVisible(false);
 
-        Label accusedNPCs = UIHelpers.createLabel("Number of People Falsely Accused: " + game.player.getFalseAccusations(), false);
+        Label accusedNPCs = UIHelpers.createLabel("Number of People Falsely Accused: " + game.currentSnapshot.player.getFalseAccusations(), false);
         accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
         accusedNPCs.setVisible(false);
 
-        Label basicScoreLabel = UIHelpers.createLabel("Points Gained: " + game.player.getScore(), false);
+        Label basicScoreLabel = UIHelpers.createLabel("Points Gained: " + game.currentSnapshot.player.getScore(), false);
         basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
         basicScoreLabel.setVisible(false);
 
-        Label timeTaken = UIHelpers.createLabel("Time Taken: " + game.player.getFormattedPlayTime(), false);
+        Label timeTaken = UIHelpers.createLabel("Time Taken: " + game.currentSnapshot.player.getFormattedPlayTime(), false);
         timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
         timeTaken.setVisible(false);
 
-        Label bonusScoreLabel = UIHelpers.createLabel("Time Bonus: " + game.player.getTimeBonus(), false);
+        Label bonusScoreLabel = UIHelpers.createLabel("Time Bonus: " + game.currentSnapshot.player.getTimeBonus(), false);
         bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
         bonusScoreLabel.setVisible(false);
 
-        Label finalScoreLabel = UIHelpers.createLabel("Total Score: " + game.player.getTotalScore(), false);
+        Label finalScoreLabel = UIHelpers.createLabel("Total Score: " + game.currentSnapshot.player.getTotalScore(), false);
         finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
         finalScoreLabel.setVisible(false);
 
@@ -144,7 +144,7 @@ public class WinScreen extends AbstractScreen {
             highscores = getHighScores();
             boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
-                if (setHighScore && game.player.getTotalScore() == highscores[i] && !highlighted) {
+                if (setHighScore && game.currentSnapshot.player.getTotalScore() == highscores[i] && !highlighted) {
                     highscoreLabels.add(UIHelpers.createLabel("*" + highscores[i] + "*", false));
                     // Only highlight first instance of a highscore (to prevent highlighting duplicates)
                     highlighted = true;
@@ -213,8 +213,8 @@ public class WinScreen extends AbstractScreen {
 
         // Check if the current score is a high score and insert it into appropriate index in scoresList
         for (int j = 0; j < 5; j++) {
-            if (game.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
-                scoresList.add(j, String.valueOf(game.player.getTotalScore()));
+            if (game.currentSnapshot.player.getTotalScore() > Integer.parseInt(scoresList.get(j))) {
+                scoresList.add(j, String.valueOf(game.currentSnapshot.player.getTotalScore()));
                 scoresList.remove(scoresList.size() - 1);
                 setHighScore = true;
                 break;
