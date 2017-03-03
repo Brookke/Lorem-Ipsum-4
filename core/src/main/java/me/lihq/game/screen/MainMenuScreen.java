@@ -32,7 +32,7 @@ public class MainMenuScreen extends AbstractScreen {
     /**
      * slider to change the number of players in a game
      */
-    private Slider playerCount = new Slider(1f,maxPlayers,1f,false, Assets.UI_SKIN);
+    private Slider playerCount;
 
     /**
      * The constructor for the MainMenuScreen
@@ -56,11 +56,12 @@ public class MainMenuScreen extends AbstractScreen {
          *
          * @autor Lorem Ipsum
          **/
-        Label playerCountLabel;
-        playerCountLabel = UIHelpers.createLabel("Number of Players:",false);
-        playerCountLabel.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/16);
+        playerCount = UIHelpers.createSlider(1f,maxPlayers,1f,false);
+        playerCount.setPosition(Gdx.graphics.getWidth()/2-playerCount.getWidth()/2,Gdx.graphics.getHeight()/12);
 
-        playerCount.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/20);
+        Label playerCountLabel;
+        playerCountLabel = UIHelpers.createLabel("Number of Players: "+getNumPlayers(),false);
+        playerCountLabel.setPosition(Gdx.graphics.getWidth()/2-playerCountLabel.getWidth()/2,Gdx.graphics.getHeight()/10);
 
         menu.stage.addActor(playerCount);
         menu.stage.addActor(playerCountLabel);
