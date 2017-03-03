@@ -21,7 +21,9 @@ import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.GlobalInput;
-import me.lihq.game.screen.*;
+import me.lihq.game.screen.AbstractScreen;
+import me.lihq.game.screen.ScreenManager;
+import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
@@ -32,10 +34,6 @@ import java.util.Random;
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
  */
 public class GameMain extends Game {
-    /**
-     * This is a static reference to itself. Comes in REALLY handy when in other classes that don't have a reference to the main game
-     */
-    public static GameMain me = null;
 
     /**
      * A list holding NPC objects
@@ -97,11 +95,9 @@ public class GameMain extends Game {
      */
     @Override
     public void create() {
-        GameMain.me = this;
-
         Assets.load();// Load in the assets the game needs
 
-        gameMap = new Map(); //instantiate game map
+        gameMap = new Map(this); //instantiate game map 
 
         initialiseAllPeople();
 
@@ -160,41 +156,43 @@ public class GameMain extends Game {
 
     /**
      * Generates all the NPC's, Players
+     *
+     * @author Lorem-Ipsum
      */
     public void initialiseAllPeople() {
         //Add ALL NPCs to the list
         //This is how you initialise an NPC
-        player = new Player("Player", "player.png", 3, 6);
+        player = new Player(this, "Player", "player.png", 3, 6);
         player.setRoom(gameMap.getRoom(0));
 
-        NPC npc = new NPC("Colin", "colin.png", 15, 17, gameMap.getRoom(0), "Colin.JSON");
+        NPC npc = new NPC(this, "Colin", "colin.png", 15, 17, gameMap.getRoom(0), "Colin.JSON");
         NPCs.add(npc);
 
-        NPC npc2 = new NPC("Diana", "diana.png", 4, 4, gameMap.getRoom(1), "Diana.JSON");
+        NPC npc2 = new NPC(this, "Diana", "diana.png", 4, 4, gameMap.getRoom(1), "Diana.JSON");
         NPCs.add(npc2);
 
-        NPC npc3 = new NPC("Lily", "lily.png", 0, 0, gameMap.getRoom(0), "Lily.JSON");
+        NPC npc3 = new NPC(this, "Lily", "lily.png", 0, 0, gameMap.getRoom(0), "Lily.JSON");
         NPCs.add(npc3);
 
-        NPC npc4 = new NPC("Mary", "mary.png", 0, 0, gameMap.getRoom(0), "Mary.JSON");
+        NPC npc4 = new NPC(this, "Mary", "mary.png", 0, 0, gameMap.getRoom(0), "Mary.JSON");
         NPCs.add(npc4);
 
-        NPC npc5 = new NPC("Mike", "mike.png", 0, 0, gameMap.getRoom(0), "Mike.JSON");
+        NPC npc5 = new NPC(this, "Mike", "mike.png", 0, 0, gameMap.getRoom(0), "Mike.JSON");
         NPCs.add(npc5);
 
-        NPC npc6 = new NPC("Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
+        NPC npc6 = new NPC(this, "Will", "will.png", 0, 0, gameMap.getRoom(0), "Will.JSON");
         NPCs.add(npc6);
 
-        NPC npc7 = new NPC("Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
+        NPC npc7 = new NPC(this, "Roger", "Roger.png", 0, 0, gameMap.getRoom(0), "Roger.JSON");
         NPCs.add(npc7);
 
-        NPC npc8 = new NPC("Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), "Horatio.JSON");
+        NPC npc8 = new NPC(this, "Horatio", "Horatio.png", 0, 0, gameMap.getRoom(0), "Horatio.JSON");
         NPCs.add(npc8);
 
-        NPC npc9 = new NPC("Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), "Kyle.JSON");
+        NPC npc9 = new NPC(this, "Kyle", "Kyle.png", 0, 0, gameMap.getRoom(0), "Kyle.JSON");
         NPCs.add(npc9);
 
-        NPC npc10 = new NPC("Adam", "Adam.png", 0, 0, gameMap.getRoom(0), "Adam.JSON");
+        NPC npc10 = new NPC(this, "Adam", "Adam.png", 0, 0, gameMap.getRoom(0), "Adam.JSON");
         NPCs.add(npc10);
 
         /*
@@ -358,7 +356,7 @@ public class GameMain extends Game {
         NPCs.clear();
 
         // Recreate the map, so the murder room is randomly re-assigned
-        gameMap = new Map();
+        gameMap = new Map(this); 
 
         // Clear the input multiplexer, and add the global input controller
         inputMultiplexer.clear();
