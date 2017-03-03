@@ -18,6 +18,8 @@ import me.lihq.game.screen.ScreenManager;
 import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
+import java.util.List;
+
 /**
  * This is the class responsible for the game as a whole. It manages the current states and entry points of the game
  */
@@ -43,11 +45,32 @@ public class GameMain extends Game {
     FPSLogger FPS;
 
     /**
+     * Stores variable with number of players
+     *
+     * @author Lorem-Ipsum
+     */
+    public int noPlayers = 1;
+
+    /**
+     * Stores variable with current player ID
+     *
+     * @author Lorem-Ipsum
+     */
+    public int currentPlayerId = 0;
+
+    /**
      * This is the game snapshot of the currently playing player
      *
      * @author Lorem-Ipsum
      */
     public GameSnapshot currentSnapshot;
+
+    /**
+     * GameSnapshots for all players
+     *
+     * @author Lorem-Ipsum
+     */
+    public List<GameSnapshot> gameSnapshots;
 
     /**
      * The ScreenManager to handle all GUI screens of the game
@@ -61,10 +84,6 @@ public class GameMain extends Game {
     public void create() {
         Assets.load();// Load in the assets the game needs
 
-        //INITIALISE GAME SNAPSHOTS
-        ScenarioBuilder builder = new ScenarioBuilder(this);
-        currentSnapshot = builder.generateGame();
-
         // Load universal input class
         input = new GlobalInput(this);
 
@@ -75,9 +94,6 @@ public class GameMain extends Game {
 
         screenManager = new ScreenManager(this);
         screenManager.setScreen(Screens.mainMenu);
-
-        // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
 
         Assets.MUSIC.play();
 
@@ -119,6 +135,33 @@ public class GameMain extends Game {
     }
 
     /**
+     * Initialises variables for starting the game
+     * @param noPlayers - number of players in game
+     *
+     * @author Lorem-Ipsum
+     */
+    public void startGame(int noPlayers) {
+        this.noPlayers = noPlayers;
+
+        //Initialise GameSnapshots
+        ScenarioBuilder builder = new ScenarioBuilder(this);
+        gameSnapshots = builder.generateGame(noPlayers);
+        currentPlayerId = 0;
+        currentSnapshot = gameSnapshots.get(currentPlayerId);
+
+        // Add an introductory SpeechBox
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
+    }
+
+    public void nextPlayer() {
+        currentPlayerId++;
+        if (currentPlayerId == noPlayers) {
+            currentPlayerId = 0;
+        }
+        //TODO: Change screen here?
+    }
+
+    /**
      * Resets the state of the game.
      *
      * @author JAAPAN
@@ -131,9 +174,5 @@ public class GameMain extends Game {
         // Reset screenManager
         screenManager.reset();
         screenManager.setScreen(Screens.mainMenu);
-
-        // Reset game snapshot
-        ScenarioBuilder builder = new ScenarioBuilder(this);
-        currentSnapshot = builder.generateGame();
     }
 }

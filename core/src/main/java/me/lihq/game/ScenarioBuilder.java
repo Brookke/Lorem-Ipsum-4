@@ -1,5 +1,6 @@
 package me.lihq.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -13,6 +14,7 @@ import me.lihq.game.people.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Created by joeshuff on 02/03/2017.
@@ -126,9 +128,9 @@ public class ScenarioBuilder {
     /**
      * This method generates the single player
      */
-    private Player initialisePlayer(Map map)
+    private Player initialisePlayer(Map map, int playerNo)
     {
-        Player player = new Player(game, "Player", "player.png", 3, 6);
+        Player player = new Player(game, "Player " + playerNo, "player.png", 3, 6);
         player.setRoom(map.getRoom(0));
         return player;
     }
@@ -216,10 +218,10 @@ public class ScenarioBuilder {
      *
      * @author Lorem-Ipsum
      */
-    public GameSnapshot generateGame()
+    private GameSnapshot getInitialGameSnapshot()
     {
         Map map = new Map(game);
-        Player player = initialisePlayer(map);
+        Player player = initialisePlayer(map, 1);
         List<NPC> NPCs = initialiseAllPeople(map);
 
         GameSnapshot snapshot = new GameSnapshot(map, player, NPCs);
@@ -245,7 +247,6 @@ public class ScenarioBuilder {
         //I dont think we need to store the clues seperately as they are in the rooms
         initialiseClues(map);
 
-
         snapshot.victim = victim;
         snapshot.killer = killer;
 
@@ -253,5 +254,50 @@ public class ScenarioBuilder {
     }
 
 
+    /**
+     * This method creates and returns the game data
+     *
+     * @param noPlayers - number of players in game
+     * @return List<GameSnapshot> - The game data
+     *
+     * @author Lorem-Ipsum
+     */
+    public List<GameSnapshot> generateGame(int noPlayers)
+    {
+        //Generate Player 1's game, used as a base for further players
+        GameSnapshot snapshot = getInitialGameSnapshot();
+
+        //Return both game snapshots
+        List<GameSnapshot> allSnapshots = new ArrayList<>();
+        allSnapshots.add(snapshot);
+
+        //For each Player generate a game snapshot, with same victim and killer
+        for (int i = 0; i < (noPlayers - 1); i++){
+            //Generate new variables for game snapshot
+            //Needs to be different for each player so NPCs and clues aren't the same for everyone
+            Map map = new Map(game);
+            Player player = initialisePlayer(map, i + 1);
+            List<NPC> NPCs = initialiseAllPeople(map);
+            initialiseClues(map);
+
+            //Create new game snapshot object
+            GameSnapshot newSnapshot = new GameSnapshot(map, player, NPCs);
+
+            //Find victim from first snapshot and give it to the second
+            Predicate<NPC> victimPredicate = npc -> npc.getName().equals(snapshot.victim.getName());
+            NPC victim = newSnapshot.NPCs.stream().filter(victimPredicate).findFirst().get();
+            newSnapshot.victim = victim;
+
+            //Find killer from first snapshot and give it to the second
+            Predicate<NPC> killerPredicate = npc -> npc.getName().equals(snapshot.killer.getName());
+            NPC killer = newSnapshot.NPCs.stream().filter(killerPredicate).findFirst().get();
+            killer.setMotive(victim);
+            newSnapshot.killer = killer;
+
+            allSnapshots.add(newSnapshot);
+        }
+
+        return allSnapshots;
+    }
 
 }
