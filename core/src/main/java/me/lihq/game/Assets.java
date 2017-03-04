@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import me.lihq.game.screen.elements.UIHelpers;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -106,7 +105,7 @@ public class Assets {
         /**
          * @Lorem Ipsum
          */
-        titleFont= createFont("Stranger back in the Night", 80);
+        titleFont = createFont("Stranger back in the Night", 80);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);
@@ -148,14 +147,8 @@ public class Assets {
          *
          * @author LOREM IPSUM
          */
-        FreeTypeFontGenerator funFont = new FreeTypeFontGenerator(Gdx.files.internal("fonts/Montserrat-Bold.ttf"));
-        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 40;
-        BitmapFont newDefaultFont = funFont.generateFont(parameter);
 
         UI_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
-        UI_SKIN.add("default-font", newDefaultFont, BitmapFont.class);
-        funFont.dispose();
 
     }
 
