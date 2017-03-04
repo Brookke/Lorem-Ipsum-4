@@ -153,6 +153,16 @@ public class Room {
     }
 
     /**
+     * This method returns the clues currently stored in the room
+     *
+     * @return List<Clue> the clues in the room
+     * @author Lorem-Ipsum
+     */
+    public List<Clue> getCluesInRoom() {
+        return cluesInRoom;
+    }
+
+    /**
      * Adds a clue to the room.
      *
      * @param newClue The clue to add to the room

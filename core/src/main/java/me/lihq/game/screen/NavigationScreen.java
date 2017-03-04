@@ -355,7 +355,7 @@ public class NavigationScreen extends AbstractScreen {
      */
     public void updateTiledMapRenderer() {
         this.changeMap = true;
-        this.currentNPCS = game.currentSnapshot.getNPCS(game.currentSnapshot.player.getRoom());
+        this.currentNPCS = game.currentSnapshot.getNPCs(game.currentSnapshot.player.getRoom());
     }
 
     /**

@@ -130,7 +130,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : game.currentSnapshot.getNPCS(getRoom())) {
+        for (NPC npc : game.currentSnapshot.getNPCs(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -217,8 +217,6 @@ public class Player extends AbstractPerson {
             }
 
             this.setTileCoordinates(newRoomData.newTileCoordinates.x, newRoomData.newTileCoordinates.y);
-
-            //TODO: Look into making a getter for the players Game this way we can do this.getGame() here instead of GameMain.
 
             game.screenManager.navigationScreen.updateTiledMapRenderer();
         }

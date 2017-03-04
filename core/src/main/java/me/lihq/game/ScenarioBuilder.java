@@ -221,10 +221,11 @@ public class ScenarioBuilder {
     private GameSnapshot getInitialGameSnapshot()
     {
         Map map = new Map(game);
+        map.setRandomMurderRoom();
         Player player = initialisePlayer(map, 1);
         List<NPC> NPCs = initialiseAllPeople(map);
 
-        GameSnapshot snapshot = new GameSnapshot(map, player, NPCs);
+        GameSnapshot snapshot = new GameSnapshot(game, map, player, NPCs);
 
         /*
         Generate who the Killer and Victim are
@@ -273,28 +274,12 @@ public class ScenarioBuilder {
 
         //For each Player generate a game snapshot, with same victim and killer
         for (int i = 0; i < (noPlayers - 1); i++){
-            //Generate new variables for game snapshot
-            //Needs to be different for each player so NPCs and clues aren't the same for everyone
-            Map map = new Map(game);
-            Player player = initialisePlayer(map, i + 1);
-            List<NPC> NPCs = initialiseAllPeople(map);
-            initialiseClues(map);
 
-            //Create new game snapshot object
-            GameSnapshot newSnapshot = new GameSnapshot(map, player, NPCs);
+            GameSnapshot nextSnapshot = new GameSnapshot(snapshot);
 
-            //Find victim from first snapshot and give it to the second
-            Predicate<NPC> victimPredicate = npc -> npc.getName().equals(snapshot.victim.getName());
-            NPC victim = newSnapshot.NPCs.stream().filter(victimPredicate).findFirst().get();
-            newSnapshot.victim = victim;
+            nextSnapshot.player.setName("Player " + (i + 2));
 
-            //Find killer from first snapshot and give it to the second
-            Predicate<NPC> killerPredicate = npc -> npc.getName().equals(snapshot.killer.getName());
-            NPC killer = newSnapshot.NPCs.stream().filter(killerPredicate).findFirst().get();
-            killer.setMotive(victim);
-            newSnapshot.killer = killer;
-
-            allSnapshots.add(newSnapshot);
+            allSnapshots.add(nextSnapshot);
         }
 
         return allSnapshots;

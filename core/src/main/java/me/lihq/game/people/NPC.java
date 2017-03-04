@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
+import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 
 import java.util.ArrayList;
@@ -45,6 +46,17 @@ public class NPC extends AbstractPerson {
      * Whether the NPC is the victim.
      */
     private boolean isVictim = false;
+
+    /**
+     * This stores the path for the JSON file
+     */
+    protected String jsonFilePath = "";
+
+    /**
+     * This stores the spritesheet file path
+     */
+    protected String spritesheetFile = "";
+
     /**
      * This stores the players personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
@@ -59,10 +71,24 @@ public class NPC extends AbstractPerson {
      * @param spriteSheet Spritesheet for this NPC
      */
     public NPC(GameMain game, String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile) {
-        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);  
+        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);
+        this.spritesheetFile = spriteSheet;
         this.setRoom(room);
 
         importDialogue(jsonFile);
+    }
+
+    public NPC(NPC other, Map map)
+    {
+        super(other.game, other.getName(), "people/NPCs/" + other.spritesheetFile, other.getTileCoordinates().x, other.getTileCoordinates().y);
+        this.spritesheetFile = other.spritesheetFile;
+
+        this.isKiller = other.isKiller;
+        this.isVictim = other.isVictim;
+
+        this.setRoom(map.getRoom(other.getRoom().getID()));
+
+        importDialogue(other.jsonFilePath);
     }
 
     /**
@@ -81,6 +107,7 @@ public class NPC extends AbstractPerson {
      */
     @Override
     public void importDialogue(String fileName) {
+        this.jsonFilePath = fileName;
         jsonData = new JsonReader().parse(Gdx.files.internal("people/NPCs/" + fileName));
         this.personality = Personality.valueOf(jsonData.getString("personality"));
     }
