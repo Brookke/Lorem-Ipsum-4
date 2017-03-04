@@ -26,6 +26,8 @@ public class Map {
      */
     private List<Room> rooms;
 
+
+    private Room.Transition secretRoomTrans;
     /**
      * Constructs the map
      */
@@ -60,6 +62,12 @@ public class Map {
         Room outside = new Room(game, 8, "outside.tmx", "Outside Ron Cooke Hub");
 
         Room pod = new Room(game, 9, "pod.tmx", "Pod");
+
+        //TODO: update with actual room file when ready
+        Room secretRoom = new Room(game, 10, "pod.tmx", "Secret Room");
+
+        //This is used by the puzzle to transition to the secret room
+        secretRoomTrans = new Room.Transition().setTo(secretRoom, 10, 10, Direction.NORTH);
 
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 
@@ -109,7 +117,7 @@ public class Map {
         pod.addTransition(new Room.Transition().setFrom(18, 9).setTo(outside, 9, 11, Direction.EAST))    //To Outside
                 .addTransition(new Room.Transition().setFrom(18, 10).setTo(outside, 9, 12, Direction.EAST));  //To Outside
 
-        rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod);
+        rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
 
         /**
          * Assign the murder room
@@ -131,6 +139,10 @@ public class Map {
         return null;
     }
 
+
+    public Room.Transition getSecretRoomTransition() {
+        return secretRoomTrans;
+    }
     /**
      * Returns the amount of rooms created by the map
      *
