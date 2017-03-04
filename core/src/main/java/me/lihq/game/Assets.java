@@ -148,7 +148,7 @@ public class Assets {
          * @author LOREM IPSUM
          */
 
-        UI_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
+        UI_SKIN = new Skin(Gdx.files.internal("skins/skin/skin.json"));
 
     }
 
