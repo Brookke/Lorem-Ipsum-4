@@ -2,10 +2,12 @@ package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -42,11 +44,12 @@ public class Puzzle {
 
     public Puzzle() {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-
+        Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
+        stage.addActor(background);
         table = new Table();
         table.setDebug(true);
         table.setFillParent(true);
-
+        table.pad(143,0,0,0);
 
         buttons = new ArrayList<>();
 
@@ -71,7 +74,6 @@ public class Puzzle {
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    //TODO: somehow disable the button
                     b.setDisabled(true);
                     b.moveBy(0,-20);
                     b.setTouchable(Touchable.disabled);
@@ -88,7 +90,7 @@ public class Puzzle {
         //This distributes all of the buttons in a square
         for (int i = 0; i < buttons.size(); i++) {
 
-            table.add(buttons.get(i)).width(60).height(500);
+            table.add(buttons.get(i)).width(65).height(185);
         }
 
         stage.addActor(table);
