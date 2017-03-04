@@ -8,7 +8,7 @@ import me.lihq.game.screen.elements.Puzzle;
  */
 public class PuzzleScreen extends AbstractScreen {
 
-    Puzzle puzzle = new Puzzle();
+    Puzzle puzzle;
 
     /**
      * This constructor sets the relevant properties of the class.
@@ -17,7 +17,7 @@ public class PuzzleScreen extends AbstractScreen {
      */
     public PuzzleScreen(GameMain game) {
         super(game);
-
+        puzzle = new Puzzle(this.game);
 
     }
 
@@ -28,7 +28,7 @@ public class PuzzleScreen extends AbstractScreen {
     public void show() {
 
         if (puzzle.hasBeenSolved()) {
-            //game.screenManager.navigationScreen.initialiseRoomChange(null);
+            puzzle.goToSecretRoom();
         }
 
         game.inputMultiplexer.addProcessor(puzzle.stage);

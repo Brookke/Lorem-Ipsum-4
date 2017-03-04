@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import me.lihq.game.GameMain;
+import me.lihq.game.models.Room;
+import me.lihq.game.screen.Screens;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +23,8 @@ import java.util.Collections;
  */
 public class Puzzle {
 
+    private final GameMain game;
+    public final Room.Transition secretRoomTrans;
     private ArrayList<Button> buttons;
     private Table table;
     public Stage stage;
@@ -39,10 +44,16 @@ public class Puzzle {
      */
     int totalSwitches = 9;
 
+
     boolean solved = false;
 
 
-    public Puzzle() {
+    public Puzzle(GameMain game) {
+        this.game = game;
+
+        secretRoomTrans = game.gameMap.getSecretRoomTransition();
+
+
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
         stage.addActor(background);
@@ -110,11 +121,26 @@ public class Puzzle {
             if (switchesPressed >= totalSwitches - resetSwitches) {
                 solved = true;
                 table.clear();
-
-                table.add(UIHelpers.createTextButton("Unlock")).pad(100,0,0,0).width(100).center();
+                Button unlock = UIHelpers.createTextButton("Unlock");
+                unlock.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        goToSecretRoom();
+                    }
+                });
+                table.add(unlock);
             }
 
         }
+    }
+
+
+    /**
+     * This does all the changes necessary to change to the secret room.
+     */
+    public void goToSecretRoom() {
+        game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
+        game.screenManager.setScreen(Screens.navigation);
     }
 
 
