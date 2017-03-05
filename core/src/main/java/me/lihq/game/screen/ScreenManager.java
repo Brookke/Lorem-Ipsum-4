@@ -49,6 +49,11 @@ public class ScreenManager {
     public PlayerSwitchScreen playerSwitchScreen;
 
     /**
+     * Menu screen displayed when the player asks for a multi-player game.
+     */
+    public NumberOfPlayersSelectionScreen numberOfPlayersSelectionScreen;
+
+    /**
      * Universal input handler
      */
     public GlobalInput input;
