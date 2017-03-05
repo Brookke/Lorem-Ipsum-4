@@ -99,7 +99,7 @@ public class SettingsScreen extends AbstractScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.screenManager.currentScreen == Screens.mainMenu) {
+                if (game.screenManager.wasInMenu) {
                     game.screenManager.setScreen(Screens.mainMenu);
                 } else {
                     game.screenManager.setScreen(Screens.pauseMenu);

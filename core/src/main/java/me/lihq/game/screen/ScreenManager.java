@@ -1,10 +1,8 @@
 package me.lihq.game.screen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import me.lihq.game.GameMain;
 import me.lihq.game.people.controller.GlobalInput;
-import me.lihq.game.screen.*;
 
 /**
  * ScreenManager handles the GUI screens within the game
@@ -26,18 +24,22 @@ public class ScreenManager {
      * A screen to be used to display standard gameplay within the game , including the status bar.
      */
     public NavigationScreen navigationScreen;
+
     /**
      * The main menu screen that shows up when the game is first started.
      */
     public MainMenuScreen menuScreen;
+
     /**
      * The screen that is displayed when the game is paused.
      */
     public PauseScreen pauseScreen;
+
     /**
      * The screen that displays the player's inventory.
      */
     public InventoryScreen inventoryScreen;
+
     /**
      * The screen that allows the player to modify settings.
      */
@@ -47,11 +49,16 @@ public class ScreenManager {
      * Universal input handler
      */
     public GlobalInput input;
+
     /**
      * Input multiplexer to control multiple inputs across project
      */
     public InputMultiplexer inputMultiplexer;
 
+    /**
+     * This stores the previous menu that was shown. Used by settings to determine what screen to return to
+     */
+    public Boolean wasInMenu = true;
 
     /**
      * Constructor for ScreenManager
@@ -79,9 +86,11 @@ public class ScreenManager {
         switch (screen) {
             case mainMenu:
                 game.setScreen(menuScreen);
+                wasInMenu = true;
                 break;
             case pauseMenu:
                 game.setScreen(pauseScreen);
+                wasInMenu = false;
                 break;
             case navigation:
                 game.setScreen(navigationScreen);
