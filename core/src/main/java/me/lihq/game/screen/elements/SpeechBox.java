@@ -74,6 +74,11 @@ public class SpeechBox {
     private Skin buttonSkin;
 
     /**
+     * This stores whether closing this speechbox triggers an interaction
+     */
+    private boolean triggerInteraction = false;
+
+    /**
      * The constructor for the SpeechBox
      */
     public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList, int timeout) {
@@ -295,5 +300,25 @@ public class SpeechBox {
      */
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+    }
+
+    /**
+     * This method sets the triggerInteraction variable to the variable
+     *
+     * @param onInteract - The value to set triggerInteraction to
+     */
+    public void setTrigger(Boolean onInteract)
+    {
+        triggerInteraction = onInteract;
+    }
+
+    /**
+     * This method returns whether this speechbox should trigger an interaction
+     *
+     * @return triggerInteraction
+     */
+    public boolean isTrigger()
+    {
+        return triggerInteraction;
     }
 }

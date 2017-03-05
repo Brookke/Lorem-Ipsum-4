@@ -156,7 +156,7 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription(), 6), true);
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
