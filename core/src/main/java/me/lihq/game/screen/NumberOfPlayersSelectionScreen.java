@@ -1,11 +1,13 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.UIHelpers;
@@ -48,6 +50,7 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
 
         // elements from the screen
         TextButton backButton;
+        TextButton newGameButton;
 
         //set up the stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -62,11 +65,28 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
 
         //set up the back button
         backButton = UIHelpers.createTextButton("Back");
-        backButton.setPosition(Gdx.graphics.getWidth()/2-backButton.getWidth()/2,Gdx.graphics.getHeight()/4);
+        backButton.setPosition(Gdx.graphics.getWidth()/2-backButton.getWidth()/2,Gdx.graphics.getHeight()/5);
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.screenManager.setScreen(Screens.mainMenu);
+            }
+        });
+
+        //set up the new game button
+        newGameButton = UIHelpers.createTextButton("New Game");
+        newGameButton.setPosition(Gdx.graphics.getWidth()/2-backButton.getWidth()/2,Gdx.graphics.getHeight()/4);
+        newGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.screenManager.setScreen(Screens.navigation);
+            }
+        });
 
         //add all actors to the stage
         stage.addActor(playerCount);
         stage.addActor(playerCountLabel);
+        stage.addActor(newGameButton);
         stage.addActor(backButton);
 
     }
