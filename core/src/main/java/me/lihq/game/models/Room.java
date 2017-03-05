@@ -153,6 +153,16 @@ public class Room {
     }
 
     /**
+     * This method returns the clues currently stored in the room
+     *
+     * @return List<Clue> the clues in the room
+     * @author Lorem-Ipsum
+     */
+    public List<Clue> getCluesInRoom() {
+        return cluesInRoom;
+    }
+
+    /**
      * Adds a clue to the room.
      *
      * @param newClue The clue to add to the room
@@ -283,7 +293,7 @@ public class Room {
              /*
             Check to see if the player is standing in the target destination
             */
-            if (game.player.getTileCoordinates().x == x && game.player.getTileCoordinates().y == y) {
+            if (game.currentSnapshot.player.getTileCoordinates().x == x && game.currentSnapshot.player.getTileCoordinates().y == y) {
                 return false;
             }
 

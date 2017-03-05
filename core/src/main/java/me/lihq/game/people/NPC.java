@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Clue;
+import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 
 import java.util.ArrayList;
@@ -45,6 +46,17 @@ public class NPC extends AbstractPerson {
      * Whether the NPC is the victim.
      */
     private boolean isVictim = false;
+
+    /**
+     * This stores the path for the JSON file
+     */
+    protected String jsonFilePath = "";
+
+    /**
+     * This stores the spritesheet file path
+     */
+    protected String spritesheetFile = "";
+
     /**
      * This stores the players personality {@link me.lihq.game.people.AbstractPerson.Personality}
      */
@@ -59,10 +71,24 @@ public class NPC extends AbstractPerson {
      * @param spriteSheet Spritesheet for this NPC
      */
     public NPC(GameMain game, String name, String spriteSheet, int tileX, int tileY, Room room, String jsonFile) {
-        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);  
+        super(game, name, "people/NPCs/" + spriteSheet, tileX, tileY);
+        this.spritesheetFile = spriteSheet;
         this.setRoom(room);
 
         importDialogue(jsonFile);
+    }
+
+    public NPC(NPC other, Map map)
+    {
+        super(other.game, other.getName(), "people/NPCs/" + other.spritesheetFile, other.getTileCoordinates().x, other.getTileCoordinates().y);
+        this.spritesheetFile = other.spritesheetFile;
+
+        this.isKiller = other.isKiller;
+        this.isVictim = other.isVictim;
+
+        this.setRoom(map.getRoom(other.getRoom().getID()));
+
+        importDialogue(other.jsonFilePath);
     }
 
     /**
@@ -81,6 +107,7 @@ public class NPC extends AbstractPerson {
      */
     @Override
     public void importDialogue(String fileName) {
+        this.jsonFilePath = fileName;
         jsonData = new JsonReader().parse(Gdx.files.internal("people/NPCs/" + fileName));
         this.personality = Personality.valueOf(jsonData.getString("personality"));
     }
@@ -184,7 +211,7 @@ public class NPC extends AbstractPerson {
     public String getSpeech(Clue clue, Personality style, Personality player) {
         if (style == personality && player == style) {
             // Increment the player's question counter
-            game.player.addQuestion();
+            game.currentSnapshot.player.addQuestion();
 
             String response = getSpeech(clue);
 
@@ -192,17 +219,17 @@ public class NPC extends AbstractPerson {
             // random NPC. Otherwise, point them towards the killer. As this is an improved
             // response, whether the clue is a red herring or not is unimportant.
             if (isKiller) {
-                String name = game.NPCs.get(random.nextInt(game.NPCs.size())).getName();
+                String name = game.currentSnapshot.NPCs.get(random.nextInt(game.currentSnapshot.NPCs.size())).getName();
                 while (name == getName()) {
-                    name = game.NPCs.get(random.nextInt(game.NPCs.size())).getName();
+                    name = game.currentSnapshot.NPCs.get(random.nextInt(game.currentSnapshot.NPCs.size())).getName();
                 }
                 // Replace the NPC tag in the string with the name of the NPC
                 response = response.replace("%NPC", name);
             } else {
                 // Replace the NPC tag in the string with the name of the NPC
-                response = response.replace("%NPC", game.killer.getName());
+                response = response.replace("%NPC", game.currentSnapshot.killer.getName());
                 // Add the room of the killer to the response
-                String room = game.killer.getRoom().getName();
+                String room = game.currentSnapshot.killer.getRoom().getName();
                 if (room != "Outside Ron Cooke Hub") {
                     response += " Last I saw them, they were in the " + room + ".";
                 } else {
@@ -213,22 +240,22 @@ public class NPC extends AbstractPerson {
             return response;
         } else if (style == personality || style == player) {
             // Increment the player's question counter
-            game.player.addQuestion();
+            game.currentSnapshot.player.addQuestion();
 
             String response = getSpeech(clue);
 
             // If this NPC is the killer, or the clue is a red herring, point the player
             // in the direction of a random NPC. Otherwise, point them towards the killer
             if (isKiller || clue.isRedHerring()) {
-                String name = game.NPCs.get(random.nextInt(game.NPCs.size())).getName();
-                while (name == getName() || name == game.killer.getName()) {
-                    name = game.NPCs.get(random.nextInt(game.NPCs.size())).getName();
+                String name = game.currentSnapshot.NPCs.get(random.nextInt(game.currentSnapshot.NPCs.size())).getName();
+                while (name == getName() || name == game.currentSnapshot.killer.getName()) {
+                    name = game.currentSnapshot.NPCs.get(random.nextInt(game.currentSnapshot.NPCs.size())).getName();
                 }
                 // Replace the NPC tag in the string with the name of the NPC
                 response = response.replace("%NPC", name);
             } else {
                 // Replace the NPC tag in the string with the name of the NPC
-                response = response.replace("%NPC", game.killer.getName());
+                response = response.replace("%NPC", game.currentSnapshot.killer.getName());
             }
 
             return response;
