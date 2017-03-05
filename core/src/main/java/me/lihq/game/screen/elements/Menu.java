@@ -101,7 +101,7 @@ public class Menu {
         newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.startGame(2);
+                game.startGame(1);
                 game.screenManager.setScreen(Screens.navigation);
             }
         });

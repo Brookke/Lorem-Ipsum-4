@@ -80,6 +80,7 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.startGame((int) playerCount.getValue());
                 game.screenManager.setScreen(Screens.navigation);
             }
         });
