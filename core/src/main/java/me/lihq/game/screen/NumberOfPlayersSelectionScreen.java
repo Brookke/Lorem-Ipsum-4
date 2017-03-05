@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
+import me.lihq.game.screen.elements.Menu;
 import me.lihq.game.screen.elements.UIHelpers;
 
 /**
@@ -21,7 +22,7 @@ import me.lihq.game.screen.elements.UIHelpers;
  *
  * @author Lorem Ipsum
  */
-public class NumberOfPlayersSelectionScreen extends AbstractScreen{
+public class NumberOfPlayersSelectionScreen extends AbstractScreen {
 
     /**
      * Stage to put elements on.
@@ -48,8 +49,7 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
      *
      * @param game
      */
-    public NumberOfPlayersSelectionScreen(GameMain game)
-    {
+    public NumberOfPlayersSelectionScreen(GameMain game) {
         super(game);
 
         // elements from the screen
@@ -59,6 +59,14 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         //set up the stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
+        //Setting the background
+        Image background = new Image(new TextureRegion(Assets.loadTexture("menuBackground.jpg")));
+        stage.addActor(background);
+
+        //Create a backdrop for the UI so it is more visible
+        Image backdrop = new Image(UIHelpers.createBackgroundTexture(new Color(0,0,0,0.7f),(Menu.BUTTON_WIDTH * 2) + 80, 250));
+        backdrop.setSize((Menu.BUTTON_WIDTH * 2) + 80, 250);
+        backdrop.setPosition((Gdx.graphics.getWidth() / 2) - Menu.BUTTON_WIDTH - 40, Gdx.graphics.getHeight() / 3 - 20);
         stage.addActor(backdrop);
 
         //set up the slider
@@ -67,6 +75,8 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         playerCount.setSize((Menu.BUTTON_WIDTH * 2) + 40, playerCount.getHeight());
 
         //set up the text above the slider
+        playerCountLabel = UIHelpers.createLabel("Number of Players: " + getNumPlayers(), Assets.TITLE_FONT, Color.WHITE);
+        playerCountLabel.setPosition(Gdx.graphics.getWidth() / 2 - playerCountLabel.getWidth() / 2, Gdx.graphics.getHeight() / 2 + 15);
 
         //set up the back button
         backButton = UIHelpers.createTextButton("Back");
