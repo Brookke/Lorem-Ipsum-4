@@ -59,18 +59,33 @@ public class Menu {
         //Creating the label containing text and determining its size and location on screen
         Label text;
 
-        if (pauseMenu) {
-            text = UIHelpers.createLabel("Paused", true);
-
-        } else {
-            text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
-        }
-
         TextButton resumeGameButton = UIHelpers.createTextButton("Resume Game");
         resumeGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
 
         TextButton newGameButton = UIHelpers.createTextButton("New Game");
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
+
+        if (pauseMenu) {
+            text = UIHelpers.createLabel("Paused", true);
+
+            stage.addActor(resumeGameButton);
+
+        } else {
+            text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
+
+            stage.addActor(newGameButton);
+
+            //Add in a multi-player button on the main menu only
+            TextButton multiplayerButton = UIHelpers.createTextButton("Multi-Player");
+            multiplayerButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 24);
+            stage.addActor(multiplayerButton);
+            multiplayerButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.screenManager.setScreen(Screens.numberOfPlayersSelection);
+                }
+            });
+        }
 
         TextButton settings = UIHelpers.createTextButton("Settings");
         settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 8);
@@ -80,7 +95,6 @@ public class Menu {
         //Loading the buttons onto the stage
         stage.addActor(text);
         stage.addActor(settings);
-        stage.addActor(newGameButton);
         stage.addActor(quit);
 
         //Making the "New Game" button clickable and causing it to start the game
