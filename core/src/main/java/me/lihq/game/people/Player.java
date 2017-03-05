@@ -176,6 +176,8 @@ public class Player extends AbstractPerson {
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
+
+            game.currentSnapshot.finishedInteraction();
         }
     }
 

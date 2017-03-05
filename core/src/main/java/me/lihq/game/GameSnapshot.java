@@ -5,6 +5,7 @@ import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
+import me.lihq.game.screen.Screens;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,15 @@ public class GameSnapshot {
     public NPC victim;
 
     /**
+     * Count number of interactions remaining before switching to next player
+     * Set to -1 if in single player mode so that prompt to switch player is never shown
+     * PlayerSwitchScreen is shown if this = 0
+     */
+    public int interactionsRemaining = -1;
+
+    private static final int MULTIPLAYER_INTERACTION_LIMIT = 2;
+
+    /**
      * This constructor creates a GameSnapshot with the provided information
      *
      * @param game - Reference to the GameMain instance
@@ -59,11 +69,15 @@ public class GameSnapshot {
      *
      * @author Lorem-Ipsum
      */
-    public GameSnapshot(GameMain game, Map map, Player player, List<NPC> npcs) {
+    public GameSnapshot(GameMain game, Map map, Player player, List<NPC> npcs, boolean isMultiPlayer) {
         this.game = game;
         this.gameMap = map;
         this.player = player;
         this.NPCs = npcs;
+
+        if (isMultiPlayer) {
+            this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
+        }
     }
 
     /**
@@ -87,15 +101,16 @@ public class GameSnapshot {
             NPCs.add(new NPC(npc, gameMap));
         }
 
-        this.victim = new NPC(other.victim, gameMap);
-
         //Find victim from first snapshot and give it to the second
+        this.victim = new NPC(other.victim, gameMap);
 
         //Find killer from first snapshot and give it to the second
         Predicate<NPC> killerPredicate = npc -> npc.getName().equals(other.killer.getName());
         NPC killer = other.NPCs.stream().filter(killerPredicate).findFirst().get();
         this.killer = new NPC(killer, gameMap);
         this.killer.setMotive(victim);
+
+        this.interactionsRemaining = other.interactionsRemaining;
     }
 
     /**
@@ -113,5 +128,13 @@ public class GameSnapshot {
         }
 
         return npcsInRoom;
+    }
+
+    public void finishedInteraction() {
+        this.interactionsRemaining -= 1;
+        if (this.interactionsRemaining == 0) {
+            this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
+            game.screenManager.setScreen(Screens.playerSwitch);
+        }
     }
 }

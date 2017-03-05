@@ -218,14 +218,14 @@ public class ScenarioBuilder {
      *
      * @author Lorem-Ipsum
      */
-    private GameSnapshot getInitialGameSnapshot()
+    private GameSnapshot getInitialGameSnapshot(boolean isMultiPlayer)
     {
         Map map = new Map(game);
         map.setRandomMurderRoom();
         Player player = initialisePlayer(map, 1);
         List<NPC> NPCs = initialiseAllPeople(map);
 
-        GameSnapshot snapshot = new GameSnapshot(game, map, player, NPCs);
+        GameSnapshot snapshot = new GameSnapshot(game, map, player, NPCs, isMultiPlayer);
 
         /*
         Generate who the Killer and Victim are
@@ -265,8 +265,13 @@ public class ScenarioBuilder {
      */
     public List<GameSnapshot> generateGame(int noPlayers)
     {
+        boolean isMultiPlayer = false;
+        if (noPlayers > 1) {
+            isMultiPlayer = true;
+        }
+
         //Generate Player 1's game, used as a base for further players
-        GameSnapshot snapshot = getInitialGameSnapshot();
+        GameSnapshot snapshot = getInitialGameSnapshot(isMultiPlayer);
 
         //Return both game snapshots
         List<GameSnapshot> allSnapshots = new ArrayList<>();

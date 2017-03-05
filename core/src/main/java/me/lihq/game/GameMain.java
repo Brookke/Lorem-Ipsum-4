@@ -155,12 +155,17 @@ public class GameMain extends Game {
     }
 
     public void nextPlayer() {
+        //Load next player's GameSnapshot into currentSnapshot
         currentPlayerId++;
         if (currentPlayerId == noPlayers) {
             currentPlayerId = 0;
         }
-
         currentSnapshot = gameSnapshots.get(currentPlayerId);
+
+        //Reset number of interactions remaining
+        currentSnapshot.interactionsRemaining = 2;
+
+        //Change screen
         screenManager.setScreen(Screens.navigation);
     }
 
