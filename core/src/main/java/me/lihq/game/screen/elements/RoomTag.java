@@ -88,8 +88,8 @@ public class RoomTag {
 
         batch.draw(Assets.TAG_BORDER, position.x, Gdx.graphics.getHeight() - position.y, 350 + (15 * extraCharacters), 150);
 
-        Assets.titleFont.setColor(Color.WHITE);
-        Assets.titleFont.draw(batch, roomName, position.x * 5.1f, Gdx.graphics.getHeight() - position.y + 75);
+        Assets.TITLE_FONT.setColor(Color.WHITE);
+        Assets.TITLE_FONT.draw(batch, roomName, position.x * 5.1f, Gdx.graphics.getHeight() - position.y + 75);
 
         if (toClose) {
             batch.end();

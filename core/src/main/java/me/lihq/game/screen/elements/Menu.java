@@ -78,10 +78,10 @@ public class Menu {
 
         if (pauseMenu) {
             newGameButton = UIHelpers.createTextButton("Resume Game");
-            text = UIHelpers.createLabel("Paused", Assets.titleFont, Color.RED);
+            text = UIHelpers.createLabel("Paused", Assets.TITLE_FONT, Color.RED);
 
         } else {
-            text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", Assets.titleFont, Color.RED );
+            text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", Assets.TITLE_FONT, Color.RED );
             newGameButton = UIHelpers.createTextButton("New Game");
         }
 

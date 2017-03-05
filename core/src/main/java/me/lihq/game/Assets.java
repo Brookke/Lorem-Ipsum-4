@@ -78,25 +78,18 @@ public class Assets {
     /**
      * Global skin storing the standard UI styles, used in the UI factory methods.
      *
-     * @author JAAPAN
+     * @author Lorem Ipsum
      */
     public static Skin UI_SKIN;
 
     public static Skin CHECK_SKIN;
 
     /**
-     * Global skin storing the standard UI style for titles.
-     *
-     * @author LOREM IPSUM
-     */
-    public static Skin TITLE_SKIN;
-
-    /**
      * Global font storing the standard UI style for titles.
      *
      * @author LOREM IPSUM
      */
-    public static BitmapFont titleFont;
+    public static BitmapFont TITLE_FONT;
 
     /**
      * Loads all assets for the game, such as textures, sound files and fonts.
@@ -107,7 +100,7 @@ public class Assets {
         /**
          * @Lorem Ipsum
          */
-        titleFont = createFont("Stranger back in the Night", 80);
+        TITLE_FONT = createFont("Stranger back in the Night", 80);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);

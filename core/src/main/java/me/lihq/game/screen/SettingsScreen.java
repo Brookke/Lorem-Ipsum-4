@@ -55,7 +55,7 @@ public class SettingsScreen extends AbstractScreen {
      */
     private void initMenu() {
         // Create and position the label containing title text
-        Label title = UIHelpers.createLabel("Settings", Assets.titleFont);
+        Label title = UIHelpers.createLabel("Settings", Assets.TITLE_FONT);
         title.setPosition(Gdx.graphics.getWidth()/2-title.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
 
 
