@@ -70,13 +70,12 @@ public class SpeechBox {
      * List of buttons to be displayed on the SpeechBox
      */
     private ArrayList<SpeechBoxButton> buttons;
-    //Styles
-    private Skin buttonSkin;
 
     /**
      * The constructor for the SpeechBox
      */
-    public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList, int timeout) {
+    public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList) {
+        int timeout = -1;
         textContent = content;
         buttons = buttonList;
         this.timeoutDuration = timeout * Settings.TPS;
@@ -86,7 +85,8 @@ public class SpeechBox {
     /**
      * The constructor for the SpeechBox with personName
      */
-    public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList, int timeout) {
+    public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList) {
+        int timeout=-1;
         person = personName;
         textContent = speechText;
         buttons = buttonList;
@@ -97,7 +97,8 @@ public class SpeechBox {
     /**
      * The constructor for the SpeechBox without buttons
      */
-    public SpeechBox(String content, int timeout) {
+    public SpeechBox(String content) {
+        int timeout=-1;
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -107,7 +108,8 @@ public class SpeechBox {
     /**
      * The constructor for the SpeechBox without buttons with personName
      */
-    public SpeechBox(String personName, String speechText, int timeout) {
+    public SpeechBox(String personName, String speechText) {
+        int timeout=-1;
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
@@ -123,7 +125,7 @@ public class SpeechBox {
         //Init stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
-        initSkins();
+        //initSkins();
 
         //Init container
         Container<Table> container = new Container<Table>();
@@ -210,7 +212,7 @@ public class SpeechBox {
                 final SpeechBoxButton button = buttons.get(i); //find button in array
 
                 //Create button, and add listener for click event
-                TextButton buttonElement = new TextButton(button.text, buttonSkin);
+                TextButton buttonElement = new TextButton(button.text, Assets.UI_SKIN);
                 buttonElement.addListener(new ClickListener() {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
@@ -245,46 +247,13 @@ public class SpeechBox {
         }
     }
 
-    /**
-     * Sets up skin variables used for defining UI control styles
-     */
-    private void initSkins() {
-        initButtonSkin();
-    }
 
-    /**
-     * Sets up the skin for buttons on the speech box
-     */
-    private void initButtonSkin() {
-        //Create a font
-        BitmapFont font = new BitmapFont();
-        font.setColor(TEXT_COLOUR);
-        buttonSkin = new Skin();
-        buttonSkin.add("default", font);
-
-        /******************** Added by team JAAPAN ********************/
-        //Create a texture
-        buttonSkin.add("background", UIHelpers.createBackgroundTexture(Color.WHITE, WIDTH, HEIGHT));
-        /**************************** End *****************************/
-
-        //Create a button style
-        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = buttonSkin.newDrawable("background", Color.GRAY);
-        textButtonStyle.down = buttonSkin.newDrawable("background", Color.BLACK);
-        textButtonStyle.checked = buttonSkin.newDrawable("background", Color.GRAY);
-        textButtonStyle.over = buttonSkin.newDrawable("background", Color.DARK_GRAY);
-        textButtonStyle.font = buttonSkin.getFont("default");
-        buttonSkin.add("default", textButtonStyle);
-    }
 
     /**
      * Disposes of SpeechBox resources
      */
     public void dispose() {
         stage.dispose();
-        /******************** Added by team JAAPAN ********************/
-        buttonSkin.dispose();
-        /**************************** End *****************************/
     }
 
     /**

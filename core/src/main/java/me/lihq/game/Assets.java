@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import me.lihq.game.screen.elements.UIHelpers;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -22,15 +21,8 @@ public class Assets {
     /**
      * Default colour for text.
      */
-    public static final Color TEXT_COLOUR = Color.RED;
-    /**
-     * Default colours for UI buttons.
-     *
-     * @author JAAPAN
-     */
-    private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY,
-            BUTTON_DOWN_COLOR = Color.DARK_GRAY,
-            BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
+    public static final Color TEXT_COLOUR = new Color(0.5f, 0f, 0f, 1f);
+
     /**
      * The asset sheet for clues.
      */
@@ -59,7 +51,7 @@ public class Assets {
      *
      * @author JAAPAN
      */
-    public static BitmapFont FONT45, FONT30, FONT20, FONT15;
+    public static BitmapFont FONT15;
     /**
      * This it the animation for the clue glint to be drawn where a clue is hidden.
      */
@@ -79,18 +71,29 @@ public class Assets {
     /**
      * Global skin storing the standard UI styles, used in the UI factory methods.
      *
-     * @author JAAPAN
+     * @author Lorem Ipsum
      */
     public static Skin UI_SKIN;
+
+    public static Skin CHECK_SKIN;
+
+    /**
+     * Global font storing the standard UI style for titles.
+     *
+     * @author LOREM IPSUM
+     */
+    public static BitmapFont TITLE_FONT;
 
     /**
      * Loads all assets for the game, such as textures, sound files and fonts.
      */
     public static void load() {
-        FONT45 = createFont("fofer", 45);
-        FONT30 = createFont("arial", 30);
-        FONT20 = createFont("arial", 20);
+
         FONT15 = new BitmapFont();
+        /**
+         * @Lorem Ipsum
+         */
+        TITLE_FONT = createFont("Stranger back in the Night", 80);
 
         Texture arrows = loadTexture("arrows.png");
         LEFT_ARROW = new TextureRegion(arrows, 0, 0, 32, 32);
@@ -122,12 +125,13 @@ public class Assets {
     }
 
     /**
-     * Initialises UI_SKIN, so the UI factory methods (getTextButton() etc.) can be used.
+     * Creating the global skins using freetype fonts.
      *
-     * @author JAAPAN
+     * @author LOREM IPSUM
      */
     private static void initSkin() {
-        UI_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
+        UI_SKIN = new Skin(Gdx.files.internal("skins/skin/skin.json"));
+        CHECK_SKIN= new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
     }
 
     /**
@@ -159,9 +163,6 @@ public class Assets {
     public static void dispose() {
         CLUE_SHEET.dispose();
         TAG_BORDER.dispose();
-        FONT45.dispose();
-        FONT30.dispose();
-        FONT20.dispose();
         MUSIC.dispose();
         SOUND.dispose();
         UI_SKIN.dispose();
