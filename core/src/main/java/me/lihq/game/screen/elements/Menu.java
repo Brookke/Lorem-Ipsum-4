@@ -71,7 +71,7 @@ public class Menu {
 
             //Add in a multi-player button on the main menu only
             TextButton multiplayerButton = UIHelpers.createTextButton("Multi-Player");
-            multiplayerButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 32);
+            multiplayerButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 24);
             stage.addActor(multiplayerButton);
             multiplayerButton.addListener(new ClickListener() {
                 @Override
