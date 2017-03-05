@@ -22,14 +22,7 @@ public class Assets {
      * Default colour for text.
      */
     public static final Color TEXT_COLOUR = Color.RED;
-    /**
-     * Default colours for UI buttons.
-     *
-     * @author JAAPAN
-     */
-    //private static final Color BUTTON_BACKGROUND_COLOR = Color.GRAY,
-           // BUTTON_DOWN_COLOR = Color.DARK_GRAY,
-           // BUTTON_OVER_COLOR = Color.LIGHT_GRAY;
+
     /**
      * The asset sheet for clues.
      */
