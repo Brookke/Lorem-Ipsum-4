@@ -118,9 +118,7 @@ public class GameMain extends Game {
         //screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!", 5));
-
-        Assets.MUSIC.play();
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!"));
 
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();

@@ -49,15 +49,13 @@ public class UIHelpers {
      * its default position is set to the middle of the top of the screen.
      *
      * @param text  The text to display in the label
-     * @param title Whether to use the title LabelStyle (font size 30) or
-     *              the default LabelStyle (font size 20)
+     * @param title Use the title font
      * @return A new label with the standard style and specified text
-     * @author JAAPAN
-     * @see #createLabel(String, BitmapFont)
+     * @author JAAPAN/Lorem Ipsum
      */
     public static Label createLabel(String text, boolean title) {
         if (title) {
-            Label label = new Label(text, Assets.UI_SKIN.get("default", Label.LabelStyle.class));
+            Label label = createLabel(text, Assets.TITLE_FONT, Assets.TEXT_COLOUR);
             label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() / 2,
                     Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 3 + Gdx.graphics.getHeight() / 16);
             return label;
@@ -127,7 +125,7 @@ public class UIHelpers {
      * @author JAAPAN
      */
     public static CheckBox createCheckBox(String text) {
-        return new CheckBox("  " + text, Assets.UI_SKIN);
+        return new CheckBox("  " + text, Assets.CHECK_SKIN);
     }
 
     /**
@@ -141,7 +139,7 @@ public class UIHelpers {
      * @author JAAPAN
      */
     public static Slider createSlider(float min, float max, float stepSize, boolean vertical) {
-        return new Slider(min, max, stepSize, vertical, Assets.UI_SKIN);
+        return new Slider(min, max, stepSize, vertical, Assets.CHECK_SKIN);
     }
 
 }
