@@ -105,17 +105,17 @@
       overFontColor: fontOver, downFontColor: fontDown, disabledFontColor: fontDisabled, pressedOffsetY: -1, pressedOffsetX: 1, imageUp: icon }
   },
   com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
-    default: { font: default, fontColor: font},
-    white: { font: default, fontColor: white }
+    default: { font: default, fontColor: font, background: buttonUp},
+    white: { font: default, fontColor: white, background: buttonUp }
   },
   com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
     default: { fontColorUnselected: font, selection: selection, fontColorSelected: fontDown, font: default },
     background: { background: list, fontColorUnselected: font, selection: selection, fontColorSelected: fontDown, font: default }
   },
   com.badlogic.gdx.scenes.scene2d.ui.ProgressBar$ProgressBarStyle: {
-    default-horizontal: { background: progressHorizontal, knobBefore: progressHorizontalKnob, 
+    default-horizontal: { background: progressHorizontal, knobBefore: progressHorizontalKnob,
       disabledBackground: progressHorizontalDisabled, disabledKnobBefore: progressHorizontalKnobDisabled },
-    default-vertical: { background: progressVertical, knobBefore: progressVerticalKnob, 
+    default-vertical: { background: progressVertical, knobBefore: progressVerticalKnob,
       disabledBackground: progressVerticalDisabled, disabledKnobBefore: progressVerticalKnobDisabled }
   },
   com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
