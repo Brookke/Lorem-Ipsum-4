@@ -74,6 +74,7 @@ public class Menu {
 
         //Setting the background
         Image background = new Image(new TextureRegion(Assets.loadTexture("menuBackground.jpg")));
+        stage.addActor(background);
 
         if (pauseMenu) {
             newGameButton = UIHelpers.createTextButton("Resume Game");
