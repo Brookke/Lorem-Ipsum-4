@@ -115,7 +115,7 @@ public class UIHelpers {
      * @author JAAPAN
      */
     public static CheckBox createCheckBox(String text) {
-        return new CheckBox("  " + text, Assets.UI_SKIN);
+        return new CheckBox("  " + text, Assets.CHECK_SKIN);
     }
 
     /**
@@ -129,7 +129,7 @@ public class UIHelpers {
      * @author JAAPAN
      */
     public static Slider createSlider(float min, float max, float stepSize, boolean vertical) {
-        return new Slider(min, max, stepSize, vertical, Assets.UI_SKIN);
+        return new Slider(min, max, stepSize, vertical, Assets.CHECK_SKIN);
     }
 
 }

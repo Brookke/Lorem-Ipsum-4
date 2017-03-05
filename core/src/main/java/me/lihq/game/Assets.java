@@ -82,6 +82,8 @@ public class Assets {
      */
     public static Skin UI_SKIN;
 
+    public static Skin CHECK_SKIN;
+
     /**
      * Global skin storing the standard UI style for titles.
      *
@@ -149,6 +151,7 @@ public class Assets {
          */
 
         UI_SKIN = new Skin(Gdx.files.internal("skins/skin/skin.json"));
+        CHECK_SKIN= new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
 
     }
 

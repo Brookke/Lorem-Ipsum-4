@@ -61,6 +61,7 @@ public class SettingsScreen extends AbstractScreen {
 
         // Create and position the back button, using the standard style
         TextButton backButton = UIHelpers.createTextButton("Back");
+        backButton.setSize(Gdx.graphics.getWidth() / 3, 80);
         backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2, Gdx.graphics.getHeight() / 16);
 
         // Create and position the mute check box, using the standard style
@@ -68,7 +69,7 @@ public class SettingsScreen extends AbstractScreen {
         muteCheckBox.toggle();
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 6);
 
-        Label musicLabel = UIHelpers.createLabel("Music volume:", false);
+        Label musicLabel = new Label("Music volume:", Assets.CHECK_SKIN);
         musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 
         // Create and position the horizontal music volume slider, using the standard style
@@ -76,7 +77,7 @@ public class SettingsScreen extends AbstractScreen {
         musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 0.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
 
-        Label sfxLabel = UIHelpers.createLabel("Sound effects volume:", false);
+        Label sfxLabel = new Label("Sound Effects volume:", Assets.CHECK_SKIN);
         sfxLabel.setPosition(Gdx.graphics.getWidth() / 2 - sfxLabel.getWidth() / 2, Gdx.graphics.getHeight() / 2 - OFFSET * 2.5f);
 
         Slider sfxSlider = UIHelpers.createSlider(0f, 1f, 0.1f, false);
