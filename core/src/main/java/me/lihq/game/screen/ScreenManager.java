@@ -57,10 +57,6 @@ public class ScreenManager {
      * Universal input handler
      */
     public GlobalInput input;
-    /**
-     * Input multiplexer to control multiple inputs across project
-     */
-    public InputMultiplexer inputMultiplexer;
 
 
     /**
