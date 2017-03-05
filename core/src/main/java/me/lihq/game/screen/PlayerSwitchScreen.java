@@ -8,11 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
+import me.lihq.game.screen.elements.Menu;
 import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * Class added by Lorem Ipsum
- *
+ * <p>
  * Screen displayed when the second player switches in and the first player switches out.
  *
  * @AUTHOR Lorem Ipsum
@@ -24,8 +25,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
      */
     private Stage stage;
 
-    public PlayerSwitchScreen(GameMain game)
-    {
+    public PlayerSwitchScreen(GameMain game) {
         super(game);
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
@@ -35,14 +35,15 @@ public class PlayerSwitchScreen extends AbstractScreen {
          */
         Label text;
         text = UIHelpers.createLabel("Time to switch players!", true);
-        text.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() * 3/4);
+        text.setPosition(Gdx.graphics.getWidth() / 2 - (text.getWidth() / 2), Gdx.graphics.getHeight() * 3 / 4);
 
         /**
          * Set up the button to click
          */
         TextButton continueButton;
         continueButton = UIHelpers.createTextButton("Ready?");
-        continueButton.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() / 2);
+        continueButton.setSize(Menu.BUTTON_WIDTH, Menu.BUTTON_HEIGHT);
+        continueButton.setPosition((Gdx.graphics.getWidth() / 2) - (Menu.BUTTON_WIDTH / 2), Gdx.graphics.getHeight() / 2);
 
         /**
          * Add the actors and a button listener
@@ -58,41 +59,40 @@ public class PlayerSwitchScreen extends AbstractScreen {
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
         game.inputMultiplexer.addProcessor(stage);
     }
 
     @Override
-    public void resize(int width, int height)
-    {
+    public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
+
     @Override
-    public void update()
-    {
+    public void update() {
 
     }
 
     @Override
-    public void render(float delta)
-    {
+    public void render(float delta) {
         stage.act();
         stage.draw();
     }
 
     @Override
-    public void dispose()
-    {
+    public void dispose() {
         stage.dispose();
     }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 }
