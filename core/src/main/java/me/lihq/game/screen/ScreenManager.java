@@ -78,6 +78,7 @@ public class ScreenManager {
         pauseScreen = new PauseScreen(game);
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
+        numberOfPlayersSelectionScreen = new NumberOfPlayersSelectionScreen(game);
 
     }
 
@@ -102,6 +103,9 @@ public class ScreenManager {
             case settings:
                 game.setScreen(settingsScreen);
                 break;
+            case numberOfPlayersSelection:
+                game.setScreen(numberOfPlayersSelectionScreen);
+                break;
         }
         currentScreen = screen;
     }
@@ -124,5 +128,6 @@ public class ScreenManager {
         pauseScreen.dispose();
         inventoryScreen.dispose();
         settingsScreen.dispose();
+        numberOfPlayersSelectionScreen.dispose();
     }
 }

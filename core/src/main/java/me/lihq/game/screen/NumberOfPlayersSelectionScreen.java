@@ -123,6 +123,22 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         stage.getViewport().update(width, height, true);
     }
 
+    @Override
+    public void show()
+    {
+        // Add the stage to the input multiplexer, so it can receive input
+        // without blocking other input controllers
+        game.inputMultiplexer.addProcessor(stage);
+    }
+
+    @Override
+    public void hide()
+    {
+        // Remove the stage from the input multiplexer, so it doesn't fire
+        // event listeners when the screen is not visible
+        game.inputMultiplexer.removeProcessor(stage);
+    }
+
     /**
      * This method is called at the start of a game to determine how many players are playing.
      *
@@ -135,12 +151,6 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
 
     @Override
     public void update() {}
-
-    @Override
-    public void show() {}
-
-    @Override
-    public void hide() {}
 
     @Override
     public void pause() {}

@@ -68,6 +68,17 @@ public class Menu {
         } else {
             text = UIHelpers.createLabel("Welcome to JAAPAN's Murder Mystery Game!", true);
             newGameButton = UIHelpers.createTextButton("New Game");
+
+            //Add in a multi-player button on the main menu only
+            TextButton multiplayerButton = UIHelpers.createTextButton("Multi-Player");
+            multiplayerButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight() / 32);
+            stage.addActor(multiplayerButton);
+            multiplayerButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.screenManager.setScreen(Screens.numberOfPlayersSelection);
+                }
+            });
         }
 
         newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() / 2);
