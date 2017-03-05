@@ -93,18 +93,18 @@ public class ConversationManagement {
 
         if (tempNPC.accused) {
             // If the NPC has been falsely accused in the past, they refuse to respond to the player
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction")));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused")));
             finished = true;
         } else if (tempNPC.ignored) {
             // If the NPC has been ignored, they also refuse to respond to the player, but this can change
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction")));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Return")));
             finished = true;
         } else {
             // Otherwise, begin a conversation with the NPC
-            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction"), 5));
-            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.player.getName(), this.player.getSpeech("Introduction")));
+            speechboxMngr.addSpeechBox(new SpeechBox(this.tempNPC.getName(), this.tempNPC.getSpeech("Introduction")));
             queryQuestionType();
         }
     }
@@ -129,9 +129,9 @@ public class ConversationManagement {
         /**************************** End *****************************/
 
         if (buttons.size() > 0) {
-            speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons, -1));
+            speechboxMngr.addSpeechBox(new SpeechBox("What do you want to do?", buttons));
         } else {
-            speechboxMngr.addSpeechBox(new SpeechBox("You need to find some clues before you question a suspect", 5));
+            speechboxMngr.addSpeechBox(new SpeechBox("You need to find some clues before you question a suspect"));
             finished = true;
         }
     }
@@ -146,7 +146,7 @@ public class ConversationManagement {
         buttons.add(new SpeechBoxButton("Nicely", 0, eventHandler));
         buttons.add(new SpeechBoxButton("Neutrally", 1, eventHandler));
         buttons.add(new SpeechBoxButton("Aggressively", 2, eventHandler));
-        speechboxMngr.addSpeechBox(new SpeechBox("How do you want to ask the question?", buttons, -1));
+        speechboxMngr.addSpeechBox(new SpeechBox("How do you want to ask the question?", buttons));
     }
 
     /**
@@ -164,7 +164,7 @@ public class ConversationManagement {
             i++;
         }
 
-        speechboxMngr.addSpeechBox(new SpeechBox("What clue do you want to ask about?", buttons, -1));
+        speechboxMngr.addSpeechBox(new SpeechBox("What clue do you want to ask about?", buttons));
     }
 
     /**
@@ -175,8 +175,8 @@ public class ConversationManagement {
         // Change the player's personality towards the style of questioning they chose
         player.changePersonality(tempQuestionStyle);
         /**************************** End *****************************/
-        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle), 5));
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality()), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle)));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech(player.collectedClues.get(tempCluePos), tempQuestionStyle, player.getPersonality())));
         finished = true;
     }
 
@@ -187,17 +187,17 @@ public class ConversationManagement {
      */
     private void accuseNPC() {
         // Display the accusation dialogue
-        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("Accuse"), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(player.getName(), player.getSpeech("Accuse")));
         if (this.tempNPC.isKiller()) {
             // If the NPC is the killer, respond with the motive
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive(), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getMotive()));
             player.addToScore(1000);
             // Set the won flag, so the game ends
             won = true;
         } else {
             // Otherwise, respond with falsely accused dialogue and set the NPC's accused flag so they
             // don't respond to the player anymore
-            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused"), 5));
+            speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Falsely Accused")));
             this.tempNPC.accused = true;
             player.addToScore(-2000);
             // Increment false accusation counter; used for endgame stats
@@ -212,7 +212,7 @@ public class ConversationManagement {
      * @author JAAPAN
      */
     private void ignoreNPC() {
-        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial"), 5));
+        speechboxMngr.addSpeechBox(new SpeechBox(tempNPC.getName(), tempNPC.getSpeech("Ignored Initial")));
         // Set the NPC's ignored flag, so they don't respond until another clue has been found
         this.tempNPC.ignored = true;
         finished = true;
