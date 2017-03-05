@@ -125,20 +125,13 @@ public class Assets {
     }
 
     /**
-     * Initialises UI_SKIN, so the UI factory methods (getTextButton() etc.) can be used.
+     * Creating the global skins using freetype fonts.
      *
-     * @author JAAPAN
+     * @author LOREM IPSUM
      */
     private static void initSkin() {
-        /**
-         * Creating the global skins using freetype fonts.
-         *
-         * @author LOREM IPSUM
-         */
-
         UI_SKIN = new Skin(Gdx.files.internal("skins/skin/skin.json"));
         CHECK_SKIN= new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
-
     }
 
     /**
