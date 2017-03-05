@@ -21,7 +21,7 @@ public class Assets {
     /**
      * Default colour for text.
      */
-    public static final Color TEXT_COLOUR = Color.RED;
+    public static final Color TEXT_COLOUR = new Color(0.5f, 0f, 0f, 1f);
 
     /**
      * The asset sheet for clues.
