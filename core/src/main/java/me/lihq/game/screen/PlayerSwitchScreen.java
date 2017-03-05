@@ -52,7 +52,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
         continueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                //change to player 2 here //wait till GameStatus (or whatever its called) is made
+                game.nextPlayer();
             }
         });
     }
