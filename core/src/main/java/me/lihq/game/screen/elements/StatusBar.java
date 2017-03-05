@@ -154,11 +154,4 @@ public class StatusBar {
     public void dispose() {
         stage.dispose();
     }
-
-    /**
-     * Sets up skin variable used for defining UI control styles.
-     *
-     * @author JAAPAN
-     */
-
 }
