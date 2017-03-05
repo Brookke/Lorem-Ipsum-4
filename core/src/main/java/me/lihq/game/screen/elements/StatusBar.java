@@ -84,11 +84,11 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), Assets.UI_SKIN);
+        scoreLabel = new Label("Score: " + game.currentSnapshot.player.getScore(), Assets.UI_SKIN);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), Assets.UI_SKIN);
+        personalityLabel = new Label("Personality: " + game.currentSnapshot.player.getPersonality().toString(), Assets.UI_SKIN);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
 

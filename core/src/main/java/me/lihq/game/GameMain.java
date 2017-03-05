@@ -95,9 +95,6 @@ public class GameMain extends Game {
         screenManager = new ScreenManager(this);
         screenManager.setScreen(Screens.mainMenu);
 
-        // Add an introductory speechbox
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!"));
-
         //Instantiate the FPSLogger to show FPS
         FPS = new FPSLogger();
     }
@@ -152,7 +149,7 @@ public class GameMain extends Game {
 
         // Add an introductory SpeechBox
         screenManager.navigationScreen.init();
-        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!", 5));
+        screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(currentSnapshot.victim.getName() + " has been murdered! You must find the killer!"));
     }
 
     public void nextPlayer() {
