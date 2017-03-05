@@ -56,16 +56,20 @@ public class SettingsScreen extends AbstractScreen {
     private void initMenu() {
         // Create and position the label containing title text
         Label title = UIHelpers.createLabel("Settings", true);
+        title.setPosition(Gdx.graphics.getWidth()/2-title.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
+
 
         // Create and position the back button, using the standard style
         TextButton backButton = UIHelpers.createTextButton("Back");
-        backButton.setPosition(Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 8, Gdx.graphics.getHeight() / 16);
+        backButton.setSize(Gdx.graphics.getWidth() / 3, 80);
+        backButton.setPosition(Gdx.graphics.getWidth() / 2 - backButton.getWidth() / 2, Gdx.graphics.getHeight() / 16);
 
         // Create and position the mute check box, using the standard style
         CheckBox muteCheckBox = UIHelpers.createCheckBox("Mute");
+        muteCheckBox.toggle();
         muteCheckBox.setPosition(Gdx.graphics.getWidth() / 2 - muteCheckBox.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 6);
 
-        Label musicLabel = UIHelpers.createLabel("Music volume:", false);
+        Label musicLabel = new Label("Music volume:", Assets.CHECK_SKIN);
         musicLabel.setPosition(Gdx.graphics.getWidth() / 2 - musicLabel.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
 
         // Create and position the horizontal music volume slider, using the standard style
@@ -73,7 +77,7 @@ public class SettingsScreen extends AbstractScreen {
         musicSlider.setPosition(Gdx.graphics.getWidth() / 2 - musicSlider.getWidth() / 2, Gdx.graphics.getHeight() / 2 + OFFSET * 0.5f);
         musicSlider.setValue(Settings.MUSIC_VOLUME);
 
-        Label sfxLabel = UIHelpers.createLabel("Sound effects volume:", false);
+        Label sfxLabel = new Label("Sound Effects volume:", Assets.CHECK_SKIN);
         sfxLabel.setPosition(Gdx.graphics.getWidth() / 2 - sfxLabel.getWidth() / 2, Gdx.graphics.getHeight() / 2 - OFFSET * 2.5f);
 
         Slider sfxSlider = UIHelpers.createSlider(0f, 1f, 0.1f, false);
@@ -95,7 +99,7 @@ public class SettingsScreen extends AbstractScreen {
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (game.screenManager.currentScreen == Screens.mainMenu) {
+                if (game.screenManager.wasInMenu) {
                     game.screenManager.setScreen(Screens.mainMenu);
                 } else {
                     game.screenManager.setScreen(Screens.pauseMenu);
