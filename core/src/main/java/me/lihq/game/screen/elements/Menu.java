@@ -24,8 +24,8 @@ public class Menu {
      *
      * @author Lorem Ipsum
      */
-    private static final int BUTTON_WIDTH = Gdx.graphics.getWidth() / 3;
-    private static final int BUTTON_HEIGHT = 80;
+    public static final int BUTTON_WIDTH = Gdx.graphics.getWidth() / 3;
+    public static final int BUTTON_HEIGHT = 80;
     private static final int BUTTON_MARGIN = BUTTON_HEIGHT / 4;
     private static final int BUTTON_START = Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 3) - 50;
 

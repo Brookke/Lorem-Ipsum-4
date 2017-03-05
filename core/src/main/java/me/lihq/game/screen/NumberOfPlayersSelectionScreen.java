@@ -1,15 +1,18 @@
 package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.UIHelpers;
 
@@ -56,17 +59,19 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         //set up the stage
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 
+        stage.addActor(backdrop);
+
         //set up the slider
-        playerCount = UIHelpers.createSlider(1f,maxPlayers,1f,false);
-        playerCount.setPosition(Gdx.graphics.getWidth()/2-playerCount.getWidth()/2,Gdx.graphics.getHeight()/2);
+        playerCount = UIHelpers.createSlider(2f, maxPlayers, 1f, false);
+        playerCount.setPosition((Gdx.graphics.getWidth() / 2) - 20 - Menu.BUTTON_WIDTH, Gdx.graphics.getHeight() / 2);
+        playerCount.setSize((Menu.BUTTON_WIDTH * 2) + 40, playerCount.getHeight());
 
         //set up the text above the slider
-        playerCountLabel = UIHelpers.createLabel("Number of Players: "+getNumPlayers(),false);
-        playerCountLabel.setPosition(Gdx.graphics.getWidth()/2-playerCountLabel.getWidth()/2,Gdx.graphics.getHeight()/2+Gdx.graphics.getHeight()/16);
 
         //set up the back button
         backButton = UIHelpers.createTextButton("Back");
-        backButton.setPosition(Gdx.graphics.getWidth()/2-backButton.getWidth()/2,Gdx.graphics.getHeight()/5);
+        backButton.setPosition((Gdx.graphics.getWidth() / 2) + 20, Gdx.graphics.getHeight() / 3);
+        backButton.setSize(Menu.BUTTON_WIDTH, Menu.BUTTON_HEIGHT);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -76,7 +81,8 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
 
         //set up the new game button
         newGameButton = UIHelpers.createTextButton("New Game");
-        newGameButton.setPosition(Gdx.graphics.getWidth()/2-backButton.getWidth()/2,Gdx.graphics.getHeight()/4);
+        newGameButton.setPosition((Gdx.graphics.getWidth() / 2) - Menu.BUTTON_WIDTH - 20, Gdx.graphics.getHeight() / 3);
+        newGameButton.setSize(Menu.BUTTON_WIDTH, Menu.BUTTON_HEIGHT);
         newGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -111,7 +117,7 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
         Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        playerCountLabel.setText("Number of Players: "+getNumPlayers());
+        playerCountLabel.setText("Number of Players: " + getNumPlayers());
         stage.act();
         stage.draw();
     }
@@ -129,16 +135,14 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
         // Add the stage to the input multiplexer, so it can receive input
         // without blocking other input controllers
         game.inputMultiplexer.addProcessor(stage);
     }
 
     @Override
-    public void hide()
-    {
+    public void hide() {
         // Remove the stage from the input multiplexer, so it doesn't fire
         // event listeners when the screen is not visible
         game.inputMultiplexer.removeProcessor(stage);
@@ -149,17 +153,19 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen{
      *
      * @return current value of the playerCount slider
      */
-    public int getNumPlayers()
-    {
-        return (int)playerCount.getValue();
+    public int getNumPlayers() {
+        return (int) playerCount.getValue();
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 }

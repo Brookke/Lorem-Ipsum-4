@@ -43,7 +43,7 @@ public class DebugOverlay {
     /**
      * This is to store the font that the debug screen is written in
      */
-    private static BitmapFont font = Assets.createFont("arial", 30);
+    private static BitmapFont font = Assets.createFont("Stranger back in the Night", 30);
 
     /**
      * This method sets the reference to the main game
