@@ -142,6 +142,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
     @Override
     public void hide() {
+        game.inputMultiplexer.removeProcessor(stage);
     }
 
     @Override
