@@ -214,7 +214,14 @@ public class SpeechBox {
             textGroup.addActor(personLabel);
             textGroup.addActor(contentLabel);
 
-            table.add(textGroup).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
+            VerticalGroup group = new VerticalGroup();
+
+            Label spaceToContinue = UIHelpers.createLabel("\nSpace to Continue", Assets.FONT15, Color.WHITE);
+
+            group.addActor(textGroup);
+            group.addActor(spaceToContinue);
+
+            table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
         }
 
         //Initialize button row
