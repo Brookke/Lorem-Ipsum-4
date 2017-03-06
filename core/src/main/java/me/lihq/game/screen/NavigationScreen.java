@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
+import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.PlayerController;
 import me.lihq.game.screen.elements.*;
 
@@ -39,6 +40,11 @@ public class NavigationScreen extends AbstractScreen {
      * This is the main ConversationManager that controls the conversation mechanic
      */
     public ConversationManagement convMngt;
+
+    /**
+     * This is the main Player class that controls all player logic
+     */
+    public Player player;
 
     /**
      * This boolean determines whether the black is fading in or out
@@ -337,10 +343,11 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void pause() {
-        // Pause the game, so the gameDuration counter isn't updated
-        game.screenManager.setScreen(Screens.pauseMenu);
+        // Pause the game unless you're mid conversation, so the gameDuration counter isn't updated
+        if (player.inConversation == false) {
+            game.screenManager.setScreen(Screens.pauseMenu);
+        }
     }
-
     /**
      * This method is called when the window is brought back into focus
      */

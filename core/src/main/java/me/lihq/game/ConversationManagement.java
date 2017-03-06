@@ -235,7 +235,7 @@ public class ConversationManagement {
         this.player.inConversation = false;
         this.finished = false;
 
-        // Update currentSnapshot to indicate an interaction has occured
+        // Update currentSnapshot to indicate an interaction has occurred
         game.currentSnapshot.finishedInteraction();
 
         // End the game, and show the winning screen
