@@ -33,12 +33,20 @@ public class PlayerSwitchScreen extends AbstractScreen {
      */
     private Stage stage;
 
+    /**
+     * This constructs the object to be shown when players switch
+     *
+     * @param game - Reference to the game object
+     */
     public PlayerSwitchScreen(GameMain game) {
         super(game);
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
     }
 
+    /**
+     * This initialises all the objects to go on the screen
+     */
     private void initScreen()
     {
         /**
@@ -100,6 +108,9 @@ public class PlayerSwitchScreen extends AbstractScreen {
         game.inputMultiplexer.addProcessor(stage);
     }
 
+    /**
+     * This method updates the objects on the screen to the new sizes based on the next players name
+     */
     public void updateUI()
     {
         int nextPlayer = game.currentPlayerId + 1;

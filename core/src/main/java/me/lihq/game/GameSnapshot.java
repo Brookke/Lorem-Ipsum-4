@@ -56,6 +56,9 @@ public class GameSnapshot {
      */
     public int interactionsRemaining = -1;
 
+    /**
+     * This is the maximum amount of interactions to be done before players switch
+     */
     private static final int MULTIPLAYER_INTERACTION_LIMIT = 2;
 
     /**
@@ -129,6 +132,9 @@ public class GameSnapshot {
         return npcsInRoom;
     }
 
+    /**
+     * This method is called when an interaction is completed.
+     */
     public void finishedInteraction() {
         this.interactionsRemaining -= 1;
         if (this.interactionsRemaining == 0) {
