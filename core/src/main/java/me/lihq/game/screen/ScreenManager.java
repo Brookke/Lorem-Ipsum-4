@@ -64,6 +64,11 @@ public class ScreenManager {
     public Boolean wasInMenu = true;
 
     /**
+     * This is the next screen to be shown, it is shown after 1 render loop
+     */
+    public AbstractScreen nextScreen = null;
+
+    /**
      * Constructor for ScreenManager
      * Initialises screens ready to render
      * @param game reference to GameMain
@@ -89,30 +94,42 @@ public class ScreenManager {
     public void setScreen(Screens screen) {
         switch (screen) {
             case mainMenu:
-                game.setScreen(menuScreen);
+                nextScreen = menuScreen;
                 wasInMenu = true;
                 break;
             case pauseMenu:
-                game.setScreen(pauseScreen);
+                nextScreen = pauseScreen;
                 wasInMenu = false;
                 break;
             case navigation:
-                game.setScreen(navigationScreen);
+                nextScreen = navigationScreen;
                 break;
             case inventory:
-                game.setScreen(inventoryScreen);
+                nextScreen = inventoryScreen;
                 break;
             case settings:
-                game.setScreen(settingsScreen);
+                nextScreen = settingsScreen;
                 break;
             case playerSwitch:
-                game.setScreen(playerSwitchScreen);
+                nextScreen = playerSwitchScreen;
                 break;
             case numberOfPlayersSelection:
-                game.setScreen(numberOfPlayersSelectionScreen);
+                nextScreen = numberOfPlayersSelectionScreen;
                 break;
         }
         currentScreen = screen;
+    }
+
+    /**
+     * This is called once a render loop to try and update the screen
+     */
+    public void update()
+    {
+        if (nextScreen != null)
+        {
+            game.setScreen(nextScreen);
+            nextScreen = null;
+        }
     }
 
     /**

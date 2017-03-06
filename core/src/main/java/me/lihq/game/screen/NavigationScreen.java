@@ -318,7 +318,6 @@ public class NavigationScreen extends AbstractScreen {
             recentFrame = new Image(ScreenUtils.getFrameBufferTexture());
             captureFrame = false;
         }
-
     }
 
     /**
