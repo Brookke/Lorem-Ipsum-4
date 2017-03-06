@@ -2,6 +2,7 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -36,6 +37,15 @@ public class PlayerSwitchScreen extends AbstractScreen {
         super(game);
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+    }
+
+    private void initScreen()
+    {
+        /**
+         * Setup the background
+         */
+        Image im = game.screenManager.navigationScreen.recentFrame;
+        stage.addActor(im);
 
         /**
          * Set up the Text Label that tells the players to switch
@@ -61,7 +71,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
         /**
          * This is the background so that the UI is visible
          */
-        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.6f), (int) (next.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
+        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.1f), (int) (next.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
         background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), Gdx.graphics.getHeight() / 2);
 
         stage.addActor(background);
@@ -82,7 +92,16 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
     @Override
     public void show() {
+        game.screenManager.navigationScreen.captureFrame = false;
 
+        initScreen();
+        updateUI();
+
+        game.inputMultiplexer.addProcessor(stage);
+    }
+
+    public void updateUI()
+    {
         int nextPlayer = game.currentPlayerId + 1;
 
         if (nextPlayer == game.noPlayers)
@@ -95,8 +114,6 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
         background.setSize((int) (next.getWidth() * 1.5f), background.getHeight());
         background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), Gdx.graphics.getHeight() / 2);
-
-        game.inputMultiplexer.addProcessor(stage);
     }
 
     @Override
@@ -111,6 +128,9 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         stage.act();
         stage.draw();
     }

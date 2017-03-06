@@ -1,6 +1,5 @@
 package me.lihq.game;
 
-import com.badlogic.gdx.Game;
 import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.NPC;
@@ -133,6 +132,7 @@ public class GameSnapshot {
     public void finishedInteraction() {
         this.interactionsRemaining -= 1;
         if (this.interactionsRemaining == 0) {
+            game.screenManager.navigationScreen.captureFrame = true;
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
             game.screenManager.setScreen(Screens.playerSwitch);
         }

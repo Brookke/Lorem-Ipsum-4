@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
@@ -107,6 +109,16 @@ public class NavigationScreen extends AbstractScreen {
      * If it is null then there is no tag to display
      */
     private RoomTag roomTag = null;
+
+    /**
+     * This image stores the most recent frame in an image
+     */
+    public Image recentFrame = null;
+
+    /**
+     * This stores whether to capture the current frame into the above variable or not
+     */
+    public boolean captureFrame = false;
 
     /**
      * Initialises the navigation screen
@@ -297,8 +309,15 @@ public class NavigationScreen extends AbstractScreen {
 
         spriteBatch.end();
 
-        statusBar.render();
-        speechboxMngr.render();
+        if (!captureFrame) {
+            statusBar.render();
+            speechboxMngr.render();
+        }
+
+        if (captureFrame) {
+            recentFrame = new Image(ScreenUtils.getFrameBufferTexture());
+            captureFrame = false;
+        }
 
     }
 

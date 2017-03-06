@@ -1,6 +1,5 @@
 package me.lihq.game.screen;
 
-import com.badlogic.gdx.InputMultiplexer;
 import me.lihq.game.GameMain;
 import me.lihq.game.people.controller.GlobalInput;
 
@@ -8,7 +7,6 @@ import me.lihq.game.people.controller.GlobalInput;
  * ScreenManager handles the GUI screens within the game
  */
 public class ScreenManager {
-
 
     /**
      * Reference to game
@@ -135,5 +133,6 @@ public class ScreenManager {
         inventoryScreen.dispose();
         settingsScreen.dispose();
         numberOfPlayersSelectionScreen.dispose();
+        playerSwitchScreen.dispose();
     }
 }
