@@ -3,7 +3,6 @@ package me.lihq.game.screen.elements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -91,7 +90,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox with personName
      */
     public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = buttonList;
@@ -103,7 +102,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons
      */
     public SpeechBox(String content) {
-        int timeout=-1;
+        int timeout = -1;
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -114,7 +113,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons with personName
      */
     public SpeechBox(String personName, String speechText) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
@@ -191,9 +190,19 @@ public class SpeechBox {
         if (person == null) {
             //Display only textContent
             /******************** Added by team JAAPAN ********************/
-            Label contentLabel = UIHelpers.createLabel(textContent, Assets.FONT15, TEXT_COLOUR);
+            Label contentLabel = UIHelpers.createLabel(textContent + "\n", Assets.FONT15, TEXT_COLOUR);
             /**************************** End *****************************/
-            table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
+//            table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
+
+            VerticalGroup group = new VerticalGroup();
+
+            Label spaceToContinue = UIHelpers.createLabel("Space to Continue", Assets.FONT15, Color.WHITE);
+
+            group.addActor(contentLabel);
+            group.addActor(spaceToContinue);
+
+            table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2);
+
         } else {
             //Display both person and textContent
             HorizontalGroup textGroup = new HorizontalGroup();
@@ -234,6 +243,7 @@ public class SpeechBox {
         //Pack table
         table.pack();
     }
+
     /**
      * Renders the speech box
      * Should be called within the render() method of a screen
@@ -251,7 +261,6 @@ public class SpeechBox {
             timeoutDuration--;
         }
     }
-
 
 
     /**
@@ -276,8 +285,7 @@ public class SpeechBox {
      *
      * @param onInteract - The value to set triggerInteraction to
      */
-    public void setTrigger(Boolean onInteract)
-    {
+    public void setTrigger(Boolean onInteract) {
         triggerInteraction = onInteract;
     }
 
@@ -286,8 +294,7 @@ public class SpeechBox {
      *
      * @return triggerInteraction
      */
-    public boolean isTrigger()
-    {
+    public boolean isTrigger() {
         return triggerInteraction;
     }
 }

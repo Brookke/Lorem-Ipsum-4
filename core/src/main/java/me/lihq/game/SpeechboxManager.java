@@ -56,6 +56,11 @@ public class SpeechboxManager {
                 }
 
                 stack.remove(0);
+
+                if (stack.isEmpty())
+                {
+                    game.currentSnapshot.player.canMove = true;
+                }
             } else {
                 stack.get(0).update();
             }

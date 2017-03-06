@@ -156,7 +156,8 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()));
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()), true);
+            canMove = false;
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -176,7 +177,6 @@ public class Player extends AbstractPerson {
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
-            game.currentSnapshot.finishedInteraction();
         }
     }
 
