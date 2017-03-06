@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
+import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.PlayerController;
 import me.lihq.game.screen.elements.*;
 
@@ -121,6 +122,11 @@ public class NavigationScreen extends AbstractScreen {
     public boolean captureFrame = false;
 
     /**
+     * This is a reference to the current player
+     */
+    private Player player;
+
+    /**
      * Initialises the navigation screen
      *
      * @param game The main game instance
@@ -158,6 +164,8 @@ public class NavigationScreen extends AbstractScreen {
         tiledMapRenderer.addPerson(game.currentSnapshot.player);
 
         arrow = new RoomArrow(game.currentSnapshot.player);
+
+        player = game.currentSnapshot.player;
 
         updateTiledMapRenderer();
     }
@@ -337,8 +345,11 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void pause() {
-        // Pause the game, so the gameDuration counter isn't updated
-        game.screenManager.setScreen(Screens.pauseMenu);
+        // Pause the game if the player isnt in conversation, so the gameDuration counter isn't updated
+        if (!player.inConversation)
+        {
+            game.screenManager.setScreen(Screens.pauseMenu);
+        }
     }
 
     /**
