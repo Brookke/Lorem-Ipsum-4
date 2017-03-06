@@ -146,6 +146,8 @@ public class NavigationScreen extends AbstractScreen {
         viewport = new FitViewport(w / Settings.ZOOM, h / Settings.ZOOM, camera);
 
         spriteBatch = new SpriteBatch();
+
+
     }
 
     public void init() {
@@ -162,8 +164,6 @@ public class NavigationScreen extends AbstractScreen {
         tiledMapRenderer.addPerson(game.currentSnapshot.player);
 
         arrow = new RoomArrow(game.currentSnapshot.player);
-
-        player = game.currentSnapshot.player;
 
         updateTiledMapRenderer();
     }
