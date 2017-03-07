@@ -15,7 +15,6 @@ import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
-import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.PlayerController;
 import me.lihq.game.screen.elements.*;
 
@@ -301,7 +300,7 @@ public class NavigationScreen extends AbstractScreen {
         }
 
         if (game.player.getRoom().getName().equals("Secret Room")){
-            spriteBatch.draw(Assets.Cover, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
         }
         spriteBatch.end();
 
