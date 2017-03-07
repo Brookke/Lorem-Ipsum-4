@@ -93,13 +93,11 @@ public class PlayerSwitchScreen extends AbstractScreen {
         //set location of scoreBoard
         scoreBoard.setPosition((Gdx.graphics.getWidth() / 2), Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight()/8);
 
-
         /**
          * This is the background so that the UI is visible
          */
         background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (next.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
         background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), Gdx.graphics.getHeight() / 2);
-
 
         /**
          * Add the actors and a button listener
