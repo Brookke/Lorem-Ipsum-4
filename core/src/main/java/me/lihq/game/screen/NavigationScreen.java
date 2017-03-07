@@ -291,6 +291,10 @@ public class NavigationScreen extends AbstractScreen {
             BLACK_BACKGROUND.draw(spriteBatch);
         }
 
+        if (game.player.getRoom().getName().equals("Secret Room")){
+            spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
+        }
+        
         if (roomTag != null) {
             roomTag.render(spriteBatch);
         }
@@ -299,9 +303,7 @@ public class NavigationScreen extends AbstractScreen {
             DebugOverlay.renderDebugInfo(spriteBatch);
         }
 
-        if (game.player.getRoom().getName().equals("Secret Room")){
-            spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
-        }
+
         spriteBatch.end();
 
         statusBar.render();
