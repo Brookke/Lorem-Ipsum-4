@@ -11,9 +11,11 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
+import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
+import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.PlayerController;
 import me.lihq.game.screen.elements.*;
 
@@ -102,6 +104,10 @@ public class NavigationScreen extends AbstractScreen {
      */
     private RoomArrow arrow;
 
+    private Map gameMap;
+
+    private SpriteBatch batch;
+
     /**
      * This is the room name tag that is to be rendered to the screen
      * <p>
@@ -183,6 +189,7 @@ public class NavigationScreen extends AbstractScreen {
             roomTag.update();
         }
     }
+
 
     /**
      * This method is called once a game tick to update the room transition animation
@@ -293,6 +300,9 @@ public class NavigationScreen extends AbstractScreen {
             DebugOverlay.renderDebugInfo(spriteBatch);
         }
 
+        if (game.player.getRoom().getName().equals("Secret Room")){
+            spriteBatch.draw(Assets.Cover, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
         spriteBatch.end();
 
         statusBar.render();
