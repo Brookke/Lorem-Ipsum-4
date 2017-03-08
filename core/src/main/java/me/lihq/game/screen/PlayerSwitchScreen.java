@@ -90,16 +90,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
         List<String> scoreBoard = new List<String>(Assets.UI_SKIN);
         scoreBoard.setSize(120,scoreBoardHeight);
         scoreBoard.setColor(0,0,0,0);
-        //get each player + the players score
-        Array<String> arrayPlayers = new Array<String>(game.noPlayers+1);
-        int count = 0;
-        arrayPlayers.add("");//blank one for a gap so the selected player doesn't go weird
-        for (GameSnapshot snapshot: game.gameSnapshots)
-        {
-            arrayPlayers.add(snapshot.player.getName()+" Score: "+snapshot.player.getScore());
-            count++;
-        }
-        scoreBoard.setItems(arrayPlayers);
+        scoreBoard.setItems(getScores());
         //set location of scoreBoard
         scoreBoard.setPosition((Gdx.graphics.getWidth() / 2) - 60, Gdx.graphics.getHeight() / 2 - scoreBoardHeight);
 
@@ -178,6 +169,20 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
         stage.act();
         stage.draw();
+    }
+
+    private Array<String> getScores()
+    {
+        //get each player + the players score
+        Array<String> arrayPlayers = new Array<String>(game.noPlayers+1);
+        int count = 0;
+        arrayPlayers.add("");//blank one for a gap so the selected player doesn't go weird
+        for (GameSnapshot snapshot: game.gameSnapshots)
+        {
+            arrayPlayers.add(snapshot.player.getName()+" Score: "+snapshot.player.getScore());
+            count++;
+        }
+        return arrayPlayers;
     }
 
     @Override
