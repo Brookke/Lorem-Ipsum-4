@@ -28,6 +28,10 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
     private Image background;
 
+    private Image scoreBackground;
+
+    private int scoreBoardHeight=1;
+
     /**
      * The main stage for rendering and handling input.
      */
@@ -49,6 +53,10 @@ public class PlayerSwitchScreen extends AbstractScreen {
      */
     private void initScreen()
     {
+        /**
+         * get the correct height of the scoreboard
+          */
+        scoreBoardHeight = game.noPlayers*20;
         /**
          * Setup the background
          */
@@ -80,6 +88,8 @@ public class PlayerSwitchScreen extends AbstractScreen {
          * Set up the current LeaderBoard //could add a background?
          */
         List<String> scoreBoard = new List<String>(Assets.UI_SKIN);
+        scoreBoard.setSize(120,scoreBoardHeight);
+        scoreBoard.setColor(0,0,0,0);
         //get each player + the players score
         Array<String> arrayPlayers = new Array<String>(game.noPlayers+1);
         int count = 0;
@@ -91,18 +101,25 @@ public class PlayerSwitchScreen extends AbstractScreen {
         }
         scoreBoard.setItems(arrayPlayers);
         //set location of scoreBoard
-        scoreBoard.setPosition((Gdx.graphics.getWidth() / 2), Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight()/8);
+        scoreBoard.setPosition((Gdx.graphics.getWidth() / 2) - 60, Gdx.graphics.getHeight() / 2 - scoreBoardHeight);
 
         /**
          * This is the background so that the UI is visible
          */
-        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (next.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
-        background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), Gdx.graphics.getHeight() / 2);
+        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (scoreBoard.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
+        background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), scoreBoard.getY()-30);
+
+        /**
+         * This is the background so that the scoreBoard is visible
+         */
+        scoreBackground = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (140), (int) (scoreBoardHeight+10)));
+        scoreBackground.setPosition(Gdx.graphics.getWidth() / 2 - (scoreBackground.getWidth() / 2),scoreBoard.getY()-scoreBoardHeight/game.noPlayers);
 
         /**
          * Add the actors and a button listener
          */
         stage.addActor(background);
+        stage.addActor(scoreBackground);
         stage.addActor(next);
         stage.addActor(text);
         stage.addActor(continueButton);
