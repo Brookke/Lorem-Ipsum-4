@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
-import me.lihq.game.models.Map;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
@@ -102,10 +101,6 @@ public class NavigationScreen extends AbstractScreen {
      * The Sprite that is to draw the arrows on the screen by doors
      */
     private RoomArrow arrow;
-
-    private Map gameMap;
-
-    private SpriteBatch batch;
 
     /**
      * This is the room name tag that is to be rendered to the screen
@@ -294,7 +289,7 @@ public class NavigationScreen extends AbstractScreen {
         if (game.player.getRoom().getName().equals("Secret Room")){
             spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
         }
-        
+
         if (roomTag != null) {
             roomTag.render(spriteBatch);
         }
