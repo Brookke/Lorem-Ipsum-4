@@ -699,6 +699,7 @@
   <properties>
    <property name="hidingSpot" type="bool" value="true"/>
    <property name="interactable" type="bool" value="true"/>
+   <property name="secretRoom" type="bool" value="true"/>
    <property name="walkable" type="bool" value="false"/>
   </properties>
  </tile>
@@ -706,6 +707,7 @@
   <properties>
    <property name="hidingSpot" type="bool" value="true"/>
    <property name="interactable" type="bool" value="true"/>
+   <property name="secretRoom" type="bool" value="true"/>
    <property name="walkable" type="bool" value="false"/>
   </properties>
  </tile>
@@ -720,6 +722,7 @@
   <properties>
    <property name="hidingSpot" type="bool" value="true"/>
    <property name="interactable" type="bool" value="true"/>
+   <property name="secretRoom" type="bool" value="true"/>
    <property name="walkable" type="bool" value="false"/>
   </properties>
  </tile>
@@ -1222,6 +1225,7 @@
  </tile>
  <tile id="173">
   <properties>
+   <property name="extraScore" type="bool" value="true"/>
    <property name="hidingSpot" type="bool" value="false"/>
    <property name="interactable" type="bool" value="false"/>
    <property name="walkable" type="bool" value="false"/>
