@@ -45,6 +45,8 @@ public class Assets {
      * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}.
      */
     public static Texture TAG_BORDER;
+
+    public static Texture Cover;
     /**
      * The default fonts used in the game - the number specifies the size. Used to render
      * UI elements and room tags.
@@ -104,6 +106,10 @@ public class Assets {
         TAG_BORDER = loadTexture("border.png");
 
         CLUE_SHEET = loadTexture("clueSheet.png");
+
+        Cover=loadTexture("cover.png");
+        //Cover.setWidth(Cover.getWidth()/(1500/ Gdx.graphics.getWidth())
+                //sprite.getHeight() / SCALE_RATIO);
 
         Texture checkbox = loadTexture("checkbox.png");
         UNCHECKED_BOX = new TextureRegion(checkbox, 0, 0, 32, 32);

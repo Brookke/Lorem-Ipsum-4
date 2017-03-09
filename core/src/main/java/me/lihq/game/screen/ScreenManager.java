@@ -10,6 +10,7 @@ import me.lihq.game.people.controller.GlobalInput;
 public class ScreenManager {
 
 
+
     /**
      * Reference to game
      */
@@ -44,7 +45,10 @@ public class ScreenManager {
      * The screen that allows the player to modify settings.
      */
     public SettingsScreen settingsScreen;
-
+    /**
+     * The puzzle screen
+     */
+    private PuzzleScreen puzzleScreen;
     /**
      * Universal input handler
      */
@@ -75,6 +79,7 @@ public class ScreenManager {
         pauseScreen = new PauseScreen(game);
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
+        puzzleScreen = new PuzzleScreen(game);
 
     }
 
@@ -100,6 +105,9 @@ public class ScreenManager {
                 break;
             case settings:
                 game.setScreen(settingsScreen);
+                break;
+            case puzzle:
+                game.setScreen(puzzleScreen);
                 break;
         }
         currentScreen = screen;
