@@ -48,6 +48,14 @@ public class Room {
      * <p>
      */
     private List<Vector2Int> bookcaseSpots = null;
+
+    /**
+     * @Lorem Ipsum
+     * This list stores the coordinates of all slots that provide extra points in this room
+     */
+    public List<Vector2Int> scoreSpots = null;
+
+
     /**
      * This stores the name of the room.
      * It is displayed on the tag when they enter the room
@@ -114,7 +122,7 @@ public class Room {
         if (bookcaseSpots.size() > 0) {
             secretRoomSpot = bookcaseSpots.get(0);
         }
-
+        scoreSpots= getExtraScoreSpots();
     }
 
     /**
@@ -241,6 +249,17 @@ public class Room {
         return hidingSpots.contains(new Vector2Int(x, y));
     }
 
+    /**
+     * This method checks whether the tile at x, y is a tile that gives you extra points
+     * in
+     *
+     * @param x The x coordinate to check
+     * @param y The y coordinate to check
+     * @return (boolean) whether the tile is an extraScore tile.
+     */
+    public boolean isExtraScore(int x, int y) {
+        return scoreSpots.contains(new Vector2Int(x, y));
+    }
     /**
      * This method locks the specified coordinates so no other people object can move to it
      *
@@ -481,6 +500,42 @@ public class Room {
 
         return this.hidingSpots;
     }
+
+    /**
+     * This will check the map for any potential extraScore locations, and returns them as a list of coordinates
+     *
+     * @return (List<Vector2Int>) list of coordinates of the extraScore tiles
+     */
+    public List<Vector2Int> getExtraScoreSpots() {
+        if (scoreSpots != null) return scoreSpots;
+
+        List<Vector2Int> scoreSpots = new ArrayList<>();
+
+        int roomWidth = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getWidth();
+        int roomHeight = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getHeight();
+
+        for (int x = 0; x < roomWidth; x++) {
+            for (int y = 0; y < roomHeight; y++) {
+                for (MapLayer layer : this.getTiledMap().getLayers()) {
+                    TiledMapTileLayer thisLayer = (TiledMapTileLayer) layer;
+                    TiledMapTileLayer.Cell cellInTile = thisLayer.getCell(x, y);
+
+                    if (cellInTile == null) continue;
+
+                    if (!cellInTile.getTile().getProperties().containsKey("extraScore")) continue;
+
+                    if (cellInTile.getTile().getProperties().get("extraScore").toString().equals("true")) {
+                        scoreSpots.add(new Vector2Int(x, y));
+                        break;
+                    }
+                }
+            }
+        }
+        this.scoreSpots = scoreSpots;
+
+        return this.scoreSpots;
+    }
+
 
 
     /**

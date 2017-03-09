@@ -10,6 +10,7 @@ import me.lihq.game.models.Room;
 import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,16 @@ public class Player extends AbstractPerson {
     private int score = 0;
 
     /**
+     * The score the player will earn if a certain item is obtained.
+     */
+    private int extraScore= 0;
+
+    /**
+     * Used to randomly generate the extra score the player gains
+     */
+    private Random ran;
+
+    /**
      * The current duration of the game, excluding time paused. Used to calculate the time
      * bonus for the score.
      */
@@ -73,6 +84,7 @@ public class Player extends AbstractPerson {
     public Player(GameMain game, String name, String imgSrc, int tileX, int tileY) {
         super(game, name, "people/player/" + imgSrc, tileX, tileY); 
         importDialogue("Player.JSON");
+
     }
 
     /**
@@ -121,9 +133,9 @@ public class Player extends AbstractPerson {
             game.screenManager.setScreen(Screens.puzzle);
         } else {
             checkForClue();
-
-
+            checkForExtraScore();
         }
+
     }
 
     /**
@@ -191,6 +203,38 @@ public class Player extends AbstractPerson {
 
         return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
     }
+
+    /**
+     * This method determines the extra score gained when the player finds an item that provides extra score
+     * The score is determined by multiplying 1000 with a randomly generated Double between 0 and 1
+     */
+    private int extraScore(){
+        Random ran= new Random();
+        extraScore= (int) (ran.nextDouble()*1000.0);
+        return extraScore;
+    }
+
+    /**
+     * This method checks to see if the tile the player is facing has a clue hidden in it or not
+     */
+    private void checkForExtraScore() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        this.getRoom().getExtraScoreSpots();
+        if (!this.getRoom().isExtraScore(x, y)) {
+            return;
+        }
+        else {
+            this.extraScore();
+            score += extraScore();
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScore() + " extra points! Lucky you :D"));
+            if (!Settings.MUTED) {
+                Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
+        }
+    }
+
     /**
      * This method returns whether or not the player is standing on a tile that initiates a Transition to another room
      *
