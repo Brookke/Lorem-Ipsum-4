@@ -6,14 +6,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.sun.org.apache.xerces.internal.impl.io.ASCIIReader;
+import com.sun.org.apache.xpath.internal.operations.String;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.GameSnapshot;
 import me.lihq.game.screen.elements.Menu;
 import me.lihq.game.screen.elements.UIHelpers;
+
+import java.util.*;
 
 /**
  * Class added by Lorem Ipsum
@@ -171,16 +176,27 @@ public class PlayerSwitchScreen extends AbstractScreen {
         stage.draw();
     }
 
-    private Array<String> getScores()
+    private Array<Label> getScores()
     {
-        //get each player + the players score
-        Array<String> arrayPlayers = new Array<String>(game.noPlayers+1);
-        int count = 0;
-        arrayPlayers.add("");//blank one for a gap so the selected player doesn't go weird
+        /**
+         * Dictionary to store variables temporarily while sorting
+         */
+        SortedMap<String,Integer> listDictionary = new TreeMap<String, Integer>();
+
+        /**
+         * Array of Labels to store the final scoreboard in
+         */
+        Array<Label> arrayPlayers = new Array<Label>(game.noPlayers+1);
+
+        arrayPlayers.add(UIHelpers.createLabel("",false));//blank one for a gap so the selected player doesn't go weird
         for (GameSnapshot snapshot: game.gameSnapshots)
         {
-            arrayPlayers.add(snapshot.player.getName()+" Score: "+snapshot.player.getScore());
-            count++;
+            listDictionary.put(snapshot.player.getName(),snapshot.player.getScore());
+        }
+        SortedMap<String,Integer> sorted = new TreeMap<String,Integer>();
+        for (Map.Entry<String,Integer> entry :sorted.entrySet())
+        {
+            arrayPlayers.add(UIHelpers.createLabel(entry.getKey()+" : "+entry.getValue(),false));
         }
         return arrayPlayers;
     }
