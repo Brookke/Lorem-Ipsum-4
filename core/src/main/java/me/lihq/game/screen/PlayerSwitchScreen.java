@@ -5,20 +5,21 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.sun.org.apache.xerces.internal.impl.io.ASCIIReader;
-import com.sun.org.apache.xpath.internal.operations.String;
 import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.GameSnapshot;
 import me.lihq.game.screen.elements.Menu;
 import me.lihq.game.screen.elements.UIHelpers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class added by Lorem Ipsum
@@ -32,10 +33,6 @@ public class PlayerSwitchScreen extends AbstractScreen {
     private Label next;
 
     private Image background;
-
-    private Image scoreBackground;
-
-    private int scoreBoardHeight=1;
 
     /**
      * The main stage for rendering and handling input.
@@ -58,10 +55,6 @@ public class PlayerSwitchScreen extends AbstractScreen {
      */
     private void initScreen()
     {
-        /**
-         * get the correct height of the scoreboard
-          */
-        scoreBoardHeight = game.noPlayers*20;
         /**
          * Setup the background
          */
@@ -90,36 +83,24 @@ public class PlayerSwitchScreen extends AbstractScreen {
         continueButton.setPosition((Gdx.graphics.getWidth() / 2) - (Menu.BUTTON_WIDTH / 2), Gdx.graphics.getHeight() / 2 + Menu.BUTTON_HEIGHT + 20);
 
         /**
-         * Set up the current LeaderBoard //could add a background?
-         */
-        List<String> scoreBoard = new List<String>(Assets.UI_SKIN);
-        scoreBoard.setSize(120,scoreBoardHeight);
-        scoreBoard.setColor(0,0,0,0);
-        scoreBoard.setItems(getScores());
-        //set location of scoreBoard
-        scoreBoard.setPosition((Gdx.graphics.getWidth() / 2) - 60, Gdx.graphics.getHeight() / 2 - scoreBoardHeight);
-
-        /**
          * This is the background so that the UI is visible
          */
-        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (scoreBoard.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
-        background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), scoreBoard.getY()-30);
+        background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (next.getWidth() + 40), (int) ((text.getY() + text.getHeight()) - next.getY())));
+        background.setPosition(Gdx.graphics.getWidth() / 2 - (background.getWidth() / 2), Gdx.graphics.getHeight() / 2);
 
         /**
-         * This is the background so that the scoreBoard is visible
+         * This is the table that the leaderboard is stored in
          */
-        scoreBackground = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) (140), (int) (scoreBoardHeight+10)));
-        scoreBackground.setPosition(Gdx.graphics.getWidth() / 2 - (scoreBackground.getWidth() / 2),scoreBoard.getY()-scoreBoardHeight/game.noPlayers);
+        Table scores = getScoreTable(background.getWidth());
 
         /**
          * Add the actors and a button listener
          */
         stage.addActor(background);
-        stage.addActor(scoreBackground);
         stage.addActor(next);
         stage.addActor(text);
         stage.addActor(continueButton);
-        stage.addActor(scoreBoard);
+        stage.addActor(scores);
         continueButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -176,29 +157,100 @@ public class PlayerSwitchScreen extends AbstractScreen {
         stage.draw();
     }
 
-    private Array<Label> getScores()
+    /**
+     * This method returns a Table with all the leaderboard UI components
+     *
+     * @param tableWidth - The width of the table
+     * @return Table containing the UI components
+     *
+     * @author Lorem-Ipsum
+     */
+    private Table getScoreTable(float tableWidth)
     {
-        /**
-         * Dictionary to store variables temporarily while sorting
-         */
-        SortedMap<String,Integer> listDictionary = new TreeMap<String, Integer>();
+        List<String> labels = getScores();
 
-        /**
-         * Array of Labels to store the final scoreboard in
-         */
-        Array<Label> arrayPlayers = new Array<Label>(game.noPlayers+1);
+        int heightPerLabel = Gdx.graphics.getHeight() / 20;
 
-        arrayPlayers.add(UIHelpers.createLabel("",false));//blank one for a gap so the selected player doesn't go weird
+        Table table = new Table();
+        table.setSize(tableWidth, Gdx.graphics.getHeight() / 2);
+        table.setPosition(Gdx.graphics.getWidth() / 2 - (table.getWidth() / 2), 0);
+
+        Image background = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (int) tableWidth, Gdx.graphics.getHeight() / 2));
+        table.addActor(background);
+
+        int count = 1;
+        for (String s : labels)
+        {
+            Label l = UIHelpers.createLabel(s, Assets.FONT15, Color.WHITE);
+
+            l.setPosition((table.getWidth() / 2) - (l.getWidth() / 2), table.getHeight() - (count * heightPerLabel));
+
+            table.addActor(l);
+
+            count ++;
+        }
+
+        return table;
+    }
+
+    /**
+     * This method loops through all the players and their scores and returns a list.
+     *
+     * The higher their score, the higher they are up the list
+     *
+     * @return List of Strings to be displayed on labels
+     *
+     * @author Lorem-Ipsum
+     */
+    private List<String> getScores()
+    {
+        List<String> results = new ArrayList<String>();
+
+        results.add("=== LEADERBOARD ===");
+
+        HashMap<String, Integer> scores = new HashMap<String, Integer>();
+
         for (GameSnapshot snapshot: game.gameSnapshots)
         {
-            listDictionary.put(snapshot.player.getName(),snapshot.player.getScore());
+            scores.put(snapshot.player.getName(),snapshot.player.getScore());
         }
-        SortedMap<String,Integer> sorted = new TreeMap<String,Integer>();
-        for (Map.Entry<String,Integer> entry :sorted.entrySet())
+
+        for (int i = 0; i < game.noPlayers; i ++)
         {
-            arrayPlayers.add(UIHelpers.createLabel(entry.getKey()+" : "+entry.getValue(),false));
+            String highestScoringPlayer = getMaxKey(scores);
+            int maxScore = scores.get(highestScoringPlayer);
+
+            results.add(highestScoringPlayer + ": " + maxScore);
+            scores.remove(highestScoringPlayer);
         }
-        return arrayPlayers;
+
+        return results;
+    }
+
+    /**
+     * This method takes a HashMap<String, Integer> and returns the Key with the minimum value
+     *
+     * @param map - The HashMap to check
+     *
+     * @return String the key with the lowest value
+     *
+     * @author Lorem-Ipsum
+     */
+    private String getMaxKey(HashMap<String, Integer> map)
+    {
+        int max = Integer.MIN_VALUE;
+        String maxKey = "";
+
+        for (String key : map.keySet())
+        {
+            if (map.get(key) > max)
+            {
+                max = map.get(key);
+                maxKey = key;
+            }
+        }
+
+        return maxKey;
     }
 
     @Override
