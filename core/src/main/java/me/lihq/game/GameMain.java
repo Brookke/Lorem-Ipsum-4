@@ -240,11 +240,17 @@ public class GameMain extends Game {
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
-            loopNpc.setRoom(gameMap.getRoom(selectedRoom));
-            Vector2Int position = loopNpc.getRoom().getRandomLocation();
-            loopNpc.setTileCoordinates(position.x, position.y);
+            if (selectedRoom==10){
+                return;
+            }
+            else{
+                loopNpc.setRoom(gameMap.getRoom(selectedRoom));
+                Vector2Int position = loopNpc.getRoom().getRandomLocation();
+                loopNpc.setTileCoordinates(position.x, position.y);
 
-            System.out.println(loopNpc.getName() + " has been placed in room \"" + gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
+                System.out.println(loopNpc.getName() + " has been placed in room \"" + gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
+            }
+
         }
         System.out.println();
     }
