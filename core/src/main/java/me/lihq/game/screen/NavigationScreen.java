@@ -263,8 +263,8 @@ public class NavigationScreen extends AbstractScreen {
             changeMap = false;
         }
 
-        camera.position.x = game.player.getX();
-        camera.position.y = game.player.getY();
+        camera.position.x = Math.round(game.player.getX());
+        camera.position.y = Math.round(game.player.getY());
         camera.update();
 
         tiledMapRenderer.setView(camera);
