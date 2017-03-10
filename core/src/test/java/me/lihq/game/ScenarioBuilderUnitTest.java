@@ -26,7 +26,7 @@ public class ScenarioBuilderUnitTest extends GameTester
     {
         try
         {
-            List<GameSnapshot> snapshots = builder.generateGame(1);
+            List<GameSnapshot> snapshots = builder.generateGame(2);
             assertTrue("Scenario Builder failed to generate game", true);
         }
         catch (Exception e){
