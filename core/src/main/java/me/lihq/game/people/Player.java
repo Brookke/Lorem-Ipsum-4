@@ -220,7 +220,7 @@ public class Player extends AbstractPerson {
      * @Author Lorem-Ipsum
      */
     private int extraScoreAmount() {
-        if (this.scoreObtained == false) {
+        if (!this.scoreObtained) {
             Random ran = new Random();
             extraScore = (int) (ran.nextGaussian() * 200 + 500);
             return extraScore;
@@ -240,9 +240,7 @@ public class Player extends AbstractPerson {
         int x = getTileCoordinates().x + getDirection().getDx();
         int y = getTileCoordinates().y + getDirection().getDy();
 
-        if (!this.getRoom().isExtraScoreTile(x, y)) {
-            return;
-        } else {
+        if (this.getRoom().isExtraScoreTile(x, y)) {
             score += extraScoreAmount();
             game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScoreAmount() + " extra points! Lucky you :D"));
             this.scoreObtained = true;
