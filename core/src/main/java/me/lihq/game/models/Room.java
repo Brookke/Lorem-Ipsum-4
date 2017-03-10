@@ -51,7 +51,9 @@ public class Room {
 
     /**
      * @Lorem Ipsum
+     * Assessment 4
      * This list stores the coordinates of all slots that provide extra points in this room
+     * @author Lorem-Ipsum
      */
     public List<Vector2Int> scoreSpots = null;
 
@@ -122,7 +124,7 @@ public class Room {
         if (bookcaseSpots.size() > 0) {
             secretRoomSpot = bookcaseSpots.get(0);
         }
-        scoreSpots= getExtraScoreSpots();
+        scoreSpots = getExtraScoreSpots();
     }
 
     /**
@@ -250,14 +252,18 @@ public class Room {
     }
 
     /**
+     * Assessment 4
+     *
      * This method checks whether the tile at x, y is a tile that gives you extra points
      * in
      *
      * @param x The x coordinate to check
      * @param y The y coordinate to check
      * @return (boolean) whether the tile is an extraScore tile.
+     *
+     * @Author Lorem-Ipsum
      */
-    public boolean isExtraScore(int x, int y) {
+    public boolean isExtraScoreTile(int x, int y) {
         return scoreSpots.contains(new Vector2Int(x, y));
     }
     /**
@@ -505,6 +511,7 @@ public class Room {
      * This will check the map for any potential extraScore locations, and returns them as a list of coordinates
      *
      * @return (List<Vector2Int>) list of coordinates of the extraScore tiles
+     * @author Lorem-Ipsum
      */
     public List<Vector2Int> getExtraScoreSpots() {
         if (scoreSpots != null) return scoreSpots;

@@ -56,7 +56,12 @@ public class Player extends AbstractPerson {
     /**
      * The score the player will earn if a certain item is obtained.
      */
-    private int extraScore= 0;
+    private int extraScore = 0;
+
+    /**
+     * Checks if the player has obtained extra score before.
+     */
+    private boolean scoreObtained = false;
 
     /**
      * Used to randomly generate the extra score the player gains
@@ -205,30 +210,44 @@ public class Player extends AbstractPerson {
     }
 
     /**
+     * Assessment 4
+     *
      * This method determines the extra score gained when the player finds an item that provides extra score
-     * The score is determined by multiplying 1000 with a randomly generated Double between 0 and 1
+     * The score is determined through a guassian distribution
+     * The mean score is 500 and the standard deviation is 200.
+     *
+     * If the player has already obtained extra score once then it makes the player unable to obtain more extra score
+     * @Author Lorem-Ipsum
      */
-    private int extraScore(){
-        Random ran= new Random();
-        extraScore= (int) (ran.nextDouble()*1000.0);
-        return extraScore;
+    private int extraScoreAmount(){
+        if (this.scoreObtained==false){
+            Random ran= new Random();
+            extraScore= (int) (ran.nextGaussian()*200+500);
+            return extraScore;
+        }
+        else {
+            return 0;
+        }
     }
 
     /**
+     * Assessment 4
+     *
      * This method checks to see if the tile the player is facing has a clue hidden in it or not
+     *
+     * @Author Lorem-Ipsum
      */
     private void checkForExtraScore() {
         int x = getTileCoordinates().x + getDirection().getDx();
         int y = getTileCoordinates().y + getDirection().getDy();
 
-        this.getRoom().getExtraScoreSpots();
-        if (!this.getRoom().isExtraScore(x, y)) {
+        if (!this.getRoom().isExtraScoreTile(x, y)) {
             return;
         }
         else {
-            this.extraScore();
-            score += extraScore();
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScore() + " extra points! Lucky you :D"));
+            score += extraScoreAmount();
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScoreAmount() + " extra points! Lucky you :D"));
+            this.scoreObtained = true;
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
