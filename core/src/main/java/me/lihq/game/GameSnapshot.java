@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 /**
  * This class stores all the vital information about a game state.
  *
+ * Each player has one of these, storing the current state of their game.
  *
  * @author Lorem-Ipsum
  */
