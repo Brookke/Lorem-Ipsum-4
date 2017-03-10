@@ -28,21 +28,11 @@ public class Room {
      */
     public Vector2Int secretRoomSpot;
     /**
-     * This is a reference to the main game class
-     *
-     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
-     *
-     * @author Lorem-Ipsum
-     */
-    private GameMain game;
-
-    /**
      * This list stores the coordinates of all hideable slots in this room
      * <p>
      * Hideable slots are tiles that the clues can be hidden in
      */
     public List<Vector2Int> hidingSpots = null;
-
     /**
      * This list stores the coordinates of all secret bookcases in this room
      * <p>
@@ -53,11 +43,20 @@ public class Room {
      * @Lorem Ipsum
      * Assessment 4
      * This list stores the coordinates of all slots that provide extra points in this room
+     *
      * @author Lorem-Ipsum
      */
     public List<Vector2Int> scoreSpots = null;
 
 
+    /**
+     * This is a reference to the main game class
+     * <p>
+     * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
+     *
+     * @author Lorem-Ipsum
+     */
+    private GameMain game;
     /**
      * This stores the name of the room.
      * It is displayed on the tag when they enter the room
@@ -102,7 +101,7 @@ public class Room {
      * @param name    The name of the room
      */
     public Room(GameMain game, int id, String mapFile, String name) {
-        this.game = game;   
+        this.game = game;
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;
@@ -253,19 +252,19 @@ public class Room {
 
     /**
      * Assessment 4
-     *
+     * <p>
      * This method checks whether the tile at x, y is a tile that gives you extra points
      * in
      *
      * @param x The x coordinate to check
      * @param y The y coordinate to check
      * @return (boolean) whether the tile is an extraScore tile.
-     *
      * @Author Lorem-Ipsum
      */
     public boolean isExtraScoreTile(int x, int y) {
         return scoreSpots.contains(new Vector2Int(x, y));
     }
+
     /**
      * This method locks the specified coordinates so no other people object can move to it
      *
@@ -542,7 +541,6 @@ public class Room {
 
         return this.scoreSpots;
     }
-
 
 
     /**

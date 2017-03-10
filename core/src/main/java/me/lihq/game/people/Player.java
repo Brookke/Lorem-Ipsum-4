@@ -10,9 +10,9 @@ import me.lihq.game.models.Room;
 import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class defines the player that the person playing the game will be represented by.
@@ -87,9 +87,8 @@ public class Player extends AbstractPerson {
      * @param imgSrc The image used to represent it.
      */
     public Player(GameMain game, String name, String imgSrc, int tileX, int tileY) {
-        super(game, name, "people/player/" + imgSrc, tileX, tileY); 
+        super(game, name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
-
     }
 
     /**
@@ -211,28 +210,28 @@ public class Player extends AbstractPerson {
 
     /**
      * Assessment 4
-     *
+     * <p>
      * This method determines the extra score gained when the player finds an item that provides extra score
      * The score is determined through a guassian distribution
      * The mean score is 500 and the standard deviation is 200.
-     *
+     * <p>
      * If the player has already obtained extra score once then it makes the player unable to obtain more extra score
+     *
      * @Author Lorem-Ipsum
      */
-    private int extraScoreAmount(){
-        if (this.scoreObtained==false){
-            Random ran= new Random();
-            extraScore= (int) (ran.nextGaussian()*200+500);
+    private int extraScoreAmount() {
+        if (this.scoreObtained == false) {
+            Random ran = new Random();
+            extraScore = (int) (ran.nextGaussian() * 200 + 500);
             return extraScore;
-        }
-        else {
+        } else {
             return 0;
         }
     }
 
     /**
      * Assessment 4
-     *
+     * <p>
      * This method checks to see if the tile the player is facing has a clue hidden in it or not
      *
      * @Author Lorem-Ipsum
@@ -243,8 +242,7 @@ public class Player extends AbstractPerson {
 
         if (!this.getRoom().isExtraScoreTile(x, y)) {
             return;
-        }
-        else {
+        } else {
             score += extraScoreAmount();
             game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScoreAmount() + " extra points! Lucky you :D"));
             this.scoreObtained = true;
@@ -282,8 +280,7 @@ public class Player extends AbstractPerson {
      * @return boolean, true if there is a room change false otherwise
      * @author Lorem-Ipsum
      */
-    private boolean roomChangeCheck(Direction dir)
-    {
+    private boolean roomChangeCheck(Direction dir) {
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
             game.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
