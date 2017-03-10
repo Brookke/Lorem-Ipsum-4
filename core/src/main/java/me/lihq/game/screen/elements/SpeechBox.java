@@ -192,14 +192,15 @@ public class SpeechBox {
             /******************** Added by team JAAPAN ********************/
             Label contentLabel = UIHelpers.createLabel(textContent + "\n", Assets.FONT15, TEXT_COLOUR);
             /**************************** End *****************************/
-//            table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
-
             VerticalGroup group = new VerticalGroup();
 
-            Label spaceToContinue = UIHelpers.createLabel("Space to Continue", Assets.FONT15, Color.WHITE);
-
             group.addActor(contentLabel);
-            group.addActor(spaceToContinue);
+
+            if (buttonCount == 0)
+            {
+                Label spaceToContinue = UIHelpers.createLabel("Space to Continue", Assets.FONT15, Color.WHITE);
+                group.addActor(spaceToContinue);
+            }
 
             table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2);
 
@@ -216,10 +217,13 @@ public class SpeechBox {
 
             VerticalGroup group = new VerticalGroup();
 
-            Label spaceToContinue = UIHelpers.createLabel("\nSpace to Continue", Assets.FONT15, Color.WHITE);
-
             group.addActor(textGroup);
-            group.addActor(spaceToContinue);
+
+            if (buttonCount == 0)
+            {
+                Label spaceToContinue = UIHelpers.createLabel("\nSpace to Continue", Assets.FONT15, Color.WHITE);
+                group.addActor(spaceToContinue);
+            }
 
             table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
         }
