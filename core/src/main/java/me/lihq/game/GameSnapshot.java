@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Created by joeshuff on 02/03/2017.
+ * This class stores all the vital information about a game state.
+ *
  *
  * @author Lorem-Ipsum
  */
