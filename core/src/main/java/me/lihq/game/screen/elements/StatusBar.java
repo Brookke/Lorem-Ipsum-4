@@ -29,7 +29,7 @@ public class StatusBar {
      * The number of items that are in the status bar. Used to set the width of the elements
      * on the bar
      */
-    private static final int ITEM_COUNT = 4;
+    private static final int ITEM_COUNT = 5;
     /**
      * The width of each element of the status bar
      */
@@ -62,6 +62,13 @@ public class StatusBar {
     private Label scoreLabel;
 
     /**
+     * The label displaying who is the current player
+     *
+     * @author Lorem Ipsum
+     */
+    private Label currentPlayerLabel;
+
+    /**
      * The label displaying the player's personality
      *
      * @author JAAPAN
@@ -84,11 +91,17 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), Assets.UI_SKIN);
+        /** addition by Lorem Ipsum*/
+        currentPlayerLabel = new Label("Current player: "+game.currentSnapshot.player.getName(),Assets.UI_SKIN);
+        currentPlayerLabel.setAlignment(Align.center, Align.center);
+        statusBar.add(currentPlayerLabel).uniform();
+        /**end of addition */
+
+        scoreLabel = new Label("Score: " + game.currentSnapshot.player.getScore(), Assets.UI_SKIN);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), Assets.UI_SKIN);
+        personalityLabel = new Label("Personality: " + game.currentSnapshot.player.getPersonality().toString(), Assets.UI_SKIN);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
 
@@ -131,8 +144,8 @@ public class StatusBar {
      */
     public void render() {
         /******************** Added by team JAAPAN ********************/
-        scoreLabel.setText("Score: " + game.player.getScore());
-        personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
+        scoreLabel.setText("Score: " + game.currentSnapshot.player.getScore());
+        personalityLabel.setText("Personality: " + game.currentSnapshot.player.getPersonality().toString());
         /**************************** End *****************************/
         stage.act();
         stage.draw();

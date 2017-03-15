@@ -3,7 +3,6 @@ package me.lihq.game.screen.elements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -72,6 +71,11 @@ public class SpeechBox {
     private ArrayList<SpeechBoxButton> buttons;
 
     /**
+     * This stores whether closing this speechbox triggers an interaction
+     */
+    private boolean triggerInteraction = false;
+
+    /**
      * The constructor for the SpeechBox
      */
     public SpeechBox(String content, ArrayList<SpeechBoxButton> buttonList) {
@@ -86,7 +90,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox with personName
      */
     public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = buttonList;
@@ -98,7 +102,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons
      */
     public SpeechBox(String content) {
-        int timeout=-1;
+        int timeout = -1;
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -109,7 +113,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons with personName
      */
     public SpeechBox(String personName, String speechText) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
@@ -186,9 +190,20 @@ public class SpeechBox {
         if (person == null) {
             //Display only textContent
             /******************** Added by team JAAPAN ********************/
-            Label contentLabel = UIHelpers.createLabel(textContent, Assets.FONT15, TEXT_COLOUR);
+            Label contentLabel = UIHelpers.createLabel(textContent + "\n", Assets.FONT15, TEXT_COLOUR);
             /**************************** End *****************************/
-            table.add(contentLabel).colspan(labelColSpan).pad(-PADDING, PADDING, 0, PADDING).top().left();
+            VerticalGroup group = new VerticalGroup();
+
+            group.addActor(contentLabel);
+
+            if (buttonCount == 0)
+            {
+                Label spaceToContinue = UIHelpers.createLabel("Space to Continue", Assets.FONT15, Color.WHITE);
+                group.addActor(spaceToContinue);
+            }
+
+            table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2);
+
         } else {
             //Display both person and textContent
             HorizontalGroup textGroup = new HorizontalGroup();
@@ -200,7 +215,17 @@ public class SpeechBox {
             textGroup.addActor(personLabel);
             textGroup.addActor(contentLabel);
 
-            table.add(textGroup).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
+            VerticalGroup group = new VerticalGroup();
+
+            group.addActor(textGroup);
+
+            if (buttonCount == 0)
+            {
+                Label spaceToContinue = UIHelpers.createLabel("\nSpace to Continue", Assets.FONT15, Color.WHITE);
+                group.addActor(spaceToContinue);
+            }
+
+            table.add(group).colspan(labelColSpan).pad(-PADDING, PADDING / 2, 0, PADDING / 2).fill();
         }
 
         //Initialize button row
@@ -229,6 +254,7 @@ public class SpeechBox {
         //Pack table
         table.pack();
     }
+
     /**
      * Renders the speech box
      * Should be called within the render() method of a screen
@@ -248,7 +274,6 @@ public class SpeechBox {
     }
 
 
-
     /**
      * Disposes of SpeechBox resources
      */
@@ -264,5 +289,23 @@ public class SpeechBox {
      */
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
+    }
+
+    /**
+     * This method sets the triggerInteraction variable to the variable
+     *
+     * @param onInteract - The value to set triggerInteraction to
+     */
+    public void setTrigger(Boolean onInteract) {
+        triggerInteraction = onInteract;
+    }
+
+    /**
+     * This method returns whether this speechbox should trigger an interaction
+     *
+     * @return triggerInteraction
+     */
+    public boolean isTrigger() {
+        return triggerInteraction;
     }
 }

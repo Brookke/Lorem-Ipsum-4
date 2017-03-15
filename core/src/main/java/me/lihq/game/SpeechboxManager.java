@@ -49,7 +49,18 @@ public class SpeechboxManager {
         if (!stack.isEmpty()) {
             if (stack.get(0).timeoutDuration == 0) {
                 multiplexer.removeProcessor(stack.get(0).stage);
+
+                if (stack.get(0).isTrigger())
+                {
+                    game.currentSnapshot.finishedInteraction();
+                }
+
                 stack.remove(0);
+
+                if (stack.isEmpty())
+                {
+                    game.currentSnapshot.player.canMove = true;
+                }
             } else {
                 stack.get(0).update();
             }
@@ -84,6 +95,18 @@ public class SpeechboxManager {
      * @param speechBox The SpeechBox to add to the stack
      */
     public void addSpeechBox(SpeechBox speechBox) {
+        stack.add(speechBox);
+    }
+
+    /**
+     * This method adds a SpeechBox to the stack and sets the interactOnClose variable
+     *
+     * @param speechBox the SpeechBox to add to the stack
+     * @param interactOnClose whether to interact when this is closed or not
+     */
+    public void addSpeechBox(SpeechBox speechBox, Boolean interactOnClose)
+    {
+        speechBox.setTrigger(interactOnClose);
         stack.add(speechBox);
     }
 

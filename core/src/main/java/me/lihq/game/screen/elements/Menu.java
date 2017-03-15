@@ -24,8 +24,10 @@ public class Menu {
      *
      * @author Lorem Ipsum
      */
-    private static final int BUTTON_WIDTH = Gdx.graphics.getWidth() / 3;
-    private static final int BUTTON_HEIGHT = 80;
+    public static final int BUTTON_WIDTH = Gdx.graphics.getWidth() / 3;
+    public static final int BUTTON_HEIGHT = 80;
+    private static final int BUTTON_MARGIN = BUTTON_HEIGHT / 4;
+    private static final int BUTTON_START = Gdx.graphics.getHeight() - (Gdx.graphics.getHeight() / 3) - 50;
 
     /**
      * The width of the menu
@@ -70,42 +72,71 @@ public class Menu {
         //Creating the label containing text and determining its size and location on screen
         Label text;
 
-        TextButton newGameButton;
+        TextButton resumeGameButton = UIHelpers.createTextButton("Resume Game");
+        resumeGameButton.setPosition(WIDTH, BUTTON_START);
+        resumeGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+
+        TextButton newGameButton = UIHelpers.createTextButton("New Game");
+        newGameButton.setPosition(WIDTH, BUTTON_START);
+        newGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         //Setting the background
         Image background = new Image(new TextureRegion(Assets.loadTexture("menuBackground.jpg")));
         stage.addActor(background);
 
+        TextButton settings = UIHelpers.createTextButton("Settings");
+        settings.setPosition(WIDTH, BUTTON_START -  1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+        settings.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+
+        TextButton quit = UIHelpers.createTextButton("Quit");
+        quit.setPosition(WIDTH, BUTTON_START -  2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+        quit.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+
         if (pauseMenu) {
-            newGameButton = UIHelpers.createTextButton("Resume Game");
             text = UIHelpers.createLabel("Paused",true);
 
+            stage.addActor(resumeGameButton);
+
         } else {
+            //Add in a multi-player button on the main menu only
+            TextButton multiplayerButton = UIHelpers.createTextButton("Multi-Player");
+            multiplayerButton.setPosition(WIDTH, BUTTON_START -  1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+            multiplayerButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+            multiplayerButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    game.screenManager.setScreen(Screens.numberOfPlayersSelection);
+                }
+            });
+
+            settings.setPosition(WIDTH, BUTTON_START -  2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+            quit.setPosition(WIDTH, BUTTON_START -  3 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+
+            stage.addActor(multiplayerButton);
+            stage.addActor(newGameButton);
+          
             text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", true);
-            newGameButton = UIHelpers.createTextButton("New Game");
         }
 
         text.setPosition(Gdx.graphics.getWidth()/2-text.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
-
-        newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/3-50);
-        newGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-
-        TextButton settings = UIHelpers.createTextButton("Settings");
-        settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2-50);
-        settings.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
-        TextButton quit = UIHelpers.createTextButton("Quit");
-        quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 3-50);
-        quit.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         //Loading the buttons and the background onto the stage
         //stage.addActor(background);
         stage.addActor(text);
         stage.addActor(settings);
-        stage.addActor(newGameButton);
         stage.addActor(quit);
 
         //Making the "New Game" button clickable and causing it to start the game
         newGameButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.startGame(1);
+                game.screenManager.setScreen(Screens.navigation);
+            }
+        });
+
+        //Making the "Resume" button clickable and causing it to start the game
+        resumeGameButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 game.screenManager.setScreen(Screens.navigation);
