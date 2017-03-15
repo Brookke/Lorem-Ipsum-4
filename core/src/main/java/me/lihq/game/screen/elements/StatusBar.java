@@ -92,7 +92,7 @@ public class StatusBar {
         statusBar.defaults().width(WIDTH);
 
         /** addition by Lorem Ipsum*/
-        currentPlayerLabel = new Label("Current player: "+game.currentSnapshot.player.getName(),Assets.UI_SKIN);
+        currentPlayerLabel = UIHelpers.createLabel("Current player: "+game.currentSnapshot.player.getName(),false);
         currentPlayerLabel.setAlignment(Align.center, Align.center);
         statusBar.add(currentPlayerLabel).uniform();
         /**end of addition */
