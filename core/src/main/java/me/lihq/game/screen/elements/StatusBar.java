@@ -1,7 +1,6 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -29,15 +28,11 @@ public class StatusBar {
      * The number of items that are in the status bar. Used to set the width of the elements
      * on the bar
      */
-    private static final int ITEM_COUNT = 5;
+    private static int ITEM_COUNT = 4;
     /**
      * The width of each element of the status bar
      */
-    private static final int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
-    /**
-     * The background colour of the status bar
-     */
-    private static final Color BACKGROUND_COLOR = Color.GRAY;
+    private static int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
     /**
      * The stage to render the elements to
      */
@@ -92,9 +87,14 @@ public class StatusBar {
         statusBar.defaults().width(WIDTH);
 
         /** addition by Lorem Ipsum*/
-        currentPlayerLabel = UIHelpers.createLabel("Current Player: "+game.currentSnapshot.player.getName(),false);
-        currentPlayerLabel.setAlignment(Align.center, Align.center);
-        statusBar.add(currentPlayerLabel).uniform();
+        //Checks to see if the game is multilayer and if so displays the who is the current player
+        if (game.noPlayers > 1) {
+            ITEM_COUNT = 5;
+            WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
+            currentPlayerLabel = UIHelpers.createLabel("Current Player: " + game.currentSnapshot.player.getName(), false);
+            currentPlayerLabel.setAlignment(Align.center, Align.center);
+            statusBar.add(currentPlayerLabel).uniform();
+        }
         /**end of addition */
 
         scoreLabel = new Label("Score: " + game.currentSnapshot.player.getScore(), Assets.UI_SKIN);
