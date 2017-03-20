@@ -211,6 +211,10 @@ public class Puzzle {
 
     }
 
+    public Integer getSwitchesPressed(){
+        return switchesPressed;
+    }
+
 }
 
 
