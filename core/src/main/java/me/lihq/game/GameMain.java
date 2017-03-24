@@ -240,13 +240,23 @@ public class GameMain extends Game {
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
+            /*
+            Checks whether the randomly selected room is the secret room,
+            if it is then an NPC is not placed there and instead another room is selected
+            */
+            if (gameMap.getRoom(selectedRoom).getName().equals("Secret Room")) {
+                toTake = new Random().nextInt(roomsLeft.size());
+                selectedRoom = roomsLeft.get(toTake);
+                roomsLeft.remove(toTake);
+            }
+
             loopNpc.setRoom(gameMap.getRoom(selectedRoom));
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);
 
             System.out.println(loopNpc.getName() + " has been placed in room \"" + gameMap.getRoom(selectedRoom).getName() + "\" at " + position);
+
         }
-        System.out.println();
     }
 
     /**
