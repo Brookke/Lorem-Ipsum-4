@@ -112,12 +112,13 @@ public class NavigationScreen extends AbstractScreen {
     private RoomTag roomTag = null;
 
     /**
-     * This image stores the most recent frame in an image
+     * This stores the last frame before the game switches to another player,
+     * and is used for the background of the playerSwitchScreen
      */
     public Image recentFrame = null;
 
     /**
-     * This stores whether to capture the current frame into the above variable or not
+     * Polled to check whether to capture the current frame into recentFrame
      */
     public boolean captureFrame = false;
 
