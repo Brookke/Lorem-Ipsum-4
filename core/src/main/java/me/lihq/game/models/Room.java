@@ -16,6 +16,7 @@ import me.lihq.game.people.NPC;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class defines a room which is a game representation of a real world room in the Ron Cooke Hub.
@@ -542,6 +543,26 @@ public class Room {
         return this.scoreSpots;
     }
 
+    /**
+     * Assessment 4
+     * <p>
+     * This method determines the extra score gained when the player finds an item that provides extra score
+     * The score is determined through a gaussian distribution
+     * The mean score is 500 and the standard deviation is 200.
+     * <p>
+     * If the player has already obtained extra score once then it makes the player unable to obtain more extra score
+     *
+     * @Author Lorem-Ipsum
+     */
+    public int extraScoreAmount() {
+        if (!game.scoreObtained) {
+            Random rand = new Random();
+            int extraScore = (int) (rand.nextGaussian() * 200 + 500);
+            return extraScore;
+        } else {
+            return 0;
+        }
+    }
 
     /**
      * This gets a random possible location to hide a clue in

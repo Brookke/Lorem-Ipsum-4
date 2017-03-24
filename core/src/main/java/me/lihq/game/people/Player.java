@@ -12,7 +12,6 @@ import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * This class defines the player that the person playing the game will be represented by.
@@ -43,6 +42,12 @@ public class Player extends AbstractPerson {
      */
     private int questionsAsked = 0;
 
+
+    /**
+     * Stores the extra points currently being added onto the score
+     */
+    private int extra;
+
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
@@ -52,21 +57,6 @@ public class Player extends AbstractPerson {
      * The score the player has earned so far.
      */
     private int score = 0;
-
-    /**
-     * The score the player will earn if a certain item is obtained.
-     */
-    private int extraScore = 0;
-
-    /**
-     * Checks if the player has obtained extra score before.
-     */
-    private boolean scoreObtained = false;
-
-    /**
-     * Used to randomly generate the extra score the player gains
-     */
-    private Random ran;
 
     /**
      * The current duration of the game, excluding time paused. Used to calculate the time
@@ -211,27 +201,6 @@ public class Player extends AbstractPerson {
     /**
      * Assessment 4
      * <p>
-     * This method determines the extra score gained when the player finds an item that provides extra score
-     * The score is determined through a guassian distribution
-     * The mean score is 500 and the standard deviation is 200.
-     * <p>
-     * If the player has already obtained extra score once then it makes the player unable to obtain more extra score
-     *
-     * @Author Lorem-Ipsum
-     */
-    private int extraScoreAmount() {
-        if (!this.scoreObtained) {
-            Random ran = new Random();
-            extraScore = (int) (ran.nextGaussian() * 200 + 500);
-            return extraScore;
-        } else {
-            return 0;
-        }
-    }
-
-    /**
-     * Assessment 4
-     * <p>
      * This method checks to see if the tile the player is facing has a clue hidden in it or not
      *
      * @Author Lorem-Ipsum
@@ -241,9 +210,10 @@ public class Player extends AbstractPerson {
         int y = getTileCoordinates().y + getDirection().getDy();
 
         if (this.getRoom().isExtraScoreTile(x, y)) {
-            score += extraScoreAmount();
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extraScoreAmount() + " extra points! Lucky you :D"));
-            this.scoreObtained = true;
+            extra= this.getRoom().extraScoreAmount();
+            score += extra;
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            game.scoreObtained = true;
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
