@@ -63,11 +63,10 @@ public class Map {
 
         Room pod = new Room(game, 9, "pod.tmx", "Pod");
 
-        //TODO: update with actual room file when ready
-        Room secretRoom = new Room(game, 10, "pod.tmx", "Secret Room");
+        Room secretRoom = new Room(game, 10, "secretroom2.tmx", "Secret Room");
 
         //This is used by the puzzle to transition to the secret room
-        secretRoomTrans = new Room.Transition().setTo(secretRoom, 10, 10, Direction.NORTH);
+        secretRoomTrans = new Room.Transition().setTo(secretRoom, 10, 0, Direction.NORTH);
 
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 
