@@ -144,6 +144,12 @@ public class Map {
                 .addTransition(new Room.Transition().setFrom(18, 10).setTo(outside, 9, 12, Direction.EAST));  //To Outside
 
         rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
+
+
+        //Pick bookcase to use
+        //TODO: replace mainRoom with random room where secretRoomSpot is not null
+        Vector2Int spot = mainRoom.secretRoomSpot;
+        secretRoom.addTransition(new Room.Transition().setFrom(10,0).setTo(mainRoom, spot.x, spot.y - 1, Direction.NORTH));
     }
 
     /**
