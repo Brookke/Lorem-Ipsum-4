@@ -46,6 +46,11 @@ public class ScreenManager {
     public SettingsScreen settingsScreen;
 
     /**
+     * Screen displayed to prompt players to swap over.
+     */
+    public PlayerSwitchScreen playerSwitchScreen;
+
+    /**
      * Universal input handler
      */
     public GlobalInput input;
