@@ -3,7 +3,6 @@ package me.lihq.game.screen.elements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -86,7 +85,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox with personName
      */
     public SpeechBox(String personName, String speechText, ArrayList<SpeechBoxButton> buttonList) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = buttonList;
@@ -98,7 +97,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons
      */
     public SpeechBox(String content) {
-        int timeout=-1;
+        int timeout = -1;
         textContent = content;
         buttons = new ArrayList<>();
         this.timeoutDuration = timeout * Settings.TPS;
@@ -109,7 +108,7 @@ public class SpeechBox {
      * The constructor for the SpeechBox without buttons with personName
      */
     public SpeechBox(String personName, String speechText) {
-        int timeout=-1;
+        int timeout = -1;
         person = personName;
         textContent = speechText;
         buttons = new ArrayList<>();
@@ -229,6 +228,7 @@ public class SpeechBox {
         //Pack table
         table.pack();
     }
+
     /**
      * Renders the speech box
      * Should be called within the render() method of a screen
@@ -246,7 +246,6 @@ public class SpeechBox {
             timeoutDuration--;
         }
     }
-
 
 
     /**

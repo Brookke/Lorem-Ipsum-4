@@ -30,7 +30,7 @@ public class Menu {
     /**
      * The width of the menu
      */
-    private static final int WIDTH = Gdx.graphics.getWidth() / 2 - BUTTON_WIDTH/2;
+    private static final int WIDTH = Gdx.graphics.getWidth() / 2 - BUTTON_WIDTH / 2;
     /**
      * the stage to render the menu to
      */
@@ -78,23 +78,23 @@ public class Menu {
 
         if (pauseMenu) {
             newGameButton = UIHelpers.createTextButton("Resume Game");
-            text = UIHelpers.createLabel("Paused",true);
+            text = UIHelpers.createLabel("Paused", true);
 
         } else {
             text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", true);
             newGameButton = UIHelpers.createTextButton("New Game");
         }
 
-        text.setPosition(Gdx.graphics.getWidth()/2-text.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
+        text.setPosition(Gdx.graphics.getWidth() / 2 - text.getWidth() / 2, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 6);
 
-        newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/3-50);
+        newGameButton.setPosition(WIDTH, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 3 - 50);
         newGameButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         TextButton settings = UIHelpers.createTextButton("Settings");
-        settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2-50);
+        settings.setPosition(WIDTH, Gdx.graphics.getHeight() / 2 - 50);
         settings.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
         TextButton quit = UIHelpers.createTextButton("Quit");
-        quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 3-50);
+        quit.setPosition(WIDTH, Gdx.graphics.getHeight() / 3 - 50);
         quit.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         //Loading the buttons and the background onto the stage

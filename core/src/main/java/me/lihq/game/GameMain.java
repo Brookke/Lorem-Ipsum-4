@@ -356,7 +356,7 @@ public class GameMain extends Game {
         NPCs.clear();
 
         // Recreate the map, so the murder room is randomly re-assigned
-        gameMap = new Map(this); 
+        gameMap = new Map(this);
 
         // Clear the input multiplexer, and add the global input controller
         inputMultiplexer.clear();

@@ -70,7 +70,7 @@ public class Player extends AbstractPerson {
      * @param imgSrc The image used to represent it.
      */
     public Player(GameMain game, String name, String imgSrc, int tileX, int tileY) {
-        super(game, name, "people/player/" + imgSrc, tileX, tileY); 
+        super(game, name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
     }
 

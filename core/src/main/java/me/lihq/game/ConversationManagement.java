@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ConversationManagement {
     /**
      * This is a reference to the main game
-     *
+     * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
      *
      * @author Lorem-Ipsum
@@ -67,7 +67,6 @@ public class ConversationManagement {
      *
      * @param player           the player that will initiate the conversation
      * @param speechboxManager the speechbox manager that is in charge of displaying the conversation
-     *
      * @author Lorem-Ipsum
      */
     public ConversationManagement(GameMain game, Player player, SpeechboxManager speechboxManager) {
@@ -237,7 +236,7 @@ public class ConversationManagement {
 
         // End the game, and show the winning screen
         if (won) {
-            game.setScreen(new WinScreen(game));    
+            game.setScreen(new WinScreen(game));
             won = false;
         }
     }

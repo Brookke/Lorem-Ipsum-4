@@ -63,6 +63,7 @@ public class ScreenManager {
     /**
      * Constructor for ScreenManager
      * Initialises screens ready to render
+     *
      * @param game reference to GameMain
      */
     public ScreenManager(GameMain game) {
@@ -80,6 +81,7 @@ public class ScreenManager {
 
     /**
      * Changes currently displayed screen
+     *
      * @param screen Screen to display
      */
     public void setScreen(Screens screen) {
