@@ -26,6 +26,7 @@ public class PuzzleScreen extends AbstractScreen {
      */
     @Override
     public void show() {
+        puzzle.init();
 
         if (puzzle.hasBeenSolved()) {
             puzzle.goToSecretRoom();

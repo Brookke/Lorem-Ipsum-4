@@ -8,12 +8,15 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import me.lihq.game.*;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.AbstractPerson;
 import me.lihq.game.people.NPC;
+import me.lihq.game.people.Player;
 import me.lihq.game.people.controller.PlayerController;
 import me.lihq.game.screen.elements.*;
 
@@ -110,6 +113,22 @@ public class NavigationScreen extends AbstractScreen {
     private RoomTag roomTag = null;
 
     /**
+     * This stores the last frame before the game switches to another player,
+     * and is used for the background of the playerSwitchScreen
+     */
+    public Image recentFrame = null;
+
+    /**
+     * Polled to check whether to capture the current frame into recentFrame
+     */
+    public boolean captureFrame = false;
+
+    /**
+     * This is a reference to the current player
+     */
+    private Player player;
+
+    /**
      * Initialises the navigation screen
      *
      * @param game The main game instance
@@ -128,23 +147,29 @@ public class NavigationScreen extends AbstractScreen {
 
         viewport = new FitViewport(w / Settings.ZOOM, h / Settings.ZOOM, camera);
 
-        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.player.getRoom().getTiledMap(), game);
-
-        playerController = new PlayerController(game, game.player);
-
         spriteBatch = new SpriteBatch();
 
+
+    }
+
+    public void init() {
         statusBar = new StatusBar(game);
 
         speechboxMngr = new SpeechboxManager(game);
 
-        convMngt = new ConversationManagement(game, game.player, speechboxMngr);
+        tiledMapRenderer = new OrthogonalTiledMapRendererWithPeople(game.currentSnapshot.player.getRoom().getTiledMap(), game);
 
-        tiledMapRenderer.addPerson(game.player);
+        playerController = new PlayerController(game, game.currentSnapshot.player);
 
-        arrow = new RoomArrow(game.player);
+        convMngt = new ConversationManagement(game, game.currentSnapshot.player, speechboxMngr);
 
+        tiledMapRenderer.addPerson(game.currentSnapshot.player);
 
+        arrow = new RoomArrow(game.currentSnapshot.player);
+
+        player = game.currentSnapshot.player;
+
+        updateTiledMapRenderer();
     }
 
     /**
@@ -152,6 +177,8 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void show() {
+        init();
+
         game.inputMultiplexer.addProcessor(speechboxMngr.multiplexer);
         game.inputMultiplexer.addProcessor(statusBar.stage);
         game.inputMultiplexer.addProcessor(playerController);
@@ -166,7 +193,7 @@ public class NavigationScreen extends AbstractScreen {
 
         if (!pause) { //this statement contains updates that shouldn't happen during a pause
             playerController.update();
-            game.player.update();
+            game.currentSnapshot.player.update();
             arrow.update();
 
             for (AbstractPerson n : currentNPCS) {
@@ -196,7 +223,7 @@ public class NavigationScreen extends AbstractScreen {
                 animTimer++;
 
                 if (animTimer == ANIM_TIME) {
-                    game.player.moveRoom(roomTransition);
+                    game.currentSnapshot.player.moveRoom(roomTransition);
                 }
 
                 if (animTimer > ANIM_TIME) {
@@ -232,7 +259,7 @@ public class NavigationScreen extends AbstractScreen {
         roomTransition = null;
         fadeToBlack = true;
         pause = false;
-        roomTag = new RoomTag(game, game.player.getRoom().getName());
+        roomTag = new RoomTag(game, game.currentSnapshot.player.getRoom().getName());
     }
 
     /**
@@ -247,24 +274,24 @@ public class NavigationScreen extends AbstractScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         update();
-        game.player.addPlayTime(delta);
+        game.currentSnapshot.player.addPlayTime(delta);
 
-        game.player.pushCoordinatesToSprite();
+        game.currentSnapshot.player.pushCoordinatesToSprite();
         for (AbstractPerson n : currentNPCS) {
             n.pushCoordinatesToSprite();
 
         }
 
         if (changeMap) {
-            tiledMapRenderer.setMap(game.player.getRoom().getTiledMap());
+            tiledMapRenderer.setMap(game.currentSnapshot.player.getRoom().getTiledMap());
             tiledMapRenderer.clearPeople();
             tiledMapRenderer.addPerson((List<AbstractPerson>) ((List<? extends AbstractPerson>) currentNPCS));
-            tiledMapRenderer.addPerson(game.player);
+            tiledMapRenderer.addPerson(game.currentSnapshot.player);
             changeMap = false;
         }
 
-        camera.position.x = Math.round(game.player.getX());
-        camera.position.y = Math.round(game.player.getY());
+        camera.position.x = Math.round(game.currentSnapshot.player.getX());
+        camera.position.y = Math.round(game.currentSnapshot.player.getY());
         camera.update();
 
         tiledMapRenderer.setView(camera);
@@ -275,7 +302,7 @@ public class NavigationScreen extends AbstractScreen {
 
         arrow.draw(tiledMapRenderer.getBatch());
 
-        game.player.getRoom().drawClues(delta, tiledMapRenderer.getBatch());
+        game.currentSnapshot.player.getRoom().drawClues(delta, tiledMapRenderer.getBatch());
 
         tiledMapRenderer.getBatch().end();
 
@@ -286,7 +313,7 @@ public class NavigationScreen extends AbstractScreen {
             BLACK_BACKGROUND.draw(spriteBatch);
         }
 
-        if (game.player.getRoom().getName().equals("Secret Room")){
+        if (game.currentSnapshot.player.getRoom().getName().equals("Secret Room")){
             spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
         }
 
@@ -301,9 +328,15 @@ public class NavigationScreen extends AbstractScreen {
 
         spriteBatch.end();
 
-        statusBar.render();
-        speechboxMngr.render();
+        if (!captureFrame) {
+            statusBar.render();
+            speechboxMngr.render();
+        }
 
+        if (captureFrame) {
+            recentFrame = new Image(ScreenUtils.getFrameBufferTexture());
+            captureFrame = false;
+        }
     }
 
     /**
@@ -323,8 +356,11 @@ public class NavigationScreen extends AbstractScreen {
      */
     @Override
     public void pause() {
-        // Pause the game, so the gameDuration counter isn't updated
-        game.screenManager.setScreen(Screens.pauseMenu);
+        // Pause the game if the player isnt in conversation, so the gameDuration counter isn't updated
+        if (!player.inConversation)
+        {
+            game.screenManager.setScreen(Screens.pauseMenu);
+        }
     }
 
     /**
@@ -359,7 +395,7 @@ public class NavigationScreen extends AbstractScreen {
      */
     public void updateTiledMapRenderer() {
         this.changeMap = true;
-        this.currentNPCS = game.getNPCS(game.player.getRoom());
+        this.currentNPCS = game.currentSnapshot.getNPCs(game.currentSnapshot.player.getRoom());
     }
 
     /**

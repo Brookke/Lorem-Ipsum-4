@@ -132,7 +132,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : game.getNPCS(getRoom())) {
+        for (NPC npc : game.currentSnapshot.getNPCs(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -158,8 +158,8 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()));
-
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()), true);
+            canMove = false;
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -171,7 +171,7 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : game.NPCs) {
+            for (NPC character : game.currentSnapshot.NPCs) {
                 character.ignored = false;
             }
             score += 250;
@@ -179,9 +179,6 @@ public class Player extends AbstractPerson {
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
-        } else {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here"));
-
         }
     }
 

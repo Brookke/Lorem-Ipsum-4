@@ -34,7 +34,7 @@ public class Puzzle {
     /**
      * The transition data for the secret room
      */
-    public final Room.Transition secretRoomTrans;
+    public Room.Transition secretRoomTrans;
 
     /**
      * The switches for the game 
@@ -68,9 +68,6 @@ public class Puzzle {
 
     public Puzzle(GameMain game) {
         this.game = game;
-
-        secretRoomTrans = game.gameMap.getSecretRoomTransition();
-
 
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
@@ -160,7 +157,7 @@ public class Puzzle {
     private void markSolved() {
         solved = true;
         //TODO: change to game snapshot
-        playerWhoUnlocked = game.player.getName();
+        playerWhoUnlocked = game.currentSnapshot.player.getName();
     }
 
     /**
@@ -183,6 +180,10 @@ public class Puzzle {
         return solved;
     }
 
+
+    public void init() {
+        secretRoomTrans = game.currentSnapshot.gameMap.getSecretRoomTransition();
+    }
 
     /**
      * This method is called to render the main menu to the stage
