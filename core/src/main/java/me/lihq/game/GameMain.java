@@ -112,10 +112,7 @@ public class GameMain extends Game {
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         screenManager = new ScreenManager(this);
-
-        //TODO: remove after accessor created
-        screenManager.setScreen(Screens.puzzle);
-        //screenManager.setScreen(Screens.mainMenu);
+        screenManager.setScreen(Screens.mainMenu);
 
         // Add an introductory speechbox
         screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox(victim.getName() + " has been murdered! You must find the killer!"));
