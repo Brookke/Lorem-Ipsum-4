@@ -7,6 +7,7 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
+import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
@@ -116,8 +117,12 @@ public class Player extends AbstractPerson {
         NPC npc = getFacingNPC();
         if (npc != null) {
             game.screenManager.navigationScreen.convMngt.startConversation(npc);
+        } else if (checkForSecretRoom()) {
+            game.screenManager.setScreen(Screens.puzzle);
         } else {
             checkForClue();
+
+
         }
     }
 
@@ -180,6 +185,15 @@ public class Player extends AbstractPerson {
         }
     }
 
+    /**
+     * Checks for secret room location
+     */
+    private boolean checkForSecretRoom() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
+    }
     /**
      * This method returns whether or not the player is standing on a tile that initiates a Transition to another room
      *

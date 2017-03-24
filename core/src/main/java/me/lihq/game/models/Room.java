@@ -22,6 +22,11 @@ import java.util.List;
  */
 public class Room {
 
+
+    /**
+     * The secret room spot, this is selected from one of the bookcases
+     */
+    public Vector2Int secretRoomSpot;
     /**
      * This is a reference to the main game class
      *
@@ -37,6 +42,12 @@ public class Room {
      * Hideable slots are tiles that the clues can be hidden in
      */
     public List<Vector2Int> hidingSpots = null;
+
+    /**
+     * This list stores the coordinates of all secret bookcases in this room
+     * <p>
+     */
+    private List<Vector2Int> bookcaseSpots = null;
     /**
      * This stores the name of the room.
      * It is displayed on the tag when they enter the room
@@ -99,6 +110,11 @@ public class Room {
         }
 
         hidingSpots = getHidingSpots();
+        Collections.shuffle(getBookcaseSpots());
+        if (bookcaseSpots.size() > 0) {
+            secretRoomSpot = bookcaseSpots.get(0);
+        }
+
     }
 
     /**
@@ -382,6 +398,42 @@ public class Room {
     public Room addTransition(Transition t) {
         roomTransitions.add(t);
         return this;
+    }
+
+    /**
+     * This will check the map for any potential hiding locations, and returns them as a list of coordinates
+     *
+     * @return (List<Vector2Int>) list of coordinates of the hideable tiles
+     */
+    private List<Vector2Int> getBookcaseSpots() {
+        if (bookcaseSpots != null) return bookcaseSpots;
+
+        List<Vector2Int> bookcaseSpots = new ArrayList<>();
+
+        int roomWidth = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getWidth();
+        int roomHeight = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getHeight();
+
+        for (int x = 0; x < roomWidth; x++) {
+            for (int y = 0; y < roomHeight; y++) {
+                for (MapLayer layer : this.getTiledMap().getLayers()) {
+                    TiledMapTileLayer thisLayer = (TiledMapTileLayer) layer;
+                    TiledMapTileLayer.Cell cellInTile = thisLayer.getCell(x, y);
+
+                    if (cellInTile == null) continue;
+
+                    if (!cellInTile.getTile().getProperties().containsKey("secretRoom")) continue;
+
+                    if (cellInTile.getTile().getProperties().get("secretRoom").toString().equals("true")) {
+                        bookcaseSpots.add(new Vector2Int(x, y));
+                        break;
+                    }
+                }
+            }
+        }
+
+        this.bookcaseSpots = bookcaseSpots;
+
+        return this.bookcaseSpots;
     }
 
     /**
