@@ -1,7 +1,6 @@
 package me.lihq.game.screen.elements;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -29,15 +28,11 @@ public class StatusBar {
      * The number of items that are in the status bar. Used to set the width of the elements
      * on the bar
      */
-    private static final int ITEM_COUNT = 4;
+    private static int ITEM_COUNT = 4;
     /**
      * The width of each element of the status bar
      */
-    private static final int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
-    /**
-     * The background colour of the status bar
-     */
-    private static final Color BACKGROUND_COLOR = Color.GRAY;
+    private static int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
     /**
      * The stage to render the elements to
      */
@@ -62,6 +57,13 @@ public class StatusBar {
     private Label scoreLabel;
 
     /**
+     * The label displaying who is the current player
+     *
+     * @author Lorem Ipsum
+     */
+    private Label currentPlayerLabel;
+
+    /**
      * The label displaying the player's personality
      *
      * @author JAAPAN
@@ -84,11 +86,22 @@ public class StatusBar {
         statusBar.row().height(HEIGHT);
         statusBar.defaults().width(WIDTH);
 
-        scoreLabel = new Label("Score: " + game.player.getScore(), Assets.UI_SKIN);
+        /** addition by Lorem Ipsum*/
+        //Checks to see if the game is multilayer and if so displays the who is the current player
+        if (game.noPlayers > 1) {
+            ITEM_COUNT = 5;
+            WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
+            currentPlayerLabel = UIHelpers.createLabel("Current Player: " + game.currentSnapshot.player.getName(), false);
+            currentPlayerLabel.setAlignment(Align.center, Align.center);
+            statusBar.add(currentPlayerLabel).uniform();
+        }
+        /**end of addition */
+
+        scoreLabel = new Label("Score: " + game.currentSnapshot.player.getScore(), Assets.UI_SKIN);
         scoreLabel.setAlignment(Align.center, Align.center);
         statusBar.add(scoreLabel).uniform();
 
-        personalityLabel = new Label("Personality: " + game.player.getPersonality().toString(), Assets.UI_SKIN);
+        personalityLabel = new Label("Personality: " + game.currentSnapshot.player.getPersonality().toString(), Assets.UI_SKIN);
         personalityLabel.setAlignment(Align.center, Align.center);
         statusBar.add(personalityLabel).uniform();
 
@@ -131,8 +144,8 @@ public class StatusBar {
      */
     public void render() {
         /******************** Added by team JAAPAN ********************/
-        scoreLabel.setText("Score: " + game.player.getScore());
-        personalityLabel.setText("Personality: " + game.player.getPersonality().toString());
+        scoreLabel.setText("Score: " + game.currentSnapshot.player.getScore());
+        personalityLabel.setText("Personality: " + game.currentSnapshot.player.getPersonality().toString());
         /**************************** End *****************************/
         stage.act();
         stage.draw();

@@ -1,6 +1,5 @@
 package me.lihq.game.screen;
 
-import com.badlogic.gdx.InputMultiplexer;
 import me.lihq.game.GameMain;
 import me.lihq.game.people.controller.GlobalInput;
 
@@ -8,7 +7,6 @@ import me.lihq.game.people.controller.GlobalInput;
  * ScreenManager handles the GUI screens within the game
  */
 public class ScreenManager {
-
 
     /**
      * Reference to game
@@ -46,19 +44,29 @@ public class ScreenManager {
     public SettingsScreen settingsScreen;
 
     /**
+     * Screen displayed to prompt players to swap over.
+     */
+    public PlayerSwitchScreen playerSwitchScreen;
+
+    /**
+     * Menu screen displayed when the player asks for a multi-player game.
+     */
+    public NumberOfPlayersSelectionScreen numberOfPlayersSelectionScreen;
+
+    /**
      * Universal input handler
      */
     public GlobalInput input;
 
     /**
-     * Input multiplexer to control multiple inputs across project
-     */
-    public InputMultiplexer inputMultiplexer;
-
-    /**
      * This stores the previous menu that was shown. Used by settings to determine what screen to return to
      */
     public Boolean wasInMenu = true;
+
+    /**
+     * This is the next screen to be shown, it is shown after 1 render loop
+     */
+    public AbstractScreen nextScreen = null;
 
     /**
      * Constructor for ScreenManager
@@ -71,10 +79,11 @@ public class ScreenManager {
         // Set up the various screens
         menuScreen = new MainMenuScreen(game);
         navigationScreen = new NavigationScreen(game);
-        navigationScreen.updateTiledMapRenderer();
         pauseScreen = new PauseScreen(game);
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
+        playerSwitchScreen = new PlayerSwitchScreen(game);
+        numberOfPlayersSelectionScreen = new NumberOfPlayersSelectionScreen(game);
 
     }
 
@@ -85,24 +94,42 @@ public class ScreenManager {
     public void setScreen(Screens screen) {
         switch (screen) {
             case mainMenu:
-                game.setScreen(menuScreen);
+                nextScreen = menuScreen;
                 wasInMenu = true;
                 break;
             case pauseMenu:
-                game.setScreen(pauseScreen);
+                nextScreen = pauseScreen;
                 wasInMenu = false;
                 break;
             case navigation:
-                game.setScreen(navigationScreen);
+                nextScreen = navigationScreen;
                 break;
             case inventory:
-                game.setScreen(inventoryScreen);
+                nextScreen = inventoryScreen;
                 break;
             case settings:
-                game.setScreen(settingsScreen);
+                nextScreen = settingsScreen;
+                break;
+            case playerSwitch:
+                nextScreen = playerSwitchScreen;
+                break;
+            case numberOfPlayersSelection:
+                nextScreen = numberOfPlayersSelectionScreen;
                 break;
         }
         currentScreen = screen;
+    }
+
+    /**
+     * This is called once a render loop to try and update the screen
+     */
+    public void update()
+    {
+        if (nextScreen != null)
+        {
+            game.setScreen(nextScreen);
+            nextScreen = null;
+        }
     }
 
     /**
@@ -111,7 +138,6 @@ public class ScreenManager {
     public void reset() {
         // Recreate the navigation screen, so the references to the player and NPCs are updated
         navigationScreen = new NavigationScreen(game);
-        navigationScreen.updateTiledMapRenderer();
     }
 
     /**
@@ -123,5 +149,7 @@ public class ScreenManager {
         pauseScreen.dispose();
         inventoryScreen.dispose();
         settingsScreen.dispose();
+        numberOfPlayersSelectionScreen.dispose();
+        playerSwitchScreen.dispose();
     }
 }

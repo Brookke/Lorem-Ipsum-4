@@ -27,11 +27,38 @@ public class Map {
     private List<Room> rooms;
 
     /**
+     * This stores the murder room
+     */
+    private Room murderRoom;
+
+    /**
      * Constructs the map
      */
     public Map(GameMain game) {
         this.game = game;   
         initialiseRooms();
+    }
+
+    /**
+     * Constructs a Map from another Map
+     *
+     * @author Lorem-Ipsum
+     */
+    public Map(Map other)
+    {
+        this.game = other.game;
+        initialiseRooms();
+
+        murderRoom = getRoom(other.murderRoom.getID());
+        murderRoom.setMurderRoom();
+
+        for (int i = 0; i < getRooms().size(); i ++)
+        {
+            for (Clue c : other.getRoom(i).getCluesInRoom())
+            {
+                rooms.get(i).addClue(new Clue(c));
+            }
+        }
     }
 
     /**
@@ -110,11 +137,19 @@ public class Map {
                 .addTransition(new Room.Transition().setFrom(18, 10).setTo(outside, 9, 12, Direction.EAST));  //To Outside
 
         rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod);
+    }
 
+    /**
+     * This method sets one of the rooms randomly to the murder room
+     */
+    public void setRandomMurderRoom()
+    {
         /**
          * Assign the murder room
          */
-        rooms.get(new Random().nextInt(rooms.size())).setMurderRoom();
+        Room room = rooms.get(new Random().nextInt(rooms.size()));
+        room.setMurderRoom();
+        murderRoom = room;
     }
 
     /**
@@ -148,5 +183,4 @@ public class Map {
     public List<Room> getRooms() {
         return rooms;
     }
-
 }

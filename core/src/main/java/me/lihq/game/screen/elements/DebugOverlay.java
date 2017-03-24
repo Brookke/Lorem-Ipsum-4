@@ -43,7 +43,7 @@ public class DebugOverlay {
     /**
      * This is to store the font that the debug screen is written in
      */
-    private static BitmapFont font = Assets.createFont("arial", 30);
+    private static BitmapFont font = Assets.createFont("Stranger back in the Night", 30);
 
     /**
      * This method sets the reference to the main game
@@ -90,7 +90,7 @@ public class DebugOverlay {
         for (int w = 0; w < roomWidth; w++) {
             for (int h = 0; h < roomHeight; h++) {
                 if (Settings.DEBUG_OPTIONS.get("showWalkable")) {
-                    if (game.player.getRoom().isWalkableTile(w, h)) {
+                    if (game.currentSnapshot.player.getRoom().isWalkableTile(w, h)) {
                         greenSprite.setPosition(w * Settings.TILE_SIZE, h * Settings.TILE_SIZE);
                         greenSprite.draw(batch);
                     } else {

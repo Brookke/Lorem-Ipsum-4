@@ -90,7 +90,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         for (int currentLayer = 0; currentLayer < amountOfLayers; currentLayer++) {
             MapLayer layer = map.getLayers().get(currentLayer);
 
-            if (layer.getName().equals("Blood") && !game.player.getRoom().isMurderRoom()) {
+            if (layer.getName().equals("Blood") && !game.currentSnapshot.player.getRoom().isMurderRoom()) {
                 //Don't draw the layer as its not the murder room
             } else {
                 renderTileLayer((TiledMapTileLayer) layer);
@@ -104,7 +104,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
         }
 
         if (Settings.DEBUG) {
-            DebugOverlay.renderDebugTiles(game.player.getRoom(), this.getBatch()); 
+            DebugOverlay.renderDebugTiles(game.currentSnapshot.player.getRoom(), this.getBatch());
         }
 
         endRender();
