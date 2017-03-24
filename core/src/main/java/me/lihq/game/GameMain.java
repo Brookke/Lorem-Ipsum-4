@@ -240,7 +240,8 @@ public class GameMain extends Game {
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
-            if (selectedRoom==10){
+            //Checks whether the randomly selected room is the secret room, if it is then an NPC is not placed there
+            if (gameMap.getRoom(selectedRoom).getName().equals("Secret Room")){
                 return;
             }
             else{
