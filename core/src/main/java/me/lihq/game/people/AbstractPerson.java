@@ -344,6 +344,17 @@ public abstract class AbstractPerson extends Sprite {
     }
 
     /**
+     * This method sets the Persons name to the parameter
+     *
+     * @param name - The name to set the persons name to
+     * @author Lorem-Ipsum
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    /**
      * Getter for direction.
      *
      * @return (Direction) Returns the direction the person is facing.

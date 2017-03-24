@@ -28,6 +28,11 @@ public class Clue extends Sprite {
     private Vector2Int tileCoordinates = new Vector2Int(0, 0);
 
     /**
+     * This stores the asset tile coordinates for the texture
+     */
+    private Vector2Int assetCoordinates = new Vector2Int(0, 0);
+
+    /**
      * True if clue is a murder weapon, otherwise false.
      *
      * @author JAAPAN
@@ -58,6 +63,24 @@ public class Clue extends Sprite {
         this.name = name;
         this.description = description;
         this.murderWeapon = weapon;
+        this.assetCoordinates = new Vector2Int(clueX, clueY);
+    }
+
+    /**
+     * This constructor builds a clue from another clue
+     *
+     * @param other - The clue to copy
+     * @author Lorem-Ipsum
+     */
+    public Clue(Clue other)
+    {
+        super(new TextureRegion(Assets.CLUE_SHEET, (other.assetCoordinates.x * Settings.CLUE_SIZE), (other.assetCoordinates.y * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
+        this.name = other.name;
+        this.description = other.description;
+        this.murderWeapon = other.murderWeapon;
+        this.assetCoordinates = new Vector2Int(other.assetCoordinates.x, other.assetCoordinates.y);
+
+        this.setTileCoordinates(new Vector2Int(other.getTileX(), other.getTileY()));
     }
 
     /**
