@@ -56,7 +56,7 @@ public class SettingsScreen extends AbstractScreen {
     private void initMenu() {
         // Create and position the label containing title text
         Label title = UIHelpers.createLabel("Settings", true);
-        title.setPosition(Gdx.graphics.getWidth()/2-title.getWidth()/2,Gdx.graphics.getHeight()-Gdx.graphics.getHeight()/6);
+        title.setPosition(Gdx.graphics.getWidth() / 2 - title.getWidth() / 2, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 6);
 
 
         // Create and position the back button, using the standard style

@@ -13,7 +13,7 @@ public class PlayerController extends InputAdapter {
 
     /**
      * This is a reference to the main game class
-     *
+     * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
      *
      * @author Lorem-Ipsum
@@ -48,7 +48,7 @@ public class PlayerController extends InputAdapter {
      */
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.SPACE)  {
+        if (keycode == Input.Keys.SPACE) {
             player.interact();
             return true;
         }

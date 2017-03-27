@@ -29,7 +29,7 @@ public class Room {
     public Vector2Int secretRoomSpot;
     /**
      * This is a reference to the main game class
-     *
+     * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
      *
      * @author Lorem-Ipsum
@@ -92,7 +92,7 @@ public class Room {
      * @param name    The name of the room
      */
     public Room(GameMain game, int id, String mapFile, String name) {
-        this.game = game;   
+        this.game = game;
         this.ID = id;
         this.mapFile = mapFile;
         this.name = name;
