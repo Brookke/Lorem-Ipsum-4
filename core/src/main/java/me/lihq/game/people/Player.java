@@ -42,12 +42,6 @@ public class Player extends AbstractPerson {
      */
     private int questionsAsked = 0;
 
-
-    /**
-     * Stores the extra points currently being added onto the score
-     */
-    private int extra;
-
     /**
      * The personality will be a percent score (0-100) 0 being angry, 50 being neutral, and 100 being happy/nice.
      */
@@ -209,10 +203,20 @@ public class Player extends AbstractPerson {
         int x = getTileCoordinates().x + getDirection().getDx();
         int y = getTileCoordinates().y + getDirection().getDy();
 
+        /**
+         * Stores the extra points currently being added onto the score
+         */
+        int extra;
+
         if (this.getRoom().isExtraScoreTile(x, y)) {
             extra= this.getRoom().extraScoreAmount();
             score += extra;
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            if (extra==0){
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+            }
+            else {
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            }
             game.scoreObtained = true;
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
