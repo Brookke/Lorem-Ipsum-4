@@ -18,7 +18,7 @@ import me.lihq.game.models.Vector2Int;
 public class DebugOverlay {
     /**
      * This is a reference to the main game
-     *
+     * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
      *
      * @author Lorem-Ipsum
@@ -49,11 +49,9 @@ public class DebugOverlay {
      * This method sets the reference to the main game
      *
      * @param game - The game instance
-     *
      * @author Lorem-Ipsum
      */
-    public static void setGame(GameMain game)
-    {
+    public static void setGame(GameMain game) {
         DebugOverlay.game = game;
     }
 

@@ -131,7 +131,7 @@ public class Assets {
      */
     private static void initSkin() {
         UI_SKIN = new Skin(Gdx.files.internal("skins/skin/skin.json"));
-        CHECK_SKIN= new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
+        CHECK_SKIN = new Skin(Gdx.files.internal("skins/skin_default/uiskin.json"));
     }
 
     /**
