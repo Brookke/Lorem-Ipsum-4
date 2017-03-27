@@ -7,6 +7,7 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
+import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class Player extends AbstractPerson {
      * @param imgSrc The image used to represent it.
      */
     public Player(GameMain game, String name, String imgSrc, int tileX, int tileY) {
-        super(game, name, "people/player/" + imgSrc, tileX, tileY); 
+        super(game, name, "people/player/" + imgSrc, tileX, tileY);
         importDialogue("Player.JSON");
     }
 
@@ -116,9 +117,13 @@ public class Player extends AbstractPerson {
         NPC npc = getFacingNPC();
         if (npc != null) {
             game.screenManager.navigationScreen.convMngt.startConversation(npc);
+        } else if (checkForSecretRoom()) {
+            game.screenManager.setScreen(Screens.puzzle);
         } else {
             checkForClue();
+            checkForExtraScore();
         }
+
     }
 
     /**
@@ -127,7 +132,7 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : game.getNPCS(getRoom())) {
+        for (NPC npc : game.currentSnapshot.getNPCs(getRoom())) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -153,8 +158,8 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()));
-
+            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()), true);
+            canMove = false;
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
                 this.foundMurderWeapon = true;
@@ -166,7 +171,7 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : game.NPCs) {
+            for (NPC character : game.currentSnapshot.NPCs) {
                 character.ignored = false;
             }
             score += 250;
@@ -174,9 +179,48 @@ public class Player extends AbstractPerson {
             if (!Settings.MUTED) {
                 Assets.SOUND.play(Settings.SFX_VOLUME);
             }
-        } else {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("Sorry, no clue here"));
+        }
+    }
 
+    /**
+     * Checks for secret room location
+     */
+    private boolean checkForSecretRoom() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
+    }
+
+    /**
+     * Assessment 4
+     * <p>
+     * This method checks to see if the tile the player is facing has a clue hidden in it or not
+     *
+     * @Author Lorem-Ipsum
+     */
+    private void checkForExtraScore() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        /**
+         * Stores the extra points currently being added onto the score
+         */
+        int extra;
+
+        if (this.getRoom().isExtraScoreTile(x, y)) {
+            extra= this.getRoom().extraScoreAmount();
+            score += extra;
+            if (extra==0){
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+            }
+            else {
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            }
+            game.scoreObtained = true;
+            if (!Settings.MUTED) {
+                Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
         }
     }
 
@@ -208,8 +252,7 @@ public class Player extends AbstractPerson {
      * @return boolean, true if there is a room change false otherwise
      * @author Lorem-Ipsum
      */
-    private boolean roomChangeCheck(Direction dir)
-    {
+    private boolean roomChangeCheck(Direction dir) {
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
             game.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
