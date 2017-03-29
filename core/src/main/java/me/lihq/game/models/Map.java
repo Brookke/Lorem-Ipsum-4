@@ -33,7 +33,7 @@ public class Map {
      * @author Lorem-Ipsum
      */
     private Room.Transition secretRoomTrans;
-    
+
     /**
      * This stores the murder room
      */

@@ -23,12 +23,6 @@ import java.util.Collections;
  */
 public class Puzzle {
 
-
-    /**
-     * The player that opened the door
-     */
-    private String playerWhoUnlocked;
-
     private final GameMain game;
 
     /**
@@ -41,6 +35,7 @@ public class Puzzle {
      */
     private ArrayList<Button> switches;
     private Table table;
+    private Table unlockTable;
     public Stage stage;
 
 
@@ -59,13 +54,6 @@ public class Puzzle {
      */
     int totalSwitches = 9;
 
-
-    /**
-     * Whether the puzzle is solved
-     */
-    boolean solved = false;
-
-
     public Puzzle(GameMain game) {
         this.game = game;
 
@@ -73,7 +61,10 @@ public class Puzzle {
         Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
         stage.addActor(background);
         table = new Table();
-        //table.setDebug(true);
+        unlockTable = new Table();
+        unlockTable.setFillParent(true);
+        unlockTable.pad(143,0,0,0);
+        unlockTable.setVisible(false);
         table.setFillParent(true);
         table.pad(143,0,0,0);
 
@@ -116,8 +107,19 @@ public class Puzzle {
             table.add(switches.get(i)).width(65).height(185);
         }
 
-        stage.addActor(table);
+        Button unlock = UIHelpers.createTextButton("Unlock");
+        unlock.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                markSolved();
+                goToSecretRoom();
+            }
+        });
+        unlockTable.add(unlock);
 
+
+        stage.addActor(table);
+        stage.addActor(unlockTable);
     }
 
     /**
@@ -131,17 +133,8 @@ public class Puzzle {
         } else {
             switchesPressed++;
             if (switchesPressed >= totalSwitches - resetSwitches) {
-                solved = true;
-                table.clear();
-                Button unlock = UIHelpers.createTextButton("Unlock");
-                unlock.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        markSolved();
-                        goToSecretRoom();
-                    }
-                });
-                table.add(unlock);
+                table.setVisible(false);
+                unlockTable.setVisible(true);
             }
 
         }
@@ -152,31 +145,17 @@ public class Puzzle {
      * Sets the puzzle as solved and records who solved the puzzle
      */
     private void markSolved() {
-        solved = true;
-        //TODO: change to game snapshot
-        playerWhoUnlocked = game.currentSnapshot.player.getName();
+        game.currentSnapshot.puzzleSolved = true;
     }
 
-    /**
-     * This returns the player that completed the puzzle
-     * @return
-     */
-    public String getPlayerWhoUnlocked() {
-        return playerWhoUnlocked;
-    }
     /**
      * This does all the changes necessary to change to the secret room.
      */
     public void goToSecretRoom() {
+        this.resetPuzzle();
         game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
         game.screenManager.setScreen(Screens.navigation);
     }
-
-
-    public boolean hasBeenSolved() {
-        return solved;
-    }
-
 
     public void init() {
         secretRoomTrans = game.currentSnapshot.gameMap.getSecretRoomTransition();
@@ -199,7 +178,8 @@ public class Puzzle {
      */
     public void resetPuzzle() {
         switchesPressed = 0;
-
+        table.setVisible(true);
+        unlockTable.setVisible(false);
         for (Button b : switches) {
             b.setDisabled(false);
             b.setTouchable(Touchable.enabled);
@@ -210,20 +190,3 @@ public class Puzzle {
     }
 
 }
-
-
-/*
-
-O 1 O
-1 O 1
-O O O
-
-
-B B B
-B B B
-B B B
-
-B P B
-B P B
-B B B
- */
