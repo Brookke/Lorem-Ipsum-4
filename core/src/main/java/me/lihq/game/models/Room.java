@@ -16,6 +16,7 @@ import me.lihq.game.people.NPC;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class defines a room which is a game representation of a real world room in the Ron Cooke Hub.
@@ -28,6 +29,28 @@ public class Room {
      */
     public Vector2Int secretRoomSpot;
     /**
+     * This list stores the coordinates of all hideable slots in this room
+     * <p>
+     * Hideable slots are tiles that the clues can be hidden in
+     */
+    public List<Vector2Int> hidingSpots = null;
+    /**
+     * This list stores the coordinates of all secret bookcases in this room
+     * <p>
+     */
+    private List<Vector2Int> bookcaseSpots = null;
+
+    /**
+     * @Lorem Ipsum
+     * Assessment 4
+     * This list stores the coordinates of all slots that provide extra points in this room
+     *
+     * @author Lorem-Ipsum
+     */
+    public List<Vector2Int> scoreSpots = null;
+
+
+    /**
      * This is a reference to the main game class
      * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
@@ -35,19 +58,6 @@ public class Room {
      * @author Lorem-Ipsum
      */
     private GameMain game;
-
-    /**
-     * This list stores the coordinates of all hideable slots in this room
-     * <p>
-     * Hideable slots are tiles that the clues can be hidden in
-     */
-    public List<Vector2Int> hidingSpots = null;
-
-    /**
-     * This list stores the coordinates of all secret bookcases in this room
-     * <p>
-     */
-    private List<Vector2Int> bookcaseSpots = null;
     /**
      * This stores the name of the room.
      * It is displayed on the tag when they enter the room
@@ -114,7 +124,7 @@ public class Room {
         if (bookcaseSpots.size() > 0) {
             secretRoomSpot = bookcaseSpots.get(0);
         }
-
+        scoreSpots = getExtraScoreSpots();
     }
 
     /**
@@ -239,6 +249,21 @@ public class Room {
      */
     public boolean isHidingPlace(int x, int y) {
         return hidingSpots.contains(new Vector2Int(x, y));
+    }
+
+    /**
+     * Assessment 4
+     * <p>
+     * This method checks whether the tile at x, y is a tile that gives you extra points
+     * in
+     *
+     * @param x The x coordinate to check
+     * @param y The y coordinate to check
+     * @return (boolean) whether the tile is an extraScore tile.
+     * @Author Lorem-Ipsum
+     */
+    public boolean isExtraScoreTile(int x, int y) {
+        return scoreSpots.contains(new Vector2Int(x, y));
     }
 
     /**
@@ -482,6 +507,62 @@ public class Room {
         return this.hidingSpots;
     }
 
+    /**
+     * This will check the map for any potential extraScore locations, and returns them as a list of coordinates
+     *
+     * @return (List<Vector2Int>) list of coordinates of the extraScore tiles
+     * @author Lorem-Ipsum
+     */
+    public List<Vector2Int> getExtraScoreSpots() {
+        if (scoreSpots != null) return scoreSpots;
+
+        List<Vector2Int> scoreSpots = new ArrayList<>();
+
+        int roomWidth = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getWidth();
+        int roomHeight = ((TiledMapTileLayer) this.getTiledMap().getLayers().get(0)).getHeight();
+
+        for (int x = 0; x < roomWidth; x++) {
+            for (int y = 0; y < roomHeight; y++) {
+                for (MapLayer layer : this.getTiledMap().getLayers()) {
+                    TiledMapTileLayer thisLayer = (TiledMapTileLayer) layer;
+                    TiledMapTileLayer.Cell cellInTile = thisLayer.getCell(x, y);
+
+                    if (cellInTile == null) continue;
+
+                    if (!cellInTile.getTile().getProperties().containsKey("extraScore")) continue;
+
+                    if (cellInTile.getTile().getProperties().get("extraScore").toString().equals("true")) {
+                        scoreSpots.add(new Vector2Int(x, y));
+                        break;
+                    }
+                }
+            }
+        }
+        this.scoreSpots = scoreSpots;
+
+        return this.scoreSpots;
+    }
+
+    /**
+     * Assessment 4
+     * <p>
+     * This method determines the extra score gained when the player finds an item that provides extra score
+     * The score is determined through a gaussian distribution
+     * The mean score is 500 and the standard deviation is 200.
+     * <p>
+     * If the player has already obtained extra score once then it makes the player unable to obtain more extra score
+     *
+     * @Author Lorem-Ipsum
+     */
+    public int extraScoreAmount() {
+        if (!game.scoreObtained) {
+            Random rand = new Random();
+            int extraScore = rand.nextInt(400) + 300;
+            return extraScore;
+        } else {
+            return 0;
+        }
+    }
 
     /**
      * This gets a random possible location to hide a clue in

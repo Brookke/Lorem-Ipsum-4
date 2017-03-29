@@ -121,9 +121,9 @@ public class Player extends AbstractPerson {
             game.screenManager.setScreen(Screens.puzzle);
         } else {
             checkForClue();
-
-
+            checkForExtraScore();
         }
+
     }
 
     /**
@@ -191,6 +191,34 @@ public class Player extends AbstractPerson {
 
         return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
     }
+
+    /**
+     * Assessment 4
+     * <p>
+     * This method checks to see if the tile the player is facing has a clue hidden in it or not
+     *
+     * @Author Lorem-Ipsum
+     */
+    private void checkForExtraScore() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        if (this.getRoom().isExtraScoreTile(x, y)) {
+            int extra = this.getRoom().extraScoreAmount();
+            score += extra;
+            if (extra == 0){
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+            }
+            else {
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            }
+            game.scoreObtained = true;
+            if (!Settings.MUTED) {
+                Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
+        }
+    }
+
     /**
      * This method returns whether or not the player is standing on a tile that initiates a Transition to another room
      *
@@ -219,8 +247,7 @@ public class Player extends AbstractPerson {
      * @return boolean, true if there is a room change false otherwise
      * @author Lorem-Ipsum
      */
-    private boolean roomChangeCheck(Direction dir)
-    {
+    private boolean roomChangeCheck(Direction dir) {
         if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
             setDirection(dir);
             game.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
