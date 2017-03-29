@@ -204,9 +204,9 @@ public class Player extends AbstractPerson {
         int y = getTileCoordinates().y + getDirection().getDy();
 
         if (this.getRoom().isExtraScoreTile(x, y)) {
-            int extra= this.getRoom().extraScoreAmount();
+            int extra = this.getRoom().extraScoreAmount();
             score += extra;
-            if (extra==0){
+            if (extra == 0){
                 game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
             }
             else {
