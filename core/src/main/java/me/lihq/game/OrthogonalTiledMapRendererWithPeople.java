@@ -27,7 +27,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
 
     /**
      * This is a reference to the main game class
-     *
+     * <p>
      * The whole class now has reference to the main game. Removing all uses of `GameMain.me`
      *
      * @author Lorem-Ipsum
@@ -42,7 +42,7 @@ public class OrthogonalTiledMapRendererWithPeople extends OrthogonalTiledMapRend
     public OrthogonalTiledMapRendererWithPeople(TiledMap map, GameMain game) {
         super(map);
 
-        this.game = game;   
+        this.game = game;
         people = new ArrayList<>();
     }
 
