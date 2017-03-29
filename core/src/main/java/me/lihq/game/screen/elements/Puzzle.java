@@ -109,11 +109,8 @@ public class Puzzle {
             switches.add(b);
         }
 
-
         Collections.shuffle(switches);
 
-
-        //This distributes all of the switches in a square
         for (int i = 0; i < switches.size(); i++) {
 
             table.add(switches.get(i)).width(65).height(185);

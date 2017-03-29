@@ -44,6 +44,7 @@ public class ScreenManager {
     public SettingsScreen settingsScreen;
     /**
      * The puzzle screen
+     * @author Lorem-Ipsum
      */
     private PuzzleScreen puzzleScreen;
     /**

@@ -27,7 +27,13 @@ public class Map {
     private List<Room> rooms;
 
 
+    /**
+     * The transition that takes the player to the correct place in the secret room
+     *
+     * @author Lorem-Ipsum
+     */
     private Room.Transition secretRoomTrans;
+    
     /**
      * This stores the murder room
      */
