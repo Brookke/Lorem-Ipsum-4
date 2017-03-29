@@ -557,7 +557,7 @@ public class Room {
     public int extraScoreAmount() {
         if (!game.scoreObtained) {
             Random rand = new Random();
-            int extraScore = (int) (rand.nextGaussian() * 200 + 500);
+            int extraScore = rand.nextInt(400) + 300;
             return extraScore;
         } else {
             return 0;
