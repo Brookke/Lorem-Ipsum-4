@@ -113,7 +113,8 @@ public class Puzzle {
             public void clicked(InputEvent event, float x, float y) {
                 markSolved();
                 goToSecretRoom();
-            }
+                game.currentSnapshot.finishedInteraction();
+                }
         });
         unlockTable.add(unlock);
 
