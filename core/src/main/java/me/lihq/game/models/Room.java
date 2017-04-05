@@ -119,11 +119,13 @@ public class Room {
             }
         }
 
-        hidingSpots = getHidingSpots();
+
         Collections.shuffle(getBookcaseSpots());
         if (bookcaseSpots.size() > 0) {
             secretRoomSpot = bookcaseSpots.get(0);
         }
+        hidingSpots = getHidingSpots();
+
         scoreSpots = getExtraScoreSpots();
     }
 
@@ -494,7 +496,8 @@ public class Room {
 
                     if (!cellInTile.getTile().getProperties().containsKey("hidingSpot")) continue;
 
-                    if (cellInTile.getTile().getProperties().get("hidingSpot").toString().equals("true")) {
+                    if (cellInTile.getTile().getProperties().get("hidingSpot").toString().equals("true") &&
+                            !secretRoomSpot.equals(new Vector2Int(x, y))) {
                         hidingSpots.add(new Vector2Int(x, y));
                         break;
                     }
