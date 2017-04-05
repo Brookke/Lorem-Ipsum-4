@@ -496,8 +496,8 @@ public class Room {
 
                     if (!cellInTile.getTile().getProperties().containsKey("hidingSpot")) continue;
 
-                    if (cellInTile.getTile().getProperties().get("hidingSpot").toString().equals("true") &&
-                            !secretRoomSpot.equals(new Vector2Int(x, y))) {
+                    if (cellInTile.getTile().getProperties().get("hidingSpot").toString().equals("true")
+                            && !new Vector2Int(x, y).equals(secretRoomSpot)) {
                         hidingSpots.add(new Vector2Int(x, y));
                         break;
                     }
