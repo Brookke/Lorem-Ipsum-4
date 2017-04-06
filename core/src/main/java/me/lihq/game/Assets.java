@@ -46,7 +46,10 @@ public class Assets {
      */
     public static Texture TAG_BORDER;
 
-    public static Texture Cover;
+    /**
+     * This is the cover used in the secret room to minimise visibility
+     */
+    public static Texture COVER;
     /**
      * The default fonts used in the game - the number specifies the size. Used to render
      * UI elements and room tags.
@@ -107,7 +110,7 @@ public class Assets {
 
         CLUE_SHEET = loadTexture("clueSheet.png");
 
-        Cover = loadTexture("cover.png");
+        COVER = loadTexture("cover.png");
 
         Texture checkbox = loadTexture("checkbox.png");
         UNCHECKED_BOX = new TextureRegion(checkbox, 0, 0, 32, 32);

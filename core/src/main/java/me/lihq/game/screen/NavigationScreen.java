@@ -314,7 +314,7 @@ public class NavigationScreen extends AbstractScreen {
         }
 
         if (game.currentSnapshot.player.getRoom().getName().equals("Secret Room")){
-            spriteBatch.draw(Assets.Cover, Gdx.graphics.getWidth()/2 - Assets.Cover.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.Cover.getHeight()/2 + Settings.TILE_SIZE);
+            spriteBatch.draw(Assets.COVER, Gdx.graphics.getWidth()/2 - Assets.COVER.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.COVER.getHeight()/2 + Settings.TILE_SIZE);
         }
 
         if (roomTag != null) {
