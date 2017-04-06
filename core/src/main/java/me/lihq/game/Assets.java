@@ -107,9 +107,7 @@ public class Assets {
 
         CLUE_SHEET = loadTexture("clueSheet.png");
 
-        Cover=loadTexture("cover.png");
-        //Cover.setWidth(Cover.getWidth()/(1500/ Gdx.graphics.getWidth())
-                //sprite.getHeight() / SCALE_RATIO);
+        Cover = loadTexture("cover.png");
 
         Texture checkbox = loadTexture("checkbox.png");
         UNCHECKED_BOX = new TextureRegion(checkbox, 0, 0, 32, 32);
