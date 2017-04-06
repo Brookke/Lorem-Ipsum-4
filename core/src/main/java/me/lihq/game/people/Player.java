@@ -272,8 +272,6 @@ public class Player extends AbstractPerson {
 
         this.setTileCoordinates(transition.newTileCoordinates.x, transition.newTileCoordinates.y);
 
-        //TODO: Look into making a getter for the players Game this way we can do this.getGame() here instead of GameMain.
-
         game.screenManager.navigationScreen.updateTiledMapRenderer();
     }
 
