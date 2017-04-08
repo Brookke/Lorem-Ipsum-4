@@ -1,5 +1,5 @@
-# JAAPAN 
-Visit out website at http://jaapan.alexcummins.uk, or read the documentation at http://jaapan.alexcummins.uk/javadoc
+# Lorem Ipsum 
+Visit out website at http://lihq.me, or read the Assessment 4 documentation at http://docs4.lihq.me
 
 ## Get started
 ### What you need
@@ -52,3 +52,6 @@ We have included a handy test configuration that can be ran from intellij.
 - Write a test function using assertions, and use `@Test` decorator above it
 - See this page for examples of assertions: https://github.com/junit-team/junit4/wiki/assertions
 - Run your tests locally and see if they pass!
+
+### Test Coverage
+We have included test coverage for the project, which is run alongside the tests on CircleCI. The test coverage results can be seen in the 'Artifacts' tab of CircleCI.

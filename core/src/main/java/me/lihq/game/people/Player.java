@@ -7,6 +7,7 @@ import me.lihq.game.GameMain;
 import me.lihq.game.Settings;
 import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
+import me.lihq.game.screen.Screens;
 import me.lihq.game.screen.elements.SpeechBox;
 
 import java.util.ArrayList;
@@ -96,11 +97,8 @@ public class Player extends AbstractPerson {
 
         if (!canMove) return;
 
-        if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
-            setDirection(dir);
-            game.screenManager.navigationScreen.initialiseRoomChange();
-            return;
-        }
+        //Taken the code that did this test and turned it into a method @author Lorem-Ipsum
+        if (roomChangeCheck(dir)) return;
 
         if (!getRoom().isWalkableTile(this.tileCoordinates.x + dir.getDx(), this.tileCoordinates.y + dir.getDy())) {
             setDirection(dir);
@@ -119,9 +117,13 @@ public class Player extends AbstractPerson {
         NPC npc = getFacingNPC();
         if (npc != null) {
             game.screenManager.navigationScreen.convMngt.startConversation(npc);
+        } else if (checkForSecretRoom()) {
+            game.screenManager.setScreen(Screens.puzzle);
         } else {
             checkForClue();
+            checkForExtraScore();
         }
+
     }
 
     /**
@@ -200,6 +202,43 @@ public class Player extends AbstractPerson {
     }
 
     /**
+     * Checks for secret room location
+     */
+    private boolean checkForSecretRoom() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
+    }
+
+    /**
+     * Assessment 4
+     * <p>
+     * This method checks to see if the tile the player is facing has a clue hidden in it or not
+     *
+     * @Author Lorem-Ipsum
+     */
+    private void checkForExtraScore() {
+        int x = getTileCoordinates().x + getDirection().getDx();
+        int y = getTileCoordinates().y + getDirection().getDy();
+
+        if (this.getRoom().isExtraScoreTile(x, y)) {
+            int extra = this.getRoom().extraScoreAmount();
+            score += extra;
+            if (extra == 0){
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+            }
+            else {
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            }
+            game.scoreObtained = true;
+            if (!Settings.MUTED) {
+                Assets.SOUND.play(Settings.SFX_VOLUME);
+            }
+        }
+    }
+
+    /**
      * This method returns whether or not the player is standing on a tile that initiates a Transition to another room
      *
      * @return (boolean) Whether the player is on a trigger tile or not
@@ -221,26 +260,40 @@ public class Player extends AbstractPerson {
     }
 
     /**
-     * This takes the player at its current position, and automatically gets the transition data
-     * for the next room and applies it to the player and game
+     * This checks to see if you are on a room mat and facing the right way and if you are it initialises a room change
+     *
+     * @param dir the direction the player is to move into
+     * @return boolean, true if there is a room change false otherwise
+     * @author Lorem-Ipsum
      */
-    public void moveRoom() {
-        if (isOnTriggerTile()) {
-            Room.Transition newRoomData = this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y);
-
-            this.setRoom(newRoomData.getNewRoom());
-
-
-            if (newRoomData.newDirection != null) {
-                this.setDirection(newRoomData.newDirection);
-                this.updateTextureRegion();
-            }
-
-            this.setTileCoordinates(newRoomData.newTileCoordinates.x, newRoomData.newTileCoordinates.y);
-
-            game.screenManager.navigationScreen.updateTiledMapRenderer();
+    private boolean roomChangeCheck(Direction dir) {
+        if (this.isOnTriggerTile() && dir.toString().equals(getRoom().getMatRotation(this.tileCoordinates.x, this.tileCoordinates.y))) {
+            setDirection(dir);
+            game.screenManager.navigationScreen.initialiseRoomChange(this.getRoom().getTransitionData(this.getTileCoordinates().x, this.getTileCoordinates().y));
+            return true;
         }
+        return false;
     }
+
+    /**
+     * This changes the room of the player based on the transition data provided to it
+     *
+     * @author Lorem-Ipsum
+     */
+    public void moveRoom(Room.Transition transition) {
+
+        this.setRoom(transition.getNewRoom());
+
+        if (transition.newDirection != null) {
+            this.setDirection(transition.newDirection);
+            this.updateTextureRegion();
+        }
+
+        this.setTileCoordinates(transition.newTileCoordinates.x, transition.newTileCoordinates.y);
+
+        game.screenManager.navigationScreen.updateTiledMapRenderer();
+    }
+
 
     /*************************************************************************/
     /****************************** Set Methods ******************************/

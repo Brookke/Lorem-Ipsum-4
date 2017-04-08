@@ -1,6 +1,5 @@
 package me.lihq.game;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
@@ -14,7 +13,6 @@ import me.lihq.game.people.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
 
 /**
  * Created by joeshuff on 02/03/2017.
@@ -201,6 +199,16 @@ public class ScenarioBuilder {
             int selectedRoom = roomsLeft.get(toTake);
             roomsLeft.remove(toTake);
 
+             /*
+              Checks whether the randomly selected room is the secret room,
+              if it is then an NPC is not placed there and instead another room is selected
+            */
+            if (map.getRoom(selectedRoom).getName().equals("Secret Room")) {
+                toTake = new Random().nextInt(roomsLeft.size());
+                selectedRoom = roomsLeft.get(toTake);
+                roomsLeft.remove(toTake);
+            }
+            
             loopNpc.setRoom(map.getRoom(selectedRoom));
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);

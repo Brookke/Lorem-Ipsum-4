@@ -42,7 +42,11 @@ public class ScreenManager {
      * The screen that allows the player to modify settings.
      */
     public SettingsScreen settingsScreen;
-
+    /**
+     * The puzzle screen
+     * @author Lorem-Ipsum
+     */
+    private PuzzleScreen puzzleScreen;
     /**
      * Screen displayed to prompt players to swap over.
      */
@@ -83,6 +87,7 @@ public class ScreenManager {
         pauseScreen = new PauseScreen(game);
         inventoryScreen = new InventoryScreen(game);
         settingsScreen = new SettingsScreen(game);
+        puzzleScreen = new PuzzleScreen(game);
         playerSwitchScreen = new PlayerSwitchScreen(game);
         numberOfPlayersSelectionScreen = new NumberOfPlayersSelectionScreen(game);
 
@@ -118,6 +123,9 @@ public class ScreenManager {
             case numberOfPlayersSelection:
                 nextScreen = numberOfPlayersSelectionScreen;
                 break;
+            case puzzle:
+                game.setScreen(puzzleScreen);
+                break;
         }
         currentScreen = screen;
     }
@@ -146,7 +154,6 @@ public class ScreenManager {
      * Disposes of associated resources
      */
     public void dispose() {
-        navigationScreen.dispose();
         menuScreen.dispose();
         pauseScreen.dispose();
         inventoryScreen.dispose();
