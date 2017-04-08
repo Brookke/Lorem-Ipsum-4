@@ -40,6 +40,12 @@ public class GameMain extends Game {
     public InputMultiplexer inputMultiplexer;
 
     /**
+     * Checks if the player has obtained extra score before.
+     * This is in the GameMain class so that there's only one instance of the variable during multiplayer gameplay
+     */
+    public boolean scoreObtained = false;
+
+     /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;

@@ -40,6 +40,10 @@ public class GameSnapshot {
     public Player player;
 
     /**
+     * Indicates if the player has solved the puzzle
+     */
+    public boolean puzzleSolved = false;
+    /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
      * killer, without having to iterate through each NPC.
      */

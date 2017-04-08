@@ -45,6 +45,11 @@ public class Assets {
      * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}.
      */
     public static Texture TAG_BORDER;
+
+    /**
+     * This is the cover used in the secret room to minimise visibility
+     */
+    public static Texture COVER;
     /**
      * The default fonts used in the game - the number specifies the size. Used to render
      * UI elements and room tags.
@@ -104,6 +109,8 @@ public class Assets {
         TAG_BORDER = loadTexture("border.png");
 
         CLUE_SHEET = loadTexture("clueSheet.png");
+
+        COVER = loadTexture("cover.png");
 
         Texture checkbox = loadTexture("checkbox.png");
         UNCHECKED_BOX = new TextureRegion(checkbox, 0, 0, 32, 32);

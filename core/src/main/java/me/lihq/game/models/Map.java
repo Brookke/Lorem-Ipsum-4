@@ -26,6 +26,14 @@ public class Map {
      */
     private List<Room> rooms;
 
+
+    /**
+     * The transition that takes the player to the correct place in the secret room
+     *
+     * @author Lorem-Ipsum
+     */
+    private Room.Transition secretRoomTrans;
+
     /**
      * This stores the murder room
      */
@@ -88,6 +96,11 @@ public class Map {
 
         Room pod = new Room(game, 9, "pod.tmx", "Pod");
 
+        Room secretRoom = new Room(game, 10, "secretroom2.tmx", "Secret Room");
+
+        //This is used by the puzzle to transition to the secret room
+        secretRoomTrans = new Room.Transition().setTo(secretRoom, 10, 0, Direction.NORTH);
+
         mainRoom.addTransition(new Room.Transition().setFrom(17, 17).setTo(portersOffice, 1, 5, Direction.EAST))    //To Porters Office
 
                 .addTransition(new Room.Transition().setFrom(27, 13).setTo(kitchen, 1, 3, Direction.EAST))    //To Kitchen
@@ -136,7 +149,10 @@ public class Map {
         pod.addTransition(new Room.Transition().setFrom(18, 9).setTo(outside, 9, 11, Direction.EAST))    //To Outside
                 .addTransition(new Room.Transition().setFrom(18, 10).setTo(outside, 9, 12, Direction.EAST));  //To Outside
 
-        rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod);
+        rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
+        
+        Vector2Int spot = mainRoom.secretRoomSpot;
+        secretRoom.addTransition(new Room.Transition().setFrom(10,0).setTo(mainRoom, spot.x, spot.y - 1, Direction.NORTH));
     }
 
     /**
@@ -166,6 +182,10 @@ public class Map {
         return null;
     }
 
+
+    public Room.Transition getSecretRoomTransition() {
+        return secretRoomTrans;
+    }
     /**
      * Returns the amount of rooms created by the map
      *
