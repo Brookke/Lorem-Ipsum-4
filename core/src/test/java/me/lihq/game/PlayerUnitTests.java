@@ -1,5 +1,6 @@
 package me.lihq.game;
 
+import me.lihq.game.models.Clue;
 import me.lihq.game.models.Room;
 import me.lihq.game.people.Player;
 import org.junit.Before;
@@ -13,13 +14,42 @@ import static org.junit.Assert.*;
  * JUnit tests for the Player class.
  */
 public class PlayerUnitTests extends GameTester {
+
     Player p = null;
 
     @Before
     public void before() {
+
         p = new Player(null, "Test Name", "player.png", 0, 0);
+
         p.setRoom(new Room(null, 0, "testMap.tmx", "Test Map"));
+
     }
+
+    @Test
+    public void testInteractFindingClues() {
+        Assets.load();
+        Clue testClue = new Clue("test clue", "this is a test clue", false, 0, 1);
+        testClue.setTileCoordinates(0, 1);
+        p.getRoom().addClue(testClue);
+        p.setDirection(Direction.NORTH);
+        p.interact();
+
+        //Tests that the clue has been added correctly
+        assertEquals(1, p.collectedClues.size());
+
+        //Tests that the corrected clue has been added
+        assertEquals(testClue, p.collectedClues.get(0));
+
+        //Test that the clue has been recognised correctly
+        assertEquals(0, p.getRedHerrings());
+
+        //Tests the the score has been correctly incremented
+        assertEquals(250, p.getScore());
+
+    }
+
+
 
     @Test
     public void testPlayername() {

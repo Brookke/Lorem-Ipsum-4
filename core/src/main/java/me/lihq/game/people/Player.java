@@ -132,7 +132,15 @@ public class Player extends AbstractPerson {
      * @return null if there isn't an NPC in front of them or the NPC is moving. Otherwise, it returns the NPC
      */
     private NPC getFacingNPC() {
-        for (NPC npc : game.currentSnapshot.getNPCs(getRoom())) {
+        List<NPC> npcs;
+        try {
+            npcs = game.currentSnapshot.getNPCs(getRoom());
+        } catch (NullPointerException e) {
+            return null;
+        }
+        if (npcs.size() == 0) return null;
+
+        for (NPC npc : npcs) {
             if ((npc.getTileCoordinates().x == getTileCoordinates().x + getDirection().getDx()) &&
                     (npc.getTileCoordinates().y == getTileCoordinates().y + getDirection().getDy())) {
                 if (npc.getState() != PersonState.STANDING) return null;
@@ -158,7 +166,13 @@ public class Player extends AbstractPerson {
 
         Clue clueFound = getRoom().getClue(x, y);
         if (clueFound != null) {
-            game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()), true);
+            try {
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You found: " + clueFound.getDescription()), true);
+            } catch (NullPointerException e) {
+                System.out.println("WARNING: Adding speech box was not possible, likely that the speech box manager does not exist \n" +
+                        "         The content of the speech box would be: You found: " + clueFound.getDescription());
+            }
+
             canMove = false;
             this.collectedClues.add(clueFound);
             if (clueFound.isMurderWeapon()) {
@@ -171,9 +185,14 @@ public class Player extends AbstractPerson {
             }
 
             // set all NPCs ignored to false
-            for (NPC character : game.currentSnapshot.NPCs) {
-                character.ignored = false;
+            try {
+                for (NPC character : game.currentSnapshot.NPCs) {
+                    character.ignored = false;
+                }
+            } catch (NullPointerException e) {
+                System.out.println("WARNING: either no snapshot or NPCs in the snapshot exist");
             }
+
             score += 250;
 
             if (!Settings.MUTED) {
