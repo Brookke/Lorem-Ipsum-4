@@ -60,16 +60,105 @@ public class Puzzle {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
         stage.addActor(background);
-        table = new Table();
+
         unlockTable = new Table();
         unlockTable.setFillParent(true);
         unlockTable.pad(143,0,0,0);
         unlockTable.setVisible(false);
+
+        table = new Table();
         table.setFillParent(true);
         table.pad(143,0,0,0);
 
-        switches = new ArrayList<>();
+        Button unlock = UIHelpers.createTextButton("Unlock");
+        unlock.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                markSolved();
+                generatePuzzle();
+                goToSecretRoom();
+            }
+        });
+        unlockTable.add(unlock);
 
+        generatePuzzle();
+
+        stage.addActor(unlockTable);
+        stage.addActor(table);
+
+    }
+
+    /**
+     * This handles what happens when each switch is pressed
+     * @param resetSwitch
+     */
+    public void handleSwitch(boolean resetSwitch) {
+        System.out.println(switchesPressed);
+        if (resetSwitch) {
+            resetPuzzle();
+        } else {
+            switchesPressed++;
+            if (switchesPressed >= totalSwitches - resetSwitches) {
+                table.setVisible(false);
+                unlockTable.setVisible(true);
+            }
+
+        }
+    }
+
+
+    /**
+     * Sets the puzzle as solved and records who solved the puzzle
+     */
+    private void markSolved() {
+        game.currentSnapshot.puzzleSolved = true;
+    }
+
+    /**
+     * This does all the changes necessary to change to the secret room.
+     */
+    public void goToSecretRoom() {
+        game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
+        game.screenManager.setScreen(Screens.navigation);
+    }
+
+    public void init() {
+        secretRoomTrans = game.currentSnapshot.gameMap.getSecretRoomTransition();
+    }
+
+    /**
+     * This method is called to render the main menu to the stage
+     */
+    public void render() {
+        //Determining the background colour of the menu
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Rendering the switches
+        stage.act();
+        stage.draw();
+    }
+
+    /**
+     * This simply resets the puzzle
+     */
+    public void resetPuzzle() {
+        switchesPressed = 0;
+        table.setVisible(true);
+        unlockTable.setVisible(false);
+        for (Button b : switches) {
+            b.setDisabled(false);
+            b.setTouchable(Touchable.enabled);
+            b.reset();
+        }
+
+
+    }
+
+    private void generatePuzzle() {
+        unlockTable.setVisible(false);
+        table.setVisible(true);
+        table.clear();
+        switches = new ArrayList<>();
 
         //Creates all the reset switches
         for (int i = 0; i < resetSwitches; i++) {
@@ -105,85 +194,6 @@ public class Puzzle {
         for (int i = 0; i < switches.size(); i++) {
 
             table.add(switches.get(i)).width(65).height(185);
-        }
-
-        Button unlock = UIHelpers.createTextButton("Unlock");
-        unlock.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                markSolved();
-                goToSecretRoom();
-                }
-        });
-        unlockTable.add(unlock);
-
-
-        stage.addActor(table);
-        stage.addActor(unlockTable);
-    }
-
-    /**
-     * This handles what happens when each switch is pressed
-     * @param resetSwitch
-     */
-    public void handleSwitch(boolean resetSwitch) {
-        System.out.println(switchesPressed);
-        if (resetSwitch) {
-            resetPuzzle();
-        } else {
-            switchesPressed++;
-            if (switchesPressed >= totalSwitches - resetSwitches) {
-                table.setVisible(false);
-                unlockTable.setVisible(true);
-            }
-
-        }
-    }
-
-
-    /**
-     * Sets the puzzle as solved and records who solved the puzzle
-     */
-    private void markSolved() {
-        game.currentSnapshot.puzzleSolved = true;
-    }
-
-    /**
-     * This does all the changes necessary to change to the secret room.
-     */
-    public void goToSecretRoom() {
-        this.resetPuzzle();
-        game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
-        game.screenManager.setScreen(Screens.navigation);
-    }
-
-    public void init() {
-        secretRoomTrans = game.currentSnapshot.gameMap.getSecretRoomTransition();
-    }
-
-    /**
-     * This method is called to render the main menu to the stage
-     */
-    public void render() {
-        //Determining the background colour of the menu
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //Rendering the switches
-        stage.act();
-        stage.draw();
-    }
-
-    /**
-     * This simply resets the puzzle
-     */
-    public void resetPuzzle() {
-        switchesPressed = 0;
-        table.setVisible(true);
-        unlockTable.setVisible(false);
-        for (Button b : switches) {
-            b.setDisabled(false);
-            b.setTouchable(Touchable.enabled);
-            b.reset();
         }
 
 
