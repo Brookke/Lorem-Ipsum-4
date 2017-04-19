@@ -89,6 +89,8 @@ public class GameSnapshot {
         this.player = player;
         this.NPCs = npcs;
 
+        game.hiddenRoomLocation = this.gameMap.getRoom(0).secretRoomSpot;
+
         if (isMultiPlayer) {
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
         }

@@ -152,6 +152,11 @@ public class Map {
         rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
         
         Vector2Int spot = mainRoom.secretRoomSpot;
+
+        if (game.hiddenRoomLocation != null) {
+            spot = game.hiddenRoomLocation;
+        }
+
         secretRoom.addTransition(new Room.Transition().setFrom(10,0).setTo(mainRoom, spot.x, spot.y - 1, Direction.NORTH));
     }
 
