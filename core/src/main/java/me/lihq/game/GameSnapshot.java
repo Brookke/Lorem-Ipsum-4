@@ -89,8 +89,6 @@ public class GameSnapshot {
         this.player = player;
         this.NPCs = npcs;
 
-        this.puzzle = new Puzzle(this.game);
-
         if (isMultiPlayer) {
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
         }
@@ -126,8 +124,6 @@ public class GameSnapshot {
         this.killer = new NPC(killer, gameMap);
         this.killer.setMotive(victim);
 
-        this.puzzle = new Puzzle(this.game);
-
         this.interactionsRemaining = other.interactionsRemaining;
     }
 
@@ -154,6 +150,9 @@ public class GameSnapshot {
      * @return Puzzle - puzzle
      */
     public Puzzle getPuzzle() {
+        if (puzzle != null) return puzzle;
+
+        this.puzzle = new Puzzle(this.game);
         return puzzle;
     }
 
