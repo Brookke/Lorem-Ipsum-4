@@ -89,6 +89,7 @@ public class GameMain extends Game {
     @Override
     public void create() {
         Assets.load();// Load in the assets the game needs
+        Assets.initImages();
 
         // Load universal input class
         input = new GlobalInput(this);

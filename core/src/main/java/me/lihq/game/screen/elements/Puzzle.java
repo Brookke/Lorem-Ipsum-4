@@ -33,7 +33,8 @@ public class Puzzle {
     /**
      * The switches for the game 
      */
-    private ArrayList<Button> switches;
+    private ArrayList<Image> correctSwitches;
+    private ArrayList<Image> switches;
     private Table table;
     private Table unlockTable;
     public Stage stage;
@@ -69,11 +70,12 @@ public class Puzzle {
         table.pad(143,0,0,0);
 
         switches = new ArrayList<>();
+        correctSwitches= new ArrayList<>();
 
 
         //Creates all the reset switches
         for (int i = 0; i < resetSwitches; i++) {
-            final Button b = UIHelpers.createButton();
+            final Image b = UIHelpers.createImage();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -87,12 +89,13 @@ public class Puzzle {
 
         //Creates all of the other switches
         for (int i = 0; i < totalSwitches - resetSwitches; i++) {
-            final Button b = UIHelpers.createButton();
+
+            final Image b = UIHelpers.createImage();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    b.setDisabled(true);
                     b.moveBy(0,-20);
+                    correctSwitches.add(b);
                     b.setTouchable(Touchable.disabled);
                     handleSwitch(false);
                 }
@@ -140,7 +143,6 @@ public class Puzzle {
         }
     }
 
-
     /**
      * Sets the puzzle as solved and records who solved the puzzle
      */
@@ -180,12 +182,11 @@ public class Puzzle {
         switchesPressed = 0;
         table.setVisible(true);
         unlockTable.setVisible(false);
-        for (Button b : switches) {
-            b.setDisabled(false);
+        for (Image b : correctSwitches) {
             b.setTouchable(Touchable.enabled);
-            b.reset();
+            b.moveBy(0,+20);
         }
-
+        correctSwitches.clear();
 
     }
 

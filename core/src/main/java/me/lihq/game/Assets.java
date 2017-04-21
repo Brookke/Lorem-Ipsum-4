@@ -9,7 +9,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -45,6 +48,8 @@ public class Assets {
      * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}.
      */
     public static Texture TAG_BORDER;
+
+    public static ArrayList<String> Images;
 
     /**
      * This is the cover used in the secret room to minimise visibility
@@ -204,6 +209,18 @@ public class Assets {
         generator.dispose();
 
         return f;
+    }
+
+    public static ArrayList<String> initImages(){
+        Images= new ArrayList<String>();
+        Images.add("AI_BOOK.png");
+        Images.add("CAKE_BOOK.png");
+        Images.add("JAVA_BOOK.png");
+        Images.add("MATHS_BOOK.png");
+        Images.add("SYSTEMS_BOOK.png");
+        Images.add("VISIONS_BOOK.png");
+
+        return Images;
     }
 
 }
