@@ -121,7 +121,7 @@ public class UIHelpers {
     /**
      * Creates a new checkbox, using the style defined in UI_SKIN. Prepends the text with
      * 2 spaces, to add a gap between it and the checkbox texture.
-     *sacASçoSOa @param text The text to display next to the checkbox
+     * @param text The text to display next to the checkbox
      * @return A new checkbox with the standard style and specified text
      * @author JAAPAN
      */
@@ -144,9 +144,9 @@ public class UIHelpers {
     }
 
     public static Image createImage(){
-        String fileName= Assets.Images.get(new Random().nextInt(Assets.Images.size()));
-        Texture temp= new Texture(Gdx.files.internal(fileName));
-        Image b= new Image(temp);
+        String fileName = Assets.Images.get(new Random().nextInt(Assets.Images.size()));
+        Texture temp = new Texture(Gdx.files.internal(fileName));
+        Image b = new Image(temp);
         return b;
     }
 }

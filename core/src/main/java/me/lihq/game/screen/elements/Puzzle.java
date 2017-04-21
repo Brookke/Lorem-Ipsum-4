@@ -70,7 +70,7 @@ public class Puzzle {
         table.pad(143,0,0,0);
 
         switches = new ArrayList<>();
-        correctSwitches= new ArrayList<>();
+        correctSwitches = new ArrayList<>();
 
 
         //Creates all the reset switches
@@ -184,7 +184,7 @@ public class Puzzle {
         unlockTable.setVisible(false);
         for (Image b : correctSwitches) {
             b.setTouchable(Touchable.enabled);
-            b.moveBy(0,+20);
+            b.moveBy(0,20);
         }
         correctSwitches.clear();
 
