@@ -25,11 +25,11 @@ public class PuzzleScreen extends AbstractScreen {
     @Override
     public void show() {
 
-        puzzle = game.currentSnapshot.getPuzzle();
+        puzzle = game.currentSnapshot.puzzle;
 
         puzzle.init();
 
-        if (game.currentSnapshot.puzzleSolved) {
+        if (game.currentSnapshot.puzzle.isSolved()) {
             puzzle.goToSecretRoom();
         }
 

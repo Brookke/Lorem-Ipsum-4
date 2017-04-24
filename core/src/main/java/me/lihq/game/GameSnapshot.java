@@ -43,7 +43,7 @@ public class GameSnapshot {
     /**
      * This is the puzzle for this specific player
      */
-    private Puzzle puzzle;
+    public Puzzle puzzle;
 
     /**
      * Indicates if the player has solved the puzzle
@@ -88,6 +88,11 @@ public class GameSnapshot {
         this.gameMap = map;
         this.player = player;
         this.NPCs = npcs;
+        try {
+            this.puzzle = new Puzzle(this.game);
+        } catch (Exception e) {
+            System.out.println("Warning: failed to initialise puzzle! " + e.getMessage());
+        }
 
         game.hiddenRoomLocation = this.gameMap.getRoom(0).secretRoomSpot;
 
@@ -106,6 +111,11 @@ public class GameSnapshot {
     public GameSnapshot(GameSnapshot other)
     {
         this.game = other.game;
+        try {
+            this.puzzle = new Puzzle(this.game);
+        } catch (Exception e) {
+            System.out.println("Warning: failed to initialise puzzle! " + e.getMessage());
+        }
 
         gameMap = new Map(other.gameMap);
 
@@ -146,17 +156,6 @@ public class GameSnapshot {
         return npcsInRoom;
     }
 
-    /**
-     * This method returns the unique puzzle for this player
-     *
-     * @return Puzzle - puzzle
-     */
-    public Puzzle getPuzzle() {
-        if (puzzle != null) return puzzle;
-
-        this.puzzle = new Puzzle(this.game);
-        return puzzle;
-    }
 
     /**
      * This method is called when an interaction is completed.
