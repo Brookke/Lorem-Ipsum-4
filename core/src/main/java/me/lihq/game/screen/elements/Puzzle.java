@@ -147,7 +147,7 @@ public class Puzzle {
 
 
     /**
-     * Sets the puzzle as solved and records who solved the puzzle
+     * Sets the puzzle as solved
      */
     private void markSolved() {
         this.solved = true;
