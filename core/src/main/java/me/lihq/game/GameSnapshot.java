@@ -94,7 +94,7 @@ public class GameSnapshot {
             System.out.println("Warning: failed to initialise puzzle! " + e.getMessage());
         }
 
-        game.hiddenRoomLocation = this.gameMap.getRoom(0).secretRoomSpot;
+        game.hiddenRoomLocation = this.gameMap.getRoom(0).hiddenRoomLocation;
 
         if (isMultiPlayer) {
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;

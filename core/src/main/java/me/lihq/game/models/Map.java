@@ -151,8 +151,9 @@ public class Map {
 
         rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
         
-        Vector2Int spot = mainRoom.secretRoomSpot;
+        Vector2Int spot = mainRoom.hiddenRoomLocation;
 
+        //This is so that the puzzle is in the same place for all players
         if (game.hiddenRoomLocation != null) {
             spot = game.hiddenRoomLocation;
         }
