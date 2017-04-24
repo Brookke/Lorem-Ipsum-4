@@ -208,7 +208,7 @@ public class Player extends AbstractPerson {
         int x = getTileCoordinates().x + getDirection().getDx();
         int y = getTileCoordinates().y + getDirection().getDy();
 
-        return this.getRoom().getName().equals("Main Foyer") && this.getRoom().secretRoomSpot.x == x && this.getRoom().secretRoomSpot.y == y;
+        return this.getRoom().getName().equals("Main Foyer") && game.hiddenRoomLocation.x == x && game.hiddenRoomLocation.y == y;
     }
 
     /**

@@ -28,6 +28,7 @@ public class Room {
      * The secret room spot, this is selected from one of the bookcases
      */
     public Vector2Int secretRoomSpot;
+
     /**
      * This list stores the coordinates of all hideable slots in this room
      * <p>

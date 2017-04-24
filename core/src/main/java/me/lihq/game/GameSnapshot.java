@@ -5,6 +5,7 @@ import me.lihq.game.models.Room;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.screen.Screens;
+import me.lihq.game.screen.elements.Puzzle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,11 @@ public class GameSnapshot {
      * A player object for the player of the game
      */
     public Player player;
+
+    /**
+     * This is the puzzle for this specific player
+     */
+    private Puzzle puzzle;
 
     /**
      * Indicates if the player has solved the puzzle
@@ -82,6 +88,8 @@ public class GameSnapshot {
         this.gameMap = map;
         this.player = player;
         this.NPCs = npcs;
+
+        game.hiddenRoomLocation = this.gameMap.getRoom(0).secretRoomSpot;
 
         if (isMultiPlayer) {
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
@@ -136,6 +144,18 @@ public class GameSnapshot {
         }
 
         return npcsInRoom;
+    }
+
+    /**
+     * This method returns the unique puzzle for this player
+     *
+     * @return Puzzle - puzzle
+     */
+    public Puzzle getPuzzle() {
+        if (puzzle != null) return puzzle;
+
+        this.puzzle = new Puzzle(this.game);
+        return puzzle;
     }
 
     /**
