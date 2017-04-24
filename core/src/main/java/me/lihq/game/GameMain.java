@@ -67,6 +67,8 @@ public class GameMain extends Game {
 
     /**
      * This stores the tile location in the main room that the hidden room is located at
+     *
+     * @author Lorem-Ipsum
      */
     public Vector2Int hiddenRoomLocation = null;
 
