@@ -29,7 +29,7 @@ public class PuzzleScreen extends AbstractScreen {
 
         puzzle.init();
 
-        if (game.currentSnapshot.puzzle.isSolved()) {
+        if (puzzle.isSolved()) {
             puzzle.goToSecretRoom();
         }
 
