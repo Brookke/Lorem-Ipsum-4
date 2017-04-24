@@ -25,7 +25,8 @@ public class Room {
 
 
     /**
-     * The secret room spot, this is selected from one of the bookcases
+     * the location of the hidden room in the game, this is selected from one of the bookcases
+     * @author Lorem-ipsum
      */
     public Vector2Int hiddenRoomLocation;
 
