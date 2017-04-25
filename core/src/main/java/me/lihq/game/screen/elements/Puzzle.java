@@ -46,6 +46,11 @@ public class Puzzle {
     int switchesPressed = 0;
 
     /**
+     * Whether the puzzle has been solved or not
+     */
+    private boolean solved = false;
+
+    /**
      * The number of reset switches in the puzzle, these are switches that if pressed cause the game to be reset
      */
     int resetSwitches = 6;
@@ -144,17 +149,24 @@ public class Puzzle {
     }
 
     /**
-     * Sets the puzzle as solved and records who solved the puzzle
+     * Sets the puzzle as solved
      */
     private void markSolved() {
-        game.currentSnapshot.puzzleSolved = true;
+        this.solved = true;
+    }
+
+    /**
+     * This method checks if the puzzle has been solved
+     * @return true if it has been solved
+     */
+    public boolean isSolved() {
+        return this.solved;
     }
 
     /**
      * This does all the changes necessary to change to the secret room.
      */
     public void goToSecretRoom() {
-        this.resetPuzzle();
         game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
         game.screenManager.setScreen(Screens.navigation);
     }

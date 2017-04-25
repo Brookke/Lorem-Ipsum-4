@@ -25,9 +25,11 @@ public class Room {
 
 
     /**
-     * The secret room spot, this is selected from one of the bookcases
+     * the location of the hidden room in the game, this is selected from one of the bookcases
+     * @author Lorem-ipsum
      */
-    public Vector2Int secretRoomSpot;
+    public Vector2Int hiddenRoomLocation;
+
     /**
      * This list stores the coordinates of all hideable slots in this room
      * <p>
@@ -122,7 +124,7 @@ public class Room {
 
         Collections.shuffle(getBookcaseSpots());
         if (bookcaseSpots.size() > 0) {
-            secretRoomSpot = bookcaseSpots.get(0);
+            hiddenRoomLocation = bookcaseSpots.get(0);
         }
         hidingSpots = getHidingSpots();
 
@@ -497,7 +499,7 @@ public class Room {
                     if (!cellInTile.getTile().getProperties().containsKey("hidingSpot")) continue;
 
                     if (cellInTile.getTile().getProperties().get("hidingSpot").toString().equals("true")
-                            && !new Vector2Int(x, y).equals(secretRoomSpot)) {
+                            && !new Vector2Int(x, y).equals(hiddenRoomLocation)) {
                         hidingSpots.add(new Vector2Int(x, y));
                         break;
                     }

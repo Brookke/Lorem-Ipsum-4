@@ -12,6 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
+import me.lihq.game.models.Vector2Int;
 import me.lihq.game.people.controller.GlobalInput;
 import me.lihq.game.screen.AbstractScreen;
 import me.lihq.game.screen.ScreenManager;
@@ -63,6 +64,13 @@ public class GameMain extends Game {
      * @author Lorem-Ipsum
      */
     public int currentPlayerId = 0;
+
+    /**
+     * This stores the tile location in the main room that the hidden room is located at
+     *
+     * @author Lorem-Ipsum
+     */
+    public Vector2Int hiddenRoomLocation = null;
 
     /**
      * This is the game snapshot of the currently playing player
