@@ -100,6 +100,7 @@ public class ScenarioBuilder {
         List<Integer> roomsLeft = new ArrayList<>();
 
         for (int i = 0; i < amountOfRooms; i++) {
+            if (map.getRoom(i).getName().equals("Secret Room")) continue;
             roomsLeft.add(i);
         }
 
@@ -119,6 +120,9 @@ public class ScenarioBuilder {
 
             if (randHidingSpot != null) {
                 room.addClue(clue.setTileCoordinates(randHidingSpot));
+            } else
+            {
+                System.out.println("Failed to place Clue " + clue.getName() + " in room " + room.getName());
             }
         }
     }

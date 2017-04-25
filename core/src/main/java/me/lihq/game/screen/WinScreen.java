@@ -88,6 +88,10 @@ public class WinScreen extends AbstractScreen {
         Label title = UIHelpers.createLabel("You Found the Killer!", true);
         stage.addActor(title);
 
+        Label winnerName = UIHelpers.createLabel("The Winner is " + game.currentSnapshot.player.getName(), true);
+        stage.addActor(winnerName);
+        winnerName.setY(title.getHeight() * 1.5f);
+
         // Create all information labels, retrieving the necessary data from the player
         // Set their visibility to false, so they can be animated from the render() method
         Label cluesLabel = UIHelpers.createLabel("Clues Found: " + game.currentSnapshot.player.collectedClues.size(), false);

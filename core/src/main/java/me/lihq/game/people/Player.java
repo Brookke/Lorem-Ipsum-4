@@ -283,6 +283,10 @@ public class Player extends AbstractPerson {
      */
     public void moveRoom(Room.Transition transition) {
 
+        for (NPC character : game.currentSnapshot.NPCs) {
+            character.ignored = false;
+        }
+
         this.setRoom(transition.getNewRoom());
 
         if (transition.newDirection != null) {
