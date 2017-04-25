@@ -119,7 +119,6 @@ public class UIHelpers {
     /**
      * Creates a new checkbox, using the style defined in UI_SKIN. Prepends the text with
      * 2 spaces, to add a gap between it and the checkbox texture.
-     *
      * @param text The text to display next to the checkbox
      * @return A new checkbox with the standard style and specified text
      * @author JAAPAN
