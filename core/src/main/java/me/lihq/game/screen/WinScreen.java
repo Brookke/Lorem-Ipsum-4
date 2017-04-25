@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
+import me.lihq.game.GameSnapshot;
 import me.lihq.game.screen.elements.UIHelpers;
 
 import java.io.File;
@@ -85,6 +86,25 @@ public class WinScreen extends AbstractScreen {
      * Initialises the UI elements on the screen, and sets up event handlers.
      */
     private void initMenu() {
+
+        GameSnapshot highestScore = game.gameSnapshots.get(0);
+
+        //Get the highest scoring player
+        //If 2 players have the same score, start prioritising other scores
+        for (GameSnapshot snapshot : game.gameSnapshots) {
+            if (snapshot.player.getTotalScore() > highestScore.player.getTotalScore()) {
+                highestScore = snapshot;
+            }
+            else if (snapshot.player.getScore() == highestScore.player.getScore()) {
+                   if (snapshot.player.getFalseAccusations() < highestScore.player.getFalseAccusations()) {
+                       highestScore = snapshot;
+                   }
+                   else if (snapshot.player.getPlayTime() < highestScore.player.getPlayTime()) {
+                       highestScore = snapshot;
+                   }
+            }
+        }
+
         Label title = UIHelpers.createLabel("You Found the Killer!", true);
         stage.addActor(title);
 
