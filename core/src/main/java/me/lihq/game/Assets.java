@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
@@ -49,7 +50,7 @@ public class Assets {
      */
     public static Texture TAG_BORDER;
 
-    public static ArrayList<String> Images;
+    public static ArrayList<String> Books = new ArrayList<String>();
 
     /**
      * This is the cover used in the secret room to minimise visibility
@@ -134,6 +135,7 @@ public class Assets {
         SOUND = Gdx.audio.newSound(Gdx.files.internal("music/clue-found.ogg"));
 
         initSkin();
+        initBooks();
     }
 
     /**
@@ -211,16 +213,31 @@ public class Assets {
         return f;
     }
 
-    public static ArrayList<String> initImages(){
-        Images= new ArrayList<String>();
-        Images.add("AI_BOOK.png");
-        Images.add("CAKE_BOOK.png");
-        Images.add("JAVA_BOOK.png");
-        Images.add("MATHS_BOOK.png");
-        Images.add("SYSTEMS_BOOK.png");
-        Images.add("VISIONS_BOOK.png");
+    /**
+     * Initialises an array of paths to books in the game
+     *
+     * @author Lorem-Ipsum
+     */
+    private static void initBooks(){
+        Books.add("AI_BOOK.png");
+        Books.add("CAKE_BOOK.png");
+        Books.add("JAVA_BOOK.png");
+        Books.add("MATHS_BOOK.png");
+        Books.add("SYSTEMS_BOOK.png");
+        Books.add("VISIONS_BOOK.png");
+    }
 
-        return Images;
+    /**
+     * Gets a book from the array of books imports it and generates an image
+     * @return Returns a image of a book
+     *
+     * @author Lorem-Ipsum
+     */
+    public static Image getRandomBook(){
+        String fileName = Books.get(new Random().nextInt(Books.size()));
+        Texture temp = new Texture(Gdx.files.internal(fileName));
+        Image b = new Image(temp);
+        return b;
     }
 
 }
