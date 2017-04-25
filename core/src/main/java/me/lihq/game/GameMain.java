@@ -98,7 +98,6 @@ public class GameMain extends Game {
     public void create() {
         Assets.load();// Load in the assets the game needs
 
-
         // Load universal input class
         input = new GlobalInput(this);
 
