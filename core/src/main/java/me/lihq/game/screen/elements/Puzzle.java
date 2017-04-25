@@ -65,66 +65,32 @@ public class Puzzle {
         stage = new Stage(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Image background = new Image(new Texture(Gdx.files.internal("puzzle-background.png")));
         stage.addActor(background);
-        table = new Table();
+
         unlockTable = new Table();
         unlockTable.setFillParent(true);
         unlockTable.pad(143,0,0,0);
         unlockTable.setVisible(false);
+
+        table = new Table();
         table.setFillParent(true);
         table.pad(143,0,0,0);
-
-        switches = new ArrayList<>();
-
-
-        //Creates all the reset switches
-        for (int i = 0; i < resetSwitches; i++) {
-            final Button b = UIHelpers.createButton();
-            b.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-
-                    handleSwitch(true);
-
-                }
-            });
-            switches.add(b);
-        }
-
-        //Creates all of the other switches
-        for (int i = 0; i < totalSwitches - resetSwitches; i++) {
-            final Button b = UIHelpers.createButton();
-            b.addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    b.setDisabled(true);
-                    b.moveBy(0,-20);
-                    b.setTouchable(Touchable.disabled);
-                    handleSwitch(false);
-                }
-            });
-            switches.add(b);
-        }
-
-        Collections.shuffle(switches);
-
-        for (int i = 0; i < switches.size(); i++) {
-
-            table.add(switches.get(i)).width(65).height(185);
-        }
 
         Button unlock = UIHelpers.createTextButton("Unlock");
         unlock.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 markSolved();
+                generatePuzzle();
                 goToSecretRoom();
-                }
+            }
         });
         unlockTable.add(unlock);
 
+        generatePuzzle();
 
-        stage.addActor(table);
         stage.addActor(unlockTable);
+        stage.addActor(table);
+
     }
 
     /**
@@ -196,6 +162,51 @@ public class Puzzle {
             b.setDisabled(false);
             b.setTouchable(Touchable.enabled);
             b.reset();
+        }
+
+
+    }
+
+    private void generatePuzzle() {
+        unlockTable.setVisible(false);
+        table.setVisible(true);
+        table.clear();
+        switches = new ArrayList<>();
+
+        //Creates all the reset switches
+        for (int i = 0; i < resetSwitches; i++) {
+            final Button b = UIHelpers.createButton();
+            b.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+
+                    handleSwitch(true);
+
+                }
+            });
+            switches.add(b);
+        }
+
+        //Creates all of the other switches
+        for (int i = 0; i < totalSwitches - resetSwitches; i++) {
+            final Button b = UIHelpers.createButton();
+            b.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    b.setDisabled(true);
+                    b.moveBy(0,-20);
+                    b.setTouchable(Touchable.disabled);
+                    handleSwitch(false);
+                }
+            });
+            switches.add(b);
+        }
+
+        Collections.shuffle(switches);
+
+        for (int i = 0; i < switches.size(); i++) {
+
+            table.add(switches.get(i)).width(65).height(185);
         }
 
 
