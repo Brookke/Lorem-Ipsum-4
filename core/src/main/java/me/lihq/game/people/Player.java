@@ -225,11 +225,12 @@ public class Player extends AbstractPerson {
         if (this.getRoom().isExtraScoreTile(x, y)) {
             int extra = this.getRoom().extraScoreAmount();
             score += extra;
-            if (extra == 0){
-                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
-            }
-            else {
-                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("You gained " + extra + " extra points! Lucky you :D"));
+            if (extra == 0) {
+                 game.screenManager.navigationScreen.speechboxMngr.addSpeechBox( new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+            } else {
+                SpeechBox speechBox = new SpeechBox("You gained " + extra + " extra points! Lucky you :D");
+                speechBox.setTrigger(true);
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(speechBox);
             }
             game.scoreObtained = true;
             if (!Settings.MUTED) {

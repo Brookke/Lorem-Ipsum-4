@@ -44,7 +44,7 @@ public class GameSnapshot {
      * This is the puzzle for this specific player
      */
     public Puzzle puzzle;
-    
+
     /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
      * killer, without having to iterate through each NPC.
