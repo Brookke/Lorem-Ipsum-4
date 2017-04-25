@@ -158,7 +158,7 @@ public class GameSnapshot {
      */
     public void finishedInteraction() {
         this.interactionsRemaining -= 1;
-        if (this.interactionsRemaining == 0) {
+        if (this.interactionsRemaining == 0 && !game.screenManager.navigationScreen.convMngt.won) {
             game.screenManager.navigationScreen.captureFrame = true;
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
             game.screenManager.setScreen(Screens.playerSwitch);
