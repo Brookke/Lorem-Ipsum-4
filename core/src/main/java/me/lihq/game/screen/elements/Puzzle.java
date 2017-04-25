@@ -165,7 +165,6 @@ public class Puzzle {
      * This does all the changes necessary to change to the secret room.
      */
     public void goToSecretRoom() {
-        this.resetPuzzle();
         game.screenManager.navigationScreen.initialiseRoomChange(secretRoomTrans);
         game.screenManager.setScreen(Screens.navigation);
     }
