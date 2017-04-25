@@ -5,6 +5,7 @@ import me.lihq.game.models.Room;
 import me.lihq.game.people.NPC;
 import me.lihq.game.people.Player;
 import me.lihq.game.screen.Screens;
+import me.lihq.game.screen.elements.Puzzle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +41,10 @@ public class GameSnapshot {
     public Player player;
 
     /**
-     * Indicates if the player has solved the puzzle
+     * This is the puzzle for this specific player
      */
-    public boolean puzzleSolved = false;
+    public Puzzle puzzle;
+
     /**
      * An NPC object for the killer. This allows us to easily access the name and room of the
      * killer, without having to iterate through each NPC.
@@ -82,6 +84,13 @@ public class GameSnapshot {
         this.gameMap = map;
         this.player = player;
         this.NPCs = npcs;
+        try {
+            this.puzzle = new Puzzle(this.game);
+        } catch (Exception e) {
+            System.out.println("Warning: failed to initialise puzzle! " + e.getMessage());
+        }
+
+        game.hiddenRoomLocation = this.gameMap.getRoom(0).hiddenRoomLocation;
 
         if (isMultiPlayer) {
             this.interactionsRemaining = MULTIPLAYER_INTERACTION_LIMIT;
@@ -98,6 +107,11 @@ public class GameSnapshot {
     public GameSnapshot(GameSnapshot other)
     {
         this.game = other.game;
+        try {
+            this.puzzle = new Puzzle(this.game);
+        } catch (Exception e) {
+            System.out.println("Warning: failed to initialise puzzle! " + e.getMessage());
+        }
 
         gameMap = new Map(other.gameMap);
 
@@ -137,6 +151,7 @@ public class GameSnapshot {
 
         return npcsInRoom;
     }
+
 
     /**
      * This method is called when an interaction is completed.
