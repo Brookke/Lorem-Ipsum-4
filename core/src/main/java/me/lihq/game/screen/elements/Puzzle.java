@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.models.Room;
 import me.lihq.game.screen.Screens;
@@ -80,7 +81,7 @@ public class Puzzle {
 
         //Creates all the reset switches
         for (int i = 0; i < resetSwitches; i++) {
-            final Image b = UIHelpers.createImage();
+            final Image b = Assets.getRandomBook();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -95,7 +96,7 @@ public class Puzzle {
         //Creates all of the other switches
         for (int i = 0; i < totalSwitches - resetSwitches; i++) {
 
-            final Image b = UIHelpers.createImage();
+            final Image b = Assets.getRandomBook();
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
