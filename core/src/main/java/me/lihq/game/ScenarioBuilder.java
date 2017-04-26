@@ -120,9 +120,8 @@ public class ScenarioBuilder {
 
             if (randHidingSpot != null) {
                 room.addClue(clue.setTileCoordinates(randHidingSpot));
-            } else
-            {
-                System.out.println("Failed to place Clue " + clue.getName() + " in room " + room.getName());
+            } else {
+                throw new IndexOutOfBoundsException("No places to Place Clue " + clue.getName() + " in room " + room.getName());
             }
         }
     }
