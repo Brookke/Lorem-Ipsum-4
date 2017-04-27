@@ -31,12 +31,14 @@ public class Assets {
      * The asset sheet for clues.
      */
     public static Texture CLUE_SHEET;
+
     /**
      * The textures for the checkbox UI item.
      *
      * @author JAAPAN
      */
     public static TextureRegion UNCHECKED_BOX, CHECKED_BOX;
+
     /**
      * These TextureRegions store the 4 different directions that the room changing
      * arrows can face.
@@ -45,17 +47,22 @@ public class Assets {
     public static TextureRegion DOWN_ARROW;
     public static TextureRegion LEFT_ARROW;
     public static TextureRegion RIGHT_ARROW;
+
     /**
      * This is the asset for the RoomTag {@link me.lihq.game.screen.elements.RoomTag}.
      */
     public static Texture TAG_BORDER;
 
+    /**
+     * This stores the file names of all the book images to be used in the Puzzle
+     */
     public static ArrayList<String> Books = new ArrayList<String>();
 
     /**
      * This is the cover used in the secret room to minimise visibility
      */
     public static Texture COVER;
+
     /**
      * The default fonts used in the game - the number specifies the size. Used to render
      * UI elements and room tags.
@@ -63,22 +70,26 @@ public class Assets {
      * @author JAAPAN
      */
     public static BitmapFont FONT15;
+
     /**
      * This it the animation for the clue glint to be drawn where a clue is hidden.
      */
     public static Animation CLUE_GLINT;
+
     /**
      * Used for streaming the soundtrack.
      *
      * @author JAAPAN
      */
     public static Music MUSIC;
+
     /**
      * Used for playing the sound effect when a clue is found.
      *
      * @author JAAPAN
      */
     public static Sound SOUND;
+
     /**
      * Global skin storing the standard UI styles, used in the UI factory methods.
      *
@@ -86,6 +97,9 @@ public class Assets {
      */
     public static Skin UI_SKIN;
 
+    /**
+     * This stores the Skin to be used for the check box
+     */
     public static Skin CHECK_SKIN;
 
     /**
