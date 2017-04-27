@@ -52,18 +52,15 @@ public class Map {
      *
      * @author Lorem-Ipsum
      */
-    public Map(Map other)
-    {
+    public Map(Map other) {
         this.game = other.game;
         initialiseRooms();
 
         murderRoom = getRoom(other.murderRoom.getID());
         murderRoom.setMurderRoom();
 
-        for (int i = 0; i < getRooms().size(); i ++)
-        {
-            for (Clue c : other.getRoom(i).getCluesInRoom())
-            {
+        for (int i = 0; i < getRooms().size(); i++) {
+            for (Clue c : other.getRoom(i).getCluesInRoom()) {
                 rooms.get(i).addClue(new Clue(c));
             }
         }
@@ -150,7 +147,7 @@ public class Map {
                 .addTransition(new Room.Transition().setFrom(18, 10).setTo(outside, 9, 12, Direction.EAST));  //To Outside
 
         rooms = Arrays.asList(mainRoom, rch037, portersOffice, kitchen, islandOfInteraction, toilet, computerRoom, lakeHouse, outside, pod, secretRoom);
-        
+
         Vector2Int spot = mainRoom.hiddenRoomLocation;
 
         //This is so that the puzzle is in the same place for all players
@@ -158,14 +155,13 @@ public class Map {
             spot = game.hiddenRoomLocation;
         }
 
-        secretRoom.addTransition(new Room.Transition().setFrom(10,0).setTo(mainRoom, spot.x, spot.y - 1, Direction.NORTH));
+        secretRoom.addTransition(new Room.Transition().setFrom(10, 0).setTo(mainRoom, spot.x, spot.y - 1, Direction.NORTH));
     }
 
     /**
      * This method sets one of the rooms randomly to the murder room
      */
-    public void setRandomMurderRoom()
-    {
+    public void setRandomMurderRoom() {
         /**
          * Assign the murder room
          */
@@ -192,6 +188,7 @@ public class Map {
     public Room.Transition getSecretRoomTransition() {
         return secretRoomTrans;
     }
+
     /**
      * Returns the amount of rooms created by the map
      *

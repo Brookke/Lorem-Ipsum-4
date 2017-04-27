@@ -72,8 +72,7 @@ public class Clue extends Sprite {
      * @param other - The clue to copy
      * @author Lorem-Ipsum
      */
-    public Clue(Clue other)
-    {
+    public Clue(Clue other) {
         super(new TextureRegion(Assets.CLUE_SHEET, (other.assetCoordinates.x * Settings.CLUE_SIZE), (other.assetCoordinates.y * Settings.CLUE_SIZE), Settings.CLUE_SIZE, Settings.CLUE_SIZE));
         this.name = other.name;
         this.description = other.description;

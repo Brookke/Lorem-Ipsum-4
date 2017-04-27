@@ -53,8 +53,7 @@ public class PlayerSwitchScreen extends AbstractScreen {
     /**
      * This initialises all the objects to go on the screen
      */
-    private void initScreen()
-    {
+    private void initScreen() {
         /**
          * Setup the background
          */
@@ -122,12 +121,10 @@ public class PlayerSwitchScreen extends AbstractScreen {
     /**
      * This method updates the objects on the screen to the new sizes based on the next players name
      */
-    public void updateUI()
-    {
+    public void updateUI() {
         int nextPlayer = game.currentPlayerId + 1;
 
-        if (nextPlayer == game.noPlayers)
-        {
+        if (nextPlayer == game.noPlayers) {
             nextPlayer = 0;
         }
 
@@ -162,11 +159,9 @@ public class PlayerSwitchScreen extends AbstractScreen {
      *
      * @param tableWidth - The width of the table
      * @return Table containing the UI components
-     *
      * @author Lorem-Ipsum
      */
-    private Table getScoreTable(float tableWidth)
-    {
+    private Table getScoreTable(float tableWidth) {
         List<String> labels = getScores();
 
         int heightPerLabel = Gdx.graphics.getHeight() / 20;
@@ -179,15 +174,14 @@ public class PlayerSwitchScreen extends AbstractScreen {
         table.addActor(background);
 
         int count = 1;
-        for (String s : labels)
-        {
+        for (String s : labels) {
             Label l = UIHelpers.createLabel(s, Assets.FONT15, Color.WHITE);
 
             l.setPosition((table.getWidth() / 2) - (l.getWidth() / 2), table.getHeight() - (count * heightPerLabel));
 
             table.addActor(l);
 
-            count ++;
+            count++;
         }
 
         return table;
@@ -195,28 +189,24 @@ public class PlayerSwitchScreen extends AbstractScreen {
 
     /**
      * This method loops through all the players and their scores and returns a list.
-     *
+     * <p>
      * The higher their score, the higher they are up the list
      *
      * @return List of Strings to be displayed on labels
-     *
      * @author Lorem-Ipsum
      */
-    private List<String> getScores()
-    {
+    private List<String> getScores() {
         List<String> results = new ArrayList<String>();
 
         results.add("=== LEADERBOARD ===");
 
         HashMap<String, Integer> scores = new HashMap<String, Integer>();
 
-        for (GameSnapshot snapshot: game.gameSnapshots)
-        {
-            scores.put(snapshot.player.getName(),snapshot.player.getScore());
+        for (GameSnapshot snapshot : game.gameSnapshots) {
+            scores.put(snapshot.player.getName(), snapshot.player.getScore());
         }
 
-        for (int i = 0; i < game.noPlayers; i ++)
-        {
+        for (int i = 0; i < game.noPlayers; i++) {
             String highestScoringPlayer = getMaxKey(scores);
             int maxScore = scores.get(highestScoringPlayer);
 
@@ -231,20 +221,15 @@ public class PlayerSwitchScreen extends AbstractScreen {
      * This method takes a HashMap<String, Integer> and returns the Key with the minimum value
      *
      * @param map - The HashMap to check
-     *
      * @return String the key with the lowest value
-     *
      * @author Lorem-Ipsum
      */
-    private String getMaxKey(HashMap<String, Integer> map)
-    {
+    private String getMaxKey(HashMap<String, Integer> map) {
         int max = Integer.MIN_VALUE;
         String maxKey = "";
 
-        for (String key : map.keySet())
-        {
-            if (map.get(key) > max)
-            {
+        for (String key : map.keySet()) {
+            if (map.get(key) > max) {
                 max = map.get(key);
                 maxKey = key;
             }

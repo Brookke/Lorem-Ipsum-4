@@ -81,6 +81,7 @@ public class NavigationScreen extends AbstractScreen {
 
     /**
      * This contains the transition data for the player, if they are moving rooms.
+     *
      * @author Lorem-Ipsum
      */
     private Room.Transition roomTransition = null;
@@ -241,8 +242,9 @@ public class NavigationScreen extends AbstractScreen {
 
     /**
      * This is called when the player decides to move to another room
-     *
+     * <p>
      * Changed to now take transition data
+     *
      * @author Lorem Ipsum
      */
     public void initialiseRoomChange(Room.Transition transition) {
@@ -313,8 +315,8 @@ public class NavigationScreen extends AbstractScreen {
             BLACK_BACKGROUND.draw(spriteBatch);
         }
 
-        if (game.currentSnapshot.player.getRoom().getName().equals("Secret Room")){
-            spriteBatch.draw(Assets.COVER, Gdx.graphics.getWidth()/2 - Assets.COVER.getWidth()/2 + Settings.TILE_SIZE/2, Gdx.graphics.getHeight()/2 - Assets.COVER.getHeight()/2 + Settings.TILE_SIZE);
+        if (game.currentSnapshot.player.getRoom().getName().equals("Secret Room")) {
+            spriteBatch.draw(Assets.COVER, Gdx.graphics.getWidth() / 2 - Assets.COVER.getWidth() / 2 + Settings.TILE_SIZE / 2, Gdx.graphics.getHeight() / 2 - Assets.COVER.getHeight() / 2 + Settings.TILE_SIZE);
         }
 
         if (roomTag != null) {
@@ -357,8 +359,7 @@ public class NavigationScreen extends AbstractScreen {
     @Override
     public void pause() {
         // Pause the game if the player isnt in conversation, so the gameDuration counter isn't updated
-        if (!player.inConversation)
-        {
+        if (!player.inConversation) {
             game.screenManager.setScreen(Screens.pauseMenu);
         }
     }

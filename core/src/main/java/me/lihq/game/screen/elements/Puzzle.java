@@ -32,7 +32,7 @@ public class Puzzle {
     public Room.Transition secretRoomTrans;
 
     /**
-     * The switches for the game 
+     * The switches for the game
      */
     private ArrayList<Image> correctSwitches;
     private ArrayList<Image> switches;
@@ -70,10 +70,10 @@ public class Puzzle {
         table = new Table();
         unlockTable = new Table();
         unlockTable.setFillParent(true);
-        unlockTable.pad(143,0,0,0);
+        unlockTable.pad(143, 0, 0, 0);
         unlockTable.setVisible(false);
         table.setFillParent(true);
-        table.pad(143,0,0,0);
+        table.pad(143, 0, 0, 0);
 
         switches = new ArrayList<>();
         correctSwitches = new ArrayList<>();
@@ -100,7 +100,7 @@ public class Puzzle {
             b.addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    b.moveBy(0,-20);
+                    b.moveBy(0, -20);
                     correctSwitches.add(b);
                     b.setTouchable(Touchable.disabled);
                     handleSwitch(false);
@@ -122,7 +122,7 @@ public class Puzzle {
             public void clicked(InputEvent event, float x, float y) {
                 markSolved();
                 goToSecretRoom();
-                }
+            }
         });
         unlockTable.add(unlock);
 
@@ -133,6 +133,7 @@ public class Puzzle {
 
     /**
      * This handles what happens when each switch is pressed
+     *
      * @param resetSwitch
      */
     public void handleSwitch(boolean resetSwitch) {
@@ -158,6 +159,7 @@ public class Puzzle {
 
     /**
      * This method checks if the puzzle has been solved
+     *
      * @return true if it has been solved
      */
     public boolean isSolved() {
@@ -197,7 +199,7 @@ public class Puzzle {
         unlockTable.setVisible(false);
         for (Image b : correctSwitches) {
             b.setTouchable(Touchable.enabled);
-            b.moveBy(0,20);
+            b.moveBy(0, 20);
         }
         correctSwitches.clear();
 

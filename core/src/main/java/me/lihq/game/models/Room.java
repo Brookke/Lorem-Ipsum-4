@@ -26,6 +26,7 @@ public class Room {
 
     /**
      * the location of the hidden room in the game, this is selected from one of the bookcases
+     *
      * @author Lorem-ipsum
      */
     public Vector2Int hiddenRoomLocation;
@@ -46,7 +47,6 @@ public class Room {
      * @Lorem Ipsum
      * Assessment 4
      * This list stores the coordinates of all slots that provide extra points in this room
-     *
      * @author Lorem-Ipsum
      */
     public List<Vector2Int> scoreSpots = null;

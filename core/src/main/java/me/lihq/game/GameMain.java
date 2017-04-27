@@ -46,7 +46,7 @@ public class GameMain extends Game {
      */
     public boolean scoreObtained = false;
 
-     /**
+    /**
      * An FPSLogger, FPSLogger allows us to check the game FPS is good enough
      */
     FPSLogger FPS;
@@ -149,8 +149,8 @@ public class GameMain extends Game {
 
     /**
      * Initialises variables for starting the game
-     * @param noPlayers - number of players in game
      *
+     * @param noPlayers - number of players in game
      * @author Lorem-Ipsum
      */
     public void startGame(int noPlayers) {

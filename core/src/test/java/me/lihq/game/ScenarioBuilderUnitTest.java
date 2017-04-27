@@ -10,26 +10,21 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by joeshuff on 10/03/2017.
  */
-public class ScenarioBuilderUnitTest extends GameTester
-{
+public class ScenarioBuilderUnitTest extends GameTester {
     ScenarioBuilder builder;
 
     @Before
-    public void before()
-    {
+    public void before() {
         GameMain game = new GameMain();
         builder = new ScenarioBuilder(game);
     }
 
     @Test
-    public void testGenerateGame()
-    {
-        try
-        {
+    public void testGenerateGame() {
+        try {
             List<GameSnapshot> snapshots = builder.generateGame(2);
             assertTrue("Scenario Builder has created the game", true);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             assertTrue("Scenario Builder failed to generate game", false);
         }
     }

@@ -94,14 +94,12 @@ public class WinScreen extends AbstractScreen {
         for (GameSnapshot snapshot : game.gameSnapshots) {
             if (snapshot.player.getTotalScore() > highestScore.player.getTotalScore()) {
                 highestScore = snapshot;
-            }
-            else if (snapshot.player.getScore() == highestScore.player.getScore()) {
-                   if (snapshot.player.getFalseAccusations() < highestScore.player.getFalseAccusations()) {
-                       highestScore = snapshot;
-                   }
-                   else if (snapshot.player.getPlayTime() < highestScore.player.getPlayTime()) {
-                       highestScore = snapshot;
-                   }
+            } else if (snapshot.player.getScore() == highestScore.player.getScore()) {
+                if (snapshot.player.getFalseAccusations() < highestScore.player.getFalseAccusations()) {
+                    highestScore = snapshot;
+                } else if (snapshot.player.getPlayTime() < highestScore.player.getPlayTime()) {
+                    highestScore = snapshot;
+                }
             }
         }
 

@@ -44,6 +44,7 @@ public class ScreenManager {
     public SettingsScreen settingsScreen;
     /**
      * The puzzle screen
+     *
      * @author Lorem-Ipsum
      */
     private PuzzleScreen puzzleScreen;
@@ -133,10 +134,8 @@ public class ScreenManager {
     /**
      * This is called once a render loop to try and update the screen
      */
-    public void update()
-    {
-        if (nextScreen != null)
-        {
+    public void update() {
+        if (nextScreen != null) {
             game.setScreen(nextScreen);
             nextScreen = null;
         }

@@ -82,10 +82,9 @@ public class NPC extends AbstractPerson {
      * This method creates a copy of the NPC passed as a parameter
      *
      * @param other - The NPC to copy
-     * @param map - The map the new NPC should be in
+     * @param map   - The map the new NPC should be in
      */
-    public NPC(NPC other, Map map)
-    {
+    public NPC(NPC other, Map map) {
         super(other.game, other.getName(), "people/NPCs/" + other.spritesheetFile, other.getTileCoordinates().x, other.getTileCoordinates().y);
         this.spritesheetFile = other.spritesheetFile;
 

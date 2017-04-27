@@ -218,7 +218,7 @@ public class Assets {
      *
      * @author Lorem-Ipsum
      */
-    private static void initBooks(){
+    private static void initBooks() {
         Books.add("AI_BOOK.png");
         Books.add("CAKE_BOOK.png");
         Books.add("JAVA_BOOK.png");
@@ -229,11 +229,11 @@ public class Assets {
 
     /**
      * Gets a book from the array of books imports it and generates an image
-     * @return Returns a image of a book
      *
+     * @return Returns a image of a book
      * @author Lorem-Ipsum
      */
-    public static Image getRandomBook(){
+    public static Image getRandomBook() {
         String fileName = Books.get(new Random().nextInt(Books.size()));
         Texture temp = new Texture(Gdx.files.internal(fileName));
         Image b = new Image(temp);

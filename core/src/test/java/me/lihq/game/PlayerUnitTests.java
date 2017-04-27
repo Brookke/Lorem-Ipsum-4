@@ -50,7 +50,6 @@ public class PlayerUnitTests extends GameTester {
     }
 
 
-
     @Test
     public void testPlayername() {
         assertEquals("Fail - Not returning correct playername", p.getName(), "Test Name");
