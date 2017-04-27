@@ -39,6 +39,7 @@ Contents
    Assessment4/gui
    Assessment4/testing
    Assessment4/executableTestPlan
+   Assessment4/evaluation
    Assessment4/appendixA
    Assessment4/appendixC
    Assessment4/appendixD
