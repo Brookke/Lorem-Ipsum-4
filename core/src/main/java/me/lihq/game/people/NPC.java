@@ -21,6 +21,7 @@ public class NPC extends AbstractPerson {
      * @author JAAPAN
      */
     public List<Clue> alreadyAskedClues = new ArrayList<>();
+
     /**
      * Used to track whether the NPC has been ignored, and thus won't respond to the player
      * until another clue has been found.
@@ -28,20 +29,24 @@ public class NPC extends AbstractPerson {
      * @author JAAPAN
      */
     public boolean ignored = false;
+
     /**
      * Used to track whether the NPC has been accused, so they can ignore the player after a false accusation.
      *
      * @author JAAPAN
      */
     public boolean accused = false;
+
     /**
      * The motive string details why the NPC committed the murder.
      */
     private String motive = "";
+
     /**
      * Whether the NPC is the killer.
      */
     private boolean isKiller = false;
+
     /**
      * Whether the NPC is the victim.
      */
