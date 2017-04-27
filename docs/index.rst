@@ -12,6 +12,7 @@ This Page will be developed further as time goes on, but for now you can access 
 or visit our `homepage <http://lihq.me/>`_.
 
 For Assessment 3, we are working with the project produced by Team Farce.
+For Assessment 4, we are working with the project produced by Team JAAPAN.
 
 
 Team Members
@@ -26,6 +27,25 @@ Team Members
 
 Contents
 =========
+.. toctree::
+   :maxdepth: 1
+   :caption: Assessment 4
+
+   Assessment4/requirements
+   Assessment4/riskAssessmentAndMitigation
+   Assessment4/methods
+   Assessment4/implementation
+   Assessment4/changeReport
+   Assessment4/gui
+   Assessment4/testing
+   Assessment4/executableTestPlan
+   Assessment4/appendixA
+   Assessment4/appendixB
+   Assessment4/appendixC
+   Assessment4/appendixD
+   Assessment4/appendixE
+   Assessment4/appendixF
+
 .. toctree::
    :maxdepth: 1
    :caption: Assessment 3
