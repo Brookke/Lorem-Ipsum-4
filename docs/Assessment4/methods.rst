@@ -141,7 +141,7 @@ Projects and issues exist for all tasks being worked on at any given
 time, whenever progress is made on a task or queries exist about it,
 comments are made on the issue relating to the task.
 
-As in previous assessments, we continued using the SCRUM methodology and had 2 in-person meetings every week. We held some debates as to whether virtual meetings would be more appropriate due to most of us working on our own bits of implementation, keeping Github updated meant we were all kept up to date with the progress of each task so meetings weren’t as necessary in some cases. Despite this we determined that weekly meetings were indeed required to have team reviews of all work done, this way any issues can be caught early. Meetings were also essential for the sake of deciding the future direction of the project and so that all members had the same vision of what we wanted the game to look like at the end.
+As in previous assessments, we continued using the SCRUM methodology and had 2 in-person meetings every week. We held some debates as to whether virtual meetings would be more appropriate due to most of us working on our own bits of implementation, keeping Github updated meant we were all kept up to date with the progress of each task so meetings weren’t as necessary in some cases. Despite this we determined that weekly meetings were indeed required to have team reviews of all work done, this way any issues can be caught early. Meetings were also essential for the sake of deciding the future direction of the project and so that all members had the same vision of what we wanted the game to look like at the end. 
 
 
 Assessment 3 Methodology
@@ -180,6 +180,29 @@ documents to be as accurate as possible. It also allowed us to have a
 better idea of how much work we had left to do since we knew exactly how
 much time documentation was taking instead of having to estimate how
 long it would take once we got to it.
+
+Assessment 4 Methodology
+------------------------
+
+The fourth assessment also began with choosing a project. As our
+original game had been chosen by a number of other teams we had the nice
+opportunity to take back an updated version of the original game. We
+even had a few different options to choose from. After our experience
+working in Assessment 3 with new code we knew better what we were
+looking for when choosing for Assessment 4. We had discovered some
+issues with the code we chose for Assessment 3 when it was too late to
+change. For this reason we opted to be more thorough with our analysis
+and decision making. We looked at all the options as a team. This led to
+much debate within the team as our recent experience of software
+engineering allowed us to see benefits to choosing multiple projects.
+
+In the end we opted for a simple project which was closely based on our
+original which we knew well. Although this lacked some features of
+another project such as a nice speech UI and CircleCI it was eventually
+chosen largely due to its familiarity and our awareness that Assessment
+4 was likely to be about extension and not so much extras that were
+already there. Once this choice was made we started to discuss how we
+would go about the project.
 
 Team Organisation
 --------------------------
@@ -231,6 +254,7 @@ week, and ensures that we are making sufficient progress in the project.
 
 During Sprints
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
 Everybody is assigned a task to be working on during sprints, and they
 are responsible for ensuring their bit of work gets done. Every team
 member uses the kanban board containing issues on GitHub to keep the
@@ -298,13 +322,6 @@ to be held, as well as continued use of GitHub projects. As can be seen
 in the Gantt chart (Appendix B), we aim to finish the assessment with a
 week to spare, so that we are prepared for any unexpected issues that
 may arise.
-
-Gantt Chart
-~~~~~~~~~~~~~~~~~~~~
-A Gantt chart [20] containing the schedule for key tasks for Assessment
-4 can be found in the appendix. This chart includes priorities, task
-dependencies and a critical path.
-
 
 Bibliography
 ----------------
@@ -439,3 +456,35 @@ ourselves on GitHub.
 -  Updated methods report
 -  Contributed towards implementation report
 
+Assessment 4:
+~~~~~~~~~~~~~~~~~~
+**Benjamin Grahamslaw**
+-  Helped implement the puzzle screen
+
+**Jason Mashinchi**
+-  Created evaluation and testing report
+-  Worked on the implementation of the multiplayer system
+-  Was meeting organiser
+-  Contributed towards project review and implementation report
+
+**Brooke Hatton**
+-  Created the architecture report
+-  Implemented the puzzle system
+-  Helped create the secret room
+-  Contributed towards implementation report
+
+**Joseph Shufflebotham**
+-  Worked on implementation of the multiplayer system
+-  Contributed towards implementation report
+-  Implemented the new sprites
+
+**Benjamin Jarvis**
+-  Updated the requirements document
+-  Worked on implementation of the multiplayer system
+-  Contributed towards implementation report
+
+**Vishal Soomaney**
+-  Created the project review document
+-  Implemented the secret room and extra point system
+-  Updated the acceptance test and methods documents
+-  Contributed towards implementation report

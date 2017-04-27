@@ -40,7 +40,6 @@ Contents
    Assessment4/testing
    Assessment4/executableTestPlan
    Assessment4/appendixA
-   Assessment4/appendixB
    Assessment4/appendixC
    Assessment4/appendixD
    Assessment4/appendixE
