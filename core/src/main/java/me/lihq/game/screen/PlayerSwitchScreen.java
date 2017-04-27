@@ -30,8 +30,14 @@ import java.util.List;
  */
 public class PlayerSwitchScreen extends AbstractScreen {
 
+    /**
+     * This label prompts the next player to get ready to play
+     */
     private Label next;
 
+    /**
+     * This stores the background image
+     */
     private Image background;
 
     /**
