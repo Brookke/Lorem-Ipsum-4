@@ -21,395 +21,210 @@ still mostly function as intended.
 | ID         | Test Name  | Purpose    | Criticalit | Class      | Req ID     | Result     |
 |            |            |            | y          |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.1        | constructor| Verifies   | High       | GUIControl | 1.1.4      | Passed     |
-|            |            | GUI is     |            | ler\_Test  |            |            |
-|            |            | constructe |            |            |            |            |
-|            |            | d          |            |            |            |            |
+| 1.01       | testName   | Verifies   | Low        | ClueUnitTe | 5          | Passed     |
+|            |            | the name   |            | st         |            |            |
+|            |            | of a clue  |            |            |            |            |
+|            |            | has been   |            |            |            |            |
+|            |            | set        |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.2        | screenCanB | Verifies   | Medium     | GUIControl | 1.1.4      | Passed     |
-|            | eSet       | that a     |            | ler\_Test  |            |            |
-|            |            | screen     |            |            |            |            |
-|            |            | from the   |            |            |            |            |
-|            |            | game can   |            |            |            |            |
-|            |            | be set as  |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | current    |            |            |            |            |
-|            |            | screen     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.3        | screenCanB | Verifies   | Medium     | GUIControl | 1.1.4      | Passed     |
-|            | eChanged   | screen can |            | ler\_Test  |            |            |
-|            |            | be changed |            |            |            |            |
-|            |            | to a       |            |            |            |            |
-|            |            | different  |            |            |            |            |
-|            |            | screen     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.4        | getTime    | Verifies   | Medium     | GameSnapsh | 6.1.2      | Passed     |
-|            |            | the game   |            | ot\_Test   |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | time value |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.5        | getRooms   | Verifies   | High       | GameSnapsh | 4.1.1      | Passed     |
-|            |            | the game   |            | ot\_Test   |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | list of    |            |            |            |            |
-|            |            | rooms      |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.6        | getClues   | Verifies   | High       | GameSnapsh | 5          | Passed     |
-|            |            | the game   |            | ot\_Test   |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | list of    |            |            |            |            |
-|            |            | clues      |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.7        | getClue    | Verifies   | Low        | Journal\_T | 5.2.1      | Passed     |
-|            |            | that the   |            | est        |            |            |
-|            |            | list held  |            |            |            |            |
-|            |            | by the     |            |            |            |            |
-|            |            | journal    |            |            |            |            |
-|            |            | contains   |            |            |            |            |
-|            |            | clues in   |            |            |            |            |
-|            |            | the right  |            |            |            |            |
-|            |            | format     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.8        | addClue    | Verifies   | Medium     | Journal\_T | 5.2.1      | Passed     |
-|            |            | that clues |            | est        |            |            |
-|            |            | are added  |            |            |            |            |
-|            |            | to the     |            |            |            |            |
-|            |            | journal    |            |            |            |            |
-|            |            | properly   |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.9        | addConvers | Verifies   | Low        | Journal\_T | 7          | Passed     |
-|            | ation      | that       |            | est        |            |            |
-|            |            | conversati |            |            |            |            |
-|            |            | on         |            |            |            |            |
-|            |            | snippets   |            |            |            |            |
-|            |            | are added  |            |            |            |            |
-|            |            | in the     |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | format     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.10       | getConvers | Verifies   | High       | Journal\_T | 7          | Passed     |
-|            | ation      | that       |            | est        |            |            |
-|            |            | getConvers |            |            |            |            |
-|            |            | ation      |            |            |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | all the    |            |            |            |            |
-|            |            | conversati |            |            |            |            |
-|            |            | on         |            |            |            |            |
-|            |            | snippets   |            |            |            |            |
-|            |            | that it is |            |            |            |            |
-|            |            | currently  |            |            |            |            |
-|            |            | holding    |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.11       | SetRoomGet | Verifies   | Medium     | MapEntity\ | 4          | Passed     |
-|            | Room       | that a     |            | _Test      |            |            |
-|            |            | room, once |            |            |            |            |
-|            |            | set, is    |            |            |            |            |
-|            |            | returned   |            |            |            |            |
-|            |            | in the     |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | format.    |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.12       | getName    | Verifies   | Low        | MapEntity\ | -          | Passed     |
-|            |            | that a map |            | _Test      |            |            |
-|            |            | entity     |            |            |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | its name   |            |            |            |            |
-|            |            | correctly  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.13       | genDescrip | Verifies   | Low        | MapEntity\ | -          | Passed     |
-|            | tion       | that a map |            | _Test      |            |            |
-|            |            | entity     |            |            |            |            |
-|            |            | returns    |            |            |            |            |
-|            |            | its        |            |            |            |            |
+| 1.02       | testDescri | Verifies   | Low        | ClueUnitTe | 5          | Passed     |
+|            | ption      | the        |            | st         |            |            |
 |            |            | descriptio |            |            |            |            |
 |            |            | n          |            |            |            |            |
+|            |            | of the     |            |            |            |            |
+|            |            | clue has   |            |            |            |            |
+|            |            | been set   |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.14       | getTexture | Verifies   | Medium     | MapEntity\ | -          | Passed     |
-|            |            | that a map |            | _Test      |            |            |
-|            |            | entity     |            |            |            |            |
-|            |            | sets its   |            |            |            |            |
-|            |            | texture    |            |            |            |            |
+| 1.03       | testTileCo | Verifies   | High       | ClueUnitTe | 5.1.1      | Passed     |
+|            | ordinates  | the        |            | st         |            |            |
+|            |            | location   |            |            |            |            |
+|            |            | of the     |            |            |            |            |
+|            |            | clue has   |            |            |            |            |
+|            |            | been set   |            |            |            |            |
+|            |            | as         |            |            |            |            |
+|            |            | expected   |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.04       | testEquali | Verifies   | Medium     | ClueUnitTe | 5          | Passed     |
+|            | ty         | that       |            | st         |            |            |
+|            |            | identical  |            |            |            |            |
+|            |            | clues are  |            |            |            |            |
+|            |            | considered |            |            |            |            |
+|            |            | equal      |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.05       | testMurder | Verifies   | High       | ClueUnitTe | 5.1.4      | Passed     |
+|            | Weapon     | that a     |            | st         |            |            |
+|            |            | murder     |            |            |            |            |
+|            |            | weapon has |            |            |            |            |
+|            |            | been       |            |            |            |            |
+|            |            | chosen     |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.15       | setSpeech  | Verifies   | Low        | NarratorSc | 7.1.7      | Passed     |
-|            |            | that the   |            | reen\_Test |            |            |
-|            |            | narrator   |            |            |            |            |
-|            |            | screen     |            |            |            |            |
-|            |            | text can   |            |            |            |            |
-|            |            | be set     |            |            |            |            |
+| 1.06       | testRedHer | Verifies   | Low        | ClueUnitTe | 5          | Passed     |
+|            | ring       | that Red   |            | st         |            |            |
+|            |            | Herrings   |            |            |            |            |
+|            |            | have been  |            |            |            |            |
+|            |            | chosen     |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.16       | updateSpee | Verifies   | Low        | NarratorSc | 7.1.7      | Passed     |
-|            | ch         | that the   |            | reen\_Test |            |            |
-|            |            | narrator   |            |            |            |            |
-|            |            | screen     |            |            |            |            |
-|            |            | text can   |            |            |            |            |
-|            |            | be updated |            |            |            |            |
+| 1.07       | testFinish | Verifies   | High       | GameSnapsh | 2.1.5      | Passed     |
+|            | Interactio | that the   |            | otTests    |            |            |
+|            | n          | game       |            |            |            |            |
+|            |            | snapshot   |            |            |            |            |
+|            |            | class      |            |            |            |            |
+|            |            | keeps      |            |            |            |            |
+|            |            | track of   |            |            |            |            |
+|            |            | how many   |            |            |            |            |
+|            |            | interactio |            |            |            |            |
+|            |            | ns         |            |            |            |            |
+|            |            | the        |            |            |            |            |
+|            |            | associated |            |            |            |            |
+|            |            | player has |            |            |            |            |
+|            |            | left in    |            |            |            |            |
+|            |            | their      |            |            |            |            |
+|            |            | current    |            |            |            |            |
+|            |            | turn       |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.17       | getTransit | Verifies   | High       | Room\_Test | 2.1.4      | Passed     |
-|            | ion        | that the   |            |            |            |            |
+| 1.08       | testGetNPC | Verifies   | High       | GameSnapsh | 3          | Passed     |
+|            | s          | that data  |            | otTests    |            |            |
+|            |            | stored on  |            |            |            |            |
+|            |            | NPCs is    |            |            |            |            |
+|            |            | stored and |            |            |            |            |
+|            |            | retrieved  |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.09       | testGetNam | Verifies   | Low        | NPCUnitTes | 3          | Passed     |
+|            | e          | that the   |            | ts         |            |            |
+|            |            | name       |            |            |            |            |
+|            |            | stored and |            |            |            |            |
+|            |            | retrieved  |            |            |            |            |
+|            |            | for the    |            |            |            |            |
+|            |            | NPC is     |            |            |            |            |
+|            |            | correct    |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.10       | testPerson | Verifies   | Medium     | NPCUnitTes | 3          | Passed     |
+|            | ality      | that the   |            | ts         |            |            |
+|            |            | personalit |            |            |            |            |
+|            |            | y          |            |            |            |            |
+|            |            | stored and |            |            |            |            |
+|            |            | retrieved  |            |            |            |            |
+|            |            | for the    |            |            |            |            |
+|            |            | NPC is     |            |            |            |            |
+|            |            | correct    |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.11       | testIntera | Verifies   | High       | PlayerUnit | 5.1.2      | Passed     |
+|            | ctFindingC | that the   |            | Tests      |            |            |
+|            | lues       | correct    |            |            |            |            |
+|            |            | clue is    |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
+|            |            | collected  |            |            |            |            |
+|            |            | when       |            |            |            |            |
+|            |            | interacted |            |            |            |            |
+|            |            | ,          |            |            |            |            |
+|            |            | also       |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
+|            |            | altering   |            |            |            |            |
+|            |            | the score  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.12       | testPlayer | Verifies   | Low        | PlayerUnit | 2.1.5      | Passed     |
+|            | Name       | that the   |            | Tests      |            |            |
+|            |            | playerName |            |            |            |            |
+|            |            | is stored  |            |            |            |            |
+|            |            | and        |            |            |            |            |
+|            |            | returned   |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.13       | testPlayer | Verifies   | Medium     | PlayerUnit | 2.1.1      | Passed     |
+|            | Personalit | that the   |            | Tests      |            |            |
+|            | y          | players    |            |            |            |            |
+|            |            | personalit |            |            |            |            |
+|            |            | y          |            |            |            |            |
+|            |            | can be     |            |            |            |            |
+|            |            | manipulate |            |            |            |            |
+|            |            | d          |            |            |            |            |
+|            |            | and stored |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.14       | doesPlayer | Verifies   | High       | PlayerUnit | 2.1.4      | Passed     |
+|            | Move       | that the   |            | Tests      |            |            |
+|            |            | player is  |            |            |            |            |
+|            |            | able to    |            |            |            |            |
+|            |            | move       |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
+|            |            | in all     |            |            |            |            |
+|            |            | four       |            |            |            |            |
+|            |            | cardinal   |            |            |            |            |
+|            |            | directions |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.15       | testCanAcc | Verifies   | Low        | PlayerUnit | 7.1.4      | Passed     |
+|            | use        | that the   |            | Tests      |            |            |
+|            |            | player is  |            |            |            |            |
+|            |            | not able   |            |            |            |            |
+|            |            | to accuse  |            |            |            |            |
+|            |            | without    |            |            |            |            |
+|            |            | evidence   |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.16       | testScore  | Verifies   | Medium     | PlayerUnit | 6.1.1      | Passed     |
+|            |            | that the   |            | Tests      |            |            |
+|            |            | players    |            |            |            |            |
+|            |            | score can  |            |            |            |            |
+|            |            | be         |            |            |            |            |
+|            |            | modified   |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.17       | testPlayTi | Verifies   | Low        | PlayerUnit | 6.1.2      | Passed     |
+|            | me         | that how   |            | Tests      |            |            |
+|            |            | long a     |            |            |            |            |
+|            |            | player has |            |            |            |            |
+|            |            | played for |            |            |            |            |
+|            |            | is stored  |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
++------------+------------+------------+------------+------------+------------+------------+
+| 1.18       | testGetTra | Verifies   | High       | RoomUnitTe | 2.1.4      | Passed     |
+|            | nsition    | that the   |            | sts        |            |            |
 |            |            | player     |            |            |            |            |
 |            |            | transition |            |            |            |            |
 |            |            | s          |            |            |            |            |
 |            |            | between    |            |            |            |            |
 |            |            | rooms      |            |            |            |            |
+|            |            | correctly  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.18       | addTransit | Verifies   | High       | Room\_Test | 2.1.4      | Passed     |
-|            | ion        | that       |            |            |            |            |
-|            |            | adding new |            |            |            |            |
+| 1.19       | testAddTra | Verifies   | High       | RoomUnitTe | 2.1.4      | Passed     |
+|            | nsition    | that new   |            | sts        |            |            |
 |            |            | transition |            |            |            |            |
 |            |            | s          |            |            |            |            |
-|            |            | between    |            |            |            |            |
-|            |            | rooms is   |            |            |            |            |
+|            |            | are added  |            |            |            |            |
 |            |            | correctly  |            |            |            |            |
-|            |            | implemente |            |            |            |            |
-|            |            | d          |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.19       | walkable   | Verifies   | High       | Room\_Test | -          | Passed     |
-|            |            | that       |            |            |            |            |
-|            |            | walkable   |            |            |            |            |
+| 1.20       | testWalkab | Verifies   | Medium     | RoomUnitTe | 2.1.4      | Passed     |
+|            | le         | certain    |            | sts        |            |            |
 |            |            | tiles are  |            |            |            |            |
-|            |            | walkable   |            |            |            |            |
-|            |            | and tiles  |            |            |            |            |
-|            |            | that       |            |            |            |            |
-|            |            | aren’t     |            |            |            |            |
-|            |            | walkable   |            |            |            |            |
-|            |            | aren’t     |            |            |            |            |
+|            |            | and aren’t |            |            |            |            |
 |            |            | walkable   |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.20       | trigger    | Verifies   | High       | Room\_Test | -          | Passed     |
-|            |            | that a     |            |            |            |            |
-|            |            | trigger    |            |            |            |            |
-|            |            | tile is    |            |            |            |            |
-|            |            | triggerabl |            |            |            |            |
-|            |            | e,         |            |            |            |            |
-|            |            | and one    |            |            |            |            |
-|            |            | that isn’t |            |            |            |            |
-|            |            | triggerabl |            |            |            |            |
-|            |            | e          |            |            |            |            |
-|            |            | isn’t      |            |            |            |            |
-|            |            | triggerabl |            |            |            |            |
-|            |            | e          |            |            |            |            |
+| 1.21       | testTrigge | Verifies   | High       | RoomUnitTe | 2.1.4      | Passed     |
+|            | r          | if a tile  |            | sts        |            |            |
+|            |            | a trigger  |            |            |            |            |
+|            |            | tile or    |            |            |            |            |
+|            |            | not        |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.21       | matRotatio | Verifies   | Low        | Room\_Test | 2.1.4      | Passed     |
-|            | n          | that       |            |            |            |            |
-|            |            | doormats   |            |            |            |            |
+| 1.22       | testMatRot | Verifies   | Low        | RoomUnitTe | 2.14       | Passed     |
+|            | ation      | that mats  |            | sts        |            |            |
 |            |            | are        |            |            |            |            |
-|            |            | orientated |            |            |            |            |
+|            |            | rotated to |            |            |            |            |
 |            |            | the        |            |            |            |            |
 |            |            | correct    |            |            |            |            |
-|            |            | way        |            |            |            |            |
+|            |            | direction  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
-| 1.22       | distribute | Verifies   | Medium     | ScenarioBu | 5.1.1      | Passed     |
-|            | RoomsGiveC | that the   |            | ilder\_Tes |            |            |
-|            | lues       | distribute |            | t          |            |            |
-|            |            | Clues()    |            |            |            |            |
-|            |            | method     |            |            |            |            |
-|            |            | distribute |            |            |            |            |
-|            |            | s          |            |            |            |            |
-|            |            | clues so   |            |            |            |            |
-|            |            | that there |            |            |            |            |
-|            |            | is at      |            |            |            |            |
-|            |            | minimum 1  |            |            |            |            |
-|            |            | clue per   |            |            |            |            |
-|            |            | room       |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.23       | distribute | Verifies   | Medium     | ScenarioBu | 5.1.1      | Passed     |
-|            | CluesDiffR | that the   |            | ilder\_Tes |            |            |
-|            | ooms       | clues      |            | t          |            |            |
-|            |            | aren’t     |            |            |            |            |
-|            |            | being      |            |            |            |            |
-|            |            | given to   |            |            |            |            |
-|            |            | the same   |            |            |            |            |
-|            |            | room       |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.24       | generateMo | Verifies   | Low        | ScenarioBu | 5.1.3      | Passed     |
-|            | tives      | that the   |            | ilder\_Tes |            |            |
-|            |            | motive     |            | t          |            |            |
-|            |            | clue is    |            |            |            |            |
-|            |            | split into |            |            |            |            |
-|            |            | 3 equal    |            |            |            |            |
-|            |            | parts      |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.25       | modifyScor | Verifies   | Low        | Scoring\_T | 6          | Passed     |
-|            | eAddition  | that the   |            | est        |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | score is   |            |            |            |            |
-|            |            | added to   |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | current    |            |            |            |            |
-|            |            | score      |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.26       | modifyScor | Verifies   | Low        | Scoring\_T | 6          | Passed     |
-|            | eSubtracti | that the   |            | est        |            |            |
-|            | on         | correct    |            |            |            |            |
-|            |            | score is   |            |            |            |            |
-|            |            | subtracted |            |            |            |            |
-|            |            | from the   |            |            |            |            |
-|            |            | current    |            |            |            |            |
-|            |            | score      |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.27       | updateScor | Verifies   | Low        | Scoring\_T | 6.1.2      | Passed     |
-|            | eNoDecrease| that the   |            | est        |            |            |
-|            |            | score      |            |            |            |            |
-|            |            | doesn’t    |            |            |            |            |
-|            |            | change if  |            |            |            |            |
-|            |            | the time   |            |            |            |            |
-|            |            | passing is |            |            |            |            |
-|            |            | less than  |            |            |            |            |
-|            |            | 5 seconds  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.28       | updateScor | Verifies   | Low        | Scoring\_T | 6.1.2      | Passed     |
-|            | eHasDecrea | that the   |            | est        |            |            |
-|            | se         | the score  |            |            |            |            |
-|            |            | decreases  |            |            |            |            |
-|            |            | by 1 after |            |            |            |            |
-|            |            | 5 seconds  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.29       | getInfo    | Verifies   | High       | Clue\_Test | 5          | Passed     |
-|            |            | that all   |            |            |            |            |
-|            |            | all parts  |            |            |            |            |
-|            |            | of the     |            |            |            |            |
-|            |            | clue are   |            |            |            |            |
-|            |            | stored     |            |            |            |            |
-|            |            | corretly   |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.30       | isMotive   | Verifies   | High       | Clue\_Test | 5.1.3      | Passed     |
-|            |            | that       |            |            |            |            |
-|            |            | motive     |            |            |            |            |
-|            |            | clues      |            |            |            |            |
-|            |            | return     |            |            |            |            |
-|            |            | true as a  |            |            |            |            |
-|            |            | motive     |            |            |            |            |
-|            |            | clue and   |            |            |            |            |
-|            |            | false if   |            |            |            |            |
-|            |            | they are   |            |            |            |            |
-|            |            | not motive |            |            |            |            |
-|            |            | clues      |            |            |            |            |
-|            |            |            |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.31       | isMeans    | Verifies   | High       | Clue\_Test | 5          | Passed     |
-|            |            | that means |            |            |            |            |
-|            |            | clues      |            |            |            |            |
-|            |            | return     |            |            |            |            |
-|            |            | true as a  |            |            |            |            |
-|            |            | motive     |            |            |            |            |
-|            |            | clue and   |            |            |            |            |
-|            |            | false if   |            |            |            |            |
-|            |            | they are   |            |            |            |            |
-|            |            | not means  |            |            |            |            |
-|            |            | clues.     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.32       | constructo | Verifies   | Low        | Dialogue\_ | 7          | Passed     |
-|            | rValidatio | that given |            | Test       |            |            |
-|            | nFail      | a false    |            |            |            |            |
-|            |            | .JSON      |            |            |            |            |
-|            |            | file, the  |            |            |            |            |
-|            |            | game       |            |            |            |            |
-|            |            | encounters |            |            |            |            |
-|            |            | “JSON not  |            |            |            |            |
-|            |            | being      |            |            |            |            |
-|            |            | verified”  |            |            |            |            |
-|            |            | error.     |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.33       | constructo | Verifies   | High       | Dialogue\_ | 7          | Passed     |
-|            | r2Validati | that given |            | Test       |            |            |
-|            | onPass     | a valid    |            |            |            |            |
-|            |            | .JSON file |            |            |            |            |
-|            |            | no error   |            |            |            |            |
-|            |            | is thrown. |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.34       | getUsingCl | Verifies   | High       | Dialogue\_ | 7          | Passed     |
-|            | ue         | that when  |            | Test       |            |            |
-|            |            | given a    |            |            |            |            |
-|            |            | clue, the  |            |            |            |            |
-|            |            | dialogue   |            |            |            |            |
-|            |            | getter     |            |            |            |            |
-|            |            | returns a  |            |            |            |            |
-|            |            | valid      |            |            |            |            |
-|            |            | response.  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.35       | getUsingSt | Verifies   | High       | Dialogue\_ | 7          | Passed     |
-|            | ring       | that when  |            | Test       |            |            |
-|            |            | given a    |            |            |            |            |
-|            |            | string,    |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | dialogue   |            |            |            |            |
-|            |            | getter     |            |            |            |            |
-|            |            | returns a  |            |            |            |            |
-|            |            | valid      |            |            |            |            |
-|            |            | response.  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.36       | aStar      | Verifies   | Low        | Player\_Te | 2          | Passed     |
-|            |            | that the   |            | st         |            |            |
-|            |            | A-Star     |            |            |            |            |
-|            |            | algorithm  |            |            |            |            |
-|            |            | produces   |            |            |            |            |
-|            |            | the        |            |            |            |            |
-|            |            | correct    |            |            |            |            |
-|            |            | result.    |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.37       | testPlayer | Verifies   | Low        | Player\_Te | -          | Passed     |
-|            | Name       | the player |            | st         |            |            |
-|            |            | name is    |            |            |            |            |
-|            |            | returned   |            |            |            |            |
-|            |            | correctly  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.38       | init       | Verifies   | High       | Suspect\_T | 3          | Passed     |
-|            |            | that the   |            | est        |            |            |
-|            |            | NPCs holds |            |            |            |            |
-|            |            | data about |            |            |            |            |
-|            |            | themselves |            |            |            |            |
-|            |            | correctly  |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.39       | hasBeenAcc | Verifies   | Low        | Suspect\_T | 7.1.9      | Passed     |
-|            | used       | that once  |            | est        |            |            |
-|            |            | a NPC who  |            |            |            |            |
-|            |            | isn’t the  |            |            |            |            |
-|            |            | murderer   |            |            |            |            |
-|            |            | has been   |            |            |            |            |
-|            |            | accused,   |            |            |            |            |
-|            |            | the NPC    |            |            |            |            |
-|            |            | records    |            |            |            |            |
-|            |            | that they  |            |            |            |            |
-|            |            | have been  |            |            |            |            |
-|            |            | accused.   |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.40       | setPositio | Verifies   | High       | Suspect\_T | 3          | Passed     |
-|            | n          | that the   |            | est        |            |            |
-|            |            | position   |            |            |            |            |
-|            |            | of a NPC   |            |            |            |            |
-|            |            | can be     |            |            |            |            |
-|            |            | successful |            |            |            |            |
-|            |            | ly         |            |            |            |            |
-|            |            | set.       |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.41       | setKiller  | Verifies   | High       | Suspect\_T | 3.1.5      | Passed     |
-|            |            | that the   |            | est        |            |            |
-|            |            | setKiller  |            |            |            |            |
-|            |            | method     |            |            |            |            |
-|            |            | successful |            |            |            |            |
-|            |            | ly         |            |            |            |            |
-|            |            | sets the   |            |            |            |            |
-|            |            | NPC as the |            |            |            |            |
-|            |            | killer.    |            |            |            |            |
-+------------+------------+------------+------------+------------+------------+------------+
-| 1.42       | setVictim  | Verifies   | High       | Suspect\_T | 3.1.5      | Passed     |
-|            |            | that the   |            | est        |            |            |
-|            |            | setKiller  |            |            |            |            |
-|            |            | method     |            |            |            |            |
-|            |            | successful |            |            |            |            |
-|            |            | ly         |            |            |            |            |
-|            |            | sets the   |            |            |            |            |
-|            |            | NPC as the |            |            |            |            |
-|            |            | victim.    |            |            |            |            |
+| 1.23       | testGenera | Verifies   | High       | ScenarioBu | 1          | Passed     |
+|            | teGame     | that the   |            | ilderUnitT |            |            |
+|            |            | scenario   |            | est        |            |            |
+|            |            | builder    |            |            |            |            |
+|            |            | runs       |            |            |            |            |
+|            |            | without    |            |            |            |            |
+|            |            | generating |            |            |            |            |
+|            |            | an         |            |            |            |            |
+|            |            | exception  |            |            |            |            |
 +------------+------------+------------+------------+------------+------------+------------+
