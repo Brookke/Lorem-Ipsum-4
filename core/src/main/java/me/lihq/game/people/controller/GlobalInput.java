@@ -28,6 +28,12 @@ public class GlobalInput extends InputAdapter {
         this.game = game;
     }
 
+    /**
+     * This method is called when a key press down event is heard
+     *
+     * @param keycode (int) the keycode of the key pressed
+     * @return (Boolean) Whether the event was handled or not.
+     */
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P) {
@@ -53,6 +59,12 @@ public class GlobalInput extends InputAdapter {
         return false;
     }
 
+    /**
+     * This method is called when a key press up event is heard
+     *
+     * @param keycode (int) the keycode of the key released
+     * @return (Boolean) Whether the event was handled or not.
+     */
     @Override
     public boolean keyUp(int keycode) {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.P) {
