@@ -24,6 +24,9 @@ import java.util.Collections;
  */
 public class Puzzle {
 
+    /**
+     * This is a reference to the main Game class
+     */
     private final GameMain game;
 
     /**
@@ -39,7 +42,6 @@ public class Puzzle {
     private Table table;
     private Table unlockTable;
     public Stage stage;
-
 
     /**
      * The number of switches pressed
@@ -61,6 +63,11 @@ public class Puzzle {
      */
     int totalSwitches = 9;
 
+    /**
+     * Main Initialiser for the Puzzle Screen element.
+     *
+     * @param game
+     */
     public Puzzle(GameMain game) {
         this.game = game;
 
