@@ -14,7 +14,6 @@ import me.lihq.game.Settings;
 
 import java.util.ArrayList;
 
-
 /**
  * SpeechBox class
  * Used for rendering box containing text and buttons on screen
