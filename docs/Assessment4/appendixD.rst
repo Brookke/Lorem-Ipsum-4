@@ -299,7 +299,7 @@ Test Listing
 |                |    and ensure  |                |                |                |
 |                |    that there  |                |                |                |
 |                |    are exactly |                |                |                |
-|                |    9 NPCs      |                |                |                |
+|                |    9 NPC s     |                |                |                |
 |                |    around the  |                |                |                |
 |                |    map.        |                |                |                |
 +----------------+----------------+----------------+----------------+----------------+
@@ -353,6 +353,26 @@ Test Listing
 |                |    has         |                |                |                |
 |                |    traveled    |                |                |                |
 |                |    through.    |                |                |                |
+|                | -  Find and    |                |                |                |
+|                |    solve the   |                |                |                |
+|                |    secret      |                |                |                |
+|                |    puzzle      |                |                |                |
+|                |    found       |                |                |                |
+|                |    within one  |                |                |                |
+|                |    of the      |                |                |                |
+|                |    bookshelves |                |                |                |
+|                |    in the      |                |                |                |
+|                |    initial     |                |                |                |
+|                |    main room.  |                |                |                |
+|                | -  Enter the   |                |                |                |
+|                |    secret      |                |                |                |
+|                |    room.       |                |                |                |
+|                | -  Ensure that |                |                |                |
+|                |    including   |                |                |                |
+|                |    the secret  |                |                |                |
+|                |    room, there |                |                |                |
+|                |    are 11      |                |                |                |
+|                |    rooms.      |                |                |                |
 +----------------+----------------+----------------+----------------+----------------+
 | 2.09           | -  Run game    | 5.1.1          | High           | Passed         |
 |                |    executable. |                |                |                |
@@ -722,7 +742,7 @@ Test Listing
 |                | -  Select      |                |                |                |
 |                |    the ‘Questi |                |                |                |
 |                | on’            |                |                |                |
-|                |    button.     |                |                |                |
+|                |    button .    |                |                |                |
 |                | -  The player  |                |                |                |
 |                |    should be   |                |                |                |
 |                |    able to     |                |                |                |
@@ -974,4 +994,167 @@ Test Listing
 |                |    score       |                |                |                |
 |                |    has decreas |                |                |                |
 |                | ed.            |                |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 2.26           | -  Run game    | 2.1.5          | High           | Passed         |
+|                |    executable. |                |                |                |
+|                | -  On the Main |                |                |                |
+|                |    Menu click  |                |                |                |
+|                |    on “New     |                |                |                |
+|                |    Game”.      |                |                |                |
+|                | -  On the      |                |                |                |
+|                |    Narrator    |                |                |                |
+|                |    Screen      |                |                |                |
+|                |    click on    |                |                |                |
+|                |    “Start      |                |                |                |
+|                |    Game”       |                |                |                |
+|                | -  Make note   |                |                |                |
+|                |    of current  |                |                |                |
+|                |    score.      |                |                |                |
+|                | -  Use “WASD”  |                |                |                |
+|                |    keys to     |                |                |                |
+|                |    Navigate    |                |                |                |
+|                |    through the |                |                |                |
+|                |    initial     |                |                |                |
+|                |    room        |                |                |                |
+|                | -  Engage in 2 |                |                |                |
+|                |    interaction |                |                |                |
+|                | s              |                |                |                |
+|                |    (an         |                |                |                |
+|                |    interaction |                |                |                |
+|                |    involves    |                |                |                |
+|                |    finding a   |                |                |                |
+|                |    clue,       |                |                |                |
+|                |    questioning |                |                |                |
+|                | ,              |                |                |                |
+|                |    ignoring or |                |                |                |
+|                |    accusing an |                |                |                |
+|                |    NPC,        |                |                |                |
+|                |    solving the |                |                |                |
+|                |    puzzle and  |                |                |                |
+|                |    picking up  |                |                |                |
+|                |    extra       |                |                |                |
+|                |    points).    |                |                |                |
+|                | -  Check that  |                |                |                |
+|                |    it becomes  |                |                |                |
+|                |    player 2’s  |                |                |                |
+|                |    turn.       |                |                |                |
+|                | -  Have player |                |                |                |
+|                |    2 engage in |                |                |                |
+|                |    2           |                |                |                |
+|                |    interaction |                |                |                |
+|                | s              |                |                |                |
+|                |    as well and |                |                |                |
+|                |    ensure that |                |                |                |
+|                |    it becomes  |                |                |                |
+|                |    the next    |                |                |                |
+|                |    player’s    |                |                |                |
+|                |    turn again. |                |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 2.27           | -  Run game    | 4.1.4, 4.1.5   | Medium         |                |
+|                |    executable. |                |                |                |
+|                | -  On the Main |                |                |                |
+|                |    Menu click  |                |                |                |
+|                |    on “New     |                |                |                |
+|                |    Game”.      |                |                |                |
+|                | -  On the      |                |                |                |
+|                |    Narrator    |                |                |                |
+|                |    Screen      |                |                |                |
+|                |    click on    |                |                |                |
+|                |    “Start      |                |                |                |
+|                |    Game”       |                |                |                |
+|                | -  Make note   |                |                |                |
+|                |    of current  |                |                |                |
+|                |    score.      |                |                |                |
+|                | -  Use “WASD”  |                |                |                |
+|                |    keys to     |                |                |                |
+|                |    Navigate    |                |                |                |
+|                |    through the |                |                |                |
+|                |    initial     |                |                |                |
+|                |    room        |                |                |                |
+|                | -  In the      |                |                |                |
+|                |    initial     |                |                |                |
+|                |    room, go up |                |                |                |
+|                |    to each     |                |                |                |
+|                |    bookcase    |                |                |                |
+|                |    and press   |                |                |                |
+|                |    the “Space  |                |                |                |
+|                |    Bar” on the |                |                |                |
+|                |    keyboard.   |                |                |                |
+|                | -  Do this     |                |                |                |
+|                |    until the   |                |                |                |
+|                |    puzzle      |                |                |                |
+|                |    appears.    |                |                |                |
+|                | -  Solve the   |                |                |                |
+|                |    puzzle and  |                |                |                |
+|                |    click on    |                |                |                |
+|                |    “Enter      |                |                |                |
+|                |    Room”       |                |                |                |
+|                | -  Ensure that |                |                |                |
+|                |    you’ve      |                |                |                |
+|                |    entered a   |                |                |                |
+|                |    new room.   |                |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 2.28           | -  Run game    | 1.3.2          | Low            |                |
+|                |    executable. |                |                |                |
+|                | -  On the Main |                |                |                |
+|                |    Menu click  |                |                |                |
+|                |    on          |                |                |                |
+|                |    “Settings”. |                |                |                |
+|                | -  Uncheck the |                |                |                |
+|                |    “Mute”      |                |                |                |
+|                |    checkbox    |                |                |                |
+|                | -  Raise the   |                |                |                |
+|                |    slider      |                |                |                |
+|                |    indicating  |                |                |                |
+|                |    “volume” to |                |                |                |
+|                |    maximum     |                |                |                |
+|                | -  Ensure that |                |                |                |
+|                |    speakers    |                |                |                |
+|                |    are on and  |                |                |                |
+|                |    check to    |                |                |                |
+|                |    see that    |                |                |                |
+|                |    music is    |                |                |                |
+|                |    playing.    |                |                |                |
+|                |                |                |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 2.29           | -  Run game    | 1.3.2          | Low            |                |
+|                |    executable. |                |                |                |
+|                | -  On the Main |                |                |                |
+|                |    Menu click  |                |                |                |
+|                |    on          |                |                |                |
+|                |    “Settings”. |                |                |                |
+|                | -  Uncheck the |                |                |                |
+|                |    “Mute”      |                |                |                |
+|                |    checkbox    |                |                |                |
+|                | -  Raise the   |                |                |                |
+|                |    slider      |                |                |                |
+|                |    indicating  |                |                |                |
+|                |    “volume” to |                |                |                |
+|                |    maximum     |                |                |                |
+|                | -  Ensure that |                |                |                |
+|                |    speakers    |                |                |                |
+|                |    are on and  |                |                |                |
+|                |    check to    |                |                |                |
+|                |    see that    |                |                |                |
+|                |    music is    |                |                |                |
+|                |    playing.    |                |                |                |
+|                | -  Move the    |                |                |                |
+|                |    slider      |                |                |                |
+|                |    indicating  |                |                |                |
+|                |    “volume” to |                |                |                |
+|                |    approximate |                |                |                |
+|                | ly             |                |                |                |
+|                |    50%.        |                |                |                |
+|                | -  Check to    |                |                |                |
+|                |    see that    |                |                |                |
+|                |    the volume  |                |                |                |
+|                |    has         |                |                |                |
+|                |    decreased.  |                |                |                |
+|                | -  Move the    |                |                |                |
+|                |    slider to 0 |                |                |                |
+|                | -  Check to    |                |                |                |
+|                |    see that    |                |                |                |
+|                |    there is no |                |                |                |
+|                |    music       |                |                |                |
+|                |    playing.    |                |                |                |
 +----------------+----------------+----------------+----------------+----------------+
