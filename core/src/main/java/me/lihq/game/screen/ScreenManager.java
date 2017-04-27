@@ -42,12 +42,14 @@ public class ScreenManager {
      * The screen that allows the player to modify settings.
      */
     public SettingsScreen settingsScreen;
+
     /**
      * The puzzle screen
      *
      * @author Lorem-Ipsum
      */
     private PuzzleScreen puzzleScreen;
+
     /**
      * Screen displayed to prompt players to swap over.
      */
