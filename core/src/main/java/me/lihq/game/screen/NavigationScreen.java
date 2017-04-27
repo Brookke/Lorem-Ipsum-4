@@ -153,6 +153,9 @@ public class NavigationScreen extends AbstractScreen {
 
     }
 
+    /**
+     * This method initialises the Different elements of the screen
+     */
     public void init() {
         statusBar = new StatusBar(game);
 
@@ -211,7 +214,6 @@ public class NavigationScreen extends AbstractScreen {
             roomTag.update();
         }
     }
-
 
     /**
      * This method is called once a game tick to update the room transition animation
