@@ -33,14 +33,17 @@ public class Menu {
      * The width of the menu
      */
     private static final int WIDTH = Gdx.graphics.getWidth() / 2 - BUTTON_WIDTH / 2;
+
     /**
      * the stage to render the menu to
      */
     public Stage stage;
+
     /**
      * Game for menu
      */
     private GameMain game;
+    
     /**
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
      */
