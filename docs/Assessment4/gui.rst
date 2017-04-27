@@ -42,6 +42,8 @@ options:
 
 -  **New game button** - this starts the game
 -  **Exit button** - this closes the game
+-  **Settings button** - go to settings screen
+-  **Multiplayer** - go to number of players select screen
 
 The buttons are all designed in the same way throughout the game. They
 are designed to be easy to distinguish from the background and for all
@@ -58,68 +60,75 @@ bar.
 While the player is playing the game they will be able to see their
 character on the map and move around from room to room. The character is
 displayed in the middle of the map for good playability. This screen
-also has a status bar overlay at the top which allows the player to
-switch between the map and journal screen, and also shows the player's
-current score and personality.
-
-When you click on a clue, the clue is shown and described. When you
-click on a detective the screen changes to the dialogue screen.
+also has a status bar overlay at the bottom, which allows the player to
+switch between the map and Inventory screen, and also shows the player's
+current score and personality. You can also go to the pause menu. Also
+shows which player turn it is in multiplayer.
 
 **Related requirements**: 2.1.4,2.2.1,3,4(Map,clues and BPC sections)
 **Realisation**:  Appendix F:2
 
 Dialogue screen
 ---------------
-The dialogue screen allows communication with suspects/NPCs. The GUI
-contains an image of the suspect and contains the interview flow. This
-involves the player first selecting whether to question, accuse or
-ignore the suspect, followed buttons to select a clue to question the
-suspect about, and dialogue style choices.
+The dialogue screen allows communication with suspects/NPCs. The GUI is
+an overlay over the main navigation screen and displays the text in a
+box which is being spoken by the NPC and player.
 
 **Related requirements**: See dialogue sections of requirements.
 **Realisation**: Appendix F:3
 
-Journal
--------
-The Journal is a collection of information that the player has obtained
-so far in the game. It is layed out like a notebook and contains buttons
-that allow the player to view clues, see the interview log of
-conversations and write in a notepad. It contains the following
-sections:
-
--  Clues list - shows the player the clues that they have collected so
-   far
--  Conversation history - provides a list of the interview dialogue that
-   have occurred with suspects so far in the game
--  Notepad - allows the player to enter any notes they feel appropriate
+Inventory
+----------
+The Inventory is a collection of information that the player has
+obtained so far in the game. It contains a clues list which shows the
+player the clues that they have collected so far
 
 **Related Requirements**:5.2.1, 5.2.2
 **Realisation**: Appendix F:4
 
-Find Clue Screen
+Settings screen
 ----------------
-When the player clicks on a clue within the map, the find clue screen is
-shown. It has a large graphic of the clue that has been found, and on
-the right hand side is a text box describing the clue. The name of the
-clue is at the top and there is a button at the bottom to continue and
-go back to the map, the map can be seen in the background.
+The settings screen contains a tick box to mute music, it also will have
+volume sliders.
 
-This screen is used to inform the player about the clue they have found
-and ensures they are aware of the implications of it. We use an
-animation to “fly out” the clue to the journal, this is intended to
-increase user awareness of the journal so that they can use it to guide
-their thought processes when deducting the killer in the game.
-
-**Related requirements**:5.1.2
+**Related Requirements**:1.3.2
 **Realisation**: Appendix F:5
 
-Narrator Screen
----------------
-The narrator screen has a narrator character, Sir Heslington (the duck),
-with a speech box containing the text which he is saying. This screen is
-used when you first load up the game, and the speech box text is used to
-explain the premise. It is also used when you have found all 3 parts of
-the motive clue. Finally it is used for when the player wins or loses.
+Pause screen
+-------------
+The pause screen will let the player quit, go to the settings menu or
+resume the game.
 
-**Related requirements**:7.1.7,8.1.1,8.1.2
+**Related Requirements**:1.2.1
 **Realisation**: Appendix F:6
+
+Number of Players Select Screen
+--------------------------------
+The number of players select screen allows the player/players to decide
+how many players you want in your multiplayer game. The screen features
+a very simple and intuitive slider which sets the number of players.
+
+**Related requirements**: 2.1.5
+**Realisation**: Appendix F:7
+
+Player Switch Screen
+----------------------
+The player switch screen is shown every time the game switches from one
+player to another in multiplayer mode. It says which player goes next
+and also shows a leaderboard table detailing who is currently winning at
+this stage in the game.
+
+**Related requirements**: 2.1.5
+**Realisation**: Appendix F:8
+
+Puzzle Screen
+---------------
+The puzzle screen is the screen which lets the player attempt to
+complete the puzzle and enter the secret room. The puzzle screen looks
+like a bookshelf with book style buttons. These buttons can be clicked
+causing them to move. If the player gets the sequence wrong these books
+all reset. If the player gets the sequence right this screen is replaced
+by the secret room and the main navigation screen as usual.
+
+**Related requirements**: 4.1.5
+**Realisation**: Appendix F:9
