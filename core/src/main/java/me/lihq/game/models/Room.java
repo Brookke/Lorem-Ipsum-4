@@ -43,6 +43,7 @@ public class Room {
 
     /**
      * This list stores the coordinates of all slots that provide extra points in this room
+     *
      * @author Lorem-Ipsum
      */
     public List<Vector2Int> scoreSpots = null;

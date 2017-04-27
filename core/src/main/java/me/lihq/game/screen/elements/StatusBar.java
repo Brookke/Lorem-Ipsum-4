@@ -46,7 +46,7 @@ public class StatusBar {
      * and changing the screen when buttons are pressed
      */
     private GameMain game;
-    
+
     /**
      * The skin for the UI elements
      *

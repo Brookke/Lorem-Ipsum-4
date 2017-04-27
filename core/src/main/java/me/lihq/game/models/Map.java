@@ -186,7 +186,7 @@ public class Map {
 
     /**
      * This method returns the Room Transition that takes the player from the Secret Room to the Main Room
-     * 
+     *
      * @return (Room.Transition) the room transition data
      */
     public Room.Transition getSecretRoomTransition() {

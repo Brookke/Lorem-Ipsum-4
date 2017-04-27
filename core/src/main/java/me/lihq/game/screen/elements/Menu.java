@@ -43,7 +43,7 @@ public class Menu {
      * Game for menu
      */
     private GameMain game;
-    
+
     /**
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
      */
