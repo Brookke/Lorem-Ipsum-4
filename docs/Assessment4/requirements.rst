@@ -64,9 +64,9 @@ using the following system:
    the requirement
 -  The second number represents how important the requirement is:
 
--  1=Must implement
--  2=Should implement
--  3=Could implement
+-  1 = Must implement
+-  2 = Should implement
+-  3 = Could implement
 
 -  The third number is the position in the list, used to ensure the
    identifier is unique.
@@ -161,6 +161,13 @@ Player
 |                |                | other rooms    |                |                |
 |                |                | when desired   |                |                |
 +----------------+----------------+----------------+----------------+----------------+
+| 2.1.5          | The game must  | The game       | Necessary      | 21-24          |
+|                | be turn-based  | switches who   | requirement.   |                |
+|                | where two      | is playing     |                |                |
+|                | players swap   | every few      |                |                |
+|                | between who is | interactions   |                |                |
+|                | playing.       | with the game. |                |                |
++----------------+----------------+----------------+----------------+----------------+
 | 2.2.1          | The player     | The game       | The Player     | 21-24          |
 |                | should be able | should present | will not be    |                |
 |                | to see their   | the player     | able to see    |                |
@@ -204,8 +211,8 @@ Map
 | 4.1.1          | The game must  | The player     | The game has   | 21-24          |
 |                | have a map     | should be able | less than 10   |                |
 |                | containing 10  | to visit 10    | rooms.         |                |
-|                | separate       | different      |                |                |
-|                | rooms.         | rooms in the   |                |                |
+|                | separate rooms | different      |                |                |
+|                |                | rooms in the   |                |                |
 |                |                | game           |                |                |
 +----------------+----------------+----------------+----------------+----------------+
 | 4.1.2          | All rooms must | The player     | There are      | 21-24          |
@@ -216,6 +223,19 @@ Map
 |                |                | different      |                |                |
 |                |                | sizes and      |                |                |
 |                |                | shapes.        |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 4.1.4          | The map must   | The map        | Necessary      | 21-24          |
+|                | have a         | contains a     | Requirement.   |                |
+|                | ‘secret’ room  | room that is   |                |                |
+|                |                | not accessible |                |                |
+|                |                | at the start   |                |                |
+|                |                | of the game.   |                |                |
++----------------+----------------+----------------+----------------+----------------+
+| 4.1.5          | The secret     | After solving  | Necessary      | 21-24          |
+|                | room is not    | a puzzle, the  | Requirement    |                |
+|                | accessible     | secret room    |                |                |
+|                | until a puzzle | becomes        |                |                |
+|                | is solved      | accessible.    |                |                |
 +----------------+----------------+----------------+----------------+----------------+
 
 Clue
@@ -229,7 +249,6 @@ Clue
 |                | clue in each   | every room and | some may have  |                |
 |                | room of the    | be able to     | multiple       |                |
 |                | map            | locate a clue  |                |                |
-|                |                |                |                |                |
 +----------------+----------------+----------------+----------------+----------------+
 | 5.1.2          | The player     | The player     | The player     | 21-24          |
 |                | must be able   | should be able | gets the clue  |                |
@@ -237,16 +256,6 @@ Clue
 |                | with a clue    | with a clue    | interaction.   |                |
 |                |                | once it has    |                |                |
 |                |                | been located   |                |                |
-+----------------+----------------+----------------+----------------+----------------+
-| 5.1.3          | The player     | When 3 motive  | The motive     | 21-24          |
-|                | must find the  | clue parts are | clue appears   |                |
-|                | 3 separate     | found, the     | after          |                |
-|                | parts of the   | player obtains | interacting    |                |
-|                | motive clue    | the whole      | with 5 NPCs.   |                |
-|                | before the     | motive clue.   |                |                |
-|                | full motive    |                |                |                |
-|                | clue can be    |                |                |                |
-|                | obtained.      |                |                |                |
 +----------------+----------------+----------------+----------------+----------------+
 | 5.2.1          | There should   | The player can | Clues are      | 21-24          |
 |                | be             | see a          | stored         |                |
@@ -409,7 +418,6 @@ NPC
 +----------------+----------------+----------------+----------------+----------------+
 | ID             | Requirement    | Success        | Alternative    | Risk ID        |
 |                |                | Criteria       |                |                |
-
 +----------------+----------------+----------------+----------------+----------------+
 | 3.1.4          | Each NPC must  | The NPC will   | All NPC’s have | 21-24          |
 |                | have a         | respond best   | the same       |                |
@@ -587,9 +595,9 @@ Dialogue
 Bibliography
 --------------
 
-[1] Appendix A [online] http://docs3.lihq.me/en/latest/Assessment3/appendixA.html [Created 21/11/16]
+[1] Appendix A [online] http://docs4.lihq.me/en/latest/Assessment4/appendixA.html [Created 21/11/16]
 
-[2] Appendix C [online] http://docs3.lihq.me/en/latest/Assessment3/appendixA.html [Created 21/11/16]
+[2] Appendix C [online] http://docs4.lihq.me/en/latest/Assessment4/appendixA.html [Created 21/11/16]
 
 [3] Colour Blind awareness [online]
 http://www.colourblindawareness.org/colour-blindness/, [Accessed
