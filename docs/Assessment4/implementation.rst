@@ -1,324 +1,148 @@
 Implementation Report
 =====================
 
-Introduction
--------------
 
-The code we inherited from Team Farce fully implemented all the
-requirements for Assessment 2, however, there were several additional
-requirements for Assessment 3 that we had to implement, which required
-some architecture changes.
-
-Once we had reviewed the code of the inherited game, we determined we
-needed to perform some extensive refactoring to simplify the code and
-game logic, as well as extending the game to meet the requirements. This
-document contains a detailed list and justification of the major changes
-below. Some changes were made to the project that aren’t listed - these
-include improved commenting and minor additions or changes with minimal
-impact, these can be viewed by visiting our repository [1]. The refactoring
-work is most evident by comparing the UML diagrams before and after the
-work completed on this assessment. To see the architecture changes
-described below in terms of a UML class diagram, please refer to our
-current UML diagram [2] and the original diagram that we inherited in
-this assessment [3]. We once again used IntelliJ to produce the UML
-class diagram, this allowed for the diagram to be completely accurate
-since there was no room for external software or manual errors. This
-means that there was no chance of having any traceability issues and
-saved us a lot of time that would have otherwise been spent creating and
-checking the diagram.
-
-All of the required features for Assessment 3 from the requirements have
-been fully implemented.
-
-New features & changes to previous software
---------------------------------------------
-
-Throughout our documents we reference to the requirements[4] using
-[x.x.x] with ‘x.x.x’ matching a requirement in the requirements table.
-We have outlined significant changes in bold, and added more details
-underneath.
-
-In this document we refer to non-playable characters as NPC’s and
-Suspects using these terms  interchangeably.
 
 Change list & justification
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
-**Refactor GUI into screens**
+**Add new class ‘PlayerSwitchScreen’**
 
--  We decided it would be useful to refactor out all the GUI elements
-   within the game into smaller modules using LibGDX’s Screen class.
-   Doing this allows us to improve the maintainability of the game, and
-   speed up development as each GUI screen are now, smaller independent
-   classes.
--  To do this we first split up a large render method in the root
-   MIRCH class of the game, which we found tough to work with as it was
-   long and full of duplicate code, into separate LibGdx’s screens
-   keeping the relevant logic together.
--  We introduced an AbstractScreen class to our architecture, which is
-   extended by all game screens containing methods and properties that
-   will be used by the other screens further improving the abstraction
-   of our architecture.
--  We removed the DisplayController class and heavily restructured the
-   GUIController class to use LibGDX’s screens, a simpler approach to
-   handling the various points of the game.
--  The GUIController now changes screens depending on GameState, and
-   contains an update method that is called whenever the screen is
-   refreshed.
--  We added or fixed appropriate unit tests for all new or modified
-   classes
+-  Our new requirement [2.1.5] states that the game must be turn based.
+   This means that the players will have to switch between who is
+   playing the game, as the game will only be running locally. During
+   this time, and to prompt the players to switch over, this new screen
+   is displayed.
+-  It includes a title saying: “Time to switch players!” and a button to
+   switch to the next player.
+-  It includes a leaderboard that shows the top scoring players, so
+   players can see who is winning.
+-  This class extends ‘AbstractScreen’
 
-**Removed RenderItem class**
+**Add new class ‘NumberOfPlayersSelectionScreen’**
 
--  The original purpose of a RenderItem was to group together objects
-   and sprites for rendering on screen, however we found this was
-   inefficient. To improve this we have made all objects that should be
-   rendered on the screen extend the LibGDX sprite class. The main
-   benefit is now we only have to update one object rather than two
-   improving the game logic. This changed the architecture
-   significantly, it lost most of the previous groups split of ‘back
-   end’ and ‘front end’ architecture which we didn’t find to be a good
-   fit for the game as it was all running in the same application. We
-   felt that although we lost the clear difference, it was a large
-   improvement in the code both for maintainability as we only have to
-   worry about one object rather than two for each displayed item.
+-  The new requirement [2.1.5] states that the game must be turn based.
+   To complete this, there needs to be two or more players.
+-  This screen allows the user to set how many people will be playing.
+   It includes a slider from 2 to the maximum amount of players, which
+   can be set by changing a constant. It also contains 2 buttons, one to
+   start the game and one to return to the main menu.
+-  The initial requirement was for 2 players to be able to play the
+   game, however the way we had implemented the code was dynamic enough
+   to allow us to have as many players as we’d like.
+-  We set an arbitrary limit of 10 players and allowed the user to
+   choose the number of players as this was minimal effort. We set the
+   maximum to 10 as we felt that to be a suitable number based on the
+   type of game. We felt this method was much better than just 2 player
+   turn-based as the game would be much more competitive.
+-  A new button ‘multi-player’ was added to the main menu to navigate
+   the player to this screen.
+-  It extends \`AbstractScreen\`
 
-**Restructured the Player and Suspect class [3.1.2]**
+**Add new class \`ScenarioBuilder\`**
 
--  The Player code has been moved from the MIRCH class to its own class
-   Player. This helped simplify the large MIRCH class and helped
-   separate concerns to improve maintainability and improve our
-   architecture.
--  The Player and the Suspect class now extend a new
-   AbstractPerson class - this was done as the Player class shares a
-   considerable amount of code with the Suspect class, thus adding
-   abstraction.
--  The AbstractPerson class inherits from the existing MapEntity class,
-   to further increase abstraction.
--  There are 10 non-player characters, 9 of these are alive in the game
-   at any one time as one of them is randomly chosen to be the
-   victim. This meets the requirement on the number of non-player
-   characters the game must have. [3.1.2]
+-  The new requirement [2.1.5] states we need to add turn based
+   multiplayer. This means the game scenario will need to be the same
+   across all players, however one player's actions shouldn’t affect
+   another player's game.
+-  This class generates the game state, including the clues, NPCs, and
+   murderer/motives.
+-  This class is used to build the games for each player that is
+   playing. It generates instances of the \`GameSnapshot\`, explained
+   below.
 
-**Replaced map system**
+**Add new class \`GameSnapshot\`**
 
--  Part of our requirements [4.1.1] were to have 10 rooms that were
-   accessible in the game. The system we inherited randomly generated
-   the map from a series of room templates.
--  We felt a substantial amount of refactoring was necessary as the
-   implemented system had a number of problems which mean it often
-   failed to meet the requirements:
+-  GameSnapshot is used to hold the instance information for each game.
+   It was created to allow us to complete requirement [2.1.5].
+-  The snapshot stores information that will need to differ for each
+   player. This includes Clues, NPCs, location etc, as these have player
+   dependent properties.
+-  As each game needs to be the same (same killer/clues), the
+   GameSnapshot instances start as duplicates - with the same values,
+   but in different memory locations.
 
--  Some rooms weren’t always accessible due to random map generation.
--  Collision system was unreliable, due to this NPCs often escaped or
-   spawned outside of the map.
+**GUI changes**
 
--  After evaluating our options, we decided the quickest and easiest
-   solution was to replace the map system with the one we had already
-   built for our previous project, as this was already fully working and
-   very easy to work with.
--  This refactoring involved bringing over our Map and Room classes,
-   along with their dependencies, including the Vector2Int class.
+-  Unlike the project we picked up in assessment 3, this one had the
+   required dependencies for the use of TrueType Fonts. This allowed us
+   to have far more interesting fonts in the game, especially for our
+   titles.
+-  We also implemented new skins for our buttons, labels, sliders and
+   checkboxes to give the game a more refined look.
+-  No architectural changes were required for this as we simply edited
+   the Assets and UIHelpers classes that already existed.
 
-**Improve handling of movement and input [1.1.2] [2.1.4]**
+**Music changes**
 
--  We brought over our PlayerController class. This uses events to
-   trigger the movement of the player, which let us remove the input and
-   movement out of the large Mirch class.
--  This helped with improving the efficiency of the code because we are
-   now using event handlers rather than polling the keyboard and mouse
-   for changes on every render. This helps ensure that the game runs
-   well on any computer [1.1.4].
--  We defined an abstract move method in the AbstractPerson class and
-   implemented it in the Player class, as well as a method in the
-   Suspect class to randomly move the NPC. Previously to move the player
-   three different methods were being called: one to check the input,
-   another to scale the input, and one to move the player by the scaled
-   input, whereas now this is all contained within the Player’s move
-   method, so only one method needs to be called to move the player.
--  Added the ability to move the Player [2.1.4] by clicking the mouse,
-   using an implementation of A\* search to ensure the Player avoids all
-   obstacles. This was implemented because we felt it fit better with
-   the user interaction model used elsewhere, with the mouse as the
-   primary input device.
+-  We disabled the music [1.3.3] by default, this means that the player
+   has to enter the “Settings” menu and manually untick the “Muted”
+   checkbox to enable the music.
 
-**Added StatusBar [2.2.1]**
+**Secret Room Implementation**
 
--  Added a StatusBar class with the GUI refactoring. This was a simple
-   addition to the architecture and it helped increase abstraction
-   within our code. Previously each screen handled its own navigation,
-   however this is no longer necessary as each screen in the game uses
-   the same status bar.
--  The status bar contains the navigation buttons that were previously
-   placed on screen near the top, as well as the player’s score
-   [6.1.1] and player personality [2.2.1].
+-  The new requirements [4.1.4] require the game to include a ‘secret
+   room’
+-  The new room was made with Tiled, using the same tileset as existing
+   rooms.
+-  The transition to the room takes place when the puzzle is solved.
+-  Logic was added to check for the rendering of the secret room. When
+   this was detected, an image overlay was added on top of the room to
+   create a ‘torch in a dark room’ effect.
+-  This image was created by us and was fully black aside from a
+   transparent circle in the center. As the game is centered around the
+   player, this allowed the player to only see the few tiles around
+   their character thus giving the room a more mysterious feel, we
+   determined that this was in line with the theme of the game.
+-  Logic was added to the random NPC distribution process to ensure that
+   no NPC spawned in the secret room, as we wanted the room to be an
+   extra feature and not something that was essential to the completion
+   of the game.
+-  No significant architectural changes were required, as no methods or
+   classes were required for the implementation of the secret room.
 
- 
+**Puzzle implementation**
 
-**JournalScreen refactoring**
+-  One of the new requirements [4.1.5] we were given in this assessment
+   was the implementation of a puzzle that had to be solved before being
+   able to enter a secret room. We decided on a puzzle in which the
+   player must click three books in a book case in the correct order to
+   unlock the room. The idea took inspiration from the classic false
+   books often seen in films.
+-  Each player gets to solve the puzzle, however the puzzle differs per
+   player.
+-  For this we implemented a “Puzzle” class which handles the logic for
+   the puzzle. The bookshelf tiles were given a boolean “secretRoom”
+   property, and one of the bookshelves in the game are randomly chosen
+   from the possible values when the game is generated.
+-  When the player clicks on the correct bookshelf in the game, a
+   transition screen is generated. Following which, a puzzle screen is
+   generated containing 9 buttons. 3 of the buttons are randomly
+   assigned as the correct ones and if all 3 are clicked in a row then
+   the secret room is revealed, if any of the erroneous buttons are
+   clicked then the puzzle resets itself.
 
--  The JournalGUIController class was refactored into the
-   JournalScreen with the GUI refactoring work
--  The journal was extensively refactored to improve the readability of
-   the code, and abstract away appropriate duplicate code.
--  The journal GameStates were simplified. The unnecessary “journalHome”
-   GameState was removed, as it originally linked to the journal
-   navigation, which required an extra step to see useful content. We
-   felt this was an unnecessary step as it slowed game play, so we
-   replaced it with “journalClues” which links directly to a useful
-   (clues) page in the journal.
--  Added two public methods to the Journal class so they can be accessed
-   by the JournalScreen.
--  The journal screen provides lists of found clues, previous
-   conversations and a notepad.
+**Extra Score**
 
-**Added scoring [6.1.1] [6.1.2] [6.1.3] [6.1.4] [6.1.5]**
-
--  We added a score property to the GameSnapshot, with two getters and
-   setters. We put it in the GameSnapshot because it can be accessed
-   throughout the game with minimal code changes.
--  The score changes throughout the game (via the modifyScore() method)
--  The score increases when the player finds clues [6.1.5], or correctly
-   accuses a NPC.
--  The score decreases when the player asks questions to the NPCs
-   [6.1.4], and a large score is lost for a wrong accusation [6.1.3].
-   The player’s score also decreases by 1 every 5 seconds [6.1.2] to
-   simulate the importance of speed during an investigation.
-
-**Added NarratorScreen**
-
--  This screen was added to inform the player about game progress - such
-   as the introduction to the game, and the response for winning or
-   losing the game.
--  We added this to provide useful feedback and help the player along
-   the game.
--  It features our team’s mascot, Sir Heslington the duck, who will say
-   a speech to the player. The speech can be set using methods included
-   in the screen.
-
-**Database changes**
-
--  We felt the need to simplify the database we inherited with the
-   codebase as we felt the database design was too complicated for the
-   problem it was trying to solve, and was hard to expand upon. When we
-   tried to change things like increasing the number of NPC’s to meet
-   the requirement [3.1.2], this cause the game to fail.
--  18 tables were removed due to our refactoring to make the code
-   simpler:
-
-Character\_costume\_links, Character\_means\_links,
-Character\_motive\_links, Clue\_means\_requirements,
-Clue\_motive\_requirements, Clue\_murder\_requirements,
-Clue\_victim\_requirements, Costumes, Dialogue\_text\_screens,
-Follow\_up\_questions, Potential\_prop\_instances,
-Prop\_clue\_implication, Protoprops, Question\_and\_responses,
-Question\_intentions, Response\_clue\_implication, Room\_templates,
-Room\_types
-
--  1 table was added: Character\_clues, used for many-to-many
-   relationship between characters and clues for the scenario generation
-   process in the game.
--  Modifying the database in this way has helped simplify the game
-   logic, maintainability and understanding of how the game works. This
-   helped us expand the game and meet the requirements of the project
-   faster.
--  The dialogue was moved from the database to static json files, more
-   details about this can be found in the dialogue refactoring section
-   of this document.
-
-**Dialogue refactoring [7.1.2], [7.1.5], [7.1.6] [2.1.1]**
-
--  Removed the dialogue related tables in the database, these were
-   replaced with json files. This decision was taken because the
-   inherited implementation was broken and required extensive
-   refactoring, and we found it quicker to use our prior code for
-   handling dialogue with json files
--  We removed these classes: AggregateDialogueTreeAdder, DialogueTree,
-   IDialogueTreeAdder, NullDialogueTreeAdder, QuestionAndResponse,
-   QuestionIntent, QuestionResult, DialogueOption and
-   SingleDialogueTreeAdder.  Doing this simplified the architecture
-   further.
--  Two new classes were added, Dialogue and InterviewScreen. These are
-   explained further below.
--  The Dialogue class parses and verifies the JSON files containing the
-   dialogue content
--  Each Person (Suspect or Player) has a Dialogue object which is used
-   in the InterviewScreen to get the relevant dialogue. It provides
-   different styles of questioning for the user to select from [7.1.5].
--  For the Suspect the dialogue file also controls how the suspect
-   should respond dependant on the style of questioning [7.1.6].
--  Player Personality was added with this work, this is stored as in
-   integer in the GameSnapshot class
--  The personality is a value between -10 and 10, providing a scale
-   between very aggressive, and very polite. The player can be anywhere
-   in between. If the player being is too aggressive, or too polite they
-   cannot use dialogue for the other extreme until they have brought
-   their personality back to a neutral level. This means that the
-   personality is dynamic and customisable by the player [2.1.1]
-
-**InterviewScreen refactoring [7.1.1], [7.1.2], [7.1.3], [7.1.4]**
-
--  The InterviewGUIController class was refactored into the
-   InterviewScreen class due to the GUI refactoring into screens. This
-   improved the structure of the code and allowed us to expand the game
-   further to meet the various interview based requirements.
-
--  Some of the GameStates were changed to reflect the changes to the
-   dialogue system, and these states are implemented by the
-   InterviewScreen class
--  InterviewResponseBox and InterviewResponseButton GUI elements were
-   added to the project, these are used for adding response [7.1.3],
-   accuse [7.1.4] and question [7.1.2] buttons for the player to select
-   from during an Interview. These elements are self contained, and do
-   not contain any game logic in order to separate concerns. Event
-   handlers are handled with the initialising code, which makes it easy
-   to maintain.
-
-**Adding Clues [5.1.1] [5.1.3]**
-
--  With the restructuring of the map, clues are hidden in the hiding
-   locations defined in each of the room files. This simplifies the
-   architecture as it allows us to remove the Prop class, lots of
-   additional code and database tables that were previously used to
-   define possible hiding locations and clues.
--  Each possible killer has 5 clues that point to them, the killer is
-   selected at random when the game starts and their clues are added to
-   the map.
--  There is one ‘easter egg’ clue that doesn’t provide any help.
--  A means clue (a weapon) is selected from a subset of the clues.
--  There is a set of motive clues, one [5.1.3] of these is selected
-   randomly and split into 3 separate clue objects. This adds 3 to the
-   total amount of clues that have to be found in the game, allowing us
-   to meet the requirement of having at least 10 clues in the game.
-   Since we have 10 rooms as well, this allows us to have at least one
-   clue per room. [5.1.1]
--  All 10 clues are distributed randomly into one of the many hiding
-   locations in each of the rooms.
--  Added FindCluesScreen. This screen is displayed when the player finds
-   a clue in the map. It displays the found clue, along with any
-   relevant information. When the user presses continue, the sprite of
-   the clue spins and flies toward the “Journal” tab on the StatusBar.
-   This is to provide a hint towards clicking on the “Journal” tab to
-   view found clues.
-
-**Main Menu [1.1.1]**
-
--  The MainMenuScreen has been added, it allows the user to start the game as well as quit the game.
--  Aside from the addition of the MainMenuScreen class, no other
-   architecture change was necessary for the implementation of the main
-   menu.
-
-Bibliography
---------------
-
-[1] Our code repository [Online] Available:
-https://github.com/Brookke/li-mirch [Accessed: 20/02/17]
-
-[2] Current team Lorem Ipsum UML class diagram [Online] Available:
-http://lihq.me/Downloads/Assessment3/CurrentUML.png [Accessed: 20/02/17]
-
-[3] Original team Farce UML class diagram [Online] Available:
-http://lihq.me/Downloads/Assessment3/OriginalUML.png  [Accessed: 20/02/17]
-
-[4] Link to updated Requirements document [Online] Available:
-http://lihq.me/Downloads/Assessment3/Req3.pdf    [Accessed: 20/02/17]
+-  To make the secret room [4.1.4] more interesting, we placed an item
+   in it that provided extra points to the player that found it. When
+   the player interacts with the extra score item, they obtain a random
+   score between 300 and 700 points.
+-  Although the extra score functionality wasn’t requested by the
+   client, we felt that its addition was necessary, as it provided a
+   purpose for players to visit the secret room.
+-  The implementation of this involved adding a property called “Extra
+   Score” to the item tile to provides extra points. In this case the
+   item was a tile that looked like a cash pile.
+-  Methods were added to the \`Room\` class to search through the
+   tileset of the room each time a room was initialised. These searched
+   for the “Extra Score” property and added the locations of any tiles
+   with said property to a List.
+-  Logic was then added to check whether an item had this property every
+   time an interaction was made, if it did then the extra score would be
+   added to the player’s score and some dialogue would appear.
+-  Further logic was then added to disable the item after this
+   interaction took place so that no further score could be obtained by
+   any player. This disabling logic meant that in a multiplayer
+   scenario, only the first player to find the cash pile would get the
+   extra points.
