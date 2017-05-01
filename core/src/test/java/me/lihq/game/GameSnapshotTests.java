@@ -14,24 +14,20 @@ import static org.junit.Assert.assertTrue;
 public class GameSnapshotTests extends GameTester {
 
     @Test
-    public void testInitialise()
-    {
-        try
-        {
+    public void testInitialise() {
+        try {
             GameMain game = new GameMain();
             ScenarioBuilder builder = new ScenarioBuilder(game);
 
             GameSnapshot snap = builder.generateGame(1).get(0);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             assertTrue("Gamesnapshot Initialiser has failed", true);
 
         }
     }
 
     @Test
-    public void testFinishInteraction()
-    {
+    public void testFinishInteraction() {
         GameMain game = new GameMain();
         ScenarioBuilder builder = new ScenarioBuilder(game);
 
@@ -43,8 +39,7 @@ public class GameSnapshotTests extends GameTester {
     }
 
     @Test
-    public void testGetNPCs()
-    {
+    public void testGetNPCs() {
         GameMain game = new GameMain();
         ScenarioBuilder builder = new ScenarioBuilder(game);
 
@@ -55,10 +50,8 @@ public class GameSnapshotTests extends GameTester {
 
         List<NPC> npcs = snap.getNPCs(snap.gameMap.getRoom(room1));
 
-        for (NPC npc : npcs)
-        {
-            if (npc.equals(inRoom1))
-            {
+        for (NPC npc : npcs) {
+            if (npc.equals(inRoom1)) {
                 assertTrue("Successfully Found NPC", true);
                 return;
             }

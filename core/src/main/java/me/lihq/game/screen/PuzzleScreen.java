@@ -8,6 +8,9 @@ import me.lihq.game.screen.elements.Puzzle;
  */
 public class PuzzleScreen extends AbstractScreen {
 
+    /**
+     * This stores the puzzle that is being drawn on the screen.
+     */
     Puzzle puzzle;
 
     /**

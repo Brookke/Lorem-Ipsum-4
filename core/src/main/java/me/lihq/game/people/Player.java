@@ -229,7 +229,7 @@ public class Player extends AbstractPerson {
             game.currentSnapshot.player.canMove = false;
 
             if (extra == 0) {
-                 game.screenManager.navigationScreen.speechboxMngr.addSpeechBox( new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
             } else {
                 SpeechBox speechBox = new SpeechBox("You gained " + extra + " extra points! Lucky you :D");
                 speechBox.setTrigger(true);

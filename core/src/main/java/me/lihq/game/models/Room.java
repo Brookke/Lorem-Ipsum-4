@@ -22,11 +22,10 @@ import java.util.Random;
  * This class defines a room which is a game representation of a real world room in the Ron Cooke Hub.
  */
 public class Room {
-
-
     /**
-     * the location of the hidden room in the game, this is selected from one of the bookcases
-     * @author Lorem-ipsum
+     * The location of the hidden room in the game, this is selected from one of the bookcases
+     *
+     * @author Lorem-Ipsum
      */
     public Vector2Int hiddenRoomLocation;
 
@@ -36,21 +35,18 @@ public class Room {
      * Hideable slots are tiles that the clues can be hidden in
      */
     public List<Vector2Int> hidingSpots = null;
+
     /**
      * This list stores the coordinates of all secret bookcases in this room
-     * <p>
      */
     private List<Vector2Int> bookcaseSpots = null;
 
     /**
-     * @Lorem Ipsum
-     * Assessment 4
      * This list stores the coordinates of all slots that provide extra points in this room
      *
      * @author Lorem-Ipsum
      */
     public List<Vector2Int> scoreSpots = null;
-
 
     /**
      * This is a reference to the main game class
@@ -60,36 +56,44 @@ public class Room {
      * @author Lorem-Ipsum
      */
     private GameMain game;
+
     /**
      * This stores the name of the room.
      * It is displayed on the tag when they enter the room
      */
     private String name;
+
     /**
      * The integer ID of the room
      */
     private int ID;
+
     /**
      * The string that points to the tmx map file for this room.
      */
     private String mapFile;
+
     /**
      * This is a list of the clues in the room.
      */
     private List<Clue> cluesInRoom = new ArrayList<>();
+
     /**
      * This stores whether or not the room is the room where the murder happened
      */
     private boolean murderRoom = false;
+
     /**
      * This stores the TMX map loaded from the String mapFile {@link #mapFile}
      */
     private TiledMap map;
+
     /**
      * This stores the coordinates of the map in a 2x2 array. If a player/NPC attempts to move to a location, it locks
      * the location before it moves, to avoid anything else moving to it.
      */
     private boolean[][] lockedTiles = null;
+
     /**
      * Room transitions stored as custom Transition object. Defines where the transition is from and where it goes to
      */

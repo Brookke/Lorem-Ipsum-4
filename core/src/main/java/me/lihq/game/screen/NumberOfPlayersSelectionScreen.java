@@ -64,7 +64,7 @@ public class NumberOfPlayersSelectionScreen extends AbstractScreen {
         stage.addActor(background);
 
         //Create a backdrop for the UI so it is more visible
-        Image backdrop = new Image(UIHelpers.createBackgroundTexture(new Color(0,0,0,0.7f),(Menu.BUTTON_WIDTH * 2) + 80, 250));
+        Image backdrop = new Image(UIHelpers.createBackgroundTexture(new Color(0, 0, 0, 0.7f), (Menu.BUTTON_WIDTH * 2) + 80, 250));
         backdrop.setSize((Menu.BUTTON_WIDTH * 2) + 80, 250);
         backdrop.setPosition((Gdx.graphics.getWidth() / 2) - Menu.BUTTON_WIDTH - 40, Gdx.graphics.getHeight() / 3 - 20);
         stage.addActor(backdrop);

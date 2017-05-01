@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 
 /**
  * This class stores all the vital information about a game state.
- *
+ * <p>
  * Each player has one of these, storing the current state of their game.
  *
  * @author Lorem-Ipsum
@@ -72,11 +72,10 @@ public class GameSnapshot {
     /**
      * This constructor creates a GameSnapshot with the provided information
      *
-     * @param game - Reference to the GameMain instance
-     * @param map - The map for the game
+     * @param game   - Reference to the GameMain instance
+     * @param map    - The map for the game
      * @param player - The player playing the game
-     * @param npcs - List of NPCs in the maps
-     *
+     * @param npcs   - List of NPCs in the maps
      * @author Lorem-Ipsum
      */
     public GameSnapshot(GameMain game, Map map, Player player, List<NPC> npcs, boolean isMultiPlayer) {
@@ -104,8 +103,7 @@ public class GameSnapshot {
      * @param other - The GameSnapshot to copy
      * @author Lorem-Ipsum
      */
-    public GameSnapshot(GameSnapshot other)
-    {
+    public GameSnapshot(GameSnapshot other) {
         this.game = other.game;
         try {
             this.puzzle = new Puzzle(this.game);
@@ -118,8 +116,7 @@ public class GameSnapshot {
         player = new Player(game, "Player", "player.png", 3, 6);
         player.setRoom(gameMap.getRoom(0));
 
-        for (NPC npc : other.NPCs)
-        {
+        for (NPC npc : other.NPCs) {
             NPCs.add(new NPC(npc, gameMap));
         }
 

@@ -33,14 +33,17 @@ public class Menu {
      * The width of the menu
      */
     private static final int WIDTH = Gdx.graphics.getWidth() / 2 - BUTTON_WIDTH / 2;
+
     /**
      * the stage to render the menu to
      */
     public Stage stage;
+
     /**
      * Game for menu
      */
     private GameMain game;
+
     /**
      * This stores whether or not the menu is for the main menu (false) or pause menu (true)
      */
@@ -85,21 +88,21 @@ public class Menu {
         stage.addActor(background);
 
         TextButton settings = UIHelpers.createTextButton("Settings");
-        settings.setPosition(WIDTH, BUTTON_START -  1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+        settings.setPosition(WIDTH, BUTTON_START - 1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
         settings.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         TextButton quit = UIHelpers.createTextButton("Quit");
-        quit.setPosition(WIDTH, BUTTON_START -  2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+        quit.setPosition(WIDTH, BUTTON_START - 2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
         quit.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
 
         if (pauseMenu) {
-            text = UIHelpers.createLabel("Paused",true);
+            text = UIHelpers.createLabel("Paused", true);
             stage.addActor(resumeGameButton);
 
         } else {
             //Add in a multi-player button on the main menu only
             TextButton multiplayerButton = UIHelpers.createTextButton("Multi-Player");
-            multiplayerButton.setPosition(WIDTH, BUTTON_START -  1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+            multiplayerButton.setPosition(WIDTH, BUTTON_START - 1 * (BUTTON_HEIGHT + BUTTON_MARGIN));
             multiplayerButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
             multiplayerButton.addListener(new ClickListener() {
                 @Override
@@ -108,12 +111,12 @@ public class Menu {
                 }
             });
 
-            settings.setPosition(WIDTH, BUTTON_START -  2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
-            quit.setPosition(WIDTH, BUTTON_START -  3 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+            settings.setPosition(WIDTH, BUTTON_START - 2 * (BUTTON_HEIGHT + BUTTON_MARGIN));
+            quit.setPosition(WIDTH, BUTTON_START - 3 * (BUTTON_HEIGHT + BUTTON_MARGIN));
 
             stage.addActor(multiplayerButton);
             stage.addActor(newGameButton);
-          
+
             text = UIHelpers.createLabel("Welcome to Lorem Ipsum's Murder Mystery Game!", true);
         }
 

@@ -28,10 +28,10 @@ public class ScenarioBuilder {
 
     /**
      * Constructor. Sets the game variable to the parameter
+     *
      * @param game
      */
-    public ScenarioBuilder(GameMain game)
-    {
+    public ScenarioBuilder(GameMain game) {
         this.game = game;
     }
 
@@ -71,10 +71,10 @@ public class ScenarioBuilder {
                 tempClues.add(new Clue(entry.name, entry.getString("description"), false, entry.getInt("x"), entry.getInt("y")));
 
                 /**
-                Set the first clues in the list to red herrings (the number of red herrings
-                specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
-                this does not need to be further randomised.
-                */
+                 Set the first clues in the list to red herrings (the number of red herrings
+                 specified by NUMBER_OF_RED_HERRINGS). As the order of choosing clues is random,
+                 this does not need to be further randomised.
+                 */
                 if (i < Settings.NUMBER_OF_RED_HERRINGS) {
                     tempClues.get(i).setRedHerring();
                 }
@@ -129,8 +129,7 @@ public class ScenarioBuilder {
     /**
      * This method generates the single player
      */
-    private Player initialisePlayer(Map map, int playerNo)
-    {
+    private Player initialisePlayer(Map map, int playerNo) {
         Player player = new Player(game, "Player " + playerNo, "player.png", 3, 6);
         player.setRoom(map.getRoom(0));
         return player;
@@ -211,7 +210,7 @@ public class ScenarioBuilder {
                 selectedRoom = roomsLeft.get(toTake);
                 roomsLeft.remove(toTake);
             }
-            
+
             loopNpc.setRoom(map.getRoom(selectedRoom));
             Vector2Int position = loopNpc.getRoom().getRandomLocation();
             loopNpc.setTileCoordinates(position.x, position.y);
@@ -226,11 +225,9 @@ public class ScenarioBuilder {
      * This method creates and returns the game data
      *
      * @return GameSnapshot - The game data
-     *
      * @author Lorem-Ipsum
      */
-    private GameSnapshot getInitialGameSnapshot(boolean isMultiPlayer)
-    {
+    private GameSnapshot getInitialGameSnapshot(boolean isMultiPlayer) {
         Map map = new Map(game);
         map.setRandomMurderRoom();
         Player player = initialisePlayer(map, 1);
@@ -271,11 +268,9 @@ public class ScenarioBuilder {
      *
      * @param noPlayers - number of players in game
      * @return List<GameSnapshot> - The game data
-     *
      * @author Lorem-Ipsum
      */
-    public List<GameSnapshot> generateGame(int noPlayers)
-    {
+    public List<GameSnapshot> generateGame(int noPlayers) {
         boolean isMultiPlayer = false;
         if (noPlayers > 1) {
             isMultiPlayer = true;
@@ -289,7 +284,7 @@ public class ScenarioBuilder {
         allSnapshots.add(snapshot);
 
         //For each Player generate a game snapshot, with same victim and killer
-        for (int i = 0; i < (noPlayers - 1); i++){
+        for (int i = 0; i < (noPlayers - 1); i++) {
 
             GameSnapshot nextSnapshot = new GameSnapshot(snapshot);
 
