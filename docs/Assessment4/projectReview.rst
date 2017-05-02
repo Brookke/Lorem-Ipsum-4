@@ -155,7 +155,7 @@ We conclude that if we were to do the project again, we would use the
 same tools again as they helped us effectively achieve the project
 goals. Throughout the project, we found it useful to evaluate how well
 our tools were working for us, and what we could do differently to
-improve..
+improve.
 
 Bibliography
 --------------
