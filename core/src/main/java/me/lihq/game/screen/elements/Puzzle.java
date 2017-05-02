@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * This class stores the information about the Puzzle that needs to be completed to get into the secret room
+ *
  * @author Lorem-Ipsum
  */
 public class Puzzle {
