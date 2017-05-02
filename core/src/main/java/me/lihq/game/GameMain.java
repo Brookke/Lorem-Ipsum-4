@@ -1,7 +1,7 @@
 /*
 * Game executable:
 *
-* http://jaapan.alexcummins.uk/JAAPAN-MITRCH-A3.jar
+* http://lihq.me/Downloads/Assessment4/Game.jar
 *
 */
 
