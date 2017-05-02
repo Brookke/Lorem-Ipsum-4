@@ -349,8 +349,7 @@ public abstract class AbstractPerson extends Sprite {
      * @param name - The name to set the persons name to
      * @author Lorem-Ipsum
      */
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 

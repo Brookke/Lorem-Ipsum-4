@@ -2,13 +2,8 @@ package me.lihq.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import me.lihq.game.Assets;
 import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
-import me.lihq.game.screen.elements.UIHelpers;
 
 /**
  * This controls the MainMenuScreen that is the first thing the user sees

@@ -60,7 +60,7 @@ public class ConversationManagement {
      *
      * @author JAAPAN
      */
-    private boolean won = false;
+    public boolean won = false;
 
     /**
      * This constructs a conversation manager

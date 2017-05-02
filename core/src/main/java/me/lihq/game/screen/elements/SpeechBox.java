@@ -14,7 +14,6 @@ import me.lihq.game.Settings;
 
 import java.util.ArrayList;
 
-
 /**
  * SpeechBox class
  * Used for rendering box containing text and buttons on screen
@@ -196,8 +195,7 @@ public class SpeechBox {
 
             group.addActor(contentLabel);
 
-            if (buttonCount == 0)
-            {
+            if (buttonCount == 0) {
                 Label spaceToContinue = UIHelpers.createLabel("Space to Continue", Assets.FONT15, Color.WHITE);
                 group.addActor(spaceToContinue);
             }
@@ -219,8 +217,7 @@ public class SpeechBox {
 
             group.addActor(textGroup);
 
-            if (buttonCount == 0)
-            {
+            if (buttonCount == 0) {
                 Label spaceToContinue = UIHelpers.createLabel("\nSpace to Continue", Assets.FONT15, Color.WHITE);
                 group.addActor(spaceToContinue);
             }

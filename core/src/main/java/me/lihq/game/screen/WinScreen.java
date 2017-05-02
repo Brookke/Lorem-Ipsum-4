@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import me.lihq.game.GameMain;
+import me.lihq.game.GameSnapshot;
 import me.lihq.game.screen.elements.UIHelpers;
 
 import java.io.File;
@@ -85,40 +86,61 @@ public class WinScreen extends AbstractScreen {
      * Initialises the UI elements on the screen, and sets up event handlers.
      */
     private void initMenu() {
+
+        GameSnapshot highestScore = game.gameSnapshots.get(0);
+
+        //Get the highest scoring player
+        //If 2 players have the same score, start prioritising other scores
+        for (GameSnapshot snapshot : game.gameSnapshots) {
+            if (snapshot.player.getTotalScore() > highestScore.player.getTotalScore()) {
+                highestScore = snapshot;
+            } else if (snapshot.player.getScore() == highestScore.player.getScore()) {
+                if (snapshot.player.getFalseAccusations() < highestScore.player.getFalseAccusations()) {
+                    highestScore = snapshot;
+                } else if (snapshot.player.getPlayTime() < highestScore.player.getPlayTime()) {
+                    highestScore = snapshot;
+                }
+            }
+        }
+
         Label title = UIHelpers.createLabel("You Found the Killer!", true);
         stage.addActor(title);
 
+        Label winnerName = UIHelpers.createLabel("The Winner is " + highestScore.player.getName(), true);
+        stage.addActor(winnerName);
+        winnerName.setY(title.getHeight() * 1.5f);
+
         // Create all information labels, retrieving the necessary data from the player
         // Set their visibility to false, so they can be animated from the render() method
-        Label cluesLabel = UIHelpers.createLabel("Clues Found: " + game.currentSnapshot.player.collectedClues.size(), false);
+        Label cluesLabel = UIHelpers.createLabel("Clues Found: " + highestScore.player.collectedClues.size(), false);
         cluesLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 4);
         cluesLabel.setVisible(false);
 
-        Label redHerringLabel = UIHelpers.createLabel("Red Herrings Found: " + game.currentSnapshot.player.getRedHerrings(), false);
+        Label redHerringLabel = UIHelpers.createLabel("Red Herrings Found: " + highestScore.player.getRedHerrings(), false);
         redHerringLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 3);
         redHerringLabel.setVisible(false);
 
-        Label questionsAsked = UIHelpers.createLabel("Questions Asked: " + game.currentSnapshot.player.getQuestions(), false);
+        Label questionsAsked = UIHelpers.createLabel("Questions Asked: " + highestScore.player.getQuestions(), false);
         questionsAsked.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 2);
         questionsAsked.setVisible(false);
 
-        Label accusedNPCs = UIHelpers.createLabel("Number of People Falsely Accused: " + game.currentSnapshot.player.getFalseAccusations(), false);
+        Label accusedNPCs = UIHelpers.createLabel("Number of People Falsely Accused: " + highestScore.player.getFalseAccusations(), false);
         accusedNPCs.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 + OFFSET * 1);
         accusedNPCs.setVisible(false);
 
-        Label basicScoreLabel = UIHelpers.createLabel("Points Gained: " + game.currentSnapshot.player.getScore(), false);
+        Label basicScoreLabel = UIHelpers.createLabel("Points Gained: " + highestScore.player.getScore(), false);
         basicScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2);
         basicScoreLabel.setVisible(false);
 
-        Label timeTaken = UIHelpers.createLabel("Time Taken: " + game.currentSnapshot.player.getFormattedPlayTime(), false);
+        Label timeTaken = UIHelpers.createLabel("Time Taken: " + highestScore.player.getFormattedPlayTime(), false);
         timeTaken.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 1);
         timeTaken.setVisible(false);
 
-        Label bonusScoreLabel = UIHelpers.createLabel("Time Bonus: " + game.currentSnapshot.player.getTimeBonus(), false);
+        Label bonusScoreLabel = UIHelpers.createLabel("Time Bonus: " + highestScore.player.getTimeBonus(), false);
         bonusScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 2);
         bonusScoreLabel.setVisible(false);
 
-        Label finalScoreLabel = UIHelpers.createLabel("Total Score: " + game.currentSnapshot.player.getTotalScore(), false);
+        Label finalScoreLabel = UIHelpers.createLabel("Total Score: " + highestScore.player.getTotalScore(), false);
         finalScoreLabel.setPosition(LEFT_ALIGN, Gdx.graphics.getHeight() / 2 - OFFSET * 3);
         finalScoreLabel.setVisible(false);
 
@@ -144,7 +166,7 @@ public class WinScreen extends AbstractScreen {
             highscores = getHighScores();
             boolean highlighted = false;
             for (int i = 0; i < 5; i++) {
-                if (setHighScore && game.currentSnapshot.player.getTotalScore() == highscores[i] && !highlighted) {
+                if (setHighScore && highestScore.player.getTotalScore() == highscores[i] && !highlighted) {
                     highscoreLabels.add(UIHelpers.createLabel("*" + highscores[i] + "*", false));
                     // Only highlight first instance of a highscore (to prevent highlighting duplicates)
                     highlighted = true;

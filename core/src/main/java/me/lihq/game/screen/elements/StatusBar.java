@@ -24,24 +24,29 @@ public class StatusBar {
      * The height of the status bar
      */
     public static final int HEIGHT = 50;
+
     /**
      * The number of items that are in the status bar. Used to set the width of the elements
      * on the bar
      */
     private static int ITEM_COUNT = 4;
+
     /**
      * The width of each element of the status bar
      */
     private static int WIDTH = (int) Gdx.graphics.getWidth() / ITEM_COUNT;
+
     /**
      * The stage to render the elements to
      */
     public Stage stage;
+
     /**
      * Reference to the game; used for accessing the player's score and personality,
      * and changing the screen when buttons are pressed
      */
     private GameMain game;
+
     /**
      * The skin for the UI elements
      *

@@ -225,8 +225,11 @@ public class Player extends AbstractPerson {
         if (this.getRoom().isExtraScoreTile(x, y)) {
             int extra = this.getRoom().extraScoreAmount();
             score += extra;
+
+            game.currentSnapshot.player.canMove = false;
+
             if (extra == 0) {
-                 game.screenManager.navigationScreen.speechboxMngr.addSpeechBox( new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
+                game.screenManager.navigationScreen.speechboxMngr.addSpeechBox(new SpeechBox("There appear to be no extra points here, the cash pile before you is fake!"));
             } else {
                 SpeechBox speechBox = new SpeechBox("You gained " + extra + " extra points! Lucky you :D");
                 speechBox.setTrigger(true);
@@ -282,6 +285,10 @@ public class Player extends AbstractPerson {
      * @author Lorem-Ipsum
      */
     public void moveRoom(Room.Transition transition) {
+
+        for (NPC character : game.currentSnapshot.NPCs) {
+            character.ignored = false;
+        }
 
         this.setRoom(transition.getNewRoom());
 
