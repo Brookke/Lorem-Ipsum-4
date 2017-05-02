@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by joeshuff on 02/03/2017.
+ * This class Builds a random game for a player and copies that same game to each other player playing
+ * in multiplayer.
  *
  * @author Lorem-Ipsum
  */

@@ -6,7 +6,7 @@ import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Menu;
 
 /**
- * Created by vishal on 18/12/2016.
+ * This class shows the pause Screen and all its UI elements.
  */
 public class PauseScreen extends AbstractScreen {
     /**

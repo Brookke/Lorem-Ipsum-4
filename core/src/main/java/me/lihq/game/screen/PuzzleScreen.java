@@ -4,6 +4,8 @@ import me.lihq.game.GameMain;
 import me.lihq.game.screen.elements.Puzzle;
 
 /**
+ * This class shows the Puzzle to the player allowing them to complete it to gain access to the secret room
+ *
  * @author Lorem-Ipsum
  */
 public class PuzzleScreen extends AbstractScreen {
