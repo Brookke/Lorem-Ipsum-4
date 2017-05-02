@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by joeshuff on 10/03/2017.
+ * JUnit tests for the GameSnapshot class
  */
 public class GameSnapshotTests extends GameTester {
 

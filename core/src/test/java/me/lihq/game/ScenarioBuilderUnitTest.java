@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by joeshuff on 10/03/2017.
+ * JUnit tests for the ScenarioBuilder class
  */
 public class ScenarioBuilderUnitTest extends GameTester {
     ScenarioBuilder builder;
